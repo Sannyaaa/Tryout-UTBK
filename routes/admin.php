@@ -11,10 +11,6 @@ Route::get('/test', function () {
     return view('test');
 });
 
-Route::get('/gatau', function () {
-    return 'gatau';
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

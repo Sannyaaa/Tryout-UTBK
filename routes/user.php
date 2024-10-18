@@ -11,10 +11,6 @@ Route::get('/test', function () {
     return view('test');
 });
 
-Route::get('/gatau', function () {
-    return 'gatau';
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -33,11 +29,11 @@ prefix('/admin')->name('admin.')->group(function() {
     require __DIR__.'/admin.php';
 });
 
-Route::
-// middleware(['auth:sanctum', 'IsAdmin'])->
-prefix('/mentor')->name('mentor.')->group(function() {
-    require __DIR__.'/mentor.php';
-});
+// Route::
+// // middleware(['auth:sanctum', 'IsAdmin'])->
+// prefix('/mentor')->name('mentor.')->group(function() {
+//     require __DIR__.'/mentor.php';
+// });
 
 Route::
 // middleware(['auth:sanctum'])->
