@@ -22,3 +22,21 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::
+// middleware(['auth:sanctum', 'IsAdmin'])->
+prefix('/admin')->name('admin.')->group(function() {
+    require __DIR__.'/admin.php';
+});
+
+Route::
+// middleware(['auth:sanctum', 'IsAdmin'])->
+prefix('/mentor')->name('mentor.')->group(function() {
+    require __DIR__.'/mentor.php';
+});
+
+Route::
+// middleware(['auth:sanctum'])->
+prefix('/user')->name('user.')->group(function() {
+    require __DIR__.'/user.php';
+});
