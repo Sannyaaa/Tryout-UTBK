@@ -1,4 +1,9 @@
 <x-guest-layout>
+
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+        Buat Akun Baru
+    </h2>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -39,14 +44,17 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+        <div class=" mt-4">
+            <div class="mt-4 space-y-4">
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+                <x-primary-button class="">
+                    {{ __('Daftar Sekarang') }}
+                </x-primary-button>
+
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mt-3">
+                    Sudah punya akun? <a href="{{ route('login') }}" class="text-indigo-700 hover:underline dark:text-indigo-500">Login Sekarang</a>
+                </div>
+            </div>
         </div>
     </form>
 </x-guest-layout>
