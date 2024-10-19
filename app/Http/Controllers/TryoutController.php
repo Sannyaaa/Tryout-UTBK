@@ -12,7 +12,9 @@ class TryoutController extends Controller
      */
     public function index()
     {
-        //
+        $tryout = Tryout::all();
+
+        return view('layouts.dashboard.tryout.index', compact('tryout'));
     }
 
     /**

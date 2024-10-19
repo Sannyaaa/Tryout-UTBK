@@ -1055,6 +1055,7 @@
             "time": "2023-12-03T19:50:20+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "intervention/gif",
             "version": "4.2.0",
             "source": {
@@ -1208,6 +1209,17 @@
             },
             "dist": {
                 "type": "zip",
+=======
+            "name": "laravel/framework",
+            "version": "v11.28.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "3ef5c8a85b4c598d5ffaf98afd72f6a5d6a0be2c"
+            },
+            "dist": {
+                "type": "zip",
+>>>>>>> 7b5446085b8dae4ac932f211a0d0cba88d17fee2
                 "url": "https://api.github.com/repos/laravel/framework/zipball/3ef5c8a85b4c598d5ffaf98afd72f6a5d6a0be2c",
                 "reference": "3ef5c8a85b4c598d5ffaf98afd72f6a5d6a0be2c",
                 "shasum": ""

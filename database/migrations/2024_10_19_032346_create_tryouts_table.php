@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
-            $table->foreignId('categories_id')->constrained()->cascadeOnDelete();
             $table->foreignId('batch_id')->constrained()->cascadeOnDelete();
-            $table->string('description');
-            $table->string('image');
-            $table->string('class');
-            $table->string('price');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('description')->nullable();
+            $table->string('image')->nullable();
+            $table->string('price')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->string('categories');
+            $table->enum('is_free',['paid','free']);
 
             $table->timestamps();
         });

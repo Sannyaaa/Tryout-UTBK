@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class tryout extends Model
 {
-    protected $fillable = ['nama', 'description', 'image', 'categories_id', 'start_date', 'end_date', 'class', 'price', 'batch_id'];
+    protected $fillable = ['nama', 'description', 'image', 'start_date', 'end_date', 'price', 'batch_id', 'categories', 'is_free'];
 }
