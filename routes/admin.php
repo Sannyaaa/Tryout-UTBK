@@ -8,18 +8,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
-    return view('test');
-});
+// Route::get('settings',[ProfileController::class])
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+// ihsan
 Route::resource('/tryout', TryoutController::class);
+// Route::delete('/tryout/bulk-delete', [TryoutController::class, 'bulkDelete'])->name('admin.tryout.bulkDelete');
+
 
 
 
 require __DIR__.'/auth.php';
 
 
+// hasan

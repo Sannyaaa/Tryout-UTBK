@@ -18,11 +18,10 @@ return new class extends Migration
             $table->foreignId('batch_id')->constrained()->cascadeOnDelete();
             $table->string('description')->nullable();
             $table->string('image')->nullable();
-            $table->string('price')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->string('categories');
             $table->enum('is_free',['paid','free']);
+            $table->enum('is_together',['basic','together']);
 
             $table->timestamps();
         });

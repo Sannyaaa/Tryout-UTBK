@@ -57,9 +57,11 @@
         @include('layouts.dashboard.footer')
       </div>
       <!-- ===== Content Area End ===== -->
+
     </div>
     <!-- ===== Page Wrapper End ===== -->
 
+    @stack('script')
     <script type="module" src="{{ asset('js/index.js') }}"></script>
     <script src="{{ asset('js/sidebar.js') }}"></script>
     <script src="{{ asset('js/dark-mode.js') }}"></script>

@@ -9,4 +9,8 @@ class batch extends Model
     protected $fillable = [
         'name', 'description'
     ];
+
+    public function tryout(){
+        return $this->hasMany(tryout::class);
+    }
 }
