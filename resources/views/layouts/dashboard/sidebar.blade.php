@@ -96,7 +96,7 @@
                 <span class="ml-3" sidebar-toggle-item>Settings</span>
             </a> --}}
 
-            <x-sidebar-link link="/" name="Settings">
+            <x-sidebar-link link="{{ route('profile.edit') }}" name="Settings">
               <i class="fa-solid fa-gear"></i>
             </x-sidebar-link>
           </li>

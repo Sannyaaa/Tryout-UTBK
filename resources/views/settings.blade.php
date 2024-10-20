@@ -31,7 +31,7 @@
         <div class="col-span-full xl:col-auto">
             <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                 <div class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
-                    <img class="mb-4 rounded-lg w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0" src="https://discoverymood.com/wp-content/uploads/2020/04/Mental-Strong-Women-min-480x340.jpg" alt="Jese picture">
+                    <img class="mb-4 rounded-lg w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0" src="/images/users/bonnie-green-2x.png" alt="Jese picture">
                     <div>
                         <h3 class="mb-1 text-xl font-bold text-gray-900 dark:text-white">Profile picture</h3>
                         <div class="mb-4 text-sm text-gray-500 dark:text-gray-400">
@@ -534,4 +534,3 @@
         </div>
     </div>
 @endsection
-    
