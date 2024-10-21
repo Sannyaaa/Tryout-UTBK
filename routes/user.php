@@ -7,4 +7,6 @@ Route::get('/dashboard', function () {
     return view('welcome');
 });
 
+Route::get('/tryouts', App\Livewire\User\Tryouts::class)->name('user.tryouts');
+
 

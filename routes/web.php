@@ -33,7 +33,7 @@ prefix('/admin')->name('admin.')->group(function() {
 });
 
 Route::
-// middleware(['auth:sanctum'])->prefix('/user')->
-name('user.')->group(function() {
+// middleware(['auth:sanctum'])->
+prefix('/user')->name('user.')->group(function() {
     require __DIR__.'/user.php';
 });
