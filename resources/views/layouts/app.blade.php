@@ -62,11 +62,20 @@
     <!-- ===== Page Wrapper End ===== -->
 
     @stack('script')
+    @yield('scripts')
     <script type="module" src="{{ asset('js/index.js') }}"></script>
     <script src="{{ asset('js/sidebar.js') }}"></script>
     <script src="{{ asset('js/dark-mode.js') }}"></script>
     <script src="{{ asset('js/charts.js') }}"></script>
     <script src="./path/to/flowbite/dist/flowbite.js"></script>
+    </script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     {{-- <script src="./path/to/flowbite/dist/flowbite.js"></script> --}}
 
   </body>

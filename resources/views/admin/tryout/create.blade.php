@@ -16,18 +16,18 @@
                   <li>
                     <div class="flex items-center">
                       <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="#" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">E-commerce</a>
+                      <a href="{{ route('admin.tryout.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Tryout</a>
                     </div>
                   </li>
                   <li>
                     <div class="flex items-center">
                       <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Products</span>
+                      <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Create</span>
                     </div>
                   </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All products</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Create Tryout</h1>
         </div>
         {{-- <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
@@ -63,77 +63,79 @@
             @method('POST')
             <div class="space-y-4">
                 <div>
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                    <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Type product name" required="">
+                    <x-input-label for="name" :value="__('Nama')" />
+                    <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Tryout" required=""/>
+                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
+                
                 <div>
-                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                    <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter event description here"></textarea>
+                    <x-input-label for="description" :value="__('Description')" />
+                    <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
+                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
-                <div>
-                    <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">image</label>
-                    <input type="file" name="image" id="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Type product image" required="">
+                
+                <div class="grid lg:grid-cols-2 gap-3">
+                    <div>
+                        <x-input-label for="image" :value="__('Image')" />
+                        <x-file-input type="file" name="image" id="image" placeholder="Masukan Image" required=""/>
+                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-input-label for="is_free" :value="__('Is Free')" />
+                        <x-select-input id="is_free" name="is_free">
+                            <option selected="" disabled>Select is free</option>
+                            <option value="paid" {{ old('is_free') == 'paid' ? 'selected' : '' }}>Berbayar</option>
+                            <option value="free" {{ old('is_free') == 'free' ? 'selected' : '' }}>Gratis</option>
+                        </x-select-input>
+                        <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
+                    </div>
                 </div>
-                {{-- <div>
-                    <label for="categories" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Categories</label>
-                    <select id="categories" name="categories" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected="">Select Categories</option>
-                        <option value="Tes Potensi Skolastik">Tes Potensi Skolastik</option>
-                        <option value="Tes Literasi">Tes Literasi</option>
-                    </select>
-                </div> --}}
-                <div>
-                    <label for="is_free" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Is Free</label>
-                    <select id="is_free" name="is_free" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected="">Select is free</option>
-                        <option value="paid">Berbayar</option>
-                        <option value="free">Gratis</option>
-                    </select>
+                <div class="grid lg:grid-cols-2 gap-3">
+                    <div>
+                        <x-input-label for="batch_id" :value="__('Batch')" />
+                        <x-select-input id="batch_id" name="batch_id" >
+                            <option selected="" disabled>Select Batch</option>
+                            @foreach ($batch as $batchs)
+                                <option value="{{ $batchs->id }}" {{ old('batch_id') == $batchs->id ? 'selected' : '' }}>{{ $batchs->name }}</option>
+                            @endforeach
+                        </x-select-input>
+                        <x-input-error :messages="$errors->get('batch_id')" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-input-label for="is_together" :value="__('Is Together')" />
+                        <x-select-input id="is_together" name="is_together" >
+                            <option selected="" disabled>Select Is Together</option>
+                            <option value="basic" {{ old('is_together') == 'basic' ? 'selected' : '' }}>Biasa</option>
+                            <option value="together" {{ old('is_together') == 'together' ? 'selected' : '' }}>Serentak</option>
+                        </x-select-input>
+                        <x-input-error :messages="$errors->get('is_together')" class="mt-2" />
+                    </div>
                 </div>
-                <div>
-                    <label for="batch_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Batch</label>
-                    <select id="batch_id" name="batch_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected="">Select Batch</option>
-                        @foreach ($batch as $batchs)
-                            <option value="{{ $batchs->id }}">{{ $batchs->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div>
-                    <label for="is_together" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Is Together</label>
-                    <select id="is_together" name="is_together" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected="">Select Is Together</option>
-                        <option value="basic">Biasa</option>
-                        <option value="together">Serentak</option>
-                    </select>
-                </div>
+                
                 <div id="date-inputs" style="display: none;"> 
-                    <div>
-                        <label for="start_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">start_date</label>
-                        <input type="date" name="start_date" id="start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Type product start_date" required="">
-                    </div>
-                    <div>
-                        <label for="end_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">end_date</label>
-                        <input type="date" name="end_date" id="end_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Type product end_date" required="">
+                    <div class="grid lg:grid-cols-2 gap-3">
+                        <div>
+                            <x-input-label for="start_date" :value="__('Start Date')" />
+                            <x-text-input type="date" :value="old('start_date')" name="start_date" id="start_date" placeholder="Masukan tanggal mulai" required=""/>
+                            <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
+                        </div>
+                        <div>
+                            <x-input-label for="end_date" :value="__('end Date')" />
+                            <x-text-input type="date" :value="old('end_date')" name="end_date" id="end_date" placeholder="Masukan tanggal selesai" required=""/>
+                            <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
+                        </div>
                     </div>
                 </div>
-                <div class=" flex justify-center w-full pb-4 ">
-                    <button type="submit" class="text-white w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Add product
-                    </button>
+                <div class="flex justify-between">
+                        <x-secondary-href href="{{ route('admin.tryout.index') }}">
+                            Back
+                        </x-secondary-href>
+                        <x-primary-button type="submit">
+                            Add Tryout
+                        </x-primary-button>
                 </div>
         </form>
     </div>
-</div>
-
-
-<!-- Add Product Drawer -->
-<div id="drawer-create-product-default" class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
-    <h5 id="drawer-label" class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">New Product</h5>
-    <button type="button" data-drawer-dismiss="drawer-create-product-default" aria-controls="drawer-create-product-default" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-        <span class="sr-only">Close menu</span>
-    </button>
 </div>
 
 

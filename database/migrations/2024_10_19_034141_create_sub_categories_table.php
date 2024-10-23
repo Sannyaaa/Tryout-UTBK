@@ -16,7 +16,8 @@ return new class extends Migration
 
             $table->string('name');
             $table->text('description');
-            $table->string('duration');
+            $table->string('duration')->nullable();
+            $table->string('category');
 
             $table->timestamps();
         });

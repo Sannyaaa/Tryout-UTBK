@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TryoutController;
 use Illuminate\Support\Facades\Route;
@@ -12,7 +13,9 @@ Route::get('/', function () {
 
 // ihsan
 Route::resource('/tryout', TryoutController::class);
-// Route::delete('/tryout/bulk-delete', [TryoutController::class, 'bulkDelete'])->name('admin.tryout.bulkDelete');
+Route::resource('/batch', BatchController::class);
+Route::post('/tryout/bulk-delete', [TryoutController::class, 'bulkDelete'])->name('tryout.bulkDelete');
+Route::post('/batch/bulk-delete', [BatchController::class, 'bulkDelete'])->name('batch.bulkDelete');
 
 
 
