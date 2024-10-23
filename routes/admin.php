@@ -1,12 +1,9 @@
 <?php
 
 use App\Http\Controllers\BatchController;
-use App\Http\Controllers\ProfileController;
-<<<<<<< HEAD
+use App\Http\Controllers\BimbelController;
 use App\Http\Controllers\UniversityController;
-=======
 use App\Http\Controllers\TryoutController;
->>>>>>> 1b6075ba1ca0a59e697d8090482f97ebebafb452
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,11 +17,11 @@ Route::resource('/tryout', TryoutController::class);
 Route::resource('/batch', BatchController::class);
 Route::post('/tryout/bulk-delete', [TryoutController::class, 'bulkDelete'])->name('tryout.bulkDelete');
 Route::post('/batch/bulk-delete', [BatchController::class, 'bulkDelete'])->name('batch.bulkDelete');
+Route::resource('/bimbel', BimbelController::class);
+Route::post('/bimbel/bulk-delete', [BimbelController::class, 'bulkDelete'])->name('bimbel.bulkDelete');
 
 
 
-
-require __DIR__.'/auth.php';
 
 
 // hasan

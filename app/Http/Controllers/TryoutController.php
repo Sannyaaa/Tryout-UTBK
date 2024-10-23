@@ -115,7 +115,6 @@ class TryoutController extends Controller
             'batch_id' => 'required|exists:batches,id',
             'is_free' => ['required', 'in:paid,free'],
             'is_together' => ['required', 'in:basic,together'],
-            
         ]);
 
         if ($request->hasFile('image')) {
