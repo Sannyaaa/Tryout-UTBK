@@ -9,7 +9,7 @@ class Major extends Model
     //
 
     protected $fillable = [
-        'university_code', 'name', 'code',
+        'university_id', 'name', 'code',
     ];
 
     public function university()

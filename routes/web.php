@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UniversityController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +26,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/fetch-universities', [UniversityController::class, 'fetchUniversities']);
+Route::get('/fetch-static-universities', [UniversityController::class, 'getStaticUniversities']);
 
 Route::
 // middleware(['auth:sanctum', 'IsAdmin'])->

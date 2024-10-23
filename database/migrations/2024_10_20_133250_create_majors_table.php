@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->foreignId('university_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->string('accreditation')->nullable();
+            $table->string('code')->nullable();
 
             $table->timestamps();
         });
