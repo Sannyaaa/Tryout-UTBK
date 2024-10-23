@@ -2,15 +2,22 @@
 
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ProfileController;
+<<<<<<< HEAD
 use App\Http\Controllers\SubCategoriesController;
+=======
+<<<<<<< HEAD
+use App\Http\Controllers\UniversityController;
+=======
+>>>>>>> 7c20bc0c6de23e33d1277eed79f1858af989d92b
 use App\Http\Controllers\TryoutController;
+>>>>>>> 1b6075ba1ca0a59e697d8090482f97ebebafb452
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('settings',[ProfileController::class])
+Route::get('all-universities',[UniversityController::class,'getAllUniversities'])->name('get-universities');
 
 // ihsan
 Route::post('/tryout/bulk-delete', [TryoutController::class, 'bulkDelete'])->name('tryout.bulkDelete');
