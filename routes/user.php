@@ -8,5 +8,8 @@ Route::get('/dashboard', function () {
 });
 
 Route::get('/tryouts', App\Livewire\User\Tryouts::class)->name('user.tryouts');
+Route::get('/tryouts/owned', App\Livewire\User\Tryouts::class)->name('user.tryouts.owned');
+Route::get('/tryouts', App\Livewire\User\Tryouts::class)->name('user.bimbels');
+Route::get('/tryouts/owned', App\Livewire\User\Tryouts::class)->name('user.tryouts.owned');
 
 
