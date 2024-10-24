@@ -14,4 +14,9 @@ class Bimbel extends Model
     {
         return $this->belongsTo(Batch::class);
     }
+
+    public function classBimbel()
+    {
+        return $this->hasMany(ClassBimbel::class);
+    }
 }
