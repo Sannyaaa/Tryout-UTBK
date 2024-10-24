@@ -8,6 +8,7 @@ use App\Http\Controllers\ClassBimbelController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\TryoutController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,3 +40,5 @@ Route::resource('/question', QuestionController::class);
 
 Route::resource('/class-bimbel', ClassBimbelController::class);
 Route::post('/class-bimbel/bulk-delete', [ClassBimbelController::class, 'bulkDelete'])->name('class-bimbel.bulkDelete');
+Route::resource('/user', UserController::class);
+Route::post('/user/bulk-delete', [UserController::class, 'bulkDelete'])->name('user.bulkDelete');

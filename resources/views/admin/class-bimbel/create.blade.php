@@ -102,8 +102,30 @@
                         <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
                     </div>
                 </div>
+
+                <div class="grid lg:grid-cols-2 gap-3 my-1">
+                    <div class="flex items-center">
+                        <input id="many-class" type="checkbox" value="1" name="days_of_week[]" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="many-class" class="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Buat Banyak Class</label>
+                    </div>
+                </div>
+
+                <div id="first-date-inputs" style="display: block;">
+                    <div class="grid lg:grid-cols-2 gap-3">
+                        <div>
+                            <x-input-label for="date" :value="__('Tanggal Mulai')" />
+                            <x-text-input type="date" :value="old('date')" name="date" id="date" placeholder="Masukan tanggal mulai" required=""/>
+                            <x-input-error :messages="$errors->get('date')" class="mt-2" />
+                        </div>
+                        <div>
+                            <x-input-label for="start_time" :value="__('Jam Mulai')" />
+                            <x-text-input type="time" :value="old('start_time')" name="start_time" id="start_time" placeholder="Masukan tanggal selesai" required=""/>
+                            <x-input-error :messages="$errors->get('start_time')" class="mt-2" />
+                        </div>
+                    </div>
+                </div>
                 
-                <div id="date-inputs">
+                <div id="second-date-inputs" style="display: none;">
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div class="space-y-3">
                             <div>
@@ -123,7 +145,7 @@
                             </div>
                         </div>
                         <div>
-                            <h3 class="mb-2 text-gray-900 dark:text-white">Hari Belajar</h3>
+                            <x-input-label for="days_of_week" :value="__('Hari Belajar')" />
                             <div class="grid lg:grid-cols-2 gap-3">
                                 <div class="flex p-4 border border-gray-200 rounded dark:border-gray-700">
                                     <input id="senin-checkbox" type="checkbox" value="1" name="days_of_week[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -162,7 +184,7 @@
                         Back
                     </x-secondary-href>
                     <x-primary-button type="submit">
-                        Add Tryout
+                        Add Class
                     </x-primary-button>
                 </div>
             </div>
@@ -175,16 +197,18 @@
 
 @push('script')
     <script>
-        document.getElementById('is_together').addEventListener('change', function() {
-            var dateInputs = document.getElementById('date-inputs');
-            dateInputs.style.display = this.value === 'together' ? 'block' : 'none';
+        document.getElementById('many-class').addEventListener('change', function() {
+            var secondDateInputs = document.getElementById('second-date-inputs');
+            var firstDateInputs = document.getElementById('first-date-inputs');
+            secondDateInputs.style.display = this.checked  ? 'block' : 'none';
+            firstDateInputs.style.display = this.checked  ? 'none' : 'block';
             
             // Toggle required attribute
-            var inputs = dateInputs.getElementsByTagName('input');
-            for(var i = 0; i < inputs.length; i++) {
-                inputs[i].required = this.value === 'together';
-            }
-        });
+        //     var inputs = secondDateInputs.getElementsByTagName('input');
+        //     for(var i = 0; i < inputs.length; i++) {
+        //         inputs[i].required = this.checked ;
+        //     }
+        // });
     </script>
 @endpush
 

@@ -16,7 +16,7 @@
                   <li>
                     <div class="flex items-center">
                       <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="#" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
+                      <a href="#" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Users</a>
                     </div>
                   </li>
                   <li>
@@ -27,7 +27,7 @@
                   </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Class</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Users</h1>
         </div>
         <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
@@ -58,8 +58,8 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ route('admin.class-bimbel.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                Add Class
+            <a href="{{ route('admin.user.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
+                Add new User
             </a>
         </div>
     </div>
@@ -68,7 +68,7 @@
     <div class="overflow-x-auto">
         <div class="inline-block min-w-full align-middle">
             <div class="overflow-hidden shadow p-6">
-                <table id="classBimbelTable" class="min-w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
+                <table id="userTable" class="min-w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
                     <thead class="bg-gray-100 dark:bg-gray-700">
                         <tr>
                             <th scope="col" class="p-4">
@@ -81,16 +81,16 @@
                                 Name
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                Email
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                Phone
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                Role
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Tanggal
-                            </th>
-                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Pengajar
-                            </th>
-                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Pelajaran
-                            </th>
-                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Bimbel
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Actions
@@ -99,7 +99,7 @@
                     </thead >
                     {{-- <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                         
-                        @foreach ($tryout as $tryouts)
+                        @foreach ($user as $users)
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <td class="w-4 p-4">
                                         <div class="flex items-center">
@@ -108,28 +108,28 @@
                                             <label for="checkbox" class="sr-only">checkbox</label>
                                         </div>
                                     </td>
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><img src="{{ Storage::url($tryouts->image) }}" class="w-[100px]" alt=""></td>
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$tryouts->name}}</td>
-                                    @if ($tryouts->is_free == 'free')
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><img src="{{ Storage::url($users->image) }}" class="w-[100px]" alt=""></td>
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$users->name}}</td>
+                                    @if ($users->is_free == 'free')
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Gratis</td>
                                     @else
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Berbayar</td>
                                     @endif
-                                    @if ($tryouts->is_together == 'basic')
+                                    @if ($users->is_together == 'basic')
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Biasa</td>
                                     @else
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Serentak</td>
                                     @endif
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$tryouts->start_date}}</td>
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$tryouts->end_date}}</td>
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$tryouts->batch->name}}</td>
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$users->start_date}}</td>
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$users->end_date}}</td>
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$users->batch->name}}</td>
                                     <td class="p-4 space-x-2 whitespace-nowrap">
                                         <div class="flex justify-start gap-1">
-                                            <a href="{{ route('admin.tryout.edit', $tryouts->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            <a href="{{ route('admin.user.edit', $users->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                                                 Update
                                             </a>
-                                            <form action="{{ route('admin.tryout.destroy', $tryouts->id) }}" method="POST">
+                                            <form action="{{ route('admin.user.destroy', $users->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
@@ -150,7 +150,7 @@
 </div>
 
 {{-- <div class="w-full p-4 bg-white border-t border-gray-200">
-    {{ $tryout->links() }}
+    {{ $user->links() }}
 </div>   --}}
 
 
@@ -167,10 +167,10 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    var table = $('#classBimbelTable').DataTable({
+    var table = $('#userTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.class-bimbel.index') }}",
+        ajax: "{{ route('admin.user.index') }}",
         columns: [
             {
                 data: 'checkbox',
@@ -180,10 +180,10 @@ $(document).ready(function() {
                 width: '5%'
             },
             {data: 'name', name: 'name'},
-            {data: 'date', name: 'date'},
-            {data: 'user.name', name: 'user.name'},
-            {data: 'sub_categories.name', name: 'sub_categories.name'},
-            {data: 'bimbel.name', name: 'bimbel.name'},
+            {data: 'email', name: 'email'},
+            {data: 'phone', name: 'phone'},
+            {data: 'role', name: 'role'},
+            {data: 'created_at', name: 'created_at'},
             {
                 data: 'action',
                 name: 'action',
@@ -195,22 +195,22 @@ $(document).ready(function() {
 
     // Handle "select all" checkbox
     $('#checkbox-all').on('click', function() {
-        $('.class-bimbel-checkbox').prop('checked', this.checked);
+        $('.user-checkbox').prop('checked', this.checked);
         updateBulkDeleteButton();
     });
 
     // Handle individual checkbox changes
-    $('#classBimbelTable').on('change', '.class-bimbel-checkbox', function() {
+    $('#userTable').on('change', '.user-checkbox', function() {
         updateBulkDeleteButton();
         
         // Update "select all" checkbox
-        var allChecked = $('.class-bimbel-checkbox:checked').length === $('.class-bimbel-checkbox').length;
+        var allChecked = $('.user-checkbox:checked').length === $('.user-checkbox').length;
         $('#checkbox-all').prop('checked', allChecked);
     });
 
     // Update bulk delete button visibility
     function updateBulkDeleteButton() {
-        var checkedCount = $('.class-bimbel-checkbox:checked').length;
+        var checkedCount = $('.user-checkbox:checked').length;
         if (checkedCount > 0) {
             $('#bulkDeleteBtn').show();
         } else {
@@ -222,12 +222,12 @@ $(document).ready(function() {
     $('#bulkDeleteBtn').on('click', function() {
         if (confirm('Are you sure you want to delete selected items?')) {
             var selectedIds = [];
-            $('.class-bimbel-checkbox:checked').each(function() {
+            $('.user-checkbox:checked').each(function() {
                 selectedIds.push($(this).val());
             });
 
             $.ajax({
-                url: "{{ route('admin.class-bimbel.bulkDelete') }}",
+                url: "{{ route('admin.user.bulkDelete') }}",
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -260,12 +260,12 @@ $(document).ready(function() {
     
 <script type="text/javascript">
         $(document).ready(function () {
-            var table = $('#classBimbelTable').DataTable({
+            var table = $('#userTable').DataTable({
                 processing: true,
                 serverSide: true,
                 order: [[5,'desc']],
                 ordering: true,
-                ajax: "{{ route('admin.tryout.index') }}",
+                ajax: "{{ route('admin.user.index') }}",
                 columns: [
                     {data: 'image', name: 'image', orderable: false, searchable: false},
                     {data: 'name', name: 'name'},

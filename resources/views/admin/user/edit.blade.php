@@ -16,18 +16,18 @@
                   <li>
                     <div class="flex items-center">
                       <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="{{ route('admin.tryout.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Tryout</a>
+                      <a href="{{ route('admin.user.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">User</a>
                     </div>
                   </li>
                   <li>
                     <div class="flex items-center">
                       <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Create</span>
+                      <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Edit</span>
                     </div>
                   </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Create Tryout</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Edit User</h1>
         </div>
         {{-- <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
@@ -54,85 +54,73 @@
                     </div>
                 </div>
             </div>
-            <button id="createProductButton" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
+            <button id="EditProductButton" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-Edit-product-default" data-drawer-show="drawer-Edit-product-default" aria-controls="drawer-Edit-product-default" data-drawer-placement="right">
                 Add new product
             </button>
         </div> --}}
-        <form action="{{ route('admin.tryout.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('POST')
+            @method('PUT')
             <div class="space-y-4">
-                <div>
-                    <x-input-label for="name" :value="__('Nama')" />
-                    <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Tryout" required=""/>
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                </div>
-                
-                <div>
-                    <x-input-label for="description" :value="__('Description')" />
-                    <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
-                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
-                </div>
                 
                 <div class="grid lg:grid-cols-2 gap-3">
                     <div>
-                        <x-input-label for="image" :value="__('Image')" />
-                        <x-file-input type="file" name="image" id="image" placeholder="Masukan Image" required=""/>
-                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                        <x-input-label for="name" :value="__('Nama')" />
+                        <x-text-input type="text" :value="old('name', $user->name)" name="name" id="name" placeholder="Masukan Nama " required=""/>
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="is_free" :value="__('Berbayar / Gratis')" />
-                        <x-select-input id="is_free" name="is_free">
-                            <option selected="" disabled>Select Berbayar / Gratis</option>
-                            <option value="paid" {{ old('is_free') == 'paid' ? 'selected' : '' }}>Berbayar</option>
-                            <option value="free" {{ old('is_free') == 'free' ? 'selected' : '' }}>Gratis</option>
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
+                        <x-input-label for="email" :value="__('Email')" />
+                        <x-text-input type="email" :value="old('email', $user->email)" name="email" id="email" placeholder="Masukan Email " required=""/>
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                 </div>
                 <div class="grid lg:grid-cols-2 gap-3">
                     <div>
-                        <x-input-label for="batch_id" :value="__('Batch')" />
-                        <x-select-input id="batch_id" name="batch_id" >
-                            <option selected="" disabled>Select Batch</option>
-                            @foreach ($batch as $batchs)
-                                <option value="{{ $batchs->id }}" {{ old('batch_id') == $batchs->id ? 'selected' : '' }}>{{ $batchs->name }}</option>
-                            @endforeach
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('batch_id')" class="mt-2" />
+                        <x-input-label for="phone" :value="__('Phone')" />
+                        <x-text-input type="number" :value="old('phone', $user->phone)" name="phone" id="phone" placeholder="Masukan nomor telp " />
+                        <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="is_together" :value="__('Biasa / Serentak')" />
-                        <x-select-input id="is_together" name="is_together" >
-                            <option selected="" disabled>Select Biasa / Serentak</option>
-                            <option value="basic" {{ old('is_together') == 'basic' ? 'selected' : '' }}>Biasa</option>
-                            <option value="together" {{ old('is_together') == 'together' ? 'selected' : '' }}>Serentak</option>
+                        <x-input-label for="role" :value="__('Role')" />
+                        <x-select-input id="role" name="role" >
+                            <option selected="" disabled>pilih role</option>
+                            <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="mentor" {{ old('role', $user->role) == 'mentor' ? 'selected' : '' }}>Mentor</option>
+                            <option value="user" {{ old('role', $user->role) == 'user' ? 'selected' : '' }}>User</option>
                         </x-select-input>
-                        <x-input-error :messages="$errors->get('is_together')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('role')" class="mt-2" />
                     </div>
                 </div>
                 
-                <div id="date-inputs" style="display: none;"> 
+                <div id="date-inputs"> 
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
-                            <x-input-label for="start_date" :value="__('Start Date')" />
-                            <x-text-input type="date" :value="old('start_date')" name="start_date" id="start_date" placeholder="Masukan tanggal mulai" required=""/>
-                            <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
+                            <x-input-label for="password" :value="__('Password')" />
+                            <x-text-input id="password" class="block mt-1 w-full"
+                                            type="password"
+                                            name="password"
+                                             autocomplete="new-password" />
+                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
+
+                        <!-- Confirm Password -->
                         <div>
-                            <x-input-label for="end_date" :value="__('end Date')" />
-                            <x-text-input type="date" :value="old('end_date')" name="end_date" id="end_date" placeholder="Masukan tanggal selesai" required=""/>
-                            <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
+                            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                                            type="password"
+                                            name="password_confirmation"  autocomplete="new-password" />
+                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                         </div>
                     </div>
                 </div>
                 <div class="flex justify-between">
-                        <x-secondary-href href="{{ route('admin.tryout.index') }}">
-                            Back
-                        </x-secondary-href>
-                        <x-primary-button type="submit">
-                            Add Tryout
-                        </x-primary-button>
+                    <x-secondary-href href="{{ route('admin.user.index') }}">
+                        Back
+                    </x-secondary-href>
+                    <x-primary-button type="submit">
+                        Add User
+                    </x-primary-button>
                 </div>
         </form>
     </div>
