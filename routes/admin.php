@@ -1,13 +1,10 @@
 <?php
 
 use App\Http\Controllers\BatchController;
-<<<<<<< HEAD
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
-=======
 use App\Http\Controllers\BimbelController;
 use App\Http\Controllers\ClassBimbelController;
->>>>>>> 0ee0fed27236126430bd8cf548eb4333e56f7280
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\TryoutController;
