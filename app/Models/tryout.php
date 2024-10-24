@@ -11,4 +11,8 @@ class tryout extends Model
     public function batch(){
         return $this->belongsTo(Batch::class);
     }
+
+    public function question(){
+        return $this->hasMany(Question::class);
+    }
 }

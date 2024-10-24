@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class sub_categories extends Model
 {
     protected $fillable = ['name', 'description', 'duration', 'category'];
+
+    public function question(){
+        return $this->hasMany(Question::class);
+    }
 }
