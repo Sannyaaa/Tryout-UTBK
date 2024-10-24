@@ -167,10 +167,22 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     var table = $('#questionTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.question.index') }}",
+        ajax: {
+            url: "{{ route('admin.question.index') }}",
+            type: 'GET',
+            error: function (xhr, error, thrown) {
+                console.log('DataTables error:', error);
+            }
+        },
         columns: [
             {
                 data: 'checkbox',
@@ -179,19 +191,19 @@ $(document).ready(function() {
                 searchable: false,
                 width: '5%'
             },
-            {data: 'sub_categories.name', name: 'sub_categories.name'},
-            {data: 'tryout.name', name: 'tryout.name'},
+            {data: 'tryout.name', name: 'tryout.name', defaultContent: ''},
+            {data: 'sub_categories.name', name: 'sub_categories.name', defaultContent: ''},
             {
                 data: 'image',
                 name: 'image',
                 orderable: false,
                 searchable: false,
                 render: function(data) {
-                    return '<img src="' + data + '" width="100" height="100">';
+                    return data ? '<img src="' + data + '" width="100" height="100">' : '';
                 }
             },
-            {data: 'question', name: 'question'},
-            {data: 'corect_answer', name: 'corect_answer'},
+            {data: 'question', name: 'question', defaultContent: ''},
+            {data: 'corect_answer', name: 'corect_answer', defaultContent: ''},
             {
                 data: 'action',
                 name: 'action',

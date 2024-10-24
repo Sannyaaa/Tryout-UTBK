@@ -81,7 +81,7 @@
                         <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="is_free" :value="__('Is Free')" />
+                        <x-input-label for="is_free" :value="__('Berbayar / Gratis')" />
                         <x-select-input id="is_free" name="is_free">
                             <option selected="" disabled>Select is free</option>
                             <option value="paid" {{ old('is_free') == 'paid' ? 'selected' : '' }}>Berbayar</option>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="grid lg:grid-cols-2 gap-3">
                     <div>
-                        <x-input-label for="batch_id" :value="__('Batch')" />
+                        <x-input-label for="batch_id" :value="__('Biasa / Serentak')" />
                         <x-select-input id="batch_id" name="batch_id" >
                             <option selected="" disabled>Select Batch</option>
                             @foreach ($batch as $batchs)

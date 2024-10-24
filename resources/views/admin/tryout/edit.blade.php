@@ -84,7 +84,7 @@
                         <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="is_free" :value="__('Is Free')" />
+                        <x-input-label for="is_free" :value="__('Berbayar / Gratis')" />
                         <x-select-input id="is_free" name="is_free">
                             <option selected="" disabled>Select is free</option>
                             <option value="paid" {{ $tryout->is_free == 'paid' ? 'selected' : '' }}>Berbayar</option>
@@ -105,7 +105,7 @@
                         <x-input-error :messages="$errors->get('batch_id')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="is_together" :value="__('Is Together')" />
+                        <x-input-label for="is_together" :value="__('Biasa / Serentak')" />
                         <x-select-input id="is_together" name="is_together" >
                             <option selected="" disabled>Select Is Together</option>
                             <option value="basic" {{ $tryout->is_together == 'basic' ? 'selected' : '' }}>Biasa</option>

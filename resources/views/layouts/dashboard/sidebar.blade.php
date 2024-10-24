@@ -80,6 +80,22 @@
                 </x-slot>
             </x-sidebar-dropdown>
           </li>
+
+          <li>
+            <!-- Dropdown Menu -->
+            <x-sidebar-dropdown id="question" name="question">
+                {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
+                <i class="fa-regular fa-file-lines"></i>
+                <x-slot name="content">
+                    <li>
+                        <a href="{{ route('admin.question.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">All Question</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.question.create') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Create</a>
+                    </li>
+                </x-slot>
+            </x-sidebar-dropdown>
+          </li>
           
           <li>
             {{-- <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" aria-controls="dropdown-crud" data-collapse-toggle="dropdown-crud">

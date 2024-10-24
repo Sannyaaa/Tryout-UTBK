@@ -84,10 +84,10 @@
                                 Name
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Is free
+                                Berbayar / Gratis
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Is together
+                                Biasa / Serentak
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Start date
@@ -195,8 +195,28 @@ $(document).ready(function() {
                 }
             },
             {data: 'name', name: 'name'},
-            {data: 'is_free', name: 'is_free'},
-            {data: 'is_together', name: 'is_together'},
+            {
+                data: 'is_free',
+                name: 'is_free', 
+                render: function(data, type, row) {
+                    if(data == 'free') {
+                        return '<span class="text-success">Gratis</span>';
+                    } else {
+                        return '<span class="text-danger">Berbayar</span>';
+                    }
+                }
+            },
+            {
+                data: 'is_together',
+                name: 'is_together',
+                render: function(data, type, row) {
+                    if(data == 'together') {
+                        return '<span class="text-success">Serentak</span>';
+                    } else {
+                        return '<span class="text-danger">Biasa</span>';
+                    }
+                }
+            },
             {data: 'start_date', name: 'start_date'},
             {data: 'end_date', name: 'end_date'},
             {data: 'batch.name', name: 'batch.name'},

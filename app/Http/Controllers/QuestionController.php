@@ -160,43 +160,74 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
+        // Pastikan bahwa question dan relasi answers ada
+        if (!$question) {
+            return redirect()->back()->with('error', 'Question not found.');
+        }
+
         $sub_categories = sub_categories::all();
         $tryouts = tryout::all();
-        return view('admin.question.edit', compact('tryouts','sub_categories', 'question'));
-    }
+        $answer = $question->answer; // Ambil jawaban yang terkait dengan pertanyaan
 
+        return view('admin.question.edit', compact('tryouts', 'sub_categories', 'question', 'answer'));
+    }
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        $question = Question::find($id);
-
+        $question = Question::findOrFail($id);
+        
+        // Validasi data pertanyaan
         $data = $request->validate([
             'sub_categories_id' => 'required|exists:sub_categories,id',
-            'number' => 'required|string',
             'question' => 'nullable|string',
             'corect_answer' => 'required|string',
             'explanation' => 'required|string',
             'tryout_id' => 'required|exists:tryouts,id',
-            
         ]);
 
+        // Jika ada file gambar, simpan
         if ($request->hasFile('image')) {
             $image = $request->file('image')->store('assets', 'public');
             $data['image'] = $image;
-        } else {
-            return redirect()->back()->with('error', 'File gambar tidak ditemukan');
         }
 
-        // dd($data);
-
-        try{
+        try {
+            // Update data pertanyaan
             $question->update($data);
-            Log::info("berhasil");
-            return redirect()->route('admin.question.index')->with('success', 'question update successfully.');
+
+            // Validasi input
+            $request->validate([
+                'a' => 'required|string|max:255',
+                'b' => 'required|string|max:255',
+                'c' => 'required|string|max:255',
+                'd' => 'required|string|max:255',
+                'e' => 'required|string|max:255',
+            ]);
+
+            // Ambil jawaban yang terkait dengan pertanyaan
+            $answer = $question->answer;
+
+            // Jika jawaban belum ada, buat jawaban baru
+            if (!$answer) {
+                $answer = new Answer();
+                $answer->question_id = $question->id; // Set id pertanyaan
+            }
+
+            // Update data jawaban
+            $answer->a = $request->input('a');
+            $answer->b = $request->input('b');
+            $answer->c = $request->input('c');
+            $answer->d = $request->input('d');
+            $answer->e = $request->input('e');
+            
+            // Simpan jawaban ke database
+            $answer->save();
+
+            return redirect()->route('admin.question.index')->with('success', 'Question and answers updated successfully.');
         } catch (\Exception $e) {
-            Log::error('Error in create question: ' . $e->getMessage());
+            Log::error('Error in update question: ' . $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
