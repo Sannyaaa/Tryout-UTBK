@@ -13,4 +13,8 @@ class batch extends Model
     public function tryout(){
         return $this->hasMany(tryout::class);
     }
+
+    public function bimbel(){
+        return $this->hasMany(Bimbel::class);
+    }
 }
