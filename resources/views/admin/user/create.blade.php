@@ -16,7 +16,7 @@
                   <li>
                     <div class="flex items-center">
                       <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="{{ route('admin.class-bimbel.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class Bimbel</a>
+                      <a href="{{ route('admin.user.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">User</a>
                     </div>
                   </li>
                   <li>
@@ -27,7 +27,7 @@
                   </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Create Class Bimbel</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Create User</h1>
         </div>
         {{-- <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
@@ -58,74 +58,70 @@
                 Add new product
             </button>
         </div> --}}
-        <form action="{{ route('admin.class-bimbel.update',$classBimbel->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
-            <div class="space-y-3">
+            @method('POST')
+            <div class="space-y-4">
+                
                 <div class="grid lg:grid-cols-2 gap-3">
                     <div>
                         <x-input-label for="name" :value="__('Nama')" />
-                        <x-text-input type="text" :value="old('name', $classBimbel->name)" name="name" id="name" placeholder="Masukan Nama Tryout" required=""/>
+                        <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama " required=""/>
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="sub_categories_id" :value="__('Mapel')" />
-                        <x-select-input id="sub_categories_id" name="sub_categories_id" >
-                            <option selected="" disabled>Select Mapel</option>
-                            @foreach ($subCategories as $sub_categories_id)
-                                <option value="{{ $sub_categories_id->id }}" {{ old('sub_categories_id', $classBimbel->sub_categories_id)  == $sub_categories_id->id ? 'selected' : '' }}>{{ $sub_categories_id->name }}</option>
-                            @endforeach
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('sub_categories_id')" class="mt-2" />
+                        <x-input-label for="email" :value="__('Email')" />
+                        <x-text-input type="email" :value="old('email')" name="email" id="email" placeholder="Masukan Email " required=""/>
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                 </div>
-
                 <div class="grid lg:grid-cols-2 gap-3">
                     <div>
-                        <x-input-label for="bimbel_id" :value="__('Bimbel')" />
-                        <x-select-input id="bimbel_id" name="bimbel_id" >
-                            <option selected="" disabled>Select Bimbel</option>
-                            @foreach ($bimbels as $bimbel)
-                                <option value="{{ $bimbel->id }}" {{ old('bimbel_id', $classBimbel->bimbel_id == $bimbel->id) ? 'selected' : '' }}>{{ $bimbel->name }}</option>
-                            @endforeach
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('bimbel_id')" class="mt-2" />
+                        <x-input-label for="phone" :value="__('Phone')" />
+                        <x-text-input type="number" :value="old('phone')" name="phone" id="phone" placeholder="Masukan nomor telp " />
+                        <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="user_id" :value="__('Pengajar')" />
-                        <x-select-input id="user_id" name="user_id" >
-                            <option selected="" disabled>Select Pengajar</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}" {{ old('user_id', $classBimbel->user_id == $user->id) ? 'selected' : '' }}>{{ $user->name }}</option>
-                            @endforeach
+                        <x-input-label for="role" :value="__('Role')" />
+                        <x-select-input id="role" name="role" >
+                            <option selected="" disabled>pilih role</option>
+                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="mentor" {{ old('role') == 'mentor' ? 'selected' : '' }}>Mentor</option>
+                            <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                         </x-select-input>
-                        <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('role')" class="mt-2" />
                     </div>
                 </div>
                 
-                <div id="date-inputs">
+                <div id="date-inputs"> 
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
-                            <x-input-label for="date" :value="__('Tanggal Belajar')" />
-                            <x-text-input type="date" :value="old('date', $classBimbel->date)" name="date" id="date" placeholder="Masukan tanggal mulai" required=""/>
-                            <x-input-error :messages="$errors->get('date')" class="mt-2" />
+                            <x-input-label for="password" :value="__('Password')" />
+                            <x-text-input id="password" class="block mt-1 w-full"
+                                            type="password"
+                                            name="password"
+                                            required autocomplete="new-password" />
+                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
+
+                        <!-- Confirm Password -->
                         <div>
-                            <x-input-label for="start_time" :value="__('Jam Mulai')" />
-                            <x-text-input type="time" :value="old('start_time', \Carbon\Carbon::parse($classBimbel->start_time)->format('H:i'))" name="start_time" id="start_time" placeholder="Masukan tanggal selesai" required=""/>
-                            <x-input-error :messages="$errors->get('start_time')" class="mt-2" />
+                            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                                            type="password"
+                                            name="password_confirmation" required autocomplete="new-password" />
+                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                         </div>
                     </div>
                 </div>
                 <div class="flex justify-between">
-                    <x-secondary-href href="{{ route('admin.class-bimbel.index') }}">
+                    <x-secondary-href href="{{ route('admin.user.index') }}">
                         Back
                     </x-secondary-href>
                     <x-primary-button type="submit">
-                        Edit Class
+                        Add User
                     </x-primary-button>
                 </div>
-            </div>
         </form>
     </div>
 </div>

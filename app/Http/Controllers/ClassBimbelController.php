@@ -26,19 +26,19 @@ class ClassBimbelController extends Controller
                 
                 return DataTables::of($query)
                     ->addIndexColumn()
-                    ->addColumn('checkbox', function($tryout) {
-                        return '<input type="checkbox" class="tryout-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $tryout->id . '">';
+                    ->addColumn('checkbox', function($class) {
+                        return '<input type="checkbox" class="class-bimbel-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $class->id . '">';
                     })
-                    ->addColumn('date', function($tryout) {
-                        return date('j F Y', strtotime($tryout->date)) .' '. date('h:i A', strtotime($tryout->start_time));
+                    ->addColumn('date', function($class) {
+                        return date('j F Y', strtotime($class->date)) .' '. date('h:i A', strtotime($class->start_time));
                     })
-                    ->addColumn('action', function ($tryout) {
-                        $editBtn = '<a href="' . route('admin.tryout.edit', $tryout->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    ->addColumn('action', function ($class) {
+                        $editBtn = '<a href="' . route('admin.class-bimbel.edit', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                             Update
                         </a>';
                         
-                        $deleteBtn = '<form action="' . route('admin.tryout.destroy', $tryout->id) . '" method="POST" class="inline-block ml-2">
+                        $deleteBtn = '<form action="' . route('admin.class-bimbel.destroy', $class->id) . '" method="POST" class="inline-block ml-2">
                             ' . csrf_field() . '
                             ' . method_field('DELETE') . '
                             <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
@@ -62,6 +62,34 @@ class ClassBimbelController extends Controller
                 return response()->json(['error' => 'An error occurred while processing your request.'], 500);
             }
             return back()->with('error', 'An error occurred while loading the page. Please try again.');
+        }
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        try {
+            $ids = $request->ids;
+            
+            if (!is_array($ids)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No items selected'
+                ], 400);
+            }
+
+            ClassBimbel::whereIn('id', $ids)->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Selected items have been deleted'
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Error in bulk delete: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Error deleting selected items'
+            ], 500);
         }
     }
 
@@ -151,7 +179,7 @@ class ClassBimbelController extends Controller
         $bimbels = Bimbel::all();
         $users = User::all();
         $subCategories = sub_categories::all();
-        return view('admin.class-bimbel.edit', compact( 'bimbels', 'users','subCategories'));
+        return view('admin.class-bimbel.edit', compact( 'classBimbel', 'bimbels', 'users','subCategories'));
     }
 
     /**
@@ -160,6 +188,26 @@ class ClassBimbelController extends Controller
     public function update(Request $request, ClassBimbel $classBimbel)
     {
         //
+
+        $request->validate([
+            'name' => 'required|string',
+            'bimbel_id' => 'required|exists:bimbels,id',
+            'sub_categories_id' => 'required|exists:sub_categories,id',
+            'user_id' => 'required|exists:users,id',
+            'date' => 'required|date',
+            'start_time' => 'required',
+        ]);
+
+        $classBimbel->update([
+            'bimbel_id' => $request->input('bimbel_id'),
+            'sub_categories_id' => $request->input('sub_categories_id'),
+            'user_id' => $request->input('user_id'),
+            'name' => $request->input('name'),
+            'date' => $request->input('date'),
+            'start_time' => $request->input('start_time'),
+        ]);
+
+        return redirect()->route('admin.class-bimbel.index')->with('success', 'Tryout berhasil diubah.');
     }
 
     /**
@@ -168,5 +216,8 @@ class ClassBimbelController extends Controller
     public function destroy(ClassBimbel $classBimbel)
     {
         //
+        $classBimbel->delete();
+
+        return redirect()->route('admin.class-bimbel.index')->with('success', 'Tryout berhasil dihapus.');
     }
 }
