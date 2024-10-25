@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\BimbelController;
 use App\Http\Controllers\ClassBimbelController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\TryoutController;
@@ -40,5 +41,9 @@ Route::resource('/question', QuestionController::class);
 
 Route::resource('/class-bimbel', ClassBimbelController::class);
 Route::post('/class-bimbel/bulk-delete', [ClassBimbelController::class, 'bulkDelete'])->name('class-bimbel.bulkDelete');
+
 Route::resource('/user', UserController::class);
 Route::post('/user/bulk-delete', [UserController::class, 'bulkDelete'])->name('user.bulkDelete');
+
+Route::resource('/discount', DiscountController::class);
+Route::post('/discount/bulk-delete', [DiscountController::class, 'bulkDelete'])->name('discount.bulkDelete');

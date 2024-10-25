@@ -75,7 +75,7 @@
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                 </div>
-                <div class="grid lg:grid-cols-2 gap-3">
+                <div class="grid lg:grid-cols-3 gap-3">
                     <div>
                         <x-input-label for="phone" :value="__('Phone')" />
                         <x-text-input type="number" :value="old('phone', $user->phone)" name="phone" id="phone" placeholder="Masukan nomor telp " />
@@ -90,6 +90,16 @@
                             <option value="user" {{ old('role', $user->role) == 'user' ? 'selected' : '' }}>User</option>
                         </x-select-input>
                         <x-input-error :messages="$errors->get('role')" class="mt-2" />
+                    </div>
+
+                    <div>
+                        <x-input-label for="access" :value="__('Access')" />
+                        <x-select-input id="access" name="access" >
+                            <option selected="" disabled>pilih access</option>
+                            <option value="yes" {{ old('access', $user->access) == 'yes' ? 'selected' : '' }}>Yes</option>
+                            <option value="no" {{ old('access', $user->access) == 'no' ? 'selected' : '' }}>No</option>
+                        </x-select-input>
+                        <x-input-error :messages="$errors->get('access')" class="mt-2" />
                     </div>
                 </div>
                 

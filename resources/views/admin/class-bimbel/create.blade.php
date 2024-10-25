@@ -105,7 +105,7 @@
 
                 <div class="grid lg:grid-cols-2 gap-3 my-1">
                     <div class="flex items-center">
-                        <input id="many-class" type="checkbox" value="1" name="days_of_week[]" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="many-class" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="many-class" class="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Buat Banyak Class</label>
                     </div>
                 </div>
@@ -114,12 +114,12 @@
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
                             <x-input-label for="date" :value="__('Tanggal Mulai')" />
-                            <x-text-input type="date" :value="old('date')" name="date" id="date" placeholder="Masukan tanggal mulai" required=""/>
+                            <x-text-input type="date" :value="old('date')" name="date" id="date" placeholder="Masukan tanggal mulai" required="required"/>
                             <x-input-error :messages="$errors->get('date')" class="mt-2" />
                         </div>
                         <div>
                             <x-input-label for="start_time" :value="__('Jam Mulai')" />
-                            <x-text-input type="time" :value="old('start_time')" name="start_time" id="start_time" placeholder="Masukan tanggal selesai" required=""/>
+                            <x-text-input type="time" :value="old('start_time')" name="start_time" id="start_time" placeholder="Masukan tanggal selesai" required="required"/>
                             <x-input-error :messages="$errors->get('start_time')" class="mt-2" />
                         </div>
                     </div>
@@ -130,18 +130,18 @@
                         <div class="space-y-3">
                             <div>
                                 <x-input-label for="start_date" :value="__('Tanggal Mulai')" />
-                                <x-text-input type="date" :value="old('start_date')" name="start_date" id="start_date" placeholder="Masukan tanggal mulai" required=""/>
+                                <x-text-input type="date" :value="old('start_date')" name="start_date" id="start_date" placeholder="Masukan tanggal mulai" />
                                 <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
                             </div>
                             <div>
                                 <x-input-label for="end_date" :value="__('Tanggal Akhir')" />
-                                <x-text-input type="date" :value="old('end_date')" name="end_date" id="end_date" placeholder="Masukan tanggal selesai" required=""/>
+                                <x-text-input type="date" :value="old('end_date')" name="end_date" id="end_date" placeholder="Masukan tanggal selesai" />
                                 <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
                             </div>
                             <div>
-                                <x-input-label for="start_time" :value="__('Jam Mulai')" />
-                                <x-text-input type="time" :value="old('start_time')" name="start_time" id="start_time" placeholder="Masukan tanggal selesai" required=""/>
-                                <x-input-error :messages="$errors->get('start_time')" class="mt-2" />
+                                <x-input-label for="start_time_second" :value="__('Jam Mulai')" />
+                                <x-text-input type="time" :value="old('start_time_second')" name="start_time_second" id="start_time_second" placeholder="Masukan tanggal selesai" />
+                                <x-input-error :messages="$errors->get('start_time_second')" class="mt-2" />
                             </div>
                         </div>
                         <div>
@@ -198,17 +198,49 @@
 @push('script')
     <script>
         document.getElementById('many-class').addEventListener('change', function() {
-            var secondDateInputs = document.getElementById('second-date-inputs');
             var firstDateInputs = document.getElementById('first-date-inputs');
-            secondDateInputs.style.display = this.checked  ? 'block' : 'none';
-            firstDateInputs.style.display = this.checked  ? 'none' : 'block';
+            var secondDateInputs = document.getElementById('second-date-inputs');
             
-            // Toggle required attribute
-        //     var inputs = secondDateInputs.getElementsByTagName('input');
-        //     for(var i = 0; i < inputs.length; i++) {
-        //         inputs[i].required = this.checked ;
-        //     }
-        // });
+            // Jika checkbox dicentang, tampilkan second-date-inputs dan sembunyikan first-date-inputs
+            if (this.checked) {
+                firstDateInputs.style.display = 'none';
+                secondDateInputs.style.display = 'block';
+            } else {
+                firstDateInputs.style.display = 'block';
+                secondDateInputs.style.display = 'none';
+            }
+        });
+    </script>
+
+    <script>
+        function toggleDateInputs() {
+            const isChecked = document.getElementById('many-class').checked;
+            
+            const firstInputs = document.querySelectorAll('#first-date-inputs input');
+            const secondInputs = document.querySelectorAll('#second-date-inputs input');
+
+            if (isChecked) {
+                document.getElementById('first-date-inputs').style.display = 'none';
+                document.getElementById('second-date-inputs').style.display = 'block';
+                
+                firstInputs.forEach(input => {
+                    input.removeAttribute('required');
+                });
+                secondInputs.forEach(input => {
+                    input.setAttribute('required', 'required');
+                });
+            } else {
+                document.getElementById('first-date-inputs').style.display = 'block';
+                document.getElementById('second-date-inputs').style.display = 'none';
+                
+                firstInputs.forEach(input => {
+                    input.setAttribute('required', 'required');
+                });
+                secondInputs.forEach(input => {
+                    input.removeAttribute('required');
+                });
+            }
+        }
     </script>
 @endpush
 

@@ -114,39 +114,31 @@ class ClassBimbelController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request);
+
         $request->validate([
             'name' => 'required|string',
             'bimbel_id' => 'required|exists:bimbels,id',
             'sub_categories_id' => 'required|exists:sub_categories,id',
             'user_id' => 'required|exists:users,id',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'start_time' => 'required',
-            'days_of_week' => 'required|array',
+            'date' => 'date',
+            'start_time' => 'nullable',
+            'start_time_second' => 'nullable',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'days_of_week' => 'nullable|array',
         ]);
 
         $bimbelId = $request->input('bimbel_id');
         $subCategoriesId = $request->input('sub_categories_id');
         $userId = $request->input('user_id');
         $name = $request->input('name');
-        $startTime = $request->input('start_time');
+        $startTime = $request->input('start_time') ?? $request->input('start_time_second');
+        
+        if ($request->input('date')) {
 
-        $startDate = Carbon::parse($request->input('start_date'));
-        $endDate = Carbon::parse($request->input('end_date'));
-        $daysOfWeek = $request->input('days_of_week'); // array [1 => 'Senin', 2 => 'Selasa', ...]
+            $date = Carbon::parse($request->input('date'));
 
-        // Loop through the date range
-        $dates = [];
-        while ($startDate->lte($endDate)) {
-            // Check if the current day is in the selected days of the week
-            if (in_array($startDate->dayOfWeek, $daysOfWeek)) {
-                $dates[] = $startDate->format('Y-m-d'); // Store the date
-            }
-            $startDate->addDay(); // Move to the next day
-        }
-
-        // Create ClassBimbel entries for each valid date
-        foreach ($dates as $date) {
             ClassBimbel::create([
                 'bimbel_id' => $bimbelId,
                 'sub_categories_id' => $subCategoriesId,
@@ -155,6 +147,33 @@ class ClassBimbelController extends Controller
                 'start_time' => $startTime,
                 'date' => $date,
             ]);
+            
+        }else {
+            $startDate = Carbon::parse($request->input('start_date'));
+            $endDate = Carbon::parse($request->input('end_date'));
+            $daysOfWeek = $request->input('days_of_week'); // array [1 => 'Senin', 2 => 'Selasa', ...]
+
+            // Loop through the date range
+            $dates = [];
+            while ($startDate->lte($endDate)) {
+                // Check if the current day is in the selected days of the week
+                if (in_array($startDate->dayOfWeek, $daysOfWeek)) {
+                    $dates[] = $startDate->format('Y-m-d'); // Store the date
+                }
+                $startDate->addDay(); // Move to the next day
+            }
+
+            // Create ClassBimbel entries for each valid date
+            foreach ($dates as $date) {
+                ClassBimbel::create([
+                    'bimbel_id' => $bimbelId,
+                    'sub_categories_id' => $subCategoriesId,
+                    'user_id' => $userId,
+                    'name' => $name,
+                    'start_time' => $startTime,
+                    'date' => $date,
+                ]);
+            }
         }
 
         return redirect()->route('admin.class-bimbel.index')->with('success', 'Tryout berhasil ditambahkan.');

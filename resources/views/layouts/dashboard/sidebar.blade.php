@@ -22,7 +22,7 @@
                 <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
                 <span class="ml-3" sidebar-toggle-item>Dashboard</span>
             </a> --}}
-            <x-sidebar-link link="/" name="Dashboard">
+            <x-sidebar-link link="{{ route('dashboard') }}" name="Dashboard">
               <i class="fa-solid fa-tv"></i>
             </x-sidebar-link>
           </li>
@@ -83,7 +83,7 @@
 
           <li>
             <!-- Dropdown Menu -->
-            <x-sidebar-dropdown id="question" name="question">
+            <x-sidebar-dropdown id="question" name="Question">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                 <i class="fa-regular fa-file-lines"></i>
                 <x-slot name="content">
@@ -113,6 +113,22 @@
                 <a href="#" class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 bg-gray-100 dark:bg-gray-700 ">Users</a>
               </li>
             </ul> --}}
+
+          <li>
+            <!-- Dropdown Menu -->
+            <x-sidebar-dropdown id="discount" name="Voucher Discount">
+                {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
+                <i class="fa-regular fa-file-lines"></i>
+                <x-slot name="content">
+                    <li>
+                        <a href="{{ route('admin.discount.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">All Discount</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.discount.create') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Create</a>
+                    </li>
+                </x-slot>
+            </x-sidebar-dropdown>
+          </li>
 
           <li>
             <!-- Dropdown Menu -->
