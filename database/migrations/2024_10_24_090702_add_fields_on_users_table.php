@@ -19,7 +19,7 @@ return new class extends Migration
                 $table->string('phone')->nullable();
                 $table->string('otp')->nullable();
                 $table->string('avatar')->nullable();
-                $table->string('access')->nullable();
+                $table->string('access')->default('yes')->nullable();
                 $table->enum('role',['admin','user','mentor'])->default('user');
                 
                 $table->unsignedBigInteger('university_id')->nullable();

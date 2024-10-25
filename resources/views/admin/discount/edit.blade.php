@@ -16,7 +16,7 @@
                   <li>
                     <div class="flex items-center">
                       <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="{{ route('admin.user.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">User</a>
+                      <a href="{{ route('admin.discount.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Discount</a>
                     </div>
                   </li>
                   <li>
@@ -27,7 +27,7 @@
                   </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Create User</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Create Discount</h1>
         </div>
         {{-- <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
@@ -58,77 +58,71 @@
                 Add new product
             </button>
         </div> --}}
-        <form action="{{ route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.discount.update', $discount->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('POST')
+            @method('PUT')
             <div class="space-y-4">
-                
                 <div class="grid lg:grid-cols-2 gap-3">
                     <div>
                         <x-input-label for="name" :value="__('Nama')" />
-                        <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama " required=""/>
+                        <x-text-input type="text" :value="old('name', $discount->name)" name="name" id="name" placeholder="Masukan Nama Discount" required=""/>
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
+                    
                     <div>
-                        <x-input-label for="email" :value="__('Email')" />
-                        <x-text-input type="email" :value="old('email')" name="email" id="email" placeholder="Masukan Email " required=""/>
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        <x-input-label for="code" :value="__('Code Diskon')" />
+                        <x-text-input type="text" :value="old('code', $discount->code)" name="code" id="code" placeholder="Masukan Code Discount" required=""/>
+                        <x-input-error :messages="$errors->get('code')" class="mt-2" />
                     </div>
                 </div>
-                <div class="grid lg:grid-cols-3 gap-3">
-                    <div>
-                        <x-input-label for="phone" :value="__('Phone')" />
-                        <x-text-input type="number" :value="old('phone')" name="phone" id="phone" placeholder="Masukan nomor telp " />
-                        <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-                    </div>
-                    <div>
-                        <x-input-label for="role" :value="__('Role')" />
-                        <x-select-input id="role" name="role" >
-                            <option selected="" disabled>pilih role</option>
-                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="mentor" {{ old('role') == 'mentor' ? 'selected' : '' }}>Mentor</option>
-                            <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('role')" class="mt-2" />
-                    </div>
-                    <div>
-                        <x-input-label for="access" :value="__('Access')" />
-                        <x-select-input id="access" name="access" >
-                            <option selected="" disabled>pilih access</option>
-                            <option value="yes" {{ old('access') == 'yes' ? 'selected' : '' }}>Yes</option>
-                            <option value="no" {{ old('access') == 'no' ? 'selected' : '' }}>No</option>
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('access')" class="mt-2" />
-                    </div>
+
+                <div>
+                    <x-input-label for="description" :value="__('Description')" />
+                    <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
+                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
                 
-                <div id="date-inputs"> 
-                    <div class="grid lg:grid-cols-2 gap-3">
-                        <div>
-                            <x-input-label for="password" :value="__('Password')" />
-                            <x-text-input id="password" class="block mt-1 w-full"
-                                            type="password"
-                                            name="password"
-                                            required autocomplete="new-password" />
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                        </div>
+                <div class="grid lg:grid-cols-2 gap-3">
+                    {{-- <div>
+                        <x-input-label for="image" :value="__('Image')" />
+                        <x-file-input type="file" name="image" id="image" placeholder="Masukan Image" required=""/>
+                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                    </div> --}}
+                    <div>
+                        <x-input-label for="discount_type" :value="__('Tipe Diskon')" />
+                        <x-select-input id="discount_type" name="discount_type">
+                            <option selected="" disabled>Select Tipe</option>
+                            <option value="percentage" {{ old('discount_type', $discount->discount_type) == 'percentage' ? 'selected' : '' }}>Diskon Persen (%)</option>
+                            <option value="fixed" {{ old('discount_type', $discount->discount_type) == 'fixed' ? 'selected' : '' }}>Diskon Tetap (Rp)</option>
+                        </x-select-input>
+                        <x-input-error :messages="$errors->get('discount_type')" class="mt-2" />
+                    </div>
 
-                        <!-- Confirm Password -->
-                        <div>
-                            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                            type="password"
-                                            name="password_confirmation" required autocomplete="new-password" />
-                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-                        </div>
+                    <div>
+                        <x-input-label for="discount_value" :value="__('Jumlah Diskon')" />
+                        <x-text-input type="number" :value="old('discount_value', $discount->discount_value)" name="discount_value" id="discount_value" placeholder="Masukan Jumlah Discount" required=""/>
+                        <x-input-error :messages="$errors->get('discount_value')" class="mt-2" />
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-3">
+                    <div>
+                        <x-input-label for="start_date" :value="__('Start Date')" />
+                        <x-text-input type="date" :value="old('start_date', $discount->start_date)" name="start_date" id="start_date" placeholder="Masukan tanggal mulai" required=""/>
+                        <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-input-label for="end_date" :value="__('end Date')" />
+                        <x-text-input type="date" :value="old('end_date', $discount->end_date)" name="end_date" id="end_date" placeholder="Masukan tanggal selesai" required=""/>
+                        <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
                     </div>
                 </div>
                 <div class="flex justify-between">
-                    <x-secondary-href href="{{ route('admin.user.index') }}">
+                    <x-secondary-href href="{{ route('admin.discount.index') }}">
                         Back
                     </x-secondary-href>
                     <x-primary-button type="submit">
-                        Add User
+                        Add Discount
                     </x-primary-button>
                 </div>
         </form>
