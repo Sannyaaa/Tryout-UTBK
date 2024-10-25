@@ -33,13 +33,13 @@ Route::get('/fetch-universities', [UniversityController::class, 'fetchUniversiti
 Route::get('/fetch-static-universities', [UniversityController::class, 'getStaticUniversities']);
 
 Route::
-// middleware(['auth:sanctum', 'IsAdmin'])->
+middleware(['role:admin'])->
 prefix('/admin')->name('admin.')->group(function() {
     require __DIR__.'/admin.php';
 });
 
 Route::
-// middleware(['auth:sanctum'])->
+middleware(['auth:sanctum'])->
 prefix('/user')->name('user.')->group(function() {
     require __DIR__.'/user.php';
 });
