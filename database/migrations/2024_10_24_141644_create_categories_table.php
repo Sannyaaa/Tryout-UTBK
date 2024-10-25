@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tryouts', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
-            $table->foreignId('batch_id')->constrained()->cascadeOnDelete();
-            $table->string('description')->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
-            $table->enum('is_free',['paid','free']);
-            $table->enum('is_together',['basic','together']);
+            $table->longText('description');
 
             $table->timestamps();
         });
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tryouts');
+        Schema::dropIfExists('categories');
     }
 };
