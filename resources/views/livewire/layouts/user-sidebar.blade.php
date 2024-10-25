@@ -23,10 +23,26 @@
                 <span class="ml-3" sidebar-toggle-item>Dashboard</span>
             </a> --}}
             <x-sidebar-link link="/" name="Dashboard">
-              <i class="fa-solid fa-tv"></i>
+              {{-- <i class="fa-solid fa-tv"></i> --}}
             </x-sidebar-link>
           </li>
           <li>
+            <x-sidebar-link link="/" name="Tryout">
+            </x-sidebar-link>
+          </li>
+          <li>
+            <x-sidebar-link link="{{route('user.tryouts.event')}}" name="Event Tryout">
+            </x-sidebar-link>
+          </li>
+          <li>
+            <x-sidebar-link link="/" name="Bimbel">
+            </x-sidebar-link>
+          </li>
+          <li>
+            <x-sidebar-link link="/" name="Paket Bimbel">
+            </x-sidebar-link>
+          </li>
+          {{-- <li>
             <!-- Dropdown Menu -->
             <x-sidebar-dropdown id="dropdown-tryout" name="Tryout">
               <i class="fa-regular fa-file-lines"></i>
@@ -52,7 +68,7 @@
                 </li>
               </x-slot>
             </x-sidebar-dropdown>
-          </li>
+          </li> --}}
         </ul>
       </div>
     </div>

@@ -9,6 +9,9 @@ Route::get('/dashboard', function () {
 
 Route::get('/tryout', App\Livewire\User\Tryouts::class)->name('tryouts');
 Route::get('/tryout/owned', App\Livewire\User\TryoutsOwned::class)->name('tryouts.owned');
+Route::get('/tryout/item/{id}', App\Livewire\User\Tryout\Item::class)->name('tryouts.item');
+Route::get('/tryout/question/{id}', App\Livewire\User\Tryout\Question::class)->name('tryouts.question');
+Route::get('/tryout/event', App\Livewire\User\Tryout\Event::class)->name('tryouts.event');
 Route::get('/bimbel', App\Livewire\User\Bimbels::class)->name('bimbels');
 Route::get('/bimbel/owned', App\Livewire\User\BimbelsOwned::class)->name('bimbels.owned');
 
