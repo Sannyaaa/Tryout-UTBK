@@ -87,13 +87,14 @@
                                 </div>
 
                                 <div>
-                                    <x-input-label for="category" :value="__('Category')" />
-                                    <x-select-input id="category" name="category" >
-                                        <option selected="" disabled>Select Category</option>
-                                        <option value="Test Potensi Skolastik" {{ old('category') == 'Test Potensi Skolastik' ? 'selected' : '' }}>Test Potensi Skolastik</option>
-                                        <option value="Test Literasi" {{ old('category') == 'Test Literasi' ? 'selected' : '' }}>Test Literasi</option>
+                                    <x-input-label for="categories_id" :value="__('categories_id')" />
+                                    <x-select-input id="categories_id" name="categories_id" >
+                                        <option selected="" disabled>Select categories</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" {{ old('categories_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                        @endforeach
                                     </x-select-input>
-                                    <x-input-error :messages="$errors->get('category')" class="mt-2" />
+                                    <x-input-error :messages="$errors->get('categories_id')" class="mt-2" />
                                 </div>
 
                                 <div>
@@ -143,9 +144,14 @@
                                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                 </div>
                                 <div>
-                                    <x-input-label for="edit_category" :value="__('Kategori')" />
-                                    <x-text-input type="text" name="category" id="edit_category" placeholder="Masukan Kategori sub_categories" required=""/>
-                                    <x-input-error :messages="$errors->get('category')" class="mt-2" />
+                                    <x-input-label for="categories_id" :value="__('categories_id')" />
+                                    <x-select-input id="categories_id" name="categories_id" >
+                                        <option selected="" disabled>Select categories</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" {{ $sub_categories->categories_id  == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                        @endforeach
+                                    </x-select-input>
+                                    <x-input-error :messages="$errors->get('categories_id')" class="mt-2" />
                                 </div>
                                 <div>
                                     <input type="checkbox" id="edit_add_duration" name="add_duration">
@@ -229,7 +235,13 @@
                     {data: 'name', name: 'name'},
                     {data: 'description', name: 'description'},
                     {data: 'duration', name: 'duration'},
-                    {data: 'category', name: 'category'},
+                    {
+                        data: 'category.name', 
+                        name: 'category.name',
+                        render: function(data, type, row) {
+                            return row.category ? row.category.name : '-';
+                        }
+                    },
                     {
                         data: 'action',
                         name: 'action',
@@ -326,13 +338,13 @@
                     const name = $(this).data('name');
                     const description = $(this).data('description');
                     const duration = $(this).data('duration'); // Get duration
-                    const category = $(this).data('category');
+                    const categories_id = $(this).data('categories_id');
 
                     // Populate the edit form fields
                     $('#editForm').attr('action', `/admin/sub_categories/${id}`);
                     $('#edit_name').val(name);
                     $('#edit_description').val(description);
-                    $('#edit_category').val(category);
+                    $('#edit_categories_id').val(categories_id);
 
                     // Set duration field
                     if (duration) {
