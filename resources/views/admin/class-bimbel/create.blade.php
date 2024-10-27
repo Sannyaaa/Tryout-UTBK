@@ -63,20 +63,21 @@
         </div> --}}
             <form action="{{ route('admin.class-bimbel.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('POST')
                 <div class="space-y-3">
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
                             <x-input-label for="name" :value="__('Nama')" />
-                            <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Tryout" required=""/>
+                            <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Tryout" required />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
                         <div>
                             <x-input-label for="sub_categories_id" :value="__('Mapel')" />
-                            <x-select-input id="sub_categories_id" name="sub_categories_id" >
-                                <option selected="" disabled>Select Mapel</option>
+                            <x-select-input id="sub_categories_id" name="sub_categories_id">
+                                <option selected disabled>Select Mapel</option>
                                 @foreach ($subCategories as $sub_categories_id)
-                                    <option value="{{ $sub_categories_id->id }}" {{ old('sub_categories_id') == $sub_categories_id->id ? 'selected' : '' }}>{{ $sub_categories_id->name }}</option>
+                                    <option value="{{ $sub_categories_id->id }}" {{ old('sub_categories_id') == $sub_categories_id->id ? 'selected' : '' }}>
+                                        {{ $sub_categories_id->name }}
+                                    </option>
                                 @endforeach
                             </x-select-input>
                             <x-input-error :messages="$errors->get('sub_categories_id')" class="mt-2" />
@@ -86,20 +87,24 @@
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
                             <x-input-label for="bimbel_id" :value="__('Bimbel')" />
-                            <x-select-input id="bimbel_id" name="bimbel_id" >
-                                <option selected="" disabled>Select Bimbel</option>
+                            <x-select-input id="bimbel_id" name="bimbel_id">
+                                <option selected disabled>Select Bimbel</option>
                                 @foreach ($bimbels as $bimbel)
-                                    <option value="{{ $bimbel->id }}" {{ old('bimbel_id') == $bimbel->id ? 'selected' : '' }}>{{ $bimbel->name }}</option>
+                                    <option value="{{ $bimbel->id }}" {{ old('bimbel_id') == $bimbel->id ? 'selected' : '' }}>
+                                        {{ $bimbel->name }}
+                                    </option>
                                 @endforeach
                             </x-select-input>
                             <x-input-error :messages="$errors->get('bimbel_id')" class="mt-2" />
                         </div>
                         <div>
                             <x-input-label for="user_id" :value="__('Pengajar')" />
-                            <x-select-input id="user_id" name="user_id" >
-                                <option selected="" disabled>Select Pengajar</option>
+                            <x-select-input id="user_id" name="user_id">
+                                <option selected disabled>Select Pengajar</option>
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                                    <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                                        {{ $user->name }}
+                                    </option>
                                 @endforeach
                             </x-select-input>
                             <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
@@ -108,8 +113,8 @@
 
                     <div class="grid lg:grid-cols-2 gap-3 my-1">
                         <div class="flex items-center">
-                            <input id="many-class" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="many-class" class="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Buat Banyak Class</label>
+                            <input id="many-class" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded" onchange="toggleDateInputs()">
+                            <label for="many-class" class="w-full ms-2 text-sm font-medium text-gray-900">Buat Banyak Class</label>
                         </div>
                     </div>
 
@@ -117,17 +122,17 @@
                         <div class="grid lg:grid-cols-2 gap-3">
                             <div>
                                 <x-input-label for="date" :value="__('Tanggal Mulai')" />
-                                <x-text-input type="date" :value="old('date')" name="date" id="date" placeholder="Masukan tanggal mulai" required="required"/>
+                                <x-text-input type="date" :value="old('date')" name="date" id="date" placeholder="Masukan tanggal mulai" required />
                                 <x-input-error :messages="$errors->get('date')" class="mt-2" />
                             </div>
                             <div>
                                 <x-input-label for="start_time" :value="__('Jam Mulai')" />
-                                <x-text-input type="time" :value="old('start_time')" name="start_time" id="start_time" placeholder="Masukan tanggal selesai" required="required"/>
+                                <x-text-input type="time" :value="old('start_time')" name="start_time" id="start_time" placeholder="Masukan tanggal selesai" required />
                                 <x-input-error :messages="$errors->get('start_time')" class="mt-2" />
                             </div>
                         </div>
                     </div>
-                    
+
                     <div id="second-date-inputs" style="display: none;">
                         <div class="grid lg:grid-cols-2 gap-3">
                             <div class="space-y-3">
@@ -182,6 +187,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="flex justify-between">
                         <x-secondary-href href="{{ route('admin.class-bimbel.index') }}">
                             Back
@@ -192,6 +198,7 @@
                     </div>
                 </div>
             </form>
+
         </div>
     </div>
 </div>
@@ -201,50 +208,43 @@
 
 @push('script')
     <script>
-        document.getElementById('many-class').addEventListener('change', function() {
-            var firstDateInputs = document.getElementById('first-date-inputs');
-            var secondDateInputs = document.getElementById('second-date-inputs');
-            
-            // Jika checkbox dicentang, tampilkan second-date-inputs dan sembunyikan first-date-inputs
-            if (this.checked) {
-                firstDateInputs.style.display = 'none';
-                secondDateInputs.style.display = 'block';
-            } else {
-                firstDateInputs.style.display = 'block';
-                secondDateInputs.style.display = 'none';
-            }
-        });
+        function toggleDateInputs() {
+            const isChecked = document.getElementById('many-class').checked;
+            const firstDateInputs = document.getElementById('first-date-inputs');
+            const secondDateInputs = document.getElementById('second-date-inputs');
+
+            firstDateInputs.style.display = isChecked ? 'none' : 'block';
+            secondDateInputs.style.display = isChecked ? 'block' : 'none';
+
+            document.querySelectorAll('#first-date-inputs input').forEach(input => {
+                input.required = !isChecked;
+            });
+            document.querySelectorAll('#second-date-inputs input').forEach(input => {
+                input.required = isChecked;
+            });
+        }
     </script>
 
     <script>
-        function toggleDateInputs() {
-            const isChecked = document.getElementById('many-class').checked;
-            
-            const firstInputs = document.querySelectorAll('#first-date-inputs input');
-            const secondInputs = document.querySelectorAll('#second-date-inputs input');
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            // Pilih semua checkbox dengan nama days_of_week[]
+            const checkboxes = document.querySelectorAll('input[name="days_of_week[]"]');
+            let isChecked = false;
 
-            if (isChecked) {
-                document.getElementById('first-date-inputs').style.display = 'none';
-                document.getElementById('second-date-inputs').style.display = 'block';
-                
-                firstInputs.forEach(input => {
-                    input.removeAttribute('required');
-                });
-                secondInputs.forEach(input => {
-                    input.setAttribute('required', 'required');
-                });
-            } else {
-                document.getElementById('first-date-inputs').style.display = 'block';
-                document.getElementById('second-date-inputs').style.display = 'none';
-                
-                firstInputs.forEach(input => {
-                    input.setAttribute('required', 'required');
-                });
-                secondInputs.forEach(input => {
-                    input.removeAttribute('required');
-                });
+            // Periksa jika setidaknya ada satu checkbox yang dicentang
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    isChecked = true;
+                }
+            });
+
+            // Jika tidak ada yang dicentang, cegah form untuk dikirim dan tampilkan pesan peringatan
+            if (!isChecked) {
+                event.preventDefault();
+                alert('Pilih setidaknya satu hari belajar!');
             }
-        }
+        });
     </script>
 @endpush
+
 

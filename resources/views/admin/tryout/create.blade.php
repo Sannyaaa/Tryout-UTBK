@@ -78,11 +78,6 @@
                     </div>
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
-                            <x-input-label for="image" :value="__('Image')" />
-                            <x-file-input type="file" name="image" id="image" placeholder="Masukan Image" required=""/>
-                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                        </div>
-                        <div>
                             <x-input-label for="is_free" :value="__('Berbayar / Gratis')" />
                             <x-select-input id="is_free" name="is_free">
                                 <option selected="" disabled>Select Berbayar / Gratis</option>
@@ -91,8 +86,6 @@
                             </x-select-input>
                             <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
                         </div>
-                    </div>
-                    <div class="grid lg:grid-cols-2 gap-3">
                         <div>
                             <x-input-label for="is_together" :value="__('Biasa / Serentak')" />
                             <x-select-input id="is_together" name="is_together" >
