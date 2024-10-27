@@ -16,7 +16,7 @@
                   <li>
                     <div class="flex items-center">
                       <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="{{ route('admin.tryout.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Tryout</a>
+                      <a href="{{ route('admin.question.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">question</a>
                     </div>
                   </li>
                   <li>
@@ -27,7 +27,7 @@
                   </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Create Tryout</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Create question</h1>
         </div>
         {{-- <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
@@ -58,80 +58,90 @@
                 Add new product
             </button>
         </div> --}}
-        <form action="{{ route('admin.tryout.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.tryout.question.store', $tryout->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
             <div class="space-y-4">
-                <div>
-                    <x-input-label for="name" :value="__('Nama')" />
-                    <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Tryout" required=""/>
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                </div>
-                
-                <div>
-                    <x-input-label for="description" :value="__('Description')" />
-                    <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
-                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
-                </div>
-                
+
                 <div class="grid lg:grid-cols-2 gap-3">
                     <div>
-                        <x-input-label for="image" :value="__('Image')" />
-                        <x-file-input type="file" name="image" id="image" placeholder="Masukan Image" required=""/>
-                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                    </div>
-                    <div>
-                        <x-input-label for="is_free" :value="__('Is Free')" />
-                        <x-select-input id="is_free" name="is_free">
-                            <option selected="" disabled>Select is free</option>
-                            <option value="paid" {{ old('is_free') == 'paid' ? 'selected' : '' }}>Berbayar</option>
-                            <option value="free" {{ old('is_free') == 'free' ? 'selected' : '' }}>Gratis</option>
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
-                    </div>
-                </div>
-                <div class="grid lg:grid-cols-2 gap-3">
-                    <div>
-                        <x-input-label for="batch_id" :value="__('Batch')" />
-                        <x-select-input id="batch_id" name="batch_id" >
-                            <option selected="" disabled>Select Batch</option>
-                            @foreach ($batch as $batchs)
-                                <option value="{{ $batchs->id }}" {{ old('batch_id') == $batchs->id ? 'selected' : '' }}>{{ $batchs->name }}</option>
+                        <x-input-label for="sub_categories_id" :value="__('Sub Categories')" />
+                        <x-select-input id="sub_categories_id" name="sub_categories_id" >
+                            <option selected="" disabled>Select Sub Categories</option>
+                            @foreach ($sub_categories as $sub_category)
+                                <option value="{{ $sub_category->id }}" {{ old('sub_categories_id') == $sub_category->id ? 'selected' : '' }}>{{ $sub_category->name }}</option>
                             @endforeach
                         </x-select-input>
-                        <x-input-error :messages="$errors->get('batch_id')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('sub_categories_id')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="is_together" :value="__('Is Together')" />
-                        <x-select-input id="is_together" name="is_together" >
-                            <option selected="" disabled>Select Is Together</option>
-                            <option value="basic" {{ old('is_together') == 'basic' ? 'selected' : '' }}>Biasa</option>
-                            <option value="together" {{ old('is_together') == 'together' ? 'selected' : '' }}>Serentak</option>
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('is_together')" class="mt-2" />
+                        <x-input-label for="image" :value="__('Image')" />
+                        <x-file-input type="file" name="image" id="image" placeholder="Masukan Image Question"/>
+                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
+                </div>
+
+                <div>
+                    <x-input-label for="question" :value="__('Question')" />
+                    <x-text-area id="question" name="question" rows="4" placeholder="Masukan question"/>
+                    <x-input-error :messages="$errors->get('question')" class="mt-2" />
+                </div>
+
+                <div>
+                    <x-input-label for="a" :value="__('Jawaban A')" />
+                    <x-text-input type="text" :value="old('a')" name="a" id="a" placeholder="Masukan jawaban A" required=""/>
+                    <x-input-error :messages="$errors->get('a')" class="mt-2" />
+                </div>
+
+                <div>
+                    <x-input-label for="b" :value="__('Jawaban B')" />
+                    <x-text-input type="text" :value="old('b')" name="b" id="b" placeholder="Masukan jawaban B" required=""/>
+                    <x-input-error :messages="$errors->get('b')" class="mt-2" />
+                </div>
+
+                <div>
+                    <x-input-label for="c" :value="__('Jawaban C')" />
+                    <x-text-input type="text" :value="old('c')" name="c" id="c" placeholder="Masukan jawaban C" required=""/>
+                    <x-input-error :messages="$errors->get('c')" class="mt-2" />
+                </div>
+
+                <div>
+                    <x-input-label for="d" :value="__('Jawaban D')" />
+                    <x-text-input type="text" :value="old('d')" name="d" id="d" placeholder="Masukan jawaban D" required=""/>
+                    <x-input-error :messages="$errors->get('d')" class="mt-2" />
+                </div>
+
+                <div>
+                    <x-input-label for="e" :value="__('Jawaban E')" />
+                    <x-text-input type="text" :value="old('e')" name="e" id="e" placeholder="Masukan jawaban E" required=""/>
+                    <x-input-error :messages="$errors->get('e')" class="mt-2" />
+                </div>
+
+                <div>
+                    <x-input-label for="corect_answer" :value="__('Corect Answer')" />
+                    <x-select-input id="corect_answer" name="corect_answer" >
+                        <option selected="" disabled>Select Corect Answer</option>
+                        <option value="a" {{ old('corect_answer') == 'a' ? 'selected' : '' }}>A</option>
+                        <option value="b" {{ old('corect_answer') == 'b' ? 'selected' : '' }}>B</option>
+                        <option value="c" {{ old('corect_answer') == 'c' ? 'selected' : '' }}>C</option>
+                        <option value="d" {{ old('corect_answer') == 'd' ? 'selected' : '' }}>D</option>
+                        <option value="e" {{ old('corect_answer') == 'e' ? 'selected' : '' }}>E</option>
+                    </x-select-input>
+                    <x-input-error :messages="$errors->get('corect_answer')" class="mt-2" />
+                </div>
+
+                <div>
+                    <x-input-label for="explanation" :value="__('explanation')" />
+                    <x-text-area id="explanation" name="explanation" rows="4" placeholder="Masukan explanation"/>
+                    <x-input-error :messages="$errors->get('explanation')" class="mt-2" />
                 </div>
                 
-                <div id="date-inputs" style="display: none;"> 
-                    <div class="grid lg:grid-cols-2 gap-3">
-                        <div>
-                            <x-input-label for="start_date" :value="__('Start Date')" />
-                            <x-text-input type="date" :value="old('start_date')" name="start_date" id="start_date" placeholder="Masukan tanggal mulai" required=""/>
-                            <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
-                        </div>
-                        <div>
-                            <x-input-label for="end_date" :value="__('end Date')" />
-                            <x-text-input type="date" :value="old('end_date')" name="end_date" id="end_date" placeholder="Masukan tanggal selesai" required=""/>
-                            <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
-                        </div>
-                    </div>
-                </div>
                 <div class="flex justify-between">
-                        <x-secondary-href href="{{ route('admin.tryout.index') }}">
+                        <x-secondary-href href="{{ route('admin.question.index') }}">
                             Back
                         </x-secondary-href>
                         <x-primary-button type="submit">
-                            Add product
+                            Add question
                         </x-primary-button>
                 </div>
         </form>

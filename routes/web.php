@@ -22,7 +22,8 @@ Route::get('/dashboard-process', [DashboardController::class,'index'])->middlewa
 Route::middleware('auth')->group(function () {
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password/{user}', [ProfileController::class, 'update_profile'])->name('password.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
 });
@@ -33,13 +34,13 @@ Route::get('/fetch-universities', [UniversityController::class, 'fetchUniversiti
 Route::get('/fetch-static-universities', [UniversityController::class, 'getStaticUniversities']);
 
 Route::
-// middleware(['auth:sanctum', 'IsAdmin'])->
+middleware(['auth','role:admin'])->
 prefix('/admin')->name('admin.')->group(function() {
     require __DIR__.'/admin.php';
 });
 
 Route::
-// middleware(['auth:sanctum'])->
+middleware(['auth'])->
 prefix('/user')->name('user.')->group(function() {
     require __DIR__.'/user.php';
 });

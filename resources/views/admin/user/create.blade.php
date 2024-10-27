@@ -2,33 +2,36 @@
 
 @section('content')
 
-<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
-    <div class="w-full mb-1">
-        <div class="mb-4">
-            <nav class="flex mb-5" aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
-                  <li class="inline-flex items-center">
-                    <a href="#" class="inline-flex items-center text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-white">
-                      <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                      Home
-                    </a>
-                  </li>
-                  <li>
-                    <div class="flex items-center">
-                      <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="{{ route('admin.user.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">User</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="flex items-center">
-                      <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Create</span>
-                    </div>
-                  </li>
-                </ol>
-            </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Create User</h1>
-        </div>
+<div class="p-4 mt-12">
+    <div class="p-6 bg-white block rounded-lg shadow sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full mb-1">
+            <div class="mx-6 relative -mt-12 mb-6">
+                <div class="bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg shadow-lg py-4 px-3">
+                    <nav class="flex" aria-label="Breadcrumb">
+                        <ol class="inline-flex items-center space-x-1 text-sm font-semibold md:space-x-2">
+                        <li class="inline-flex items-center">
+                            <a href="{{ route('dashboard') }}" class="inline-flex items-center text-gray-50 hover:text-sky-200 dark:text-gray-300 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                            <a href="{{ route('admin.user.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">User</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Buat User</span>
+                            </div>
+                        </li>
+                        </ol>
+                    </nav>
+                    {{-- <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Bimbels</h1> --}}
+                </div>
+            </div>
         {{-- <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
                 <form class="sm:pr-3" action="#" method="GET">
@@ -58,80 +61,81 @@
                 Add new product
             </button>
         </div> --}}
-        <form action="{{ route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('POST')
-            <div class="space-y-4">
-                
-                <div class="grid lg:grid-cols-2 gap-3">
-                    <div>
-                        <x-input-label for="name" :value="__('Nama')" />
-                        <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama " required=""/>
-                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                    </div>
-                    <div>
-                        <x-input-label for="email" :value="__('Email')" />
-                        <x-text-input type="email" :value="old('email')" name="email" id="email" placeholder="Masukan Email " required=""/>
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                    </div>
-                </div>
-                <div class="grid lg:grid-cols-3 gap-3">
-                    <div>
-                        <x-input-label for="phone" :value="__('Phone')" />
-                        <x-text-input type="number" :value="old('phone')" name="phone" id="phone" placeholder="Masukan nomor telp " />
-                        <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-                    </div>
-                    <div>
-                        <x-input-label for="role" :value="__('Role')" />
-                        <x-select-input id="role" name="role" >
-                            <option selected="" disabled>pilih role</option>
-                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="mentor" {{ old('role') == 'mentor' ? 'selected' : '' }}>Mentor</option>
-                            <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('role')" class="mt-2" />
-                    </div>
-                    <div>
-                        <x-input-label for="access" :value="__('Access')" />
-                        <x-select-input id="access" name="access" >
-                            <option selected="" disabled>pilih access</option>
-                            <option value="yes" {{ old('access') == 'yes' ? 'selected' : '' }}>Yes</option>
-                            <option value="no" {{ old('access') == 'no' ? 'selected' : '' }}>No</option>
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('access')" class="mt-2" />
-                    </div>
-                </div>
-                
-                <div id="date-inputs"> 
+            <form action="{{ route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="space-y-4">
+                    
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
-                            <x-input-label for="password" :value="__('Password')" />
-                            <x-text-input id="password" class="block mt-1 w-full"
-                                            type="password"
-                                            name="password"
-                                            required autocomplete="new-password" />
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                            <x-input-label for="name" :value="__('Nama')" />
+                            <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama " required=""/>
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
-
-                        <!-- Confirm Password -->
                         <div>
-                            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                            type="password"
-                                            name="password_confirmation" required autocomplete="new-password" />
-                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                            <x-input-label for="email" :value="__('Email')" />
+                            <x-text-input type="email" :value="old('email')" name="email" id="email" placeholder="Masukan Email " required=""/>
+                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                     </div>
-                </div>
-                <div class="flex justify-between">
-                    <x-secondary-href href="{{ route('admin.user.index') }}">
-                        Back
-                    </x-secondary-href>
-                    <x-primary-button type="submit">
-                        Add User
-                    </x-primary-button>
-                </div>
-        </form>
+                    <div class="grid lg:grid-cols-3 gap-3">
+                        <div>
+                            <x-input-label for="phone" :value="__('Phone')" />
+                            <x-text-input type="number" :value="old('phone')" name="phone" id="phone" placeholder="Masukan nomor telp " />
+                            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+                        </div>
+                        <div>
+                            <x-input-label for="role" :value="__('Role')" />
+                            <x-select-input id="role" name="role" >
+                                <option selected="" disabled>pilih role</option>
+                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="mentor" {{ old('role') == 'mentor' ? 'selected' : '' }}>Mentor</option>
+                                <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+                        </div>
+                        <div>
+                            <x-input-label for="access" :value="__('Access')" />
+                            <x-select-input id="access" name="access" >
+                                <option selected="" disabled>pilih access</option>
+                                <option value="yes" {{ old('access') == 'yes' ? 'selected' : '' }}>Yes</option>
+                                <option value="no" {{ old('access') == 'no' ? 'selected' : '' }}>No</option>
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('access')" class="mt-2" />
+                        </div>
+                    </div>
+                    
+                    <div id="date-inputs"> 
+                        <div class="grid lg:grid-cols-2 gap-3">
+                            <div>
+                                <x-input-label for="password" :value="__('Password')" />
+                                <x-text-input id="password" class="block mt-1 w-full"
+                                                type="password"
+                                                name="password"
+                                                required autocomplete="new-password" />
+                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div>
+                                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                                <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                                                type="password"
+                                                name="password_confirmation" required autocomplete="new-password" />
+                                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <x-secondary-href href="{{ route('admin.user.index') }}">
+                            Back
+                        </x-secondary-href>
+                        <x-primary-button type="submit">
+                            Add User
+                        </x-primary-button>
+                    </div>
+            </form>
+        </div>
     </div>
 </div>
 

@@ -2,33 +2,36 @@
 
 @section('content')
 
-<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
-    <div class="w-full mb-1">
-        <div class="mb-4">
-            <nav class="flex mb-5" aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
-                  <li class="inline-flex items-center">
-                    <a href="#" class="inline-flex items-center text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-white">
-                      <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                      Home
-                    </a>
-                  </li>
-                  <li>
-                    <div class="flex items-center">
-                      <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="{{ route('admin.discount.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Discount</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="flex items-center">
-                      <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Create</span>
-                    </div>
-                  </li>
-                </ol>
-            </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Create Discount</h1>
-        </div>
+<div class="p-4 mt-12">
+    <div class="p-6 bg-white block rounded-lg shadow sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full mb-1">
+            <div class="mx-6 relative -mt-12 mb-6">
+                <div class="bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg shadow-lg py-4 px-3">
+                    <nav class="flex" aria-label="Breadcrumb">
+                        <ol class="inline-flex items-center space-x-1 text-sm font-semibold md:space-x-2">
+                        <li class="inline-flex items-center">
+                            <a href="{{ route('dashboard') }}" class="inline-flex items-center text-gray-50 hover:text-sky-200 dark:text-gray-300 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                            <a href="{{ route('admin.discount.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Edit Voucher</span>
+                            </div>
+                        </li>
+                        </ol>
+                    </nav>
+                    {{-- <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Bimbels</h1> --}}
+                </div>
+            </div>
         {{-- <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
                 <form class="sm:pr-3" action="#" method="GET">
@@ -58,74 +61,75 @@
                 Add new product
             </button>
         </div> --}}
-        <form action="{{ route('admin.discount.update', $discount->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <div class="space-y-4">
-                <div class="grid lg:grid-cols-2 gap-3">
+            <form action="{{ route('admin.discount.update', $discount->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="space-y-4">
+                    <div class="grid lg:grid-cols-2 gap-3">
+                        <div>
+                            <x-input-label for="name" :value="__('Nama')" />
+                            <x-text-input type="text" :value="old('name', $discount->name)" name="name" id="name" placeholder="Masukan Nama Discount" required=""/>
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        </div>
+                        
+                        <div>
+                            <x-input-label for="code" :value="__('Code Diskon')" />
+                            <x-text-input type="text" :value="old('code', $discount->code)" name="code" id="code" placeholder="Masukan Code Discount" required=""/>
+                            <x-input-error :messages="$errors->get('code')" class="mt-2" />
+                        </div>
+                    </div>
+
                     <div>
-                        <x-input-label for="name" :value="__('Nama')" />
-                        <x-text-input type="text" :value="old('name', $discount->name)" name="name" id="name" placeholder="Masukan Nama Discount" required=""/>
-                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        <x-input-label for="description" :value="__('Description')" />
+                        <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
+                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
                     
-                    <div>
-                        <x-input-label for="code" :value="__('Code Diskon')" />
-                        <x-text-input type="text" :value="old('code', $discount->code)" name="code" id="code" placeholder="Masukan Code Discount" required=""/>
-                        <x-input-error :messages="$errors->get('code')" class="mt-2" />
-                    </div>
-                </div>
+                    <div class="grid lg:grid-cols-2 gap-3">
+                        {{-- <div>
+                            <x-input-label for="image" :value="__('Image')" />
+                            <x-file-input type="file" name="image" id="image" placeholder="Masukan Image" required=""/>
+                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                        </div> --}}
+                        <div>
+                            <x-input-label for="discount_type" :value="__('Tipe Diskon')" />
+                            <x-select-input id="discount_type" name="discount_type">
+                                <option selected="" disabled>Select Tipe</option>
+                                <option value="percentage" {{ old('discount_type', $discount->discount_type) == 'percentage' ? 'selected' : '' }}>Diskon Persen (%)</option>
+                                <option value="fixed" {{ old('discount_type', $discount->discount_type) == 'fixed' ? 'selected' : '' }}>Diskon Tetap (Rp)</option>
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('discount_type')" class="mt-2" />
+                        </div>
 
-                <div>
-                    <x-input-label for="description" :value="__('Description')" />
-                    <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
-                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
-                </div>
-                
-                <div class="grid lg:grid-cols-2 gap-3">
-                    {{-- <div>
-                        <x-input-label for="image" :value="__('Image')" />
-                        <x-file-input type="file" name="image" id="image" placeholder="Masukan Image" required=""/>
-                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                    </div> --}}
-                    <div>
-                        <x-input-label for="discount_type" :value="__('Tipe Diskon')" />
-                        <x-select-input id="discount_type" name="discount_type">
-                            <option selected="" disabled>Select Tipe</option>
-                            <option value="percentage" {{ old('discount_type', $discount->discount_type) == 'percentage' ? 'selected' : '' }}>Diskon Persen (%)</option>
-                            <option value="fixed" {{ old('discount_type', $discount->discount_type) == 'fixed' ? 'selected' : '' }}>Diskon Tetap (Rp)</option>
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('discount_type')" class="mt-2" />
+                        <div>
+                            <x-input-label for="discount_value" :value="__('Jumlah Diskon')" />
+                            <x-text-input type="number" :value="old('discount_value', $discount->discount_value)" name="discount_value" id="discount_value" placeholder="Masukan Jumlah Discount" required=""/>
+                            <x-input-error :messages="$errors->get('discount_value')" class="mt-2" />
+                        </div>
                     </div>
 
-                    <div>
-                        <x-input-label for="discount_value" :value="__('Jumlah Diskon')" />
-                        <x-text-input type="number" :value="old('discount_value', $discount->discount_value)" name="discount_value" id="discount_value" placeholder="Masukan Jumlah Discount" required=""/>
-                        <x-input-error :messages="$errors->get('discount_value')" class="mt-2" />
+                    <div class="grid lg:grid-cols-2 gap-3">
+                        <div>
+                            <x-input-label for="start_date" :value="__('Start Date')" />
+                            <x-text-input type="date" :value="old('start_date', $discount->start_date)" name="start_date" id="start_date" placeholder="Masukan tanggal mulai" required=""/>
+                            <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
+                        </div>
+                        <div>
+                            <x-input-label for="end_date" :value="__('end Date')" />
+                            <x-text-input type="date" :value="old('end_date', $discount->end_date)" name="end_date" id="end_date" placeholder="Masukan tanggal selesai" required=""/>
+                            <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
+                        </div>
                     </div>
-                </div>
-
-                <div class="grid lg:grid-cols-2 gap-3">
-                    <div>
-                        <x-input-label for="start_date" :value="__('Start Date')" />
-                        <x-text-input type="date" :value="old('start_date', $discount->start_date)" name="start_date" id="start_date" placeholder="Masukan tanggal mulai" required=""/>
-                        <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
+                    <div class="flex justify-between">
+                        <x-secondary-href href="{{ route('admin.discount.index') }}">
+                            Back
+                        </x-secondary-href>
+                        <x-primary-button type="submit">
+                            Edit Discount
+                        </x-primary-button>
                     </div>
-                    <div>
-                        <x-input-label for="end_date" :value="__('end Date')" />
-                        <x-text-input type="date" :value="old('end_date', $discount->end_date)" name="end_date" id="end_date" placeholder="Masukan tanggal selesai" required=""/>
-                        <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
-                    </div>
-                </div>
-                <div class="flex justify-between">
-                    <x-secondary-href href="{{ route('admin.discount.index') }}">
-                        Back
-                    </x-secondary-href>
-                    <x-primary-button type="submit">
-                        Add Discount
-                    </x-primary-button>
-                </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 

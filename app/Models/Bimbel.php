@@ -8,15 +8,15 @@ class Bimbel extends Model
 {
     //
 
-    protected $fillable = ['name', 'description', 'batch_id'];
-
-    public function batch()
-    {
-        return $this->belongsTo(Batch::class);
-    }
+    protected $fillable = ['name', 'description'];
 
     public function classBimbel()
     {
         return $this->hasMany(ClassBimbel::class);
+    }
+    
+    public function package_member()
+    {
+        return $this->hasMany(package_member::class);
     }
 }

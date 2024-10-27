@@ -16,7 +16,6 @@ return new class extends Migration
 
             $table->string('name');
             $table->text('description');
-            $table->foreignId('batch_id')->constrained()->cascadeOnDelete();
 
             $table->timestamps();
         });

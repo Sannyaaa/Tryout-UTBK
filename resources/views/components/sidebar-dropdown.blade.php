@@ -4,7 +4,7 @@
 
 {{-- flex items-center p-2 text-base text-gray-900 rounded-lg group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 bg-gray-100 dark:bg-gray-700  --}}
 {{-- flex items-center p-2 text-base text-gray-900 rounded-lg transition duration-75  pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 --}}
-<button type="button" class="flex items-center w-full p-2 ms-1 me-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" aria-controls="dropdown-{{ $id }}" data-collapse-toggle="dropdown-{{ $id }}">
+<button type="button" class="flex items-center w-full p-2 ms-1 me-2 text-base text-gray-900 hover:bg-gradient-to-tr hover:from-sky-400 hover:to-sky-500 hover:text-white transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" aria-controls="dropdown-{{ $id }}" data-collapse-toggle="dropdown-{{ $id }}">
     {{ $slot }}
     {{-- <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
     </svg> --}}
