@@ -180,15 +180,6 @@ $(document).ready(function() {
                 searchable: false,
                 width: '5%'
             },
-            {
-                data: 'image',
-                name: 'image',
-                orderable: false,
-                searchable: false,
-                render: function(data) {
-                    return '<img src="' + data + '" width="100" height="100">';
-                }
-            },
             {data: 'name', name: 'name'},
             {
                 data: 'is_free',
@@ -214,7 +205,6 @@ $(document).ready(function() {
             },
             {data: 'start_date', name: 'start_date'},
             {data: 'end_date', name: 'end_date'},
-            {data: 'batch.name', name: 'batch.name'},
             {
                 data: 'action',
                 name: 'action',

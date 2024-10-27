@@ -4,8 +4,10 @@ use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\BimbelController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClassBimbelController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\PackageMemberController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\TryoutController;
@@ -22,16 +24,27 @@ Route::get('all-universities',[UniversityController::class,'getAllUniversities']
 Route::post('/tryout/bulk-delete', [TryoutController::class, 'bulkDelete'])->name('tryout.bulkDelete');
 Route::resource('/tryout', TryoutController::class);
 
-Route::post('/batch/bulk-delete', [BatchController::class, 'bulkDelete'])->name('batch.bulkDelete');
+Route::get('/tryout/{tryout}/question/create', [TryoutController::class, 'question_create'])->name('tryout.question.create');
+Route::post('/tryout/{tryout}/question/', [TryoutController::class, 'question_store'])->name('tryout.question.store');
+Route::get('/tryout/{tryout}/question/{question}/edit', [TryoutController::class, 'question_edit'])->name('tryout.question.edit');
+Route::put('/tryout/{tryout}/question/{question}', [TryoutController::class, 'question_update'])->name('tryout.question.update');
+Route::delete('/tryout/{tryout}/question/{question}', [TryoutController::class, 'question_destroy'])->name('tryout.question.destroy');
+
 Route::resource('/bimbel', BimbelController::class);
 Route::post('/bimbel/bulk-delete', [BimbelController::class, 'bulkDelete'])->name('bimbel.bulkDelete');
-Route::resource('/batch', BatchController::class);
 
 Route::post('/sub_categories/bulk-delete', [SubCategoriesController::class, 'bulkDelete'])->name('sub_categories.bulkDelete');
 Route::resource('/sub_categories', SubCategoriesController::class);
 
 Route::post('/question/bulk-delete', [QuestionController::class, 'bulkDelete'])->name('question.bulkDelete');
 Route::resource('/question', QuestionController::class);
+
+Route::post('/package_member/bulk-delete', [PackageMemberController::class, 'bulkDelete'])->name('package_member.bulkDelete');
+Route::resource('/package_member', PackageMemberController::class);
+
+Route::post('/category/bulk-delete', [CategoryController::class, 'bulkDelete'])->name('category.bulkDelete');
+Route::resource('/category', CategoryController::class);
+
 
 
 

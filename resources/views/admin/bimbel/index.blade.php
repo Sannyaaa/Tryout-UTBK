@@ -279,7 +279,6 @@ $(document).ready(function() {
             
             {data: 'name', name: 'name'},
             {data: 'description', name: 'description'},
-            {data: 'batch_id', name: 'batch_id'},
             {
                 data: 'action',
                 name: 'action',

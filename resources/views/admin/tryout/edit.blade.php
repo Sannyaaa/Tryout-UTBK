@@ -61,6 +61,7 @@
                 Add new product
             </button>
         </div> --}}
+<<<<<<< HEAD
             <form action="{{ route('admin.tryout.update', $tryout->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -80,6 +81,7 @@
                     <div>
                         <img src="{{ Storage::url($tryout->image) }}" class="w-[300px]" alt="">
                     </div>
+                    
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
                             <x-input-label for="image" :value="__('Image')" />

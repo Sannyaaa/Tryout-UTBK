@@ -16,7 +16,7 @@
                   <li>
                     <div class="flex items-center">
                       <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="#" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Tryouts</a>
+                      <a href="#" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">package_members</a>
                     </div>
                   </li>
                   <li>
@@ -27,7 +27,7 @@
                   </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Tryouts</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Package members</h1>
         </div>
         <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
@@ -58,8 +58,8 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ route('admin.tryout.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                Add new product
+            <a href="{{ route('admin.package_member.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
+                Add new package_member
             </a>
         </div>
     </div>
@@ -68,7 +68,7 @@
     <div class="overflow-x-auto">
         <div class="inline-block min-w-full align-middle">
             <div class="overflow-hidden shadow p-6">
-                <table id="tryoutTable" class="min-w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
+                <table id="package_memberTable" class="min-w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
                     <thead class="bg-gray-100 dark:bg-gray-700">
                         <tr>
                             <th scope="col" class="p-4">
@@ -78,19 +78,19 @@
                                 </div>
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                Image
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Name
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Is free
+                                Price
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Is together
+                                Tryout
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Start date
-                            </th>
-                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                End date
+                                Bimbel
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Actions
@@ -99,7 +99,7 @@
                     </thead >
                     {{-- <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                         
-                        @foreach ($tryout as $tryouts)
+                        @foreach ($package_member as $package_members)
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <td class="w-4 p-4">
                                         <div class="flex items-center">
@@ -108,28 +108,28 @@
                                             <label for="checkbox" class="sr-only">checkbox</label>
                                         </div>
                                     </td>
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><img src="{{ Storage::url($tryouts->image) }}" class="w-[100px]" alt=""></td>
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$tryouts->name}}</td>
-                                    @if ($tryouts->is_free == 'free')
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><img src="{{ Storage::url($package_members->image) }}" class="w-[100px]" alt=""></td>
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$package_members->name}}</td>
+                                    @if ($package_members->is_free == 'free')
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Gratis</td>
                                     @else
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Berbayar</td>
                                     @endif
-                                    @if ($tryouts->is_together == 'basic')
+                                    @if ($package_members->is_together == 'basic')
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Biasa</td>
                                     @else
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Serentak</td>
                                     @endif
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$tryouts->start_date}}</td>
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$tryouts->end_date}}</td>
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$tryouts->batch->name}}</td>
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$package_members->start_date}}</td>
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$package_members->end_date}}</td>
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$package_members->batch->name}}</td>
                                     <td class="p-4 space-x-2 whitespace-nowrap">
                                         <div class="flex justify-start gap-1">
-                                            <a href="{{ route('admin.tryout.edit', $tryouts->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            <a href="{{ route('admin.package_member.edit', $package_members->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                                                 Update
                                             </a>
-                                            <form action="{{ route('admin.tryout.destroy', $tryouts->id) }}" method="POST">
+                                            <form action="{{ route('admin.package_member.destroy', $package_members->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
@@ -150,7 +150,7 @@
 </div>
 
 {{-- <div class="w-full p-4 bg-white border-t border-gray-200">
-    {{ $tryout->links() }}
+    {{ $package_member->links() }}
 </div>   --}}
 
 
@@ -167,10 +167,22 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    var table = $('#tryoutTable').DataTable({
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    var table = $('#package_memberTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.tryout.index') }}",
+        ajax: {
+            url: "{{ route('admin.package_member.index') }}",
+            type: 'GET',
+            error: function (xhr, error, thrown) {
+                console.log('DataTables error:', error);
+            }
+        },
         columns: [
             {
                 data: 'checkbox',
@@ -179,13 +191,21 @@ $(document).ready(function() {
                 searchable: false,
                 width: '5%'
             },
-            {data: 'name', name: 'name'},
-            {data: 'is_free', name: 'is_free'},
-            {data: 'is_together', name: 'is_together'},
-            {data: 'start_date', name: 'start_date'},
-            {data: 'end_date', name: 'end_date'},
             {
-                data: 'action',
+                data: 'image',
+                name: 'image',
+                orderable: false,
+                searchable: false,
+                render: function(data) {
+                    return data ? '<img src="' + data + '" width="100" height="100">' : '';
+                }
+            },
+            {data: 'name', name: 'name', defaultContent: ''},
+            {data: 'price', name: 'price', defaultContent: ''},
+            {data: 'tryout.name', name: 'tryout.name', defaultContent: ''},
+            {data: 'bimbel.name', name: 'bimbel.name', defaultContent: ''},
+            {
+                data: 'action', 
                 name: 'action',
                 orderable: false,
                 searchable: false
@@ -195,22 +215,22 @@ $(document).ready(function() {
 
     // Handle "select all" checkbox
     $('#checkbox-all').on('click', function() {
-        $('.tryout-checkbox').prop('checked', this.checked);
+        $('.package_member-checkbox').prop('checked', this.checked);
         updateBulkDeleteButton();
     });
 
     // Handle individual checkbox changes
-    $('#tryoutTable').on('change', '.tryout-checkbox', function() {
+    $('#package_memberTable').on('change', '.package_member-checkbox', function() {
         updateBulkDeleteButton();
         
         // Update "select all" checkbox
-        var allChecked = $('.tryout-checkbox:checked').length === $('.tryout-checkbox').length;
+        var allChecked = $('.package_member-checkbox:checked').length === $('.package_member-checkbox').length;
         $('#checkbox-all').prop('checked', allChecked);
     });
 
     // Update bulk delete button visibility
     function updateBulkDeleteButton() {
-        var checkedCount = $('.tryout-checkbox:checked').length;
+        var checkedCount = $('.package_member-checkbox:checked').length;
         if (checkedCount > 0) {
             $('#bulkDeleteBtn').show();
         } else {
@@ -222,12 +242,12 @@ $(document).ready(function() {
     $('#bulkDeleteBtn').on('click', function() {
         if (confirm('Are you sure you want to delete selected items?')) {
             var selectedIds = [];
-            $('.tryout-checkbox:checked').each(function() {
+            $('.package_member-checkbox:checked').each(function() {
                 selectedIds.push($(this).val());
             });
 
             $.ajax({
-                url: "{{ route('admin.tryout.bulkDelete') }}",
+                url: "{{ route('admin.package_member.bulkDelete') }}",
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -255,30 +275,4 @@ $(document).ready(function() {
 </script>
 @endsection
 
-
-{{-- <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    
-<script type="text/javascript">
-        $(document).ready(function () {
-            var table = $('#tryoutTable').DataTable({
-                processing: true,
-                serverSide: true,
-                order: [[5,'desc']],
-                ordering: true,
-                ajax: "{{ route('admin.tryout.index') }}",
-                columns: [
-                    {data: 'image', name: 'image', orderable: false, searchable: false},
-                    {data: 'name', name: 'name'},
-                    {data: 'description', name: 'description'},
-                    {data: 'is_free', name: 'is_free'},
-                    {data: 'is_together', name: 'is_together'},
-                    {data: 'start_date', name: 'start_date'},
-                    {data: 'end_date', name: 'end_date'},
-                    {data: 'batch_id', name: 'batch_id'},
-                    {data: 'created_at', name: 'created_at'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
-                ]
-            });
-        });
-    </script> --}}
 

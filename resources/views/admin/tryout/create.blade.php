@@ -76,7 +76,6 @@
                         <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
-                    
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
                             <x-input-label for="image" :value="__('Image')" />
