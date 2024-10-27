@@ -1,5 +1,4 @@
-{{-- {{- $url := split .Permalink "/" -}} --}}
-{{-- {{- $page_slug := index $url (sub (len $url) 2) -}} --}}
+
 
 <aside id="sidebar" class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-72 p-4 h-full font-normal duration-75 lg:flex transition-width" aria-label="Sidebar">
   <div class="relative flex flex-col flex-1 min-h-0 py-0 mt-20 lg:mt-0 overflow-hidden bg-white border-r rounded-lg shadow border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -8,7 +7,6 @@
         <ul class="pb-2 space-y-2">
           <li>
             <a href="#" class="flex justify-center">
-              {{-- <img src="/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" /> --}}
               <span class="self-center text-2xl font-semibold sm:text-4xl whitespace-nowrap dark:text-white">Flowbite</span>
             </a>
           </li>
