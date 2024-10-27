@@ -35,7 +35,7 @@
                     <hr>
                     <div class="py-4 px-6 bg-white rounded-b-lg">
                         <a href="{{route('user.tryouts.item', 1)}}" class="w-full">
-                            <button class="text-white font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 w-full p-3 rounded-lg">
+                            <button class="text-white font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-sky-700 w-full p-3 rounded-lg">
                                 Kerjakan
                                 <i class="fa-solid fa-arrow-right-long"></i>
                             </button>
