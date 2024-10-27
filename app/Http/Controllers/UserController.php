@@ -24,13 +24,13 @@ class UserController extends Controller
                 return DataTables::of($query)
                     ->addIndexColumn()
                     ->addColumn('checkbox', function($user) {
-                        return '<input type="checkbox" class="user-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $user->id . '">';
+                        return '<input type="checkbox" class="user-checkbox w-4 h-4 text-sky-500 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $user->id . '">';
                     })
                     ->addColumn('created_at', function($class) {
                         return date('j F Y', strtotime($class->created_at));
                     })
                     ->addColumn('action', function ($user) {
-                        $editBtn = '<a href="' . route('admin.user.edit', $user->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        $editBtn = '<a href="' . route('admin.user.edit', $user->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                             Update
                         </a>';
@@ -38,7 +38,7 @@ class UserController extends Controller
                         $deleteBtn = '<form action="' . route('admin.user.destroy', $user->id) . '" method="POST" class="inline-block ml-2">
                             ' . csrf_field() . '
                             ' . method_field('DELETE') . '
-                            <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                            <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-tr from-rose-400 to-rose-500 rounded-lg focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                                 Delete
                             </button>
@@ -163,6 +163,13 @@ class UserController extends Controller
         if ($data['password']) {
             $user->password = Hash::make($data['password']);
         }
+
+        if($data['role'] == 'admin'){
+            $user->assignRole('admin');
+        }elseif($data['role'] == 'mentor'){
+            $user->assignRole('mentor');
+        }
+
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->phone = $data['phone'];

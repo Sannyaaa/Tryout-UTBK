@@ -1,11 +1,18 @@
 {{-- {{- $url := split .Permalink "/" -}} --}}
 {{-- {{- $page_slug := index $url (sub (len $url) 2) -}} --}}
 
-<aside id="sidebar" class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-64 h-full pt-16 font-normal duration-75 lg:flex transition-width" aria-label="Sidebar">
-  <div class="relative flex flex-col flex-1 min-h-0 pt-0 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+<aside id="sidebar" class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-72 p-4 h-full font-normal duration-75 lg:flex transition-width" aria-label="Sidebar">
+  <div class="relative flex flex-col flex-1 min-h-0 py-0 mt-20 lg:mt-0 overflow-hidden bg-white border-r rounded-lg shadow border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
       <div class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
         <ul class="pb-2 space-y-2">
+          <li>
+            <a href="#" class="flex justify-center">
+              {{-- <img src="/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" /> --}}
+              <span class="self-center text-2xl font-semibold sm:text-4xl whitespace-nowrap dark:text-white">Flowbite</span>
+            </a>
+          </li>
+
           <li>
             <form action="#" method="GET" class="lg:hidden">
               <label for="mobile-search" class="sr-only">Search</label>
@@ -33,13 +40,13 @@
                 <span class="ml-3" sidebar-toggle-item>Dashboard</span>
             </a> --}}
             <x-sidebar-link link="{{ route('admin.batch.index') }}" name="Batch">
-              <i class="fa-solid fa-tv"></i>
+              <i class="fa-regular fa-folder-open"></i>
             </x-sidebar-link>
           </li>
 
           <li>
             <x-sidebar-link link="{{ route('admin.bimbel.index') }}" name="Bimbel">
-              <i class="fa-solid fa-tv"></i>
+              <i class="fa-solid fa-book-open"></i>
             </x-sidebar-link>
           </li>
 
@@ -47,7 +54,7 @@
             <!-- Dropdown Menu -->
             <x-sidebar-dropdown id="class-bimbel" name="Class Bimbel">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
-                <i class="fa-regular fa-file-lines"></i>
+                <i class="fa-solid fa-chalkboard-user"></i>
                 <x-slot name="content">
                     <li>
                         <a href="{{ route('admin.class-bimbel.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">All Class</a>
@@ -61,7 +68,7 @@
 
           <li>
             <x-sidebar-link link="{{ route('admin.sub_categories.index') }}" name="Category Question">
-              <i class="fa-solid fa-tv"></i>
+              <i class="fa-solid fa-list"></i>
             </x-sidebar-link>
           </li>
 
@@ -85,7 +92,7 @@
             <!-- Dropdown Menu -->
             <x-sidebar-dropdown id="question" name="Question">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
-                <i class="fa-regular fa-file-lines"></i>
+                <i class="fa-solid fa-circle-question"></i>
                 <x-slot name="content">
                     <li>
                         <a href="{{ route('admin.question.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">All Question</a>
@@ -118,7 +125,7 @@
             <!-- Dropdown Menu -->
             <x-sidebar-dropdown id="discount" name="Voucher Discount">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
-                <i class="fa-regular fa-file-lines"></i>
+                <i class="fa-solid fa-ticket"></i>
                 <x-slot name="content">
                     <li>
                         <a href="{{ route('admin.discount.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">All Discount</a>
@@ -134,7 +141,7 @@
             <!-- Dropdown Menu -->
             <x-sidebar-dropdown id="user" name="User">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
-                <i class="fa-regular fa-file-lines"></i>
+                <i class="fa-solid fa-users"></i>
                 <x-slot name="content">
                     <li>
                         <a href="{{ route('admin.user.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">All User</a>
@@ -150,6 +157,12 @@
           <x-sidebar-link link="{{ route('profile.edit') }}" name="Profile">
             <i class="fa-solid fa-user"></i>
           </x-sidebar-link>
+          <form method="POST" action="{{ route('logout') }}" class="">
+            @csrf
+            <span class="block p-2 font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
+              <button type="submit" role="menuitem" class=""><i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Sign out</button>
+            </span>
+          </form>
           {{-- <a href="https://github.com/themesberg/flowbite-admin-dashboard" target="_blank" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
             <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
             <span class="ml-3" sidebar-toggle-item>GitHub Repository</span>

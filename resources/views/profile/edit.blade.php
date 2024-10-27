@@ -272,10 +272,12 @@
                         <p class="text-sm mb-4">Pastikan informasi yang kamu masukan benar!</p>
                     </div>
                     <div>
-                        <a href="{{ route('admin.get-universities') }}" class="px-6 py-3 bg-indigo-600 rounded-md font-semibold text-white">Ambil Univ</a>
+                        {{-- <a href="{{ route('admin.get-universities') }}" class="px-6 py-3 bg-indigo-600 rounded-md font-semibold text-white">Ambil Univ</a> --}}
                     </div>
                 </div>
-                <form action="#">
+                <form action="{{ route('profile.update', $user->id) }}" enctype="multipart/form-data" method="POST">
+                    @method('PUT')
+                    @csrf
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-3">
                             <x-input-label for="name" :value="__('Nama')" />
@@ -298,21 +300,23 @@
                         <div class="col-span-6 sm:col-span-3">
                             <x-input-label for="phone" :value="__('phone')" />
                             <x-text-input id="phone" class="block mt-1 w-full"
-                            type="phone"
+                            type="number"
                             name="phone"
                             value="{{ $user->phone ?? '' }}"
-                            required autocomplete="phone" />
+                            autocomplete="phone" />
                             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-                        </div><div class="col-span-6 sm:col-span-3">
-                            <x-input-label for="email" :value="__('Email')" />
-                            <x-text-input id="email" class="block mt-1 w-full"
-                            type="email"
-                            name="email"
-                            value="{{ $user->email }}"
-                            required autocomplete="email" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
-                        <div class="col-span-6 sm:col-span-3">
+                        {{-- <div class="col-span-6 sm:col-span-3">
+                            <x-input-label for="role" :value="__('Role')" />
+                            <x-select-input id="role" name="role" >
+                                <option selected="" disabled>pilih role</option>
+                                <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="mentor" {{ old('role', $user->role) == 'mentor' ? 'selected' : '' }}>Mentor</option>
+                                <option value="user" {{ old('role', $user->role) == 'user' ? 'selected' : '' }}>User</option>
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+                        </div> --}}
+                        {{-- <div class="col-span-6 sm:col-span-3">
                             <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
                             <input type="text" name="country" id="country" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="United States" required>
                         </div>
@@ -351,15 +355,18 @@
                         <div class="col-span-6 sm:col-span-3">
                             <label for="zip-code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Zip/postal code</label>
                             <input type="number" name="zip-code" id="zip-code" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="123456" required>
-                        </div>
+                        </div> --}}
                         <div class="col-span-6 sm:col-full">
-                            <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Save all</button>
+                            {{-- <x-text-input type="submit">
+                                Update 
+                            </x-text-input> --}}
+                            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Update Data</button>
                         </div>
                     </div>
                 </form>
             </div>
             
-            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+            {{-- <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                 <div class="flow-root">
                     <h3 class="text-xl font-semibold dark:text-white">Sessions</h3>
                     <ul class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -404,7 +411,7 @@
                         <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">See more</button>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="col-span-full xl:col-auto">
             <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -451,14 +458,14 @@
                             <input type="text" name="confirm-password" id="confirm-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="••••••••" required>
                         </div>
                         <div class="col-span-6 sm:col-full">
-                            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Save all</button>
+                            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Update Password</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="grid grid-cols-1 px-4 xl:grid-cols-2 xl:gap-4">
+    {{-- <div class="grid grid-cols-1 px-4 xl:grid-cols-2 xl:gap-4">
         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800 xl:mb-0">
             <div class="flow-root">
                 <h3 class="text-xl font-semibold dark:text-white">Alerts & Notifications</h3>
@@ -569,6 +576,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
     
