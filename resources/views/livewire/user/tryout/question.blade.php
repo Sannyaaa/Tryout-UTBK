@@ -29,7 +29,7 @@
         <div class="py-10 px-7 bg-white rounded-md shadow flex border-y">
             <div class="w-1/12">
                 <span class="px-4 py-3 rounded-full bg-blue-600 text-white">
-                    1.
+                    2.
                 </span>
             </div>
             <hr class="h-100 border">
@@ -54,7 +54,7 @@
         <div class="py-10 px-7 bg-white rounded-md shadow flex border-y">
             <div class="w-1/12">
                 <span class="px-4 py-3 rounded-full bg-blue-600 text-white">
-                    1.
+                    3.
                 </span>
             </div>
             <hr class="h-100 border">

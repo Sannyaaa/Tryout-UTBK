@@ -1,18 +1,22 @@
+{{-- <div> --}}
+    {{-- Because she competes with no one, no one can compete with her. --}}
+{{-- </div> --}}
+
 <div>
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
     <div class="mx-5 mt-10">
-        <h1 class="">Tryout Event Live</h1>
+        <h1 class="">Bimbel Event Live</h1>
         <div class="grid grid-cols-4">
             <div class="p-4">
-                <div class="p-5 text-white bg-sky-300  rounded-lg shadow flex">
+                <div class="p-5 bg-white border rounded shadow flex">
                     <div>
                         <span class="bg-blue-700 text-white px-3 py-2 rounded-full">1.</span>
                     </div>
                     <hr class="border mx-2 py-10">
                     <div>
-                        <a href="{{route('user.tryouts.item', 1)}}">
-                            <h1 class="font-bold mb-2">Tryout UTBK</h1>
-                        </a>
+                        {{-- <a href="{{route('user.bimbels.item', 1)}}"> --}}
+                            <h1 class="font-bold mb-2">Bimbel UTBK</h1>
+                        {{-- </a> --}}
                         <div>
                             <p>Ini adalah tryuout pertama kita</p>
                             <h6 class="text-blue-700 mt-2">
@@ -26,7 +30,7 @@
         </div>
     </div>
     <div class="mx-5 mt-10">
-        <h1 class="">Tryout Upcoming</h1>
+        <h1 class="">Bimbel Upcoming</h1>
         <div class="grid grid-cols-4">
             <div class="p-4">
                 <div class="p-5 bg-white border rounded shadow flex">
@@ -35,9 +39,9 @@
                     </div>
                     <hr class="border mx-2 py-10">
                     <div>
-                        <a href="{{route('user.tryouts.item', 1)}}">
-                            <h1 class="font-bold mb-2">Tryout UTBK</h1>
-                        </a>
+                        {{-- <a href="{{route('user.bimbels.item', 1)}}"> --}}
+                            <h1 class="font-bold mb-2">Bimbel UTBK</h1>
+                        {{-- </a> --}}
                         <div>
                             <p>Ini adalah tryuout pertama kita</p>
                             <h6 class="text-orange-400 mt-2">
@@ -55,9 +59,9 @@
                     </div>
                     <hr class="border mx-2 py-10">
                     <div>
-                        <a href="{{route('user.tryouts.item', 1)}}">
-                            <h1 class="font-bold mb-2">Tryout UTBK</h1>
-                        </a>
+                        {{-- <a href="{{route('user.bimbels.item', 1)}}"> --}}
+                            <h1 class="font-bold mb-2">Bimbel UTBK</h1>
+                        {{-- </a> --}}
                         <div>
                             <p>Ini adalah tryuout pertama kita</p>
                             <h6 class="text-orange-400 mt-2">
@@ -71,7 +75,7 @@
         </div>
     </div>
     <div class="mx-5 mt-10">
-        <h1 class="">Tryout Past</h1>
+        <h1 class="">Bimbel Past</h1>
         <div class="grid grid-cols-4">
             <div class="p-4">
                 <div class="p-5 bg-white border rounded shadow flex">
@@ -80,9 +84,9 @@
                     </div>
                     <hr class="border mx-2 py-10">
                     <div>
-                        <a href="{{route('user.tryouts.item', 1)}}">
-                            <h1 class="font-bold mb-2">Tryout UTBK</h1>
-                        </a>
+                        {{-- <a href="{{route('user.bimbels.item', 1)}}"> --}}
+                            <h1 class="font-bold mb-2">Bimbel UTBK</h1>
+                        {{-- </a> --}}
                         <div>
                             <p>Ini adalah tryuout pertama kita</p>
                             <h6 class="text-gray-400 mt-2">
@@ -100,9 +104,9 @@
                     </div>
                     <hr class="border mx-2 py-10">
                     <div>
-                        <a href="{{route('user.tryouts.item', 1)}}">
-                            <h1 class="font-bold mb-2">Tryout UTBK</h1>
-                        </a>
+                        {{-- <a href="{{route('user.bimbels.item', 1)}}"> --}}
+                            <h1 class="font-bold mb-2">Bimbel UTBK</h1>
+                        {{-- </a> --}}
                         <div>
                             <p>Ini adalah tryuout pertama kita</p>
                             <h6 class="text-gray-400 mt-2">
@@ -120,9 +124,9 @@
                     </div>
                     <hr class="border mx-2 py-10">
                     <div>
-                        <a href="{{route('user.tryouts.item', 1)}}">
-                            <h1 class="font-bold mb-2">Tryout UTBK</h1>
-                        </a>
+                        {{-- <a href="{{route('user.bimbels.item', 1)}}"> --}}
+                            <h1 class="font-bold mb-2">Bimbel UTBK</h1>
+                        {{-- </a> --}}
                         <div>
                             <p>Ini adalah tryuout pertama kita</p>
                             <h6 class="text-gray-400 mt-2">
