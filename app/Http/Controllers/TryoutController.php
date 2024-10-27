@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Livewire\User\Tryouts;
+use App\Models\Answer;
 use App\Models\batch;
+use App\Models\Question;
+use App\Models\sub_categories;
 use App\Models\tryout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -19,20 +23,25 @@ class TryoutController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $query = tryout::with('batch')->orderBy('created_at', 'desc');
+                $query = tryout::orderBy('created_at', 'desc');
                 
                 return DataTables::of($query)
                     ->addIndexColumn()
                     ->addColumn('checkbox', function($tryout) {
                         return '<input type="checkbox" class="tryout-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $tryout->id . '">';
                     })
-                    ->addColumn('image', function ($tryout) {
-                        return asset('storage/' . $tryout->image);
-                    })
+                    // ->addColumn('image', function ($tryout) {
+                    //     return asset('storage/' . $tryout->image);
+                    // })
                     ->addColumn('action', function ($tryout) {
                         $editBtn = '<a href="' . route('admin.tryout.edit', $tryout->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                             Update
+                        </a>';
+
+                        $showBtn = '<a href="' . route('admin.tryout.show', $tryout->id) . '" class="show-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
+                            Show
                         </a>';
                         
                         $deleteBtn = '<form action="' . route('admin.tryout.destroy', $tryout->id) . '" method="POST" class="inline-block ml-2">
@@ -44,7 +53,7 @@ class TryoutController extends Controller
                             </button>
                         </form>';
                         
-                        return $editBtn . $deleteBtn;
+                        return $showBtn . $editBtn . $deleteBtn;
                     })
                     ->rawColumns(['action', 'image', 'checkbox'])
                     ->make(true);
@@ -95,15 +104,14 @@ class TryoutController extends Controller
      */
     public function create()
     {
-        $batch = batch::all();
-
-        return view('admin.tryout.create', compact('batch'));
+        return view('admin.tryout.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, batch $batch)
+    public function store(Request $request)
     {
 
         // dd($request);
@@ -112,19 +120,9 @@ class TryoutController extends Controller
             'description' => 'nullable|string',
             'start_date' => 'nullable|string',
             'end_date' => 'nullable|string',
-            'batch_id' => 'required|exists:batches,id',
             'is_free' => ['required', 'in:paid,free'],
             'is_together' => ['required', 'in:basic,together'],
         ]);
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image')->store('assets', 'public');
-            $data['image'] = $image;
-        } else {
-            return redirect()->back()->with('error', 'File gambar tidak ditemukan');
-        }
-
-        // dd($data);
 
         try{
             Tryout::create($data);
@@ -141,7 +139,8 @@ class TryoutController extends Controller
      */
     public function show(tryout $tryout)
     {
-        //
+        $question = Question::where('tryout_id', $tryout->id)->get();
+        return view('admin.tryout.show', compact('tryout','question'));
     }
 
     /**
@@ -149,9 +148,8 @@ class TryoutController extends Controller
      */
     public function edit(tryout $tryout)
     {
-        $batch = Batch::all();
 
-        return view('admin.tryout.edit', compact('batch', 'tryout'));
+        return view('admin.tryout.edit', compact( 'tryout'));
     }
 
     /**
@@ -167,17 +165,9 @@ class TryoutController extends Controller
             'description' => 'nullable|string',
             'start_date' => 'nullable|string',
             'end_date' => 'nullable|string',
-            'batch_id' => 'required|exists:batches,id',
             'is_free' => ['required', 'in:paid,free'],
             'is_together' => ['required', 'in:basic,together'],
         ]);
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image')->store('assets', 'public');
-            $data['image'] = $image;
-        }
-
-        // dd($data);
 
         try{
             $tryout->update($data);
@@ -204,17 +194,145 @@ class TryoutController extends Controller
         }
     }
 
-    // public function bulkDelete(Request $request)
-    // {
-    //     $selectedTryoutIds = $request->input('tryout_ids');
+    public function question_create(Tryout $tryout){
+        $sub_categories = sub_categories::all();
+        return view('admin.tryout.show_question_create', compact('tryout', 'sub_categories'));
+    }
 
-    //     if ($selectedTryoutIds) {
-    //         // Hapus data tryout yang dipilih
-    //         Tryout::whereIn('id', $selectedTryoutIds)->delete();
+    public function question_store(Request $request, Tryout $tryout)
+    {
+        // question
+        $data = $request->validate([
+            'sub_categories_id' => 'required|exists:sub_categories,id',
+            'question' => 'nullable|string',
+            'corect_answer' => 'required|string',
+            'explanation' => 'required|string',
+            'image' => 'nullable|image|max:2048',
+        ]);
 
-    //         return back()->with('success', 'Data tryout berhasil dihapus.');
-    //     }
+        $data['tryout_id'] = $tryout->id;
 
-    //     return back()->with('error', 'Tidak ada data yang dipilih.');
-    // }
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->store('assets', 'public');
+            $data['image'] = $image;
+        }
+
+
+        try{
+            $question = Question::create($data);
+
+            // answer
+            $answer = $request->validate([
+                'a' => 'required|string',
+                'b' => 'required|string',
+                'c' => 'required|string',
+                'd' => 'required|string',
+                'e' => 'required|string',
+            ]);
+
+            $answer['question_id'] = $question->id;
+
+            Answer::create($answer);
+
+            Log::info("berhasil");
+            return redirect()->route('admin.tryout.show', $tryout->id )->with('success', 'question created successfully.');
+        } catch (\Exception $e) {
+            Log::error('Error in create question: ' . $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function question_edit(Tryout $tryout)
+    {
+        // Ambil pertanyaan berdasarkan tryout_id dan pastikan relasi answer di-load
+        $question = Question::with('answer')->where('tryout_id', $tryout->id)->first();
+
+        // Pastikan bahwa question dan relasi answer ada
+        if (!$question) {
+            return redirect()->back()->with('error', 'Question not found.');
+        }
+
+        $sub_categories = sub_categories::all();
+        $answer = $question->answer; // Ambil jawaban yang terkait dengan pertanyaan
+
+        return view('admin.tryout.show_question_edit', compact('tryout', 'sub_categories', 'question', 'answer'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function question_update(Request $request, Tryout $tryout, Question $question)
+    {
+        // Pastikan pertanyaan tersebut terkait dengan tryout yang benar
+        if ($question->tryout_id !== $tryout->id) {
+            return redirect()->back()->with('error', 'Invalid question for the selected tryout.');
+        }
+
+        // Validasi data pertanyaan
+        $data = $request->validate([
+            'sub_categories_id' => 'required|exists:sub_categories,id',
+            'question' => 'nullable|string',
+            'corect_answer' => 'required|string',
+            'explanation' => 'required|string',
+        ]);
+
+        $data['tryout_id'] = $tryout->id;
+
+        // Jika ada file gambar, simpan
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->store('assets', 'public');
+            $data['image'] = $image;
+        }
+
+        try {
+            // Update data pertanyaan
+            $question->update($data);
+
+            // Validasi input untuk jawaban
+            $request->validate([
+                'a' => 'required|string|max:255',
+                'b' => 'required|string|max:255',
+                'c' => 'required|string|max:255',
+                'd' => 'required|string|max:255',
+                'e' => 'required|string|max:255',
+            ]);
+
+            // Ambil jawaban yang terkait dengan pertanyaan
+            $answer = $question->answer;
+
+            // Jika jawaban belum ada, buat jawaban baru
+            if (!$answer) {
+                $answer = new Answer();
+                $answer->question_id = $question->id;
+            }
+
+            // Update data jawaban
+            $answer->a = $request->input('a');
+            $answer->b = $request->input('b');
+            $answer->c = $request->input('c');
+            $answer->d = $request->input('d');
+            $answer->e = $request->input('e');
+            
+            // Simpan jawaban ke database
+            $answer->save();
+
+            return redirect()->route('admin.tryout.show', $tryout->id)->with('success', 'Question and answers updated successfully.');
+        } catch (\Exception $e) {
+            Log::error('Error in update question: ' . $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+     public function question_destroy(Tryout $tryout, Question $question)
+    {
+        try {
+            $question->delete();
+            Log::info("berhasil");
+            return redirect()->route('admin.tryout.show', $tryout->id)->with('success', 'Question deleted successfully.');
+        } catch (\Exception $e) {
+            Log::error('Error in delete question: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while deleting the question.');
+        }
+    }
+
 }

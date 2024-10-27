@@ -16,7 +16,7 @@
                   <li>
                     <div class="flex items-center">
                       <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="#" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Bimbels</a>
+                      <a href="#" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">categories</a>
                     </div>
                   </li>
                   <li>
@@ -27,7 +27,7 @@
                   </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Bimbels</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All categories</h1>
         </div>
         <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
@@ -40,14 +40,14 @@
                     </div>
                 </div>
             </div>
-            {{-- <a href="{{ route('admin.bimbel.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
+            {{-- <a href="{{ route('admin.category.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
                 Add new product
             </a> --}}
             
 
             <!-- Modal toggle -->
             <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                Add Bimbel
+                Add category
             </button>
 
             <!-- Main modal -->
@@ -58,7 +58,7 @@
                         <!-- Modal header -->
                         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                Create New Bimbel
+                                Create New category
                             </h3>
                             <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -68,13 +68,13 @@
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <form action="{{ route('admin.bimbel.store') }}" method="POST" enctype="multipart/form-data" class="p-4 md:p-5">
+                        <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data" class="p-4 md:p-5">
                             @csrf
                             @method('POST')
-                            <div class="py-2 space-y-1">
+                            <div class="py-3">
                                 <div>
                                     <x-input-label for="name" :value="__('Nama')" />
-                                    <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama bimbel" required=""/>
+                                    <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama category" required=""/>
                                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                 </div>
                                 
@@ -83,10 +83,9 @@
                                     <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
                                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                 </div>
-
                             </div>
                             <x-primary-button type="submit">
-                                Add Bimbel
+                                Add category
                             </x-primary-button>
                         </form>
                     </div>
@@ -101,7 +100,7 @@
                         <!-- Modal header -->
                         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                Edit Bimbel
+                                Edit category
                             </h3>
                             <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editModal">
                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -116,22 +115,21 @@
                             @method('PUT')
                             <div class="grid gap-4 mb-4">
                                 <div>
-                                    <x-input-label for="edit_name" :value="__('Nama')" />
-                                    <x-text-input type="text" name="name" id="edit_name" placeholder="Masukan Nama bimbel" required=""/>
+                                    <x-input-label for="edit_name" :value="__('Nama')" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"/>
+                                    <x-text-input type="text" name="name" id="edit_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukan Nama category" required=""/>
                                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                 </div>
                                 
                                 <div>
-                                    <x-input-label for="edit_description" :value="__('Description')" />
-                                    <x-text-area id="edit_description" name="description" rows="4"  placeholder="Masukan Description"/>
+                                    <x-input-label for="edit_description" :value="__('Description')" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"/>
+                                    <x-text-area id="edit_description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukan Description"/>
                                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                 </div>
-
                             </div>
                             <div class="flex items-center space-x-4">
                                 <x-primary-button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     {{-- <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg> --}}
-                                    Update Bimbel
+                                    Update category
                                 </x-primary-button>
                             </div>
                         </form>
@@ -146,7 +144,7 @@
     <div class="overflow-x-auto">
         <div class="inline-block min-w-full align-middle">
             <div class="overflow-hidden shadow p-6">
-                <table id="bimbelTable" class="min-w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
+                <table id="categoryTable" class="min-w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
                     <thead class="bg-gray-100 dark:bg-gray-700">
                         <tr>
                             <th scope="col" class="p-4">
@@ -168,7 +166,7 @@
                     </thead >
                     {{-- <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                         
-                        @foreach ($bimbel as $bimbels)
+                        @foreach ($category as $categories)
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <td class="w-4 p-4">
                                         <div class="flex items-center">
@@ -177,28 +175,28 @@
                                             <label for="checkbox" class="sr-only">checkbox</label>
                                         </div>
                                     </td>
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><img src="{{ Storage::url($bimbels->image) }}" class="w-[100px]" alt=""></td>
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$bimbels->name}}</td>
-                                    @if ($bimbels->is_free == 'free')
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><img src="{{ Storage::url($categories->image) }}" class="w-[100px]" alt=""></td>
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$categories->name}}</td>
+                                    @if ($categories->is_free == 'free')
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Gratis</td>
                                     @else
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Berbayar</td>
                                     @endif
-                                    @if ($bimbels->is_together == 'basic')
+                                    @if ($categories->is_together == 'basic')
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Biasa</td>
                                     @else
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Serentak</td>
                                     @endif
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$bimbels->start_date}}</td>
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$bimbels->end_date}}</td>
-                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$bimbels->bimbel->name}}</td>
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$categories->start_date}}</td>
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$categories->end_date}}</td>
+                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$categories->category->name}}</td>
                                     <td class="p-4 space-x-2 whitespace-nowrap">
                                         <div class="flex justify-start gap-1">
-                                            <a href="{{ route('admin.bimbel.edit', $bimbels->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            <a href="{{ route('admin.category.edit', $categories->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                                                 Update
                                             </a>
-                                            <form action="{{ route('admin.bimbel.destroy', $bimbels->id) }}" method="POST">
+                                            <form action="{{ route('admin.category.destroy', $categories->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
@@ -219,7 +217,7 @@
 </div>
 
 {{-- <div class="w-full p-4 bg-white border-t border-gray-200">
-    {{ $bimbel->links() }}
+    {{ $category->links() }}
 </div>   --}}
 
 
@@ -236,10 +234,10 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    var table = $('#bimbelTable').DataTable({
+    var table = $('#categoryTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.bimbel.index') }}",
+        ajax: "{{ route('admin.category.index') }}",
         columns: [
             {
                 data: 'checkbox',
@@ -262,22 +260,22 @@ $(document).ready(function() {
 
     // Handle "select all" checkbox
     $('#checkbox-all').on('click', function() {
-        $('.bimbel-checkbox').prop('checked', this.checked);
+        $('.category-checkbox').prop('checked', this.checked);
         updateBulkDeleteButton();
     });
 
     // Handle individual checkbox changes
-    $('#bimbelTable').on('change', '.bimbel-checkbox', function() {
+    $('#categoryTable').on('change', '.category-checkbox', function() {
         updateBulkDeleteButton();
         
         // Update "select all" checkbox
-        var allChecked = $('.bimbel-checkbox:checked').length === $('.bimbel-checkbox').length;
+        var allChecked = $('.category-checkbox:checked').length === $('.category-checkbox').length;
         $('#checkbox-all').prop('checked', allChecked);
     });
 
     // Update bulk delete button visibility
     function updateBulkDeleteButton() {
-        var checkedCount = $('.bimbel-checkbox:checked').length;
+        var checkedCount = $('.category-checkbox:checked').length;
         if (checkedCount > 0) {
             $('#bulkDeleteBtn').show();
         } else {
@@ -289,12 +287,12 @@ $(document).ready(function() {
     $('#bulkDeleteBtn').on('click', function() {
         if (confirm('Are you sure you want to delete selected items?')) {
             var selectedIds = [];
-            $('.bimbel-checkbox:checked').each(function() {
+            $('.category-checkbox:checked').each(function() {
                 selectedIds.push($(this).val());
             });
 
             $.ajax({
-                url: "{{ route('admin.bimbel.bulkDelete') }}",
+                url: "{{ route('admin.category.bulkDelete') }}",
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -320,14 +318,13 @@ $(document).ready(function() {
     });
 
     // Fungsi untuk membuka modal edit
-    function openEditModal(id, name, description, batch_id) {
+    function openEditModal(id, name, description) {
         // Set form action URL
-        $('#editForm').attr('action', `/admin/bimbel/${id}`);
+        $('#editForm').attr('action', `/admin/category/${id}`);
         
         // Set nilai input
         $('#edit_name').val(name);
         $('#edit_description').val( description);
-        $('#edit_batch_id').val( batch_id);
         
         // Buka modal
         $('#editModal').removeClass('hidden');
@@ -339,9 +336,8 @@ $(document).ready(function() {
         const id = $(this).data('id');
         const name = $(this).data('name');
         const description = $(this).data('description');
-        const batch_id = $(this).data('batch_id');
         
-        openEditModal(id, name, description, batch_id);
+        openEditModal(id, name, description);
     });
 
     // Handle submit form edit
@@ -361,11 +357,11 @@ $(document).ready(function() {
                     // Refresh table
                     table.ajax.reload();
                     // Show success message
-                    alert('Bimbel updated successfully');
+                    alert('category updated successfully');
                 }
             },
             error: function(xhr) {
-                alert('Error updating bimbel');
+                alert('Error updating category');
             }
         });
     });
@@ -383,12 +379,12 @@ $(document).ready(function() {
     
 <script type="text/javascript">
         $(document).ready(function () {
-            var table = $('#bimbelTable').DataTable({
+            var table = $('#categoryTable').DataTable({
                 processing: true,
                 serverSide: true,
                 order: [[5,'desc']],
                 ordering: true,
-                ajax: "{{ route('admin.bimbel.index') }}",
+                ajax: "{{ route('admin.category.index') }}",
                 columns: [
                     {data: 'image', name: 'image', orderable: false, searchable: false},
                     {data: 'name', name: 'name'},
@@ -397,7 +393,7 @@ $(document).ready(function() {
                     {data: 'is_together', name: 'is_together'},
                     {data: 'start_date', name: 'start_date'},
                     {data: 'end_date', name: 'end_date'},
-                    {data: 'bimbel_id', name: 'bimbel_id'},
+                    {data: 'category_id', name: 'category_id'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]

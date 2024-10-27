@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('batches', function (Blueprint $table) {
+        Schema::create('package_members', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
-            $table->text('description');
+            $table->longText('description');
+            $table->string('image')->nullable();
+            $table->string('price');
+            $table->foreignId('tryout_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('bimbel_id')->constrained()->cascadeOnDelete();
 
             $table->timestamps();
         });
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('batches');
+        Schema::dropIfExists('package_members');
     }
 };

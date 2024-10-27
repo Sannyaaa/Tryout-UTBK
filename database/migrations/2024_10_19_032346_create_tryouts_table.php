@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
-            $table->foreignId('batch_id')->constrained()->cascadeOnDelete();
             $table->string('description')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

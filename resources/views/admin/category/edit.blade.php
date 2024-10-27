@@ -74,9 +74,17 @@
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
                 
+                <div>
+                    <img src="{{ Storage::url($tryout->image) }}" class="w-[300px]" alt="">
+                </div>
                 <div class="grid lg:grid-cols-2 gap-3">
                     <div>
-                        <x-input-label for="is_free" :value="__('Berbayar / Gratis')" />
+                        <x-input-label for="image" :value="__('Image')" />
+                        <x-file-input type="file" name="image" id="image" placeholder="Masukan Image"/>
+                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-input-label for="is_free" :value="__('Is Free')" />
                         <x-select-input id="is_free" name="is_free">
                             <option selected="" disabled>Select is free</option>
                             <option value="paid" {{ $tryout->is_free == 'paid' ? 'selected' : '' }}>Berbayar</option>
@@ -84,8 +92,20 @@
                         </x-select-input>
                         <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
                     </div>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-3">
                     <div>
-                        <x-input-label for="is_together" :value="__('Biasa / Serentak')" />
+                        <x-input-label for="batch_id" :value="__('Batch')" />
+                        <x-select-input id="batch_id" name="batch_id" >
+                            <option selected="" disabled>Select Batch</option>
+                            @foreach ($batch as $batchs)
+                                <option value="{{ $batchs->id }}" {{ $tryout->batch_id == $batchs->id ? 'selected' : '' }}>{{ $batchs->name }}</option>
+                            @endforeach
+                        </x-select-input>
+                        <x-input-error :messages="$errors->get('batch_id')" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-input-label for="is_together" :value="__('Is Together')" />
                         <x-select-input id="is_together" name="is_together" >
                             <option selected="" disabled>Select Is Together</option>
                             <option value="basic" {{ $tryout->is_together == 'basic' ? 'selected' : '' }}>Biasa</option>

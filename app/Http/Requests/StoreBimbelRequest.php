@@ -25,7 +25,6 @@ class StoreBimbelRequest extends FormRequest
             //
             'name' => ['required', 'string', 'max:255'],
             'description' => ['string','nullable'],
-            'batch_id' => ['exists:batches,id','required'],
             //
         ];
     }

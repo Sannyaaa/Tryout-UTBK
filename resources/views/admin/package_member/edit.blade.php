@@ -16,7 +16,7 @@
                   <li>
                     <div class="flex items-center">
                       <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="{{ route('admin.tryout.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Tryout</a>
+                      <a href="{{ route('admin.package_member.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">package_member</a>
                     </div>
                   </li>
                   <li>
@@ -27,7 +27,7 @@
                   </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Create Tryout</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Edit package_member</h1>
         </div>
         {{-- <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
@@ -58,63 +58,100 @@
                 Add new product
             </button>
         </div> --}}
-        <form action="{{ route('admin.tryout.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.package_member.update', $package_member->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('POST')
+            @method('PUT')
             <div class="space-y-4">
+
                 <div>
-                    <x-input-label for="name" :value="__('Nama')" />
-                    <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Tryout" required=""/>
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                    <x-input-label for="name" :value="__('Name Package Member')" />
+                    <x-text-input type="text" :value="$package_member->name ?? old('name')" name="name" id="name" placeholder="Masukan name" required=""/>
+                    <x-input-error :messages="$errors->get('price')" class="mt-2" />
                 </div>
                 
                 <div>
-                    <x-input-label for="description" :value="__('Description')" />
-                    <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
+                    <img src="{{ Storage::url($package_member->image) }}" class="w-[300px]" alt="">
+                </div>
+
+                <div>
+                    <x-input-label for="image" :value="__('Image')" />
+                    <x-file-input type="file" name="image" id="image" placeholder="Masukan Image package_member" required=""/>
+                    <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                </div>
+
+                <div>
+                    <x-input-label for="description" :value="__('description')" />
+                    <x-text-area id="description" name="description" rows="4" placeholder="Masukan description">{{$package_member->description}}</x-text-area>
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                </div>
+
+                <div>
+                    <x-input-label for="benefits" :value="__('Benefits Package Member')" />
+                    <div class="benefits-container space-y-3">
+                        @foreach($package_member->benefits as $benefit)
+                            <div class="benefit-input flex gap-2">
+                                <x-text-input type="text" name="benefits[]" value="{{ $benefit->benefit }}" placeholder="Enter benefit" required/>
+                                <button type="button" class="remove-benefit px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        @endforeach
+                        @if($package_member->benefits->isEmpty())
+                            <div class="benefit-input flex gap-2">
+                                <x-text-input type="text" name="benefits[]" placeholder="Enter benefit" required/>
+                                <button type="button" class="remove-benefit px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        @endif
+                    </div>
+                    <button type="button" class="add-benefit mt-2 px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">
+                        <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        Add Benefit
+                    </button>
+                </div>
+
+                <div>
+                    <x-input-label for="price" :value="__('Price')" />
+                    <x-text-input type="number" :value="$package_member->price ?? old('price')" name="price" id="price" placeholder="Masukan price" required=""/>
+                    <x-input-error :messages="$errors->get('price')" class="mt-2" />
                 </div>
 
                 <div class="grid lg:grid-cols-2 gap-3">
                     <div>
-                        <x-input-label for="is_free" :value="__('Berbayar / Gratis')" />
-                        <x-select-input id="is_free" name="is_free">
-                            <option selected="" disabled>Select Berbayar / Gratis</option>
-                            <option value="paid" {{ old('is_free') == 'paid' ? 'selected' : '' }}>Berbayar</option>
-                            <option value="free" {{ old('is_free') == 'free' ? 'selected' : '' }}>Gratis</option>
+                        <x-input-label for="tryout_id" :value="__('Tryout')" />
+                        <x-select-input id="tryout_id" name="tryout_id" >
+                            <option selected="" disabled>Select Tryout</option>
+                            @foreach ($tryout as $tryouts)
+                                <option value="{{ $tryouts->id }}" {{ $package_member->tryout_id == $tryouts->id ? 'selected' : '' }}>{{ $tryouts->name }}</option>
+                            @endforeach
                         </x-select-input>
-                        <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('tryout_id')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="is_together" :value="__('Biasa / Serentak')" />
-                        <x-select-input id="is_together" name="is_together" >
-                            <option selected="" disabled>Select Biasa / Serentak</option>
-                            <option value="basic" {{ old('is_together') == 'basic' ? 'selected' : '' }}>Biasa</option>
-                            <option value="together" {{ old('is_together') == 'together' ? 'selected' : '' }}>Serentak</option>
+                        <x-input-label for="bimbel_id" :value="__('Bimbel')" />
+                        <x-select-input id="bimbel_id" name="bimbel_id" >
+                            <option selected="" disabled>Select Bimbel</option>
+                            @foreach ($bimbel as $bimbels)
+                                <option value="{{ $bimbels->id }}" {{ $package_member->bimbel_id == $bimbels->id ? 'selected' : '' }}>{{ $bimbels->name }}</option>
+                            @endforeach
                         </x-select-input>
-                        <x-input-error :messages="$errors->get('is_together')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('bimbel_id')" class="mt-2" />
                     </div>
                 </div>
                 
-                <div id="date-inputs" style="display: none;"> 
-                    <div class="grid lg:grid-cols-2 gap-3">
-                        <div>
-                            <x-input-label for="start_date" :value="__('Start Date')" />
-                            <x-text-input type="date" :value="old('start_date')" name="start_date" id="start_date" placeholder="Masukan tanggal mulai" required=""/>
-                            <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
-                        </div>
-                        <div>
-                            <x-input-label for="end_date" :value="__('end Date')" />
-                            <x-text-input type="date" :value="old('end_date')" name="end_date" id="end_date" placeholder="Masukan tanggal selesai" required=""/>
-                            <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
-                        </div>
-                    </div>
-                </div>
                 <div class="flex justify-between">
-                        <x-secondary-href href="{{ route('admin.tryout.index') }}">
+                        <x-secondary-href href="{{ route('admin.package_member.index') }}">
                             Back
                         </x-secondary-href>
                         <x-primary-button type="submit">
-                            Add Tryout
+                            Edit Package member
                         </x-primary-button>
                 </div>
         </form>
@@ -137,5 +174,39 @@
             }
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const benefitsContainer = document.querySelector('.benefits-container');
+            
+            // Template for new benefit input
+            const benefitTemplate = `
+                <div class="benefit-input flex gap-2">
+                    <x-text-input type="text" name="benefits[]" placeholder="Enter benefit" required/>
+                    <button type="button" class="remove-benefit px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            `;
+
+            // Add new benefit input
+            document.querySelector('.add-benefit').addEventListener('click', function() {
+                const newBenefit = document.createElement('div');
+                newBenefit.innerHTML = benefitTemplate;
+                benefitsContainer.appendChild(newBenefit.firstElementChild);
+            });
+
+            // Remove benefit input
+            benefitsContainer.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-benefit')) {
+                    const benefitInput = e.target.closest('.benefit-input');
+                    if (benefitsContainer.children.length > 1) {
+                        benefitInput.remove();
+                    }
+                }
+            });
+        });
+        </script>
 @endpush
 
