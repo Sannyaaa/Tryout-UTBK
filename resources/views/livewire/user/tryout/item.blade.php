@@ -54,7 +54,7 @@
                             </span>
                         </div>
                         <div class="w-3/6 flex align-middle justify-end text-sky-500">
-                            <a href="#" class="my-auto">
+                            <a href="{{route('user.tryouts.paper', [1, 1])}}" class="my-auto">
                                 <button class="py-2 px-4 rounded-lg bg-sky-500 hover:bg-sky-700 text-white font-semibold">
                                     <i class="m-auto me-2 fa-solid fa-arrow-right-long"></i> <span>Kerjakan</span>
                                 </button>
