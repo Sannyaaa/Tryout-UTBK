@@ -86,17 +86,6 @@
                                         <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
                                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
-
-                                    <div>
-                                        <x-input-label for="batch_id" :value="__('Pilih Batch')" />
-                                        <x-select-input id="batch_id" name="batch_id">
-                                            <option selected="" disabled>pilih batch</option>
-                                            @foreach ($batchs as $batch)
-                                                <option value="{{ $batch->id }}" {{ old('batch_id') == $batch->id ? 'selected' : '' }}>{{ $batch->name }}</option>
-                                            @endforeach
-                                        </x-select-input>
-                                        <x-input-error :messages="$errors->get('batch_id')" class="mt-2" />
-                                    </div>
                                 </div>
                                 <x-primary-button type="submit">
                                     Add Bimbel
@@ -139,17 +128,6 @@
                                         <x-text-area id="edit_description" name="description" rows="4"  placeholder="Masukan Description"/>
                                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
-
-                                    <div>
-                                        <x-input-label for="edit_batch_id" :value="__('Pilih Batch')" />
-                                        <x-select-input id="edit_batch_id" name="batch_id">
-                                            <option id="edit_batch_id">pilih bimbel</option>
-                                            @foreach ($batchs as $batch)
-                                                <option value="{{ $batch->id }}" {{ old('batch_id') == $batch->id ? 'selected' : '' }}>{{ $batch->name }}</option>
-                                            @endforeach
-                                        </x-select-input>
-                                        <x-input-error :messages="$errors->get('batch_id')" class="mt-2" />
-                                    </div>
                                 </div>
                                 <div class="flex items-center space-x-4">
                                     <x-primary-button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -181,9 +159,6 @@
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Description
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Batch
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Actions

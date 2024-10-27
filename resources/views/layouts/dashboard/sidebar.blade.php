@@ -54,11 +54,7 @@
             </x-sidebar-dropdown>
           </li>
 
-          <li>
-<<<<<<< HEAD
-            <x-sidebar-link link="{{ route('admin.sub_categories.index') }}" name="Category Question">
-              <i class="fa-solid fa-list"></i>
-=======
+          {{-- <li>
             <x-sidebar-link link="{{ route('admin.category.index') }}" name="Category Question">
               <i class="fa-solid fa-tv"></i>
             </x-sidebar-link>
@@ -67,8 +63,23 @@
           <li>
             <x-sidebar-link link="{{ route('admin.sub_categories.index') }}" name="Sub Category Question">
               <i class="fa-solid fa-tv"></i>
->>>>>>> 41ce0cdf763e66752d3bfc0f806556080b0cbb68
             </x-sidebar-link>
+          </li> --}}
+
+          <li>
+            <!-- Dropdown Menu -->
+            <x-sidebar-dropdown id="category" name="Category">
+                {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
+                <i class="fa-regular fa-file-lines"></i>
+                <x-slot name="content">
+                    <li>
+                        <a href="{{ route('admin.category.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Category</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.sub_categories.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Sub Category</a>
+                    </li>
+                </x-slot>
+            </x-sidebar-dropdown>
           </li>
 
           <li>
