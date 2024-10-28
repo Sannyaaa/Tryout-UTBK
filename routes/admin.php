@@ -62,3 +62,8 @@ Route::post('/user/bulk-delete', [UserController::class, 'bulkDelete'])->name('u
 
 Route::resource('/discount', DiscountController::class);
 Route::post('/discount/bulk-delete', [DiscountController::class, 'bulkDelete'])->name('discount.bulkDelete');
+
+Route::resource('/question-practice', QuestionController::class);
+Route::post('/question/bulk-delete', [QuestionController::class, 'bulkDelete'])->name('question.bulkDelete');
+Route::get('/class/{class_bimbel}/question/create', [ClassBimbelController::class, 'question_create'])->name('class.question.create');
+Route::get('/class/{class_bimbel}/question/{practice_question}/edit', [ClassBimbelController::class, 'question_edit'])->name('class.question.edit');

@@ -18,13 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="{{ route('admin.tryout.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
+                            <a href="{{ route('admin.class-bimbel.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Detail Tryout</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Detail Class</span>
                             </div>
                         </li>
                         </ol>
@@ -38,25 +38,31 @@
                 <main class="rounded-lg bg-white shadow mx-auto px-4 py-10">
                     <div class="grid lg:grid-cols-2 gap-2">
                         <div class="w-full lg:w-2/3 px-4">
-                            <h2 class="text-sm text-gray-500 mb-4">Name Tryout <br><span class="text-lg font-bold text-gray-800">{{ $tryout->name }}</span></h2>
-                            <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-gray-800">{{ $tryout->description }}</span></p>
-                        </div>
-                        <div class="w-full px-4">
-                            <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
-                                @if ( $tryout->is_free == 'free' )
-                                    <span class="text-lg font-bold text-gray-800 mb-4">Gratis</span>
-                                @else
-                                    <span class="text-lg font-bold text-gray-800 mb-4">Berbayar</span>
-                                @endif
+                            <h3 class="text-sm text-gray-500 mb-4">Name Class <br>
+                                <span class="text-lg font-bold text-gray-800">{{ $classBimbel->name }}</span>
                             </h3>
-                            <h3 class="text-sm text-gray-500  mb-4">Biasa / Serentak <br>
-                                @if ( $tryout->is_together == 'together' )
-                                    <span class="text-lg font-bold text-gray-800 mb-4">Serentak</span><br>
-                                    <span class="text-lg font-bold text-gray-800">Start Date = {{ $tryout->start_date }}</span><br>
-                                    <span class="text-lg font-bold text-gray-800">End Date = {{ $tryout->end_date }}</span><br>
-                                @else
-                                    <span class="text-lg font-bold text-gray-800 mb-4">Biasa</span>
-                                @endif
+                            <h3 class="text-sm text-gray-500 mb-4">Bimbel <br>
+                                <span class="text-lg font-bold text-gray-800">{{ $classBimbel->bimbel->name }}</span>
+                            </h3>
+                            <h3 class="text-sm text-gray-500 mb-4">Materi Pelajaran <br>
+                                <span class="text-lg font-bold text-gray-800">{{ $classBimbel->sub_categories->name }}</span>
+                            </h3>
+                            <h3 class="text-sm text-gray-500 mb-4">Tanggal <br>
+                                <span class="text-lg font-bold text-gray-800">{{ date('j F Y', strtotime($classBimbel->date)) .' '. date('h:i A', strtotime($classBimbel->start_time)) }}</span>
+                            </h3>
+                        </div>
+                        <div class="w-full lg:w-1/3 px-4">
+                            <h3 class="text-sm text-gray-500 mb-4">Pemateri <br>
+                                <span class="text-lg font-bold text-gray-800 mb-4">{{ $classBimbel->user->name ?? 'Belum di tambahkan' }}</span>
+                            </h3>
+                            <h3 class="text-sm text-gray-500 mb-4">Link Zoom <br>
+                                <span class="text-lg font-bold text-gray-800 mb-4">{{ $classBimbel->link_zoom ?? 'Belum di tambahkan' }}</span>
+                            </h3>
+                            <h3 class="text-sm text-gray-500  mb-4">Link Video <br>
+                                <span class="text-lg font-bold text-gray-800 mb-4">{{ $classBimbel->link_video ?? 'Belum di tambahkan' }}</span>
+                            </h3>
+                            <h3 class="text-sm text-gray-500  mb-4">Link Materi <br>
+                                <span class="text-lg font-bold text-gray-800 mb-4">{{ $classBimbel->materi ?? 'Belum di tambahkan' }}</span>
                             </h3>
                         </div>
                     </div>
@@ -67,9 +73,9 @@
         
             <div class="items-center justify-between block my-6 sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
                 <h3 class="text-2xl text-gray-800 font-bold">
-                    Daftar Pertanyaan {{ $tryout->name }}
+                    Daftar Pertanyaan {{ $classBimbel->name }}
                 </h3>
-                <a href="{{ route('admin.tryout.question.create', $tryout->id) }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
+                <a href="{{ route('admin.class.question.create', $classBimbel->id) }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     Add new Question
                 </a>
             </div>
@@ -94,16 +100,10 @@
                                             No
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Tryout
+                                            Pertanyaan
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Sub categories
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Question
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Corect answer
+                                            Tanggal
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Actions
@@ -111,20 +111,18 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">    
-                                    @foreach ($question as $i => $questions)
+                                    @foreach ($questions as $i => $question)
                                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                             <td class="p-4 text-base font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{$i + 1}}</td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->tryout->name}}</td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->sub_categories->name}}</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->question}}</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->corect_answer}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$question->question}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$question->created_at->format('J M d')}}</td>
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                                     <div class="flex justify-start gap-1">
-                                                        <a href="{{ route('admin.tryout.question.edit', [$tryout->id, $questions->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                        <a href="{{ route('admin.tryout.question.edit', [$tryout->id, $question->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                                                             Update
                                                         </a>
-                                                        <form action="{{ route('admin.tryout.question.destroy', [$tryout->id, $questions->id]) }}" method="POST">
+                                                        <form action="{{ route('admin.tryout.question.destroy', [$tryout->id, $question->id]) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">

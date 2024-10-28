@@ -17,7 +17,7 @@ Route::get('/gatau', function () {
     return 'gatau';
 });
 
-Route::get('/dashboard-process', [DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     

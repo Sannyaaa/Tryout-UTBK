@@ -42,7 +42,7 @@
     </button>
     
     <ul id="dropdown-{{ $id }}" 
-        class="{{ request()->segment(2) == $id ? '' : 'hidden' }} p-2 space-y-2">
+        class="{{ request()->segment(2) == $id ? '' : 'hidden' }} p-2 space-y-1">
         {{ $content }}
     </ul>
 </div>
