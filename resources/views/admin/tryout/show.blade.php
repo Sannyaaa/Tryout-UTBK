@@ -38,7 +38,7 @@
                         <h2 class="text-sm text-gray-500 mb-4">Name Tryout <br><span class="text-lg font-bold text-black">{{ $tryout->name }}</span></h2>
                         <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-black">{{ $tryout->description }}</span></p>
                     </div>
-                    <div class="w-full lg:w-1/3 px-4">
+                    <div class="w-full px-4">
                         <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
                             @if ( $tryout->is_free == 'free' )
                                 <span class="text-lg font-bold text-black mb-4">Gratis</span>
@@ -46,11 +46,14 @@
                                 <span class="text-lg font-bold text-black mb-4">Berbayar</span>
                             @endif
                         </h3>
+                        @php
+                            use Carbon\Carbon;
+                        @endphp
                         <h3 class="text-sm text-gray-500  mb-4">Biasa / Serentak <br>
                             @if ( $tryout->is_together == 'together' )
-                                <span class="text-lg font-bold text-black mb-4">Serentak</span><br>
-                                <span class="text-lg font-bold text-black">Start Date = {{ $tryout->start_date }}</span><br>
-                                <span class="text-lg font-bold text-black">End Date = {{ $tryout->end_date }}</span><br>
+                                <p class="text-lg font-bold text-black mb-4">Serentak</p>
+                                <span class="text-sm text-gray-500">Tanggal</span>
+                                <p class="text-lg font-bold text-black mb-4">{{ Carbon::parse($tryout->start_date)->format('d F Y') }} - {{ Carbon::parse($tryout->end_date)->format('d F Y') }} </p>
                             @else
                                 <span class="text-lg font-bold text-black mb-4">Biasa</span>
                             @endif
