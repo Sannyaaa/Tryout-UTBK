@@ -33,23 +33,23 @@
           </li>
 
           <li>
-            <x-sidebar-link id="bimbel" link="{{ route('admin.bimbel.index') }}" name="Bimbel">
+            <x-sidebar-link link="{{ route('admin.bimbel.index') }}" name="Bimbel">
               <i class="fa-solid fa-book-open"></i>
             </x-sidebar-link>
           </li>
 
           <li>
             <!-- Dropdown Menu -->
-            <x-sidebar-dropdown id="class-bimbel" name="Class Bimbel">
+            <x-sidebar-dropdown id="class-bimbel" name="Kelas Bimbel">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                 <i class="fa-solid fa-chalkboard-user"></i>
                 <x-slot name="content">
                     <li>
-                        <x-sidebar-link-dropdown link="{{ route('admin.class-bimbel.index') }}" name="Bimbel" />
+                        <x-sidebar-link-dropdown link="{{ route('admin.class-bimbel.index') }}" name="List" />
                         {{-- <a href="{{ route('admin.class-bimbel.index') }}" name="All Class</a> --}}
                     </li>
                     <li>
-                        <x-sidebar-link-dropdown link="{{ route('admin.class-bimbel.create') }}" name="Buat Bimbel" />
+                        <x-sidebar-link-dropdown link="{{ route('admin.class-bimbel.create') }}" name="Buat" />
                         {{-- <a href="{{ route('admin.class-bimbel.create') }}" name="Buat</a> --}}
                     </li>
                 </x-slot>
@@ -70,15 +70,15 @@
 
           <li>
             <!-- Dropdown Menu -->
-            <x-sidebar-dropdown id="category" name="Category">
+            <x-sidebar-dropdown id="category" name="Categori">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                 <i class="fa-regular fa-file-lines"></i>
                 <x-slot name="content">
                     <li>
-                        <x-sidebar-link-dropdown link="{{ route('admin.category.index') }}" name="Category" />
+                        <x-sidebar-link-dropdown link="{{ route('admin.category.index') }}" name="Categori" />
                     </li>
                     <li>
-                        <x-sidebar-link-dropdown link="{{ route('admin.sub_categories.index') }}" name="Sub Category" />
+                        <x-sidebar-link-dropdown link="{{ route('admin.sub_categories.index') }}" name="Sub Categori" />
                     </li>
                 </x-slot>
             </x-sidebar-dropdown>
@@ -91,7 +91,7 @@
                 <i class="fa-regular fa-file-lines"></i>
                 <x-slot name="content">
                     <li>
-                        <x-sidebar-link-dropdown link="{{ route('admin.tryout.index') }}" name="All Tryout" />
+                        <x-sidebar-link-dropdown link="{{ route('admin.tryout.index') }}" name="List" />
                     </li>
                     <li>
                         <x-sidebar-link-dropdown link="{{ route('admin.tryout.create') }}" name="Buat" />
@@ -102,12 +102,12 @@
 
           <li>
             <!-- Dropdown Menu -->
-            <x-sidebar-dropdown id="question" name="Question">
+            <x-sidebar-dropdown id="question" name="Pertanyaan">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                 <i class="fa-solid fa-circle-question"></i>
                 <x-slot name="content">
                     <li>
-                        <x-sidebar-link-dropdown link="{{ route('admin.question.index') }}" name="All Question" />
+                        <x-sidebar-link-dropdown link="{{ route('admin.question.index') }}" name="List" />
                     </li>
                     <li>
                         <x-sidebar-link-dropdown link="{{ route('admin.question.create') }}" name="Buat" />
@@ -118,12 +118,12 @@
 
           <li>
             <!-- Dropdown Menu -->
-            <x-sidebar-dropdown id="package_member" name="Package member">
+            <x-sidebar-dropdown id="package_member" name="Paket">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                 <i class="fa-regular fa-file-lines"></i>
                 <x-slot name="content">
                     <li>
-                        <x-sidebar-link-dropdown link="{{ route('admin.package_member.index') }}" name="All Package member" />
+                        <x-sidebar-link-dropdown link="{{ route('admin.package_member.index') }}" name="list" />
                     </li>
                     <li>
                         <x-sidebar-link-dropdown link="{{ route('admin.package_member.create') }}" name="Buat" />
@@ -151,12 +151,12 @@
 
           <li>
             <!-- Dropdown Menu -->
-            <x-sidebar-dropdown id="discount" name="Voucher Discount">
+            <x-sidebar-dropdown id="discount" name="Voucher Diskon">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                 <i class="fa-solid fa-ticket"></i>
                 <x-slot name="content">
                     <li>
-                        <x-sidebar-link-dropdown link="{{ route('admin.discount.index') }}" name="All Discount" />
+                        <x-sidebar-link-dropdown link="{{ route('admin.discount.index') }}" name="List" />
                     </li>
                     <li>
                         <x-sidebar-link-dropdown link="{{ route('admin.discount.create') }}" name="Buat" />
@@ -172,7 +172,7 @@
                 <i class="fa-solid fa-users"></i>
                 <x-slot name="content">
                     <li>
-                        <x-sidebar-link-dropdown link="{{ route('admin.user.index') }}" name="All User" />
+                        <x-sidebar-link-dropdown link="{{ route('admin.user.index') }}" name="List" />
                     </li>
                     <li>
                         <x-sidebar-link-dropdown link="{{ route('admin.user.create') }}" name="Buat" />
