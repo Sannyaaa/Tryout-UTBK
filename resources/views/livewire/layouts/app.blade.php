@@ -34,22 +34,23 @@
     <!-- ===== Preloader End ===== -->
 
     <!-- ===== Header Start ===== -->
-    @include('layouts.dashboard.header')
     {{-- <include src="./partials/header.html" /> --}}
     <!-- ===== Header End ===== -->
-
+    <!-- ===== Sidebar Start ===== -->
+    @include('livewire.layouts.user-sidebar')
+    {{-- <include src="./partials/sidebar.html"></include> --}}
+    <!-- ===== Sidebar End ===== -->
+    
     <!-- ===== Page Wrapper Start ===== -->
-    <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
-      <!-- ===== Sidebar Start ===== -->
-      @include('livewire.layouts.user-sidebar')
-      {{-- <include src="./partials/sidebar.html"></include> --}}
-      <!-- ===== Sidebar End ===== -->
-
+    <div class="flex overflow-hidden bg-gray-50 dark:bg-gray-900">
+      
       <!-- ===== Content Area Start ===== -->
       <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
+        
+        @include('layouts.dashboard.header')
 
         <!-- ===== Main Content Start ===== -->
-        <main>
+        <main class="pt-16">
             {{-- @yield('content') --}}
             {{$slot}}
         </main>

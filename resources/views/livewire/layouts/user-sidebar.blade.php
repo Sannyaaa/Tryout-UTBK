@@ -1,13 +1,13 @@
 {{-- {{- $url := split .Permalink "/" -}} --}}
 {{-- {{- $page_slug := index $url (sub (len $url) 2) -}} --}}
 
-<aside id="sidebar" class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-64 h-full pt-16 font-normal duration-75 lg:flex transition-width" aria-label="Sidebar">
-  <div class="relative flex flex-col flex-1 min-h-0 pt-0 
-    {{-- bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 --}}
+<aside id="sidebar" class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-64 h-full pt-4 font-normal duration-75 lg:flex transition-width rounded-lg overflow-hidden" aria-label="Sidebar">
+  <div class="relative flex flex-col flex-1 min-h-0 py-0 mt-20 lg:mt-0 rounded-lg overflow-hidden 
+    bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 shadow
     ms-4 mb-4
     ">
     <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
-      <div class="flex-1 px-3 space-y-1 rounded-lg bg-blue-200 divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+      <div class="flex-1 px-3 space-y-1 rounded-lg bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
         <ul class="pb-2 space-y-2">
           <li>
             <form action="#" method="GET" class="lg:hidden">
@@ -75,7 +75,7 @@
         </ul>
       </div>
     </div>
-    <div class="absolute bottom-0 left-0 justify-center hidden w-full p-4 space-x-4 bg-blue-200 rounded-lg lg:flex dark:bg-gray-800" sidebar-bottom-menu>
+    <div class="absolute bottom-0 left-0 justify-center hidden w-full p-4 space-x-4 bg-white rounded-lg lg:flex dark:bg-gray-800" sidebar-bottom-menu>
       <a href="#" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>
       </a>
