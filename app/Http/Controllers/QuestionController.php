@@ -122,7 +122,6 @@ class QuestionController extends Controller
             return redirect()->back()->with('error', 'File gambar tidak ditemukan');
         }
 
-
         try{
             $question = Question::create($data);
 

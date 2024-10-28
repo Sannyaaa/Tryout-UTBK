@@ -18,13 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
+                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Questions</a>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">All Class</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">All Question</span>
                             </div>
                         </li>
                         </ol>
@@ -43,15 +43,23 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('admin.package_member.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                    Add new package_member
+                <a href="{{ route('admin.question.create') }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
+                    Add Question
                 </a>
+                
+
+                <!-- Modal toggle -->
+                {{-- <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                    Add Bimbel
+                </button> --}}
+
             </div>
+
             <div class="flex flex-col">
-                <div class="overflow-x-auto">
-                    <div class="inline-block min-w-full align-middle">
-                        <div class="overflow-hidden shadow p-6">
-                            <table id="package_memberTable" class="min-w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
+                <div class="">
+                    <div class="align-middle">
+                        <div class=" overflow-x-scroll lg:overflow-x-hidden">
+                            <table id="questionTable" class="w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
                                 <thead class="bg-gray-100 dark:bg-gray-700">
                                     <tr>
                                         <th scope="col" class="p-4">
@@ -61,19 +69,16 @@
                                             </div>
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Image
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Name
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Price
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Tryout
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Bimbel
+                                            Sub categories
+                                        </th>
+                                        {{-- <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Image
+                                        </th> --}}
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Question
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Actions
@@ -82,7 +87,7 @@
                                 </thead >
                                 {{-- <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                                     
-                                    @foreach ($package_member as $package_members)
+                                    @foreach ($question as $questions)
                                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                                 <td class="w-4 p-4">
                                                     <div class="flex items-center">
@@ -91,28 +96,28 @@
                                                         <label for="checkbox" class="sr-only">checkbox</label>
                                                     </div>
                                                 </td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><img src="{{ Storage::url($package_members->image) }}" class="w-[100px]" alt=""></td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$package_members->name}}</td>
-                                                @if ($package_members->is_free == 'free')
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><img src="{{ Storage::url($questions->image) }}" class="w-[100px]" alt=""></td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->name}}</td>
+                                                @if ($questions->is_free == 'free')
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Gratis</td>
                                                 @else
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Berbayar</td>
                                                 @endif
-                                                @if ($package_members->is_together == 'basic')
+                                                @if ($questions->is_together == 'basic')
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Biasa</td>
                                                 @else
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Serentak</td>
                                                 @endif
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$package_members->start_date}}</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$package_members->end_date}}</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$package_members->batch->name}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->start_date}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->end_date}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->batch->name}}</td>
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                                     <div class="flex justify-start gap-1">
-                                                        <a href="{{ route('admin.package_member.edit', $package_members->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                        <a href="{{ route('admin.question.edit', $questions->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                                                             Update
                                                         </a>
-                                                        <form action="{{ route('admin.package_member.destroy', $package_members->id) }}" method="POST">
+                                                        <form action="{{ route('admin.question.destroy', $questions->id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
@@ -126,7 +131,6 @@
                                         @endforeach
                                 </tbody> --}}
                             </table>
-                            
                         </div>
                     </div>
                 </div>
@@ -134,10 +138,11 @@
         </div>
     </div>
 </div>
-    
+
+
 
 {{-- <div class="w-full p-4 bg-white border-t border-gray-200">
-    {{ $package_member->links() }}
+    {{ $question->links() }}
 </div>   --}}
 
 
@@ -160,11 +165,11 @@ $(document).ready(function() {
         }
     });
 
-    var table = $('#package_memberTable').DataTable({
+    var table = $('#questionTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: "{{ route('admin.package_member.index') }}",
+            url: "{{ route('admin.question.index') }}",
             type: 'GET',
             error: function (xhr, error, thrown) {
                 console.log('DataTables error:', error);
@@ -178,21 +183,20 @@ $(document).ready(function() {
                 searchable: false,
                 width: '5%'
             },
-            {
-                data: 'image',
-                name: 'image',
-                orderable: false,
-                searchable: false,
-                render: function(data) {
-                    return data ? '<img src="' + data + '" width="100" height="100">' : '';
-                }
-            },
-            {data: 'name', name: 'name', defaultContent: ''},
-            {data: 'price', name: 'price', defaultContent: ''},
             {data: 'tryout.name', name: 'tryout.name', defaultContent: ''},
-            {data: 'bimbel.name', name: 'bimbel.name', defaultContent: ''},
+            {data: 'sub_categories.name', name: 'sub_categories.name', defaultContent: ''},
+            // {
+            //     data: 'image',
+            //     name: 'image',
+            //     orderable: false,
+            //     searchable: false,
+            //     render: function(data) {
+            //         return data ? '<img src="' + data + '" width="100" height="100">' : '';
+            //     }
+            // },
+            {data: 'question', name: 'question', defaultContent: ''},
             {
-                data: 'action', 
+                data: 'action',
                 name: 'action',
                 orderable: false,
                 searchable: false
@@ -202,22 +206,22 @@ $(document).ready(function() {
 
     // Handle "select all" checkbox
     $('#checkbox-all').on('click', function() {
-        $('.package_member-checkbox').prop('checked', this.checked);
+        $('.question-checkbox').prop('checked', this.checked);
         updateBulkDeleteButton();
     });
 
     // Handle individual checkbox changes
-    $('#package_memberTable').on('change', '.package_member-checkbox', function() {
+    $('#questionTable').on('change', '.question-checkbox', function() {
         updateBulkDeleteButton();
         
         // Update "select all" checkbox
-        var allChecked = $('.package_member-checkbox:checked').length === $('.package_member-checkbox').length;
+        var allChecked = $('.question-checkbox:checked').length === $('.question-checkbox').length;
         $('#checkbox-all').prop('checked', allChecked);
     });
 
     // Update bulk delete button visibility
     function updateBulkDeleteButton() {
-        var checkedCount = $('.package_member-checkbox:checked').length;
+        var checkedCount = $('.question-checkbox:checked').length;
         if (checkedCount > 0) {
             $('#bulkDeleteBtn').show();
         } else {
@@ -229,12 +233,12 @@ $(document).ready(function() {
     $('#bulkDeleteBtn').on('click', function() {
         if (confirm('Are you sure you want to delete selected items?')) {
             var selectedIds = [];
-            $('.package_member-checkbox:checked').each(function() {
+            $('.question-checkbox:checked').each(function() {
                 selectedIds.push($(this).val());
             });
 
             $.ajax({
-                url: "{{ route('admin.package_member.bulkDelete') }}",
+                url: "{{ route('admin.question.bulkDelete') }}",
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -262,4 +266,30 @@ $(document).ready(function() {
 </script>
 @endsection
 
+
+{{-- <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    
+<script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#questionTable').DataTable({
+                processing: true,
+                serverSide: true,
+                order: [[5,'desc']],
+                ordering: true,
+                ajax: "{{ route('admin.question.index') }}",
+                columns: [
+                    {data: 'image', name: 'image', orderable: false, searchable: false},
+                    {data: 'name', name: 'name'},
+                    {data: 'description', name: 'description'},
+                    {data: 'is_free', name: 'is_free'},
+                    {data: 'is_together', name: 'is_together'},
+                    {data: 'start_date', name: 'start_date'},
+                    {data: 'end_date', name: 'end_date'},
+                    {data: 'batch_id', name: 'batch_id'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+        });
+    </script> --}}
 

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Bimbel;
 use App\Models\ClassBimbel;
+use App\Models\QuestionPractice;
 use Illuminate\Http\Request;
 use App\Models\sub_categories;
 use Yajra\DataTables\DataTables;
@@ -33,12 +34,17 @@ class ClassBimbelController extends Controller
                         return date('j F Y', strtotime($class->date)) .' '. date('h:i A', strtotime($class->start_time));
                     })
                     ->addColumn('action', function ($class) {
+                        $showBtn = '<a href="' . route('admin.class-bimbel.show', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-emerald-400 to-emerald-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            
+                            Show
+                        </a>';
+
                         $editBtn = '<a href="' . route('admin.class-bimbel.edit', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                             Update
                         </a>';
                         
-                        $deleteBtn = '<form action="' . route('admin.class-bimbel.destroy', $class->id) . '" method="POST" class="inline-block ml-2">
+                        $deleteBtn = '<form action="' . route('admin.class-bimbel.destroy', $class->id) . '" method="POST" class="inline-block">
                             ' . csrf_field() . '
                             ' . method_field('DELETE') . '
                             <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white  bg-gradient-to-tr from-rose-400 to-rose-500 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
@@ -47,7 +53,15 @@ class ClassBimbelController extends Controller
                             </button>
                         </form>';
                         
-                        return $editBtn . $deleteBtn;
+                        $action = '<div class="flex items-center gap-2">
+                            ' 
+                             . $showBtn 
+                            .
+                              $editBtn . $deleteBtn .
+                            '
+                        </div>';
+                        
+                        return $action;
                     })
                     ->rawColumns(['action', 'date', 'checkbox'])
                     ->make(true);
@@ -106,6 +120,16 @@ class ClassBimbelController extends Controller
         $subCategories = sub_categories::all();
 
         return view('admin.class-bimbel.create', compact('bimbels', 'users','subCategories'));
+    }
+
+    public function question_create(ClassBimbel $classBimbel)
+    {
+        //
+        $back = route('admin.bimbel.show',$classBimbel->id);
+
+        $classes = ClassBimbel::all();
+
+        return view('admin.question-practice.create', compact('classBimbel','back','classes'));
     }
 
     /**
@@ -190,6 +214,10 @@ class ClassBimbelController extends Controller
     public function show(ClassBimbel $classBimbel)
     {
         //
+
+        $questions = QuestionPractice::where('class_bimbel_id',$classBimbel->id)->get();
+
+        return view('admin.class-bimbel.show', compact('classBimbel','questions'));
     }
 
     /**
@@ -200,9 +228,26 @@ class ClassBimbelController extends Controller
         //
 
         $bimbels = Bimbel::all();
+
         $users = User::all();
+
         $subCategories = sub_categories::all();
+
         return view('admin.class-bimbel.edit', compact( 'classBimbel', 'bimbels', 'users','subCategories'));
+    }
+
+    public function class_edit(Bimbel $bimbel, ClassBimbel $classBimbel)
+    {
+        //
+        $back = route('admin.bimbel.show',$bimbel->id);
+
+        $bimbels = Bimbel::all();
+
+        $users = User::all();
+
+        $subCategories = sub_categories::all();
+
+        return view('admin.class-bimbel.edit', compact('bimbel','bimbels','users','subCategories','back', 'classBimbel'));
     }
 
     /**
