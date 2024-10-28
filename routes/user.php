@@ -18,4 +18,3 @@ Route::get('/bimbel/{id}', App\Livewire\User\Bimbel\Item::class)->name('bimbels.
 // Route::get('/bimbel', App\Livewire\User\Bimbels::class)->name('bimbels');
 // Route::get('/bimbel/owned', App\Livewire\User\BimbelsOwned::class)->name('bimbels.owned');
 
-

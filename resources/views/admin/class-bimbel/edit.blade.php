@@ -65,6 +65,7 @@
                 @csrf
                 @method('PUT')
                 <div class="space-y-3">
+                    <x-text-input type="hidden" value="{{ $back ?? '' }}" name="back" id="back" />
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
                             <x-input-label for="name" :value="__('Nama')" />
@@ -140,7 +141,7 @@
                     </div>
 
                     <div class="flex justify-between">
-                        <x-secondary-href href="{{ route('admin.class-bimbel.index') }}">
+                        <x-secondary-href href="{{ $back ?? route('admin.class-bimbel.index') }}">
                             Back
                         </x-secondary-href>
                         <x-primary-button type="submit">

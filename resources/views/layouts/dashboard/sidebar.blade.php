@@ -6,8 +6,8 @@
       <div class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
         <ul class="pb-2 space-y-2">
           <li>
-            <a href="#" class="flex justify-center">
-              <span class="self-center text-2xl font-semibold sm:text-4xl whitespace-nowrap dark:text-white">Flowbite</span>
+            <a href="#" class="flex justify-center my-3">
+              <span class="self-center text-3xl font-semibold sm:text-4xl whitespace-nowrap dark:text-white">Flowbite</span>
             </a>
           </li>
 
@@ -40,15 +40,17 @@
 
           <li>
             <!-- Dropdown Menu -->
-            <x-sidebar-dropdown id="class-bimbel" name="Class Bimbel">
+            <x-sidebar-dropdown id="class-bimbel" name="Kelas Bimbel">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                 <i class="fa-solid fa-chalkboard-user"></i>
                 <x-slot name="content">
                     <li>
-                        <a href="{{ route('admin.class-bimbel.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">All Class</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.class-bimbel.index') }}" name="List" />
+                        {{-- <a href="{{ route('admin.class-bimbel.index') }}" name="All Class</a> --}}
                     </li>
                     <li>
-                        <a href="{{ route('admin.class-bimbel.create') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Create</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.class-bimbel.create') }}" name="Buat" />
+                        {{-- <a href="{{ route('admin.class-bimbel.create') }}" name="Buat</a> --}}
                     </li>
                 </x-slot>
             </x-sidebar-dropdown>
@@ -68,15 +70,15 @@
 
           <li>
             <!-- Dropdown Menu -->
-            <x-sidebar-dropdown id="category" name="Category">
+            <x-sidebar-dropdown id="category" name="Categori">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                 <i class="fa-regular fa-file-lines"></i>
                 <x-slot name="content">
                     <li>
-                        <a href="{{ route('admin.category.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Category</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.category.index') }}" name="Categori" />
                     </li>
                     <li>
-                        <a href="{{ route('admin.sub_categories.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Sub Category</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.sub_categories.index') }}" name="Sub Categori" />
                     </li>
                 </x-slot>
             </x-sidebar-dropdown>
@@ -89,10 +91,10 @@
                 <i class="fa-regular fa-file-lines"></i>
                 <x-slot name="content">
                     <li>
-                        <a href="{{ route('admin.tryout.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">All Tryout</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.tryout.index') }}" name="List" />
                     </li>
                     <li>
-                        <a href="{{ route('admin.tryout.create') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Create</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.tryout.create') }}" name="Buat" />
                     </li>
                 </x-slot>
             </x-sidebar-dropdown>
@@ -100,15 +102,15 @@
 
           <li>
             <!-- Dropdown Menu -->
-            <x-sidebar-dropdown id="question" name="Question">
+            <x-sidebar-dropdown id="question" name="Pertanyaan">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                 <i class="fa-solid fa-circle-question"></i>
                 <x-slot name="content">
                     <li>
-                        <a href="{{ route('admin.question.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">All Question</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.question.index') }}" name="List" />
                     </li>
                     <li>
-                        <a href="{{ route('admin.question.create') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Create</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.question.create') }}" name="Buat" />
                     </li>
                 </x-slot>
             </x-sidebar-dropdown>
@@ -116,15 +118,15 @@
 
           <li>
             <!-- Dropdown Menu -->
-            <x-sidebar-dropdown id="package_member" name="Package member">
+            <x-sidebar-dropdown id="package_member" name="Paket">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
-                <i class="fa-regular fa-file-lines"></i>
+                <i class="fa-solid fa-tags"></i>
                 <x-slot name="content">
                     <li>
-                        <a href="{{ route('admin.package_member.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">All Package member</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.package_member.index') }}" name="list" />
                     </li>
                     <li>
-                        <a href="{{ route('admin.package_member.create') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Create</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.package_member.create') }}" name="Buat" />
                     </li>
                 </x-slot>
             </x-sidebar-dropdown>
@@ -140,24 +142,24 @@
             </button>
             <ul id="dropdown-crud" class="space-y-2 py-2 hidden ">
               <li>
-                <a href="#" class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700  bg-gray-100 dark:bg-gray-700 ">Products</a>
+                <x-sidebar-link-dropdown link="#" class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700  bg-gray-100 dark:bg-gray-700 ">Products" />
               </li>
               <li>
-                <a href="#" class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 bg-gray-100 dark:bg-gray-700 ">Users</a>
+                <x-sidebar-link-dropdown link="#" class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 bg-gray-100 dark:bg-gray-700 ">Users" />
               </li>
             </ul> --}}
 
           <li>
             <!-- Dropdown Menu -->
-            <x-sidebar-dropdown id="discount" name="Voucher Discount">
+            <x-sidebar-dropdown id="discount" name="Voucher Diskon">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                 <i class="fa-solid fa-ticket"></i>
                 <x-slot name="content">
                     <li>
-                        <a href="{{ route('admin.discount.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">All Discount</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.discount.index') }}" name="List" />
                     </li>
                     <li>
-                        <a href="{{ route('admin.discount.create') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Create</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.discount.create') }}" name="Buat" />
                     </li>
                 </x-slot>
             </x-sidebar-dropdown>
@@ -170,10 +172,10 @@
                 <i class="fa-solid fa-users"></i>
                 <x-slot name="content">
                     <li>
-                        <a href="{{ route('admin.user.index') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">All User</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.user.index') }}" name="List" />
                     </li>
                     <li>
-                        <a href="{{ route('admin.user.create') }}" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Create</a>
+                        <x-sidebar-link-dropdown link="{{ route('admin.user.create') }}" name="Buat" />
                     </li>
                 </x-slot>
             </x-sidebar-dropdown>
@@ -293,3 +295,4 @@
 </aside>
 
 <div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
+

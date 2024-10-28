@@ -32,9 +32,11 @@ Route::delete('/tryout/{tryout}/question/{question}', [TryoutController::class, 
 
 Route::resource('/bimbel', BimbelController::class);
 Route::post('/bimbel/bulk-delete', [BimbelController::class, 'bulkDelete'])->name('bimbel.bulkDelete');
+Route::get('/bimbel/{bimbel}/class/create', [BimbelController::class, 'class_create'])->name('bimbel.class.create');
+Route::get('/bimbel/{bimbel}/class/{class_bimbel}/edit', [BimbelController::class, 'class_edit'])->name('bimbel.class.edit');
 
 Route::post('/sub_categories/bulk-delete', [SubCategoriesController::class, 'bulkDelete'])->name('sub_categories.bulkDelete');
-Route::resource('/sub_categories', SubCategoriesController::class);
+Route::resource('//category/sub_categories', SubCategoriesController::class);
 
 Route::post('/question/bulk-delete', [QuestionController::class, 'bulkDelete'])->name('question.bulkDelete');
 Route::resource('/question', QuestionController::class);
@@ -60,3 +62,8 @@ Route::post('/user/bulk-delete', [UserController::class, 'bulkDelete'])->name('u
 
 Route::resource('/discount', DiscountController::class);
 Route::post('/discount/bulk-delete', [DiscountController::class, 'bulkDelete'])->name('discount.bulkDelete');
+
+Route::resource('/question-practice', QuestionController::class);
+Route::post('/question/bulk-delete', [QuestionController::class, 'bulkDelete'])->name('question.bulkDelete');
+Route::get('/class/{class_bimbel}/question/create', [ClassBimbelController::class, 'question_create'])->name('class.question.create');
+Route::get('/class/{class_bimbel}/question/{practice_question}/edit', [ClassBimbelController::class, 'question_edit'])->name('class.question.edit');

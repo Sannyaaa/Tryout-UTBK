@@ -61,7 +61,7 @@
                 Add new product
             </button>
         </div> --}}
-<<<<<<< HEAD
+        
             <form action="{{ route('admin.tryout.update', $tryout->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -84,11 +84,6 @@
                     
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
-                            <x-input-label for="image" :value="__('Image')" />
-                            <x-file-input type="file" name="image" id="image" placeholder="Masukan Image"/>
-                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                        </div>
-                        <div>
                             <x-input-label for="is_free" :value="__('Berbayar / Gratis')" />
                             <x-select-input id="is_free" name="is_free">
                                 <option selected="" disabled>Select is free</option>
@@ -96,18 +91,6 @@
                                 <option value="free" {{ $tryout->is_free == 'free' ? 'selected' : '' }}>Gratis</option>
                             </x-select-input>
                             <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
-                        </div>
-                    </div>
-                    <div class="grid lg:grid-cols-2 gap-3">
-                        <div>
-                            <x-input-label for="batch_id" :value="__('Batch')" />
-                            <x-select-input id="batch_id" name="batch_id" >
-                                <option selected="" disabled>Select Batch</option>
-                                @foreach ($batch as $batchs)
-                                    <option value="{{ $batchs->id }}" {{ $tryout->batch_id == $batchs->id ? 'selected' : '' }}>{{ $batchs->name }}</option>
-                                @endforeach
-                            </x-select-input>
-                            <x-input-error :messages="$errors->get('batch_id')" class="mt-2" />
                         </div>
                         <div>
                             <x-input-label for="is_together" :value="__('Biasa / Serentak')" />

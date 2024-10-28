@@ -4,13 +4,45 @@
 
 {{-- flex items-center p-2 text-base text-gray-900 rounded-lg group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 bg-gray-100 dark:bg-gray-700  --}}
 {{-- flex items-center p-2 text-base text-gray-900 rounded-lg transition duration-75  pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 --}}
-<button type="button" class="flex items-center w-full p-2 ms-1 me-2 text-base text-gray-900 hover:bg-gradient-to-tr hover:from-sky-400 hover:to-sky-500 hover:text-white transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" aria-controls="dropdown-{{ $id }}" data-collapse-toggle="dropdown-{{ $id }}">
-    {{ $slot }}
-    {{-- <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-    </svg> --}}
-    <span class="flex-1 ml-3 text-left whitespace-nowrap">{{ $name }}</span>
-    <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-</button>
-<ul id="dropdown-{{ $id }}" class="hidden py-2 space-y-2">
-    {{ $content }}
-</ul>
+
+@php
+    // Check if any of the child routes are active
+    $isActive = false;
+    $childRoutes = Str::of($content)->matchAll('/route\(\'(.*?)\'\)/');
+    
+    foreach ($childRoutes as $route) {
+        if (request()->routeIs($route)) {
+            $isActive = true;
+            break;
+        }
+    }
+@endphp
+
+<div class="relative">
+    <button type="button" 
+        class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group
+        {{ request()->segment(2) == $id
+            ? 'bg-gradient-to-tr from-sky-400 to-sky-500 text-white' 
+            : 'text-gray-700 hover:bg-gradient-to-tr hover:from-sky-400 hover:to-sky-500 hover:text-white hover:bg-opacity-20' 
+        }}
+        aria-controls="dropdown-{{ $id }}"
+        data-collapse-toggle="dropdown-{{ $id }}">
+        {{ $slot }}
+        <span class="flex-1 ml-3 text-left whitespace-nowrap">{{ $name }}</span>
+        <svg sidebar-toggle-item 
+            class="w-6 h-6 transition-transform duration-200 {{ request()->segment(2) == $id ? 'rotate-180' : '' }}" 
+            fill="currentColor" 
+            viewBox="0 0 20 20" 
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" 
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" 
+                clip-rule="evenodd">
+            </path>
+        </svg>
+    </button>
+    
+    <ul id="dropdown-{{ $id }}" 
+        class="{{ request()->segment(2) == $id ? '' : 'hidden' }} p-2 space-y-1">
+        {{ $content }}
+    </ul>
+</div>

@@ -32,6 +32,7 @@
                     {{-- <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Bimbels</h1> --}}
                 </div>
             </div>
+
         {{-- <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
                 <form class="sm:pr-3" action="#" method="GET">
@@ -65,9 +66,10 @@
                 @csrf
                 <div class="space-y-3">
                     <div class="grid lg:grid-cols-2 gap-3">
+                        <x-text-input type="hidden" value="{{ $back ?? '' }}" name="back" id="back" />
                         <div>
                             <x-input-label for="name" :value="__('Nama')" />
-                            <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Tryout" required />
+                            <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Klass" required />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
                         <div>
@@ -89,9 +91,9 @@
                             <x-input-label for="bimbel_id" :value="__('Bimbel')" />
                             <x-select-input id="bimbel_id" name="bimbel_id">
                                 <option selected disabled>Select Bimbel</option>
-                                @foreach ($bimbels as $bimbel)
-                                    <option value="{{ $bimbel->id }}" {{ old('bimbel_id') == $bimbel->id ? 'selected' : '' }}>
-                                        {{ $bimbel->name }}
+                                @foreach ($bimbels as $bimbelSelect)
+                                    <option value="{{ $bimbelSelect->id }}" {{ old('bimbel_id', $bimbel->id ?? '') == $bimbelSelect->id ? 'selected' : '' }}>
+                                        {{ $bimbelSelect->name }}
                                     </option>
                                 @endforeach
                             </x-select-input>
@@ -189,7 +191,7 @@
                     </div>
 
                     <div class="flex justify-between">
-                        <x-secondary-href href="{{ route('admin.class-bimbel.index') }}">
+                        <x-secondary-href href="{{ $back ?? route('admin.class-bimbel.index') }}">
                             Back
                         </x-secondary-href>
                         <x-primary-button type="submit">
@@ -209,23 +211,76 @@
 @push('script')
     <script>
         function toggleDateInputs() {
-            const isChecked = document.getElementById('many-class').checked;
+            const manyClassCheckbox = document.getElementById('many-class');
             const firstDateInputs = document.getElementById('first-date-inputs');
             const secondDateInputs = document.getElementById('second-date-inputs');
+            
+            // Get all input elements
+            const firstDateInput = document.getElementById('date');
+            const firstStartTimeInput = document.getElementById('start_time');
+            
+            const secondStartDateInput = document.getElementById('start_date');
+            const secondEndDateInput = document.getElementById('end_date');
+            const secondStartTimeInput = document.getElementById('start_time_second');
+            const daysOfWeekInputs = document.querySelectorAll('input[name="days_of_week[]"]');
 
-            firstDateInputs.style.display = isChecked ? 'none' : 'block';
-            secondDateInputs.style.display = isChecked ? 'block' : 'none';
+            if (manyClassCheckbox.checked) {
+                // Show second date inputs, hide first date inputs
+                firstDateInputs.style.display = 'none';
+                secondDateInputs.style.display = 'block';
+                
+                // Remove required from first date inputs
+                firstDateInput.required = false;
+                firstStartTimeInput.required = false;
+                
+                // Add required to second date inputs
+                secondStartDateInput.required = true;
+                secondEndDateInput.required = true;
+                secondStartTimeInput.required = true;
+                
+                // Make at least one day of week required
+                daysOfWeekInputs.forEach(input => {
+                    input.addEventListener('change', validateDaysOfWeek);
+                });
+                validateDaysOfWeek();
+            } else {
+                // Show first date inputs, hide second date inputs
+                firstDateInputs.style.display = 'block';
+                secondDateInputs.style.display = 'none';
+                
+                // Add required to first date inputs
+                firstDateInput.required = true;
+                firstStartTimeInput.required = true;
+                
+                // Remove required from second date inputs
+                secondStartDateInput.required = false;
+                secondEndDateInput.required = false;
+                secondStartTimeInput.required = false;
+                
+                // Remove required from days of week
+                daysOfWeekInputs.forEach(input => {
+                    input.required = false;
+                    input.removeEventListener('change', validateDaysOfWeek);
+                });
+            }
+        }
 
-            document.querySelectorAll('#first-date-inputs input').forEach(input => {
-                input.required = !isChecked;
-            });
-            document.querySelectorAll('#second-date-inputs input').forEach(input => {
-                input.required = isChecked;
+        // Function to validate that at least one day of week is selected
+        function validateDaysOfWeek() {
+            const daysOfWeekInputs = document.querySelectorAll('input[name="days_of_week[]"]');
+            const anyChecked = Array.from(daysOfWeekInputs).some(input => input.checked);
+            
+            daysOfWeekInputs.forEach(input => {
+                if (!anyChecked) {
+                    input.setCustomValidity('Please select at least one day');
+                } else {
+                    input.setCustomValidity('');
+                }
             });
         }
     </script>
 
-    <script>
+    {{-- <script>
         document.getElementById('myForm').addEventListener('submit', function(event) {
             // Pilih semua checkbox dengan nama days_of_week[]
             const checkboxes = document.querySelectorAll('input[name="days_of_week[]"]');
@@ -244,7 +299,7 @@
                 alert('Pilih setidaknya satu hari belajar!');
             }
         });
-    </script>
+    </script> --}}
 @endpush
 
 
