@@ -44,7 +44,7 @@ class TryoutController extends Controller
                             Show
                         </a>';
                         
-                        $deleteBtn = '<form action="' . route('admin.tryout.destroy', $tryout->id) . '" method="POST" class="inline-block ml-2">
+                        $deleteBtn = '<form action="' . route('admin.tryout.destroy', $tryout->id) . '" method="POST" class="inline-block">
                             ' . csrf_field() . '
                             ' . method_field('DELETE') . '
                             <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white  bg-gradient-to-tr from-rose-400 to-rose-500 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
@@ -53,7 +53,15 @@ class TryoutController extends Controller
                             </button>
                         </form>';
                         
-                        return $showBtn . $editBtn . $deleteBtn;
+                        $action = '<div class="flex items-center gap-2">
+                            ' 
+                             . $showBtn 
+                            .
+                              $editBtn . $deleteBtn .
+                            '
+                        </div>';
+                        
+                        return $action;
                     })
                     ->rawColumns(['action', 'image', 'checkbox'])
                     ->make(true);

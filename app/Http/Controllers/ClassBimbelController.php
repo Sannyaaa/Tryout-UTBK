@@ -121,7 +121,7 @@ class ClassBimbelController extends Controller
             'bimbel_id' => 'required|exists:bimbels,id',
             'sub_categories_id' => 'required|exists:sub_categories,id',
             'user_id' => 'required|exists:users,id',
-            'date' => 'date',
+            'date' => 'date|nullable',
             'start_time' => 'nullable',
             'start_time_second' => 'nullable',
             'start_date' => 'nullable|date',
@@ -176,6 +176,10 @@ class ClassBimbelController extends Controller
             }
         }
 
+        if($request->input('back')){
+            return redirect($request->input('back'))->with('success', 'Tryout berhasil ditambahkan.');
+        }
+
         return redirect()->route('admin.class-bimbel.index')->with('success', 'Tryout berhasil ditambahkan.');
     
     }
@@ -221,6 +225,10 @@ class ClassBimbelController extends Controller
         ]);
 
         $classBimbel->update($data);
+
+        if($request->input('back')){
+            return redirect($request->input('back'))->with('success', 'Tryout berhasil ditambahkan.');
+        }
 
         return redirect()->route('admin.class-bimbel.index')->with('success', 'Tryout berhasil diubah.');
     }
