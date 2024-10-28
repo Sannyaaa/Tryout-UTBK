@@ -41,7 +41,7 @@
                             <h2 class="text-sm text-gray-500 mb-4">Name Tryout <br><span class="text-lg font-bold text-gray-800">{{ $tryout->name }}</span></h2>
                             <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-gray-800">{{ $tryout->description }}</span></p>
                         </div>
-                        <div class="w-full lg:w-1/3 px-4">
+                        <div class="w-full px-4">
                             <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
                                 @if ( $tryout->is_free == 'free' )
                                     <span class="text-lg font-bold text-gray-800 mb-4">Gratis</span>
