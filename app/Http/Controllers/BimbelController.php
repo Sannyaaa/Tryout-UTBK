@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBimbelRequest;
+use App\Models\User;
 use App\Models\batch;
 use App\Models\Bimbel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Models\sub_categories;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\StoreBimbelRequest;
+use App\Models\ClassBimbel;
 
 class BimbelController extends Controller
 {
@@ -36,10 +39,10 @@ class BimbelController extends Controller
                             Update
                         </button>';
 
-                        // $showBtn = '<a href="'. route('admin.bimbel.show',$bimbel->id) .'" class="show-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
-                        //     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
-                        //     Show
-                        // </a>';
+                        $showBtn = '<a href="'. route('admin.bimbel.show',$bimbel->id) .'" class="show-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
+                            Show
+                        </a>';
                         
                         $deleteBtn = '<form action="' . route('admin.bimbel.destroy', $bimbel->id) . '" method="POST" class="inline-block">
                             ' . csrf_field() . '
@@ -52,7 +55,7 @@ class BimbelController extends Controller
 
                         $action = '<div class="flex items-center gap-2">
                             ' 
-                            //  . $showBtn 
+                             . $showBtn 
                             .
                               $editBtn . $deleteBtn .
                             '
@@ -112,6 +115,20 @@ class BimbelController extends Controller
         //
     }
 
+    public function class_create(Bimbel $bimbel)
+    {
+        //
+        $back = route('admin.bimbel.show',$bimbel->id);
+
+        $bimbels = Bimbel::all();
+
+        $users = User::all();
+
+        $subCategories = sub_categories::all();
+
+        return view('admin.class-bimbel.create', compact('bimbel','bimbels','users','subCategories','back'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -138,7 +155,9 @@ class BimbelController extends Controller
     {
         //
 
-        return view('admin.bimbel.show', compact('bimbel'));
+        $classes = ClassBimbel::where('bimbel_id', $bimbel->id)->get();
+
+        return view('admin.bimbel.show', compact('bimbel','classes'));
     }
 
     /**
@@ -147,6 +166,20 @@ class BimbelController extends Controller
     public function edit(Bimbel $bimbel)
     {
         //
+    }
+
+    public function class_edit(Bimbel $bimbel, ClassBimbel $classBimbel)
+    {
+        //
+        $back = route('admin.bimbel.show',$bimbel->id);
+
+        $bimbels = Bimbel::all();
+
+        $users = User::all();
+
+        $subCategories = sub_categories::all();
+
+        return view('admin.class-bimbel.edit', compact('bimbel','bimbels','users','subCategories','back', 'classBimbel'));
     }
 
     /**

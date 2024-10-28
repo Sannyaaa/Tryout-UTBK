@@ -18,13 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="{{ route('admin.tryout.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
+                            <a href="{{ route('admin.bimbel.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Bimbel</a>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Detail Tryout</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Detail Bimbel</span>
                             </div>
                         </li>
                         </ol>
@@ -35,25 +35,25 @@
 
 
             <div class="">
-                <main class="rounded-lg bg-white shadow mx-auto px-4 py-10">
+                <main class="rounded-lg bg-white shadow mx-auto px-4 py-8">
                     <div class="grid lg:grid-cols-2 gap-2">
                         <div class="w-full lg:w-2/3 px-4">
-                            <h2 class="text-sm text-gray-500 mb-4">Name Tryout <br><span class="text-lg font-bold text-gray-800">{{ $tryout->name }}</span></h2>
-                            <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-gray-800">{{ $tryout->description }}</span></p>
+                            <h2 class="text-sm text-gray-500 mb-4">Name Bimbel <br><span class="text-lg font-bold text-gray-800">{{ $bimbel->name }}</span></h2>
+                            <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-gray-800">{{ $bimbel->description }}</span></p>
                         </div>
                         <div class="w-full lg:w-1/3 px-4">
                             <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
-                                @if ( $tryout->is_free == 'free' )
+                                @if ( $bimbel->is_free == 'free' )
                                     <span class="text-lg font-bold text-gray-800 mb-4">Gratis</span>
                                 @else
                                     <span class="text-lg font-bold text-gray-800 mb-4">Berbayar</span>
                                 @endif
                             </h3>
-                            <h3 class="text-sm text-gray-500  mb-4">Biasa / Serentak <br>
-                                @if ( $tryout->is_together == 'together' )
+                            <h3 class="text-sm text-gray-500 ">Biasa / Serentak <br>
+                                @if ( $bimbel->is_together == 'together' )
                                     <span class="text-lg font-bold text-gray-800 mb-4">Serentak</span><br>
-                                    <span class="text-lg font-bold text-gray-800">Start Date = {{ $tryout->start_date }}</span><br>
-                                    <span class="text-lg font-bold text-gray-800">End Date = {{ $tryout->end_date }}</span><br>
+                                    <span class="text-lg font-bold text-gray-800">Start Date = {{ $bimbel->start_date }}</span><br>
+                                    <span class="text-lg font-bold text-gray-800">End Date = {{ $bimbel->end_date }}</span><br>
                                 @else
                                     <span class="text-lg font-bold text-gray-800 mb-4">Biasa</span>
                                 @endif
@@ -67,10 +67,10 @@
         
             <div class="items-center justify-between block my-6 sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
                 <h3 class="text-2xl text-gray-800 font-bold">
-                    Daftar Pertanyaan {{ $tryout->name }}
+                    Daftar Class {{ $bimbel->name }}
                 </h3>
-                <a href="{{ route('admin.tryout.question.create', $tryout->id) }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                    Add new Question
+                <a href="{{ route('admin.bimbel.class.create', $bimbel->id) }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
+                    Add new Class
                 </a>
             </div>
 
@@ -94,16 +94,16 @@
                                             No
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Tryout
+                                            Bimbel
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Sub categories
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Question
+                                            Mentor
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Corect answer
+                                            Tanggal
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Actions
@@ -111,20 +111,20 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">    
-                                    @foreach ($question as $i => $questions)
+                                    @foreach ($classes as $i => $class)
                                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                             <td class="p-4 text-base font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{$i + 1}}</td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->tryout->name}}</td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->sub_categories->name}}</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->question}}</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->corect_answer}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$class->name}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$class->sub_categories->name}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$class->user->name}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$class->date}}</td>
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                                     <div class="flex justify-start gap-1">
-                                                        <a href="{{ route('admin.tryout.question.edit', [$tryout->id, $questions->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                        <a href="{{ route('admin.bimbel.class.edit', [$bimbel->id, $class->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                                                             Update
                                                         </a>
-                                                        <form action="{{ route('admin.tryout.question.destroy', [$tryout->id, $questions->id]) }}" method="POST">
+                                                        <form action="{{ route('admin.class-bimbel.destroy', $class->id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
@@ -164,10 +164,10 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    var table = $('#tryoutTable').DataTable({
+    var table = $('#bimbelTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.tryout.index') }}",
+        ajax: "{{ route('admin.bimbel.index') }}",
         columns: [
             {
                 data: 'checkbox',
@@ -212,22 +212,22 @@ $(document).ready(function() {
 
     // Handle "select all" checkbox
     $('#checkbox-all').on('click', function() {
-        $('.tryout-checkbox').prop('checked', this.checked);
+        $('.bimbel-checkbox').prop('checked', this.checked);
         updateBulkDeleteButton();
     });
 
     // Handle individual checkbox changes
-    $('#tryoutTable').on('change', '.tryout-checkbox', function() {
+    $('#bimbelTable').on('change', '.bimbel-checkbox', function() {
         updateBulkDeleteButton();
         
         // Update "select all" checkbox
-        var allChecked = $('.tryout-checkbox:checked').length === $('.tryout-checkbox').length;
+        var allChecked = $('.bimbel-checkbox:checked').length === $('.bimbel-checkbox').length;
         $('#checkbox-all').prop('checked', allChecked);
     });
 
     // Update bulk delete button visibility
     function updateBulkDeleteButton() {
-        var checkedCount = $('.tryout-checkbox:checked').length;
+        var checkedCount = $('.bimbel-checkbox:checked').length;
         if (checkedCount > 0) {
             $('#bulkDeleteBtn').show();
         } else {
@@ -239,12 +239,12 @@ $(document).ready(function() {
     $('#bulkDeleteBtn').on('click', function() {
         if (confirm('Are you sure you want to delete selected items?')) {
             var selectedIds = [];
-            $('.tryout-checkbox:checked').each(function() {
+            $('.bimbel-checkbox:checked').each(function() {
                 selectedIds.push($(this).val());
             });
 
             $.ajax({
-                url: "{{ route('admin.tryout.bulkDelete') }}",
+                url: "{{ route('admin.bimbel.bulkDelete') }}",
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -277,12 +277,12 @@ $(document).ready(function() {
     
 <script type="text/javascript">
         $(document).ready(function () {
-            var table = $('#tryoutTable').DataTable({
+            var table = $('#bimbelTable').DataTable({
                 processing: true,
                 serverSide: true,
                 order: [[5,'desc']],
                 ordering: true,
-                ajax: "{{ route('admin.tryout.index') }}",
+                ajax: "{{ route('admin.bimbel.index') }}",
                 columns: [
                     {data: 'image', name: 'image', orderable: false, searchable: false},
                     {data: 'name', name: 'name'},
