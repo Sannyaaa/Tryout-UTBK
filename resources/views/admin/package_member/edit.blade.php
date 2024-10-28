@@ -65,7 +65,7 @@
 
                 <div>
                     <x-input-label for="name" :value="__('Name Package Member')" />
-                    <x-text-input type="text" :value="$package_member->name ?? old('name')" name="name" id="name" placeholder="Masukan name" required=""/>
+                    <x-text-input type="text" :value="$package_member->name ?? old('name')" name="name" id="name" placeholder="Masukan name"/>
                     <x-input-error :messages="$errors->get('price')" class="mt-2" />
                 </div>
                 
@@ -75,7 +75,7 @@
 
                 <div>
                     <x-input-label for="image" :value="__('Image')" />
-                    <x-file-input type="file" name="image" id="image" placeholder="Masukan Image package_member" required=""/>
+                    <x-file-input type="file" name="image" id="image" placeholder="Masukan Image package_member"/>
                     <x-input-error :messages="$errors->get('image')" class="mt-2" />
                 </div>
 
@@ -119,14 +119,30 @@
 
                 <div>
                     <x-input-label for="price" :value="__('Price')" />
-                    <x-text-input type="number" :value="$package_member->price ?? old('price')" name="price" id="price" placeholder="Masukan price" required=""/>
+                    <x-text-input type="number" :value="$package_member->price ?? old('price')" name="price" id="price" placeholder="Masukan price"/>
                     <x-input-error :messages="$errors->get('price')" class="mt-2" />
                 </div>
 
-                <div class="grid lg:grid-cols-2 gap-3">
+                <div class="space-y-4">
+                    <!-- Input Radio untuk memilih antara Tryout dan Bimbel -->
                     <div>
+                        <x-input-label :value="__('Pilih Jenis')" />
+                        <div class="flex items-center">
+                            <label class="mr-4">
+                                <input type="radio" name="type" value="tryout" class="mr-2" id="tryoutRadio" {{ $package_member->tryout_id ? 'checked' : '' }}>
+                                Tryout
+                            </label>
+                            <label>
+                                <input type="radio" name="type" value="bimbel" class="mr-2" id="bimbelRadio" {{ $package_member->bimbel_id ? 'checked' : '' }}>
+                                Bimbel
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown untuk Tryout -->
+                    <div id="tryoutContainer" style="{{ $package_member->tryout_id ? '' : 'display: none;' }}">
                         <x-input-label for="tryout_id" :value="__('Tryout')" />
-                        <x-select-input id="tryout_id" name="tryout_id" >
+                        <x-select-input id="tryout_id" name="tryout_id">
                             <option selected="" disabled>Select Tryout</option>
                             @foreach ($tryout as $tryouts)
                                 <option value="{{ $tryouts->id }}" {{ $package_member->tryout_id == $tryouts->id ? 'selected' : '' }}>{{ $tryouts->name }}</option>
@@ -134,9 +150,11 @@
                         </x-select-input>
                         <x-input-error :messages="$errors->get('tryout_id')" class="mt-2" />
                     </div>
-                    <div>
+
+                    <!-- Dropdown untuk Bimbel -->
+                    <div id="bimbelContainer" style="{{ $package_member->bimbel_id ? '' : 'display: none;' }}">
                         <x-input-label for="bimbel_id" :value="__('Bimbel')" />
-                        <x-select-input id="bimbel_id" name="bimbel_id" >
+                        <x-select-input id="bimbel_id" name="bimbel_id">
                             <option selected="" disabled>Select Bimbel</option>
                             @foreach ($bimbel as $bimbels)
                                 <option value="{{ $bimbels->id }}" {{ $package_member->bimbel_id == $bimbels->id ? 'selected' : '' }}>{{ $bimbels->name }}</option>
@@ -208,5 +226,31 @@
             });
         });
         </script>
+        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tryoutRadio = document.getElementById('tryoutRadio');
+        const bimbelRadio = document.getElementById('bimbelRadio');
+        const tryoutContainer = document.getElementById('tryoutContainer');
+        const bimbelContainer = document.getElementById('bimbelContainer');
+
+        // Fungsi untuk memperbarui tampilan dropdown berdasarkan pilihan
+        function updateVisibility() {
+            if (tryoutRadio.checked) {
+                tryoutContainer.style.display = 'block';
+                bimbelContainer.style.display = 'none';
+            } else if (bimbelRadio.checked) {
+                tryoutContainer.style.display = 'none';
+                bimbelContainer.style.display = 'block';
+            }
+        }
+
+        // Event listener untuk radio buttons
+        tryoutRadio.addEventListener('change', updateVisibility);
+        bimbelRadio.addEventListener('change', updateVisibility);
+
+        // Inisialisasi tampilan
+        updateVisibility();
+    });
+</script>
 @endpush
 
