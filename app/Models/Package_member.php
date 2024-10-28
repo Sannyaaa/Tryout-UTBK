@@ -13,7 +13,7 @@ class Package_member extends Model
     }
 
     public function tryout(){
-        return $this->belongsTo(tryout::class);
+        return $this->belongsTo(Tryout::class);
     }
 
     public function bimbel(){

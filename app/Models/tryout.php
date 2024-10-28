@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class tryout extends Model
+class Tryout extends Model
 {
     protected $fillable = ['name', 'description', 'start_date', 'end_date', 'is_free', 'is_together'];
 
@@ -13,6 +13,6 @@ class tryout extends Model
     }
 
     public function package_member(){
-        return $this->hasMany(package_member::class);
+        return $this->hasMany(Package_member::class);
     }
 }
