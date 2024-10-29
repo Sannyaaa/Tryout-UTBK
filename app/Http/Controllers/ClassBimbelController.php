@@ -25,6 +25,17 @@ class ClassBimbelController extends Controller
             if ($request->ajax()) {
                 $query = ClassBimbel::with(['bimbel','user','sub_categories'])->orderBy('created_at', 'desc');
                 
+                // Check if a sub_category filter is applied
+                // if ($request->has('sub_category') && $request->sub_category != '') {
+                //     $query->whereHas('sub_categories', function($q) use ($request) {
+                //         $q->where('name', $request->sub_category);
+                //     });
+                // }
+
+                if ($request->sub_categories) {
+                    $query->where('sub_categories_id', $request->sub_categories);
+                }
+
                 return DataTables::of($query)
                     ->addIndexColumn()
                     ->addColumn('checkbox', function($class) {
@@ -67,7 +78,9 @@ class ClassBimbelController extends Controller
                     ->make(true);
             }
 
-            return view('admin.class-bimbel.index');
+            //
+            $subCategories = sub_categories::all(); //
+            return view('admin.class-bimbel.index', compact('subCategories'));
         } catch (\Exception $e) {
             Log::error('Error in index method: ' . $e->getMessage());
             Log::error('Stack trace: ' . $e->getTraceAsString());
