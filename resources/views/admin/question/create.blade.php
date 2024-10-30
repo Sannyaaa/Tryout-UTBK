@@ -91,7 +91,7 @@
                     
                     <div>
                         <x-input-label for="image" :value="__('Image')" />
-                        <x-file-input type="file" name="image" id="image" placeholder="Masukan Image Question" required=""/>
+                        <x-file-input type="file" name="image" id="image" placeholder="Masukan Image Question"/>
                         <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
 
