@@ -25,6 +25,15 @@ class TryoutController extends Controller
             if ($request->ajax()) {
                 $query = tryout::orderBy('created_at', 'desc');
                 
+               // Check if a filter is applied
+                if ($request->has('is_free') && $request->is_free != '') {
+                    $query->where('is_free', $request->is_free);
+                }
+
+                if ($request->has('is_together') && $request->is_together != '') {
+                    $query->where('is_together', $request->is_together);
+                }
+
                 return DataTables::of($query)
                     ->addIndexColumn()
                     ->addColumn('checkbox', function($tryout) {
@@ -67,7 +76,8 @@ class TryoutController extends Controller
                     ->make(true);
             }
 
-            return view('admin.tryout.index');
+            $tryout = tryout::all(); //
+            return view('admin.tryout.index', compact('tryout'));
         } catch (\Exception $e) {
             Log::error('Error in index method: ' . $e->getMessage());
             Log::error('Stack trace: ' . $e->getTraceAsString());

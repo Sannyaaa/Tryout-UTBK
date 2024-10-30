@@ -51,7 +51,7 @@
                                 <span class="text-lg font-bold text-gray-800">{{ date('j F Y', strtotime($classBimbel->date)) .' '. date('h:i A', strtotime($classBimbel->start_time)) }}</span>
                             </h3>
                         </div>
-                        <div class="w-full lg:w-1/3 px-4">
+                        <div class="w-full lg:w-1/2 px-4">
                             <h3 class="text-sm text-gray-500 mb-4">Pemateri <br>
                                 <span class="text-lg font-bold text-gray-800 mb-4">{{ $classBimbel->user->name ?? 'Belum di tambahkan' }}</span>
                             </h3>

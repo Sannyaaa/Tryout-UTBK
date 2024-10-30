@@ -69,7 +69,7 @@
                         <x-text-input type="hidden" value="{{ $back ?? '' }}" name="back" id="back" />
                         <div>
                             <x-input-label for="name" :value="__('Nama')" />
-                            <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Tryout" required />
+                            <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Klass" required />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
                         <div>

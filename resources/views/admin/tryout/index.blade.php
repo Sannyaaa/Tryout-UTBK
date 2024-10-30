@@ -43,9 +43,25 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('admin.tryout.create') }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                    Add Tryout
-                </a>
+                <div class="flex justify-center items-center gap-2">
+                    <div class="">
+                        <select id="tryout_is_free_filter" class="p-2 border rounded">
+                            <option value="">All Gratis & Berbayar</option>
+                            <option value="free">Gratis</option>
+                            <option value="paid">Berbayar</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <select id="tryout_is_together_filter" class="p-2 border rounded">
+                            <option value="">All Serentak & Biasa</option>
+                            <option value="together">Serentak</option>
+                            <option value="basic">Biasa</option>
+                        </select>
+                    </div>
+                    <a href="{{ route('admin.tryout.create') }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
+                        Add Tryout
+                    </a>
+                </div>
                 
 
                 <!-- Modal toggle -->
@@ -165,7 +181,14 @@ $(document).ready(function() {
     var table = $('#tryoutTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.tryout.index') }}",
+        // ajax: "{{ route('admin.tryout.index') }}",
+        ajax: {
+                url: "{{ route('admin.tryout.index') }}",
+                data: function (d) {
+                    d.is_free = $('#tryout_is_free_filter').val();
+                    d.is_together = $('#tryout_is_together_filter').val();
+                }
+            },
         columns: [
             {
                 data: 'checkbox',
@@ -206,6 +229,14 @@ $(document).ready(function() {
                 searchable: false
             }
         ]
+    });
+
+    $('#tryout_is_free_filter').change(function(){
+        table.draw();
+    });
+
+    $('#tryout_is_together_filter').change(function(){
+        table.draw();
     });
 
     // Handle "select all" checkbox

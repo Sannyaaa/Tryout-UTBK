@@ -188,13 +188,13 @@ class PackageMemberController extends Controller
         
         // Validate data
         $data = $request->validate([
-            'tryout_id' => 'required|exists:tryouts,id',
-            'bimbel_id' => 'required|exists:bimbels,id',
+            'tryout_id' => 'nullable|exists:tryouts,id',
+            'bimbel_id' => 'nullable|exists:bimbels,id',
             'name' => 'nullable|string',
-            'description' => 'required|string',
-            'price' => 'required|string',
-            'benefits' => 'required|array|min:1',
-            'benefits.*' => 'required|string',
+            'description' => 'nullable|string',
+            'price' => 'nullable|string',
+            'benefits' => 'nullable|array|min:1',
+            'benefits.*' => 'nullable|string',
         ]);
 
         // Handle image upload if there's a new image
