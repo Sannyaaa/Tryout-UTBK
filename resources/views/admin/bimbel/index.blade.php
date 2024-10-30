@@ -75,13 +75,13 @@
                                 @csrf
                                 @method('POST')
                                 <div class="py-2 space-y-1">
-                                    <div>
+                                    <div class="mb-4">
                                         <x-input-label for="name" :value="__('Nama')" />
                                         <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama bimbel" required=""/>
                                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
                                     
-                                    <div>
+                                    <div class="mb-4">
                                         <x-input-label for="description" :value="__('Description')" />
                                         <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
                                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
