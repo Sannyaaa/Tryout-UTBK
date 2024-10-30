@@ -69,13 +69,13 @@
                         <x-text-input type="hidden" value="{{ $back ?? '' }}" name="back" id="back" />
                         <div>
                             <x-input-label for="name" :value="__('Nama')" />
-                            <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Klass" required />
+                            <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Kelas" required />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
                         <div>
                             <x-input-label for="sub_categories_id" :value="__('Mapel')" />
                             <x-select-input id="sub_categories_id" name="sub_categories_id">
-                                <option selected disabled>Select Mapel</option>
+                                <option selected disabled>Pilih Mapel</option>
                                 @foreach ($subCategories as $sub_categories_id)
                                     <option value="{{ $sub_categories_id->id }}" {{ old('sub_categories_id') == $sub_categories_id->id ? 'selected' : '' }}>
                                         {{ $sub_categories_id->name }}
@@ -90,7 +90,7 @@
                         <div>
                             <x-input-label for="bimbel_id" :value="__('Bimbel')" />
                             <x-select-input id="bimbel_id" name="bimbel_id">
-                                <option selected disabled>Select Bimbel</option>
+                                <option selected disabled>Pilih Bimbel</option>
                                 @foreach ($bimbels as $bimbelSelect)
                                     <option value="{{ $bimbelSelect->id }}" {{ old('bimbel_id', $bimbel->id ?? '') == $bimbelSelect->id ? 'selected' : '' }}>
                                         {{ $bimbelSelect->name }}
@@ -102,7 +102,7 @@
                         <div>
                             <x-input-label for="user_id" :value="__('Pengajar')" />
                             <x-select-input id="user_id" name="user_id">
-                                <option selected disabled>Select Pengajar</option>
+                                <option selected disabled>Pilih Pengajar</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
                                         {{ $user->name }}

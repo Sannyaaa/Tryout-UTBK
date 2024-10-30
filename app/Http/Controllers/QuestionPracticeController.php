@@ -43,8 +43,6 @@ class QuestionPracticeController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image')->store('assets', 'public');
             $data['image'] = $image;
-        } else {
-            return redirect()->back()->with('error', 'File gambar tidak ditemukan');
         }
 
         try{
