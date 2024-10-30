@@ -21,6 +21,10 @@ class UserController extends Controller
             if ($request->ajax()) {
                 $query = User::orderBy('created_at', 'desc');
                 
+                if ($request->has('role') && $request->role != '') {
+                    $query->where('role', $request->role);
+                }
+
                 return DataTables::of($query)
                     ->addIndexColumn()
                     ->addColumn('checkbox', function($user) {

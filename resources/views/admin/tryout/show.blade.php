@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="p-4 mt-12">
     <div class="p-6 bg-white block rounded-lg shadow sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
         <div class="w-full mb-1">
@@ -42,23 +41,26 @@
                             <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-gray-800">{{ $tryout->description }}</span></p>
                         </div>
                         <div class="w-full px-4">
-                            <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
-                                @if ( $tryout->is_free == 'free' )
-                                    <span class="text-lg font-bold text-gray-800 mb-4">Gratis</span>
-                                @else
-                                    <span class="text-lg font-bold text-gray-800 mb-4">Berbayar</span>
-                                @endif
-                            </h3>
-                            <h3 class="text-sm text-gray-500  mb-4">Biasa / Serentak <br>
-                                @if ( $tryout->is_together == 'together' )
-                                    <span class="text-lg font-bold text-gray-800 mb-4">Serentak</span><br>
-                                    <span class="text-lg font-bold text-gray-800">Start Date = {{ $tryout->start_date }}</span><br>
-                                    <span class="text-lg font-bold text-gray-800">End Date = {{ $tryout->end_date }}</span><br>
-                                @else
-                                    <span class="text-lg font-bold text-gray-800 mb-4">Biasa</span>
-                                @endif
-                            </h3>
-                        </div>
+                        <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
+                            @if ( $tryout->is_free == 'free' )
+                                <span class="text-lg font-bold text-black mb-4">Gratis</span>
+                            @else
+                                <span class="text-lg font-bold text-black mb-4">Berbayar</span>
+                            @endif
+                        </h3>
+                        @php
+                            use Carbon\Carbon;
+                        @endphp
+                        <h3 class="text-sm text-gray-500  mb-4">Biasa / Serentak <br>
+                            @if ( $tryout->is_together == 'together' )
+                                <p class="text-lg font-bold text-black mb-4">Serentak</p>
+                                <span class="text-sm text-gray-500">Tanggal</span>
+                                <p class="text-lg font-bold text-black mb-4">{{ Carbon::parse($tryout->start_date)->format('d F Y') }} - {{ Carbon::parse($tryout->end_date)->format('d F Y') }} </p>
+                            @else
+                                <span class="text-lg font-bold text-black mb-4">Biasa</span>
+                            @endif
+                        </h3>
+                    </div>
                     </div>
                 </main>
             </div>

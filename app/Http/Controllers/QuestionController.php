@@ -21,6 +21,14 @@ class QuestionController extends Controller
             if ($request->ajax()) {
                 $query = Question::with('tryout','sub_categories')->orderBy('created_at', 'desc');
                 
+                if ($request->tryout) {
+                    $query->where('tryout_id', $request->tryout);
+                }
+
+                if ($request->sub_categories) {
+                    $query->where('sub_categories_id', $request->sub_categories);
+                }
+
                 return DataTables::of($query)
                     ->addIndexColumn()
                     ->addColumn('checkbox', function($question) {
@@ -50,7 +58,9 @@ class QuestionController extends Controller
                     ->make(true);
             }
 
-            return view('admin.question.index');
+             $subCategories = sub_categories::all();
+             $tryout = tryout::all();
+            return view('admin.question.index', compact('subCategories', 'tryout'));
         } catch (\Exception $e) {
             Log::error('Error in index method: ' . $e->getMessage());
             Log::error('Stack trace: ' . $e->getTraceAsString());
