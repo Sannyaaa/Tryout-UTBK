@@ -12,7 +12,7 @@
                 </p>
             </div>
             <hr class="border h-100">
-            <div class="w-4/6">
+            <div class="w-4/6"> 
                 @foreach($categories as $item)
                     <div class="mb-5 border shadow rounded-lg overflow-hidden">
                         <h1 class="p-5 text-2xl font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 text-white">{{$item->name}}</h1>

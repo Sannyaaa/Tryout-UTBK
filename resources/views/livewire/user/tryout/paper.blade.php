@@ -5,7 +5,7 @@
             <div class="w-1/3">
                 <div class="">
                     <div class="bg-white border rounded-lg shadow p-8 mb-4">
-                        <h1 class="text-3xl font-bold">Paper 01</h1>
+                        <h1 class="text-3xl font-bold">{{$paper->name}}</h1>
                     </div>
                     {{-- <hr class="border border-gray-300 my-5">  --}}
                     <div class="bg-white border rounded-lg shadow p-8 mb-4 text-lg text-sky-500 flex items-center">
@@ -14,70 +14,36 @@
                         <span class="my-auto">20:15</span>
                     </div>
                     <div class="bg-white border rounded-lg shadow p-8 mb-4 grid grid-cols-5">
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border rounded-lg bg-sky-400 text-white">1</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">2</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">3</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">4</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">5</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">6</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">7</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">8</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">9</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">10</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">11</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">12</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">13</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">14</button>
-                        </div>
-                        <div class="px-2 py-4">
-                            <button class="w-5/6 py-4 border border-gray-400 rounded-lg">15</button>
-                        </div>
+                        {{-- <input type="number" name="" wire:model.live="q" id=""> --}}
+                        @foreach ($questions as $item)
+                            <div class="px-2 py-4">
+                                <input type="radio" name="question" wire:model.live="q" id="question{{$item->id}}" value="{{$item->id}}" class="hidden">
+                                <label for="question{{$item->id}}" class="px-3 py-4 border rounded-lg bg-sky-400 text-white cursor-pointer">
+                                    {{$item->count}}
+                                </label>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
             <div class="w-2/3 ps-4">
                 <div class="h-full bg-white border rounded-lg shadow">
                     <div class="p-8 flex justify-between items-center">
-                        <button class="px-3 py-1 bg-sky-500 rounded text-white text-2xl">&laquo;</button>
+                        {{-- <input type="radio" name="question" id="previous" wire:model.live="q" value="{{$question->id - 1}}" class="hidden"> --}}
+                        {{-- <label for="previous" class="px-3 py-1 bg-sky-500 rounded text-white text-2xl">&laquo;</label> --}}
                         <span class="my-auto">
-                            <h5 class="text-xl font-semibold text-sky-500">Pertanyaan 1</h5>
+                            <h5 class="text-xl font-semibold text-sky-500 text-center">Pertanyaan {{$question->count}}</h5>
                         </span>
-                        <button class="px-3 py-1 bg-sky-500 rounded text-white text-2xl">&raquo;</button>
+                        {{-- <input type="radio" name="question" id="next" wire:model.live="q" value="{{$question->id + 1}}" class="hidden"> --}}
+                        {{-- <label for="next" class="px-3 py-1 bg-sky-500 rounded text-white text-2xl">&raquo;</label> --}}
                         {{-- <a href="">&laquo; Sebelumnya</a> --}}
                     </div>
                     <hr>
                     <div class="p-8">
                         <button>
-                            <img data-modal-target="image-modal" data-modal-toggle="image-modal" src="https://images.unsplash.com/photo-1705488420842-efc45a507d72?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="mb-2" style="max-height: 36rem;">
+                            <img data-modal-target="image-modal" data-modal-toggle="image-modal" src="{{Storage::url($question->image)}}" class="mb-2" style="max-height: 36rem;">
                         </button>
-                        <h3 class="text-2xl">Apakah anda tahu apa yang saya maksud?</h3>
+                        <h3 class="text-2xl">{{ $question->question }}</h3>
                     </div>
                     <div class="p-8">
                         <div class="flex gap-2 items-center mb-2">

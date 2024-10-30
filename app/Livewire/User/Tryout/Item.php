@@ -19,6 +19,6 @@ class Item extends Component
         // }
         // die();
 
-        return view('livewire.user.tryout.item', compact('categories'));
+        return view('livewire.user.tryout.item', compact('categories')); 
     }
 }
