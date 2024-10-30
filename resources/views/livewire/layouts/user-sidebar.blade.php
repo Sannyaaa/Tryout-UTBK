@@ -1,7 +1,7 @@
 {{-- {{- $url := split .Permalink "/" -}} --}}
 {{-- {{- $page_slug := index $url (sub (len $url) 2) -}} --}}
 
-<aside id="sidebar" class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-64 h-full pt-4 font-normal duration-75 lg:flex transition-width rounded-lg overflow-hidden" aria-label="Sidebar">
+<aside id="sidebar" class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-72 h-full pt-4 font-normal duration-75 lg:flex transition-width rounded-lg overflow-hidden" aria-label="Sidebar">
   <div class="relative flex flex-col flex-1 min-h-0 py-0 mt-20 lg:mt-0 rounded-lg overflow-hidden 
     bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 shadow
     ms-4 mb-4
@@ -25,16 +25,16 @@
                 <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
                 <span class="ml-3" sidebar-toggle-item>Dashboard</span>
             </a> --}}
-            <x-sidebar-link link="/" name="Dashboard">
+            <x-sidebar-link link="/" token="dashboard" name="Dashboard">
               {{-- <i class="fa-solid fa-tv"></i> --}}
             </x-sidebar-link>
           </li>
           <li>
-            <x-sidebar-link link="{{route('user.tryouts')}}" name="Tryout">
+            <x-sidebar-link link="{{route('user.tryouts')}}" token="tryout" name="Tryout">
             </x-sidebar-link>
           </li>
           <li>
-            <x-sidebar-link link="{{route('user.tryouts.event')}}" name="Event Tryout">
+            <x-sidebar-link link="{{route('user.tryouts.event')}}" token="event" name="Event Tryout">
             </x-sidebar-link>
           </li>
           {{-- <li>
@@ -42,7 +42,7 @@
             </x-sidebar-link>
           </li> --}}
           <li>
-            <x-sidebar-link link="{{route('user.bimbels')}}" name="Paket Bimbel">
+            <x-sidebar-link link="{{route('user.bimbels')}}" token="bimbel" name="Paket Pembelian">
             </x-sidebar-link>
           </li>
           {{-- <li>

@@ -112,21 +112,23 @@ class PackageMemberController extends Controller
     {
         // Validate package member data
         $data = $request->validate([
-            'tryout_id' => 'required|exists:tryouts,id',
-            'bimbel_id' => 'required|exists:bimbels,id',
-            'name' => 'nullable|string',
-            'description' => 'required|string',
+            'tryout_id' => 'required_without:bimbel_id|exists:tryouts,id',
+            'bimbel_id' => 'required_without:tryout_id|exists:bimbels,id',
+            'name' => 'required|string',
+            'description' => 'nullable|string',
             'price' => 'required|string',
             'benefits' => 'required|array|min:1',
             'benefits.*' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ],[
+            'bimbel_id.required_without' => 'Bimbel atau Tryout harus diisi.',
+            'tryout_id.required_without' => 'Tryout atau Bimbel harus diisi.',
         ]);
 
         // Handle image upload
         if ($request->hasFile('image')) {
             $image = $request->file('image')->store('assets', 'public');
             $data['image'] = $image;
-        } else {
-            return redirect()->back()->with('error', 'File gambar tidak ditemukan');
         }
 
         try {
@@ -134,7 +136,7 @@ class PackageMemberController extends Controller
 
             // Create package member
             $package_member = Package_member::create($data);
-
+            
             // Create benefits
             foreach ($request->benefits as $benefitText) {
                 Benefit::create([

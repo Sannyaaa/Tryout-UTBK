@@ -24,7 +24,7 @@
         {{ request()->segment(2) == $id
             ? 'bg-gradient-to-tr from-sky-400 to-sky-500 text-white' 
             : 'text-gray-700 hover:bg-gradient-to-tr hover:from-sky-400 hover:to-sky-500 hover:text-white hover:bg-opacity-20' 
-        }}
+        }}"
         aria-controls="dropdown-{{ $id }}"
         data-collapse-toggle="dropdown-{{ $id }}">
         {{ $slot }}

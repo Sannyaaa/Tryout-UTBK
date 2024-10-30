@@ -2,12 +2,15 @@
 
 namespace App\Livewire\User\Bimbel;
 
+use App\Models\Package_member;
 use Livewire\Component;
 
 class All extends Component
 {
     public function render()
     {
-        return view('livewire.user.bimbel.all');
+        $packages = Package_member::with('benefits')->get();
+
+        return view('livewire.user.bimbel.all', compact( 'packages'));
     }
 }
