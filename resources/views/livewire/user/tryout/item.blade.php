@@ -13,100 +13,30 @@
             </div>
             <hr class="border h-100">
             <div class="w-4/6">
-                <div class="mb-5 border shadow rounded-lg overflow-hidden">
-                    <h1 class="p-5 text-2xl font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 text-white">Bagian satu</h1>
-                    <div class="py-2 border-y px-5 flex" style="width: 100%;">
-                        <div class="w-3/6">
-                            <h3 class="font-medium text-lg">Form satu</h1>
-                            <span class="text-sky-500">
-                                <i class="fa-regular fa-clock"></i>
-                                <span class="me-2">Sekitar 15 menit</span>
-                                <i class="fa-regular fa-file"></i>
-                                <span>20 Soal</span>
-                            </span>
+                @foreach($categories as $item)
+                    <div class="mb-5 border shadow rounded-lg overflow-hidden">
+                        <h1 class="p-5 text-2xl font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 text-white">{{$item->name}}</h1>
+                        @foreach($item->sub_categories as $sub_item)
+                        <div class="py-2 border-y px-5 flex" style="width: 100%;">
+                            <div class="w-3/6">
+                                <h3 class="font-medium text-lg">{{$sub_item->name}}</h1>
+                                <span class="text-sky-500">
+                                    <i class="fa-regular fa-clock"></i>
+                                    <span class="me-2">{{$sub_item->duration}}</span>
+                                    {{-- <i class="fa-regular fa-file"></i> --}}
+                                    {{-- <span></span> --}}
+                                </span>
+                            </div>
+                            <div class="w-3/6 px-5 flex align-middle justify-end text-sky-500">
+                                <a href="{{route('user.tryouts.paper', [1, $sub_item->id])}}" class="flex items-center">
+                                    <button class="p-3 px-4 flex items-center text-white bg-sky-500 rounded-lg font-semibold"><i class="fa-solid fa-arrow-right-long"></i>&nbsp; Kerjakan</button>
+                                </a>
+                                {{-- <i class="my-auto me-2 fa-solid fa-circle-check"></i> <span class="my-auto">Selesai</span> --}}
+                            </div>
                         </div>
-                        <div class="w-3/6 px-5 flex align-middle justify-end text-sky-500">
-                            <i class="my-auto me-2 fa-solid fa-circle-check"></i> <span class="my-auto">Selesai</span>
-                        </div>
+                        @endforeach
                     </div>
-                    <div class="py-2 border-y px-5 flex" style="width: 100%;">
-                        <div class="w-3/6">
-                            <h3 class="font-medium text-lg">Form dua</h1>
-                            <span class="text-sky-500">
-                                <i class="fa-regular fa-clock"></i>
-                                <span class="me-2">Sekitar 30 menit</span>
-                                <i class="fa-regular fa-file"></i>
-                                <span>40 Soal</span>
-                            </span>
-                        </div>
-                        <div class="w-3/6 px-5 flex align-middle justify-end text-sky-500">
-                            <i class="my-auto me-2 fa-solid fa-circle-check"></i> <span class="my-auto">Selesai</span>
-                        </div>
-                    </div>
-                    <div class="py-2 border-y px-5 flex" style="width: 100%;">
-                        <div class="w-3/6">
-                            <h3 class="font-medium text-lg">Form tiga</h1>
-                            <span class="text-sky-500">
-                                <i class="fa-regular fa-clock"></i>
-                                <span class="me-2">Sekitar 45 menit</span>
-                                <i class="fa-regular fa-file"></i>
-                                <span>60 Soal</span>
-                            </span>
-                        </div>
-                        <div class="w-3/6 flex align-middle justify-end text-sky-500">
-                            <a href="{{route('user.tryouts.paper', [1, 1])}}" class="my-auto">
-                                <button class="py-2 px-4 rounded-lg bg-sky-500 hover:bg-sky-700 text-white font-semibold">
-                                    <i class="m-auto me-2 fa-solid fa-arrow-right-long"></i> <span>Kerjakan</span>
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-5 border shadow rounded-lg overflow-hidden">
-                    <h1 class="p-5 text-2xl font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 text-white">Bagian dua</h1>
-                    <div class="py-2 border-y px-5 flex" style="width: 100%;">
-                        <div class="w-3/6">
-                            <h3 class="font-medium text-lg">Form satu</h1>
-                            <span class="text-sky-500">
-                                <i class="fa-regular fa-clock"></i>
-                                <span class="me-2">Sekitar 15 menit</span>
-                                <i class="fa-regular fa-file"></i>
-                                <span>20 Soal</span>
-                            </span>
-                        </div>
-                        <div class="w-3/6 px-5 flex align-middle justify-end text-red-600">
-                            <i class="my-auto me-2 fa-solid fa-circle-xmark"></i> <span class="my-auto">Terkunci</span>
-                        </div>
-                    </div>
-                    <div class="py-2 border-y px-5 flex" style="width: 100%;">
-                        <div class="w-3/6">
-                            <h3 class="font-medium text-lg">Form dua</h1>
-                            <span class="text-sky-500">
-                                <i class="fa-regular fa-clock"></i>
-                                <span class="me-2">Sekitar 30 menit</span>
-                                <i class="fa-regular fa-file"></i>
-                                <span>40 Soal</span>
-                            </span>
-                        </div>
-                        <div class="w-3/6 px-5 flex align-middle justify-end text-red-600">
-                            <i class="my-auto me-2 fa-solid fa-circle-xmark"></i> <span class="my-auto">Terkunci</span>
-                        </div>
-                    </div>
-                    <div class="py-2 border-y px-5 flex" style="width: 100%;">
-                        <div class="w-3/6">
-                            <h3 class="font-medium text-lg">Form tiga</h1>
-                            <span class="text-sky-500">
-                                <i class="fa-regular fa-clock"></i>
-                                <span class="me-2">Sekitar 45 menit</span>
-                                <i class="fa-regular fa-file"></i>
-                                <span>60 Soal</span>
-                            </span>
-                        </div>
-                        <div class="w-3/6 px-5 flex align-middle justify-end text-red-600">
-                            <i class="my-auto me-2 fa-solid fa-circle-xmark"></i> <span class="my-auto">Terkunci</span>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
         
