@@ -306,7 +306,7 @@
                             autocomplete="phone" />
                             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                         </div>
-                        {{-- <div class="col-span-6 sm:col-span-3">
+                        <div class="col-span-6 sm:col-span-3">
                             <x-input-label for="role" :value="__('Role')" />
                             <x-select-input id="role" name="role" >
                                 <option selected="" disabled>pilih role</option>
@@ -315,7 +315,7 @@
                                 <option value="user" {{ old('role', $user->role) == 'user' ? 'selected' : '' }}>User</option>
                             </x-select-input>
                             <x-input-error :messages="$errors->get('role')" class="mt-2" />
-                        </div> --}}
+                        </div>
                         {{-- <div class="col-span-6 sm:col-span-3">
                             <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
                             <input type="text" name="country" id="country" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="United States" required>

@@ -2,33 +2,36 @@
 
 @section('content')
 
-<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
-    <div class="w-full mb-1">
-        <div class="mb-4">
-            <nav class="flex mb-5" aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
-                  <li class="inline-flex items-center">
-                    <a href="#" class="inline-flex items-center text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-white">
-                      <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                      Home
-                    </a>
-                  </li>
-                  <li>
-                    <div class="flex items-center">
-                      <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="{{ route('admin.package_member.index') }}" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">package_member</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="flex items-center">
-                      <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Create</span>
-                    </div>
-                  </li>
-                </ol>
-            </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Edit package_member</h1>
-        </div>
+<div class="p-4 mt-12">
+    <div class="p-6 bg-white block rounded-lg shadow sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full mb-1">
+            <div class="mx-6 relative -mt-12 mb-6">
+                <div class="bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg shadow-lg py-4 px-3">
+                    <nav class="flex" aria-label="Breadcrumb">
+                        <ol class="inline-flex items-center space-x-1 text-sm font-semibold md:space-x-2">
+                        <li class="inline-flex items-center">
+                            <a href="#" class="inline-flex items-center text-gray-50 hover:text-sky-200 dark:text-gray-300 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Paket</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Edit Paket</span>
+                            </div>
+                        </li>
+                        </ol>
+                    </nav>
+                    {{-- <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Bimbels</h1> --}}
+                </div>
+            </div>
         {{-- <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <div class="flex items-center mb-4 sm:mb-0">
                 <form class="sm:pr-3" action="#" method="GET">
@@ -58,121 +61,122 @@
                 Add new product
             </button>
         </div> --}}
-        <form action="{{ route('admin.package_member.update', $package_member->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <div class="space-y-4">
-
-                <div>
-                    <x-input-label for="name" :value="__('Name Package Member')" />
-                    <x-text-input type="text" :value="$package_member->name ?? old('name')" name="name" id="name" placeholder="Masukan name"/>
-                    <x-input-error :messages="$errors->get('price')" class="mt-2" />
-                </div>
-                
-                <div>
-                    <img src="{{ Storage::url($package_member->image) }}" class="w-[300px]" alt="">
-                </div>
-
-                <div>
-                    <x-input-label for="image" :value="__('Image')" />
-                    <x-file-input type="file" name="image" id="image" placeholder="Masukan Image package_member"/>
-                    <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                </div>
-
-                <div>
-                    <x-input-label for="description" :value="__('description')" />
-                    <x-text-area id="description" name="description" rows="4" placeholder="Masukan description">{{$package_member->description}}</x-text-area>
-                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
-                </div>
-
-                <div>
-                    <x-input-label for="benefits" :value="__('Benefits Package Member')" />
-                    <div class="benefits-container space-y-3">
-                        @foreach($package_member->benefits as $benefit)
-                            <div class="benefit-input flex gap-2">
-                                <x-text-input type="text" name="benefits[]" value="{{ $benefit->benefit }}" placeholder="Enter benefit" required/>
-                                <button type="button" class="remove-benefit px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        @endforeach
-                        @if($package_member->benefits->isEmpty())
-                            <div class="benefit-input flex gap-2">
-                                <x-text-input type="text" name="benefits[]" placeholder="Enter benefit" required/>
-                                <button type="button" class="remove-benefit px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        @endif
-                    </div>
-                    <button type="button" class="add-benefit mt-2 px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">
-                        <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                        </svg>
-                        Add Benefit
-                    </button>
-                </div>
-
-                <div>
-                    <x-input-label for="price" :value="__('Price')" />
-                    <x-text-input type="number" :value="$package_member->price ?? old('price')" name="price" id="price" placeholder="Masukan price"/>
-                    <x-input-error :messages="$errors->get('price')" class="mt-2" />
-                </div>
-
+            <form action="{{ route('admin.package_member.update', $package_member->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
                 <div class="space-y-4">
-                    <!-- Input Radio untuk memilih antara Tryout dan Bimbel -->
+
                     <div>
-                        <x-input-label :value="__('Pilih Jenis')" />
-                        <div class="flex items-center">
-                            <label class="mr-4">
-                                <input type="radio" name="type" value="tryout" class="mr-2" id="tryoutRadio" {{ $package_member->tryout_id ? 'checked' : '' }}>
-                                Tryout
-                            </label>
-                            <label>
-                                <input type="radio" name="type" value="bimbel" class="mr-2" id="bimbelRadio" {{ $package_member->bimbel_id ? 'checked' : '' }}>
-                                Bimbel
-                            </label>
+                        <x-input-label for="name" :value="__('Name Package Member')" />
+                        <x-text-input type="text" :value="$package_member->name ?? old('name')" name="name" id="name" placeholder="Masukan name"/>
+                        <x-input-error :messages="$errors->get('price')" class="mt-2" />
+                    </div>
+                    
+                    <div>
+                        <img src="{{ Storage::url($package_member->image) }}" class="w-[300px]" alt="">
+                    </div>
+
+                    <div>
+                        <x-input-label for="image" :value="__('Image')" />
+                        <x-file-input type="file" name="image" id="image" placeholder="Masukan Image package_member"/>
+                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                    </div>
+
+                    <div>
+                        <x-input-label for="description" :value="__('description')" />
+                        <x-text-area id="description" name="description" rows="4" placeholder="Masukan description">{{$package_member->description}}</x-text-area>
+                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                    </div>
+
+                    <div>
+                        <x-input-label for="benefits" :value="__('Benefits Package Member')" />
+                        <div class="benefits-container space-y-3">
+                            @foreach($package_member->benefits as $benefit)
+                                <div class="benefit-input flex gap-2">
+                                    <x-text-input type="text" name="benefits[]" value="{{ $benefit->benefit }}" placeholder="Enter benefit" required/>
+                                    <button type="button" class="remove-benefit px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            @endforeach
+                            @if($package_member->benefits->isEmpty())
+                                <div class="benefit-input flex gap-2">
+                                    <x-text-input type="text" name="benefits[]" placeholder="Enter benefit" required/>
+                                    <button type="button" class="remove-benefit px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            @endif
+                        </div>
+                        <button type="button" class="add-benefit mt-2 px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">
+                            <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            Add Benefit
+                        </button>
+                    </div>
+
+                    <div>
+                        <x-input-label for="price" :value="__('Price')" />
+                        <x-text-input type="number" :value="$package_member->price ?? old('price')" name="price" id="price" placeholder="Masukan price"/>
+                        <x-input-error :messages="$errors->get('price')" class="mt-2" />
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Input Radio untuk memilih antara Tryout dan Bimbel -->
+                        <div>
+                            <x-input-label :value="__('Pilih Jenis')" />
+                            <div class="flex items-center">
+                                <label class="mr-4">
+                                    <input type="radio" name="type" value="tryout" class="mr-2" id="tryoutRadio" {{ $package_member->tryout_id ? 'checked' : '' }}>
+                                    Tryout
+                                </label>
+                                <label>
+                                    <input type="radio" name="type" value="bimbel" class="mr-2" id="bimbelRadio" {{ $package_member->bimbel_id ? 'checked' : '' }}>
+                                    Bimbel
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Dropdown untuk Tryout -->
+                        <div id="tryoutContainer" style="{{ $package_member->tryout_id ? '' : 'display: none;' }}">
+                            <x-input-label for="tryout_id" :value="__('Tryout')" />
+                            <x-select-input id="tryout_id" name="tryout_id">
+                                <option selected="" disabled>Select Tryout</option>
+                                @foreach ($tryout as $tryouts)
+                                    <option value="{{ $tryouts->id }}" {{ $package_member->tryout_id == $tryouts->id ? 'selected' : '' }}>{{ $tryouts->name }}</option>
+                                @endforeach
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('tryout_id')" class="mt-2" />
+                        </div>
+
+                        <!-- Dropdown untuk Bimbel -->
+                        <div id="bimbelContainer" style="{{ $package_member->bimbel_id ? '' : 'display: none;' }}">
+                            <x-input-label for="bimbel_id" :value="__('Bimbel')" />
+                            <x-select-input id="bimbel_id" name="bimbel_id">
+                                <option selected="" disabled>Select Bimbel</option>
+                                @foreach ($bimbel as $bimbels)
+                                    <option value="{{ $bimbels->id }}" {{ $package_member->bimbel_id == $bimbels->id ? 'selected' : '' }}>{{ $bimbels->name }}</option>
+                                @endforeach
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('bimbel_id')" class="mt-2" />
                         </div>
                     </div>
-
-                    <!-- Dropdown untuk Tryout -->
-                    <div id="tryoutContainer" style="{{ $package_member->tryout_id ? '' : 'display: none;' }}">
-                        <x-input-label for="tryout_id" :value="__('Tryout')" />
-                        <x-select-input id="tryout_id" name="tryout_id">
-                            <option selected="" disabled>Select Tryout</option>
-                            @foreach ($tryout as $tryouts)
-                                <option value="{{ $tryouts->id }}" {{ $package_member->tryout_id == $tryouts->id ? 'selected' : '' }}>{{ $tryouts->name }}</option>
-                            @endforeach
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('tryout_id')" class="mt-2" />
+                    
+                    <div class="flex justify-between">
+                            <x-secondary-href href="{{ route('admin.package_member.index') }}">
+                                Back
+                            </x-secondary-href>
+                            <x-primary-button type="submit">
+                                Edit Package member
+                            </x-primary-button>
                     </div>
-
-                    <!-- Dropdown untuk Bimbel -->
-                    <div id="bimbelContainer" style="{{ $package_member->bimbel_id ? '' : 'display: none;' }}">
-                        <x-input-label for="bimbel_id" :value="__('Bimbel')" />
-                        <x-select-input id="bimbel_id" name="bimbel_id">
-                            <option selected="" disabled>Select Bimbel</option>
-                            @foreach ($bimbel as $bimbels)
-                                <option value="{{ $bimbels->id }}" {{ $package_member->bimbel_id == $bimbels->id ? 'selected' : '' }}>{{ $bimbels->name }}</option>
-                            @endforeach
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('bimbel_id')" class="mt-2" />
-                    </div>
-                </div>
-                
-                <div class="flex justify-between">
-                        <x-secondary-href href="{{ route('admin.package_member.index') }}">
-                            Back
-                        </x-secondary-href>
-                        <x-primary-button type="submit">
-                            Edit Package member
-                        </x-primary-button>
-                </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 
