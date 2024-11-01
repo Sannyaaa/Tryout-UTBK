@@ -9,17 +9,11 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('universities', function (Blueprint $table) {
             $table->id();
-
-            $table->string('name');
-            $table->string('code');
-            $table->string('city');
-            $table->string('province');
-            $table->string('website')->nullable();
-
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

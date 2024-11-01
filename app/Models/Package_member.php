@@ -8,7 +8,7 @@ class Package_member extends Model
 {
     protected $fillable = ['name', 'description', 'image', 'price', 'tryout_id', 'bimbel_id'];
 
-     public function Benefits(){
+     public function benefits(){
         return $this->hasMany(Benefit::class, 'package_member_id');
     }
 

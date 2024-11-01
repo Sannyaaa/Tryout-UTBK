@@ -98,8 +98,15 @@
                     </div>
 
                     <div>
-                        <x-input-label for="corect_answer" :value="__('Correct Answer')" />
-                        <x-text-input type="text" name="corect_answer" id="corect_answer" value="{{ old('corect_answer', $question->corect_answer) }}" required />
+                        <x-input-label for="corect_answer" :value="__('Corect Answer')" />
+                        <x-select-input id="corect_answer" name="corect_answer" >
+                            <option selected="" disabled>Select Corect Answer</option>
+                            <option value="a" {{ old('corect_answer', $question->corect_answer) == 'a' ? 'selected' : '' }}>A</option>
+                            <option value="b" {{ old('corect_answer', $question->corect_answer) == 'b' ? 'selected' : '' }}>B</option>
+                            <option value="c" {{ old('corect_answer', $question->corect_answer) == 'c' ? 'selected' : '' }}>C</option>
+                            <option value="d" {{ old('corect_answer', $question->corect_answer) == 'd' ? 'selected' : '' }}>D</option>
+                            <option value="e" {{ old('corect_answer', $question->corect_answer) == 'e' ? 'selected' : '' }}>E</option>
+                        </x-select-input>
                         <x-input-error :messages="$errors->get('corect_answer')" class="mt-2" />
                     </div>
 

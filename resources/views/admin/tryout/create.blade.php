@@ -80,7 +80,7 @@
                         <div>
                             <x-input-label for="is_free" :value="__('Berbayar / Gratis')" />
                             <x-select-input id="is_free" name="is_free">
-                                <option selected="" disabled>Select Berbayar / Gratis</option>
+                                <option selected="" disabled>Pilih Berbayar / Gratis</option>
                                 <option value="paid" {{ old('is_free') == 'paid' ? 'selected' : '' }}>Berbayar</option>
                                 <option value="free" {{ old('is_free') == 'free' ? 'selected' : '' }}>Gratis</option>
                             </x-select-input>
@@ -89,7 +89,7 @@
                         <div>
                             <x-input-label for="is_together" :value="__('Biasa / Serentak')" />
                             <x-select-input id="is_together" name="is_together" >
-                                <option selected="" disabled>Select Biasa / Serentak</option>
+                                <option selected="" disabled>Pilih Biasa / Serentak</option>
                                 <option value="basic" {{ old('is_together') == 'basic' ? 'selected' : '' }}>Biasa</option>
                                 <option value="together" {{ old('is_together') == 'together' ? 'selected' : '' }}>Serentak</option>
                             </x-select-input>
@@ -100,12 +100,12 @@
                     <div id="date-inputs" style="display: none;"> 
                         <div class="grid lg:grid-cols-2 gap-3">
                             <div>
-                                <x-input-label for="start_date" :value="__('Start Date')" />
+                                <x-input-label for="start_date" :value="__('Tanggal Mulai')" />
                                 <x-text-input type="date" :value="old('start_date')" name="start_date" id="start_date" placeholder="Masukan tanggal mulai" required=""/>
                                 <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
                             </div>
                             <div>
-                                <x-input-label for="end_date" :value="__('end Date')" />
+                                <x-input-label for="end_date" :value="__('Tanggal Selsai')" />
                                 <x-text-input type="date" :value="old('end_date')" name="end_date" id="end_date" placeholder="Masukan tanggal selesai" required=""/>
                                 <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
                             </div>
@@ -113,10 +113,10 @@
                     </div>
                     <div class="flex justify-between">
                             <x-secondary-href href="{{ route('admin.tryout.index') }}">
-                                Back
+                                Kembali
                             </x-secondary-href>
                             <x-primary-button type="submit">
-                                Add Tryout
+                                Tambah Tryout
                             </x-primary-button>
                     </div>
             </form>

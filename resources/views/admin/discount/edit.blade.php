@@ -18,7 +18,7 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="{{ route('admin.discount.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
+                            <a href="{{ route('admin.discount.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Voucher</a>
                             </div>
                         </li>
                         <li>
@@ -68,20 +68,20 @@
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
                             <x-input-label for="name" :value="__('Nama')" />
-                            <x-text-input type="text" :value="old('name', $discount->name)" name="name" id="name" placeholder="Masukan Nama Discount" required=""/>
+                            <x-text-input type="text" :value="old('name', $discount->name)" name="name" id="name" placeholder="Masukan Nama Voucher" required=""/>
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
                         
                         <div>
-                            <x-input-label for="code" :value="__('Code Diskon')" />
-                            <x-text-input type="text" :value="old('code', $discount->code)" name="code" id="code" placeholder="Masukan Code Discount" required=""/>
+                            <x-input-label for="code" :value="__('Code Voucher')" />
+                            <x-text-input type="text" :value="old('code', $discount->code)" name="code" id="code" placeholder="Masukan Code Voucher" required=""/>
                             <x-input-error :messages="$errors->get('code')" class="mt-2" />
                         </div>
                     </div>
 
                     <div>
                         <x-input-label for="description" :value="__('Description')" />
-                        <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
+                        <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description">{{$discount->description}}</x-text-area>
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
                     
@@ -110,22 +110,22 @@
 
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
-                            <x-input-label for="start_date" :value="__('Start Date')" />
+                            <x-input-label for="start_date" :value="__('Tanggal Mulai')" />
                             <x-text-input type="date" :value="old('start_date', $discount->start_date)" name="start_date" id="start_date" placeholder="Masukan tanggal mulai" required=""/>
                             <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
                         </div>
                         <div>
-                            <x-input-label for="end_date" :value="__('end Date')" />
+                            <x-input-label for="end_date" :value="__('Tanggal Selesai')" />
                             <x-text-input type="date" :value="old('end_date', $discount->end_date)" name="end_date" id="end_date" placeholder="Masukan tanggal selesai" required=""/>
                             <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
                         </div>
                     </div>
                     <div class="flex justify-between">
                         <x-secondary-href href="{{ route('admin.discount.index') }}">
-                            Back
+                            Kembali
                         </x-secondary-href>
                         <x-primary-button type="submit">
-                            Edit Discount
+                            Edit Voucher
                         </x-primary-button>
                     </div>
             </form>

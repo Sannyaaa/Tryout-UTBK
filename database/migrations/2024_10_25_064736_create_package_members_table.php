@@ -18,9 +18,10 @@ return new class extends Migration
             $table->longText('description');
             $table->string('image')->nullable();
             $table->string('price');
+
             $table->unsignedBigInteger('tryout_id')->nullable();
             $table->foreign('tryout_id')->references('id')->on('tryouts')->onDelete('cascade');
-           $table->unsignedBigInteger('bimbel_id')->nullable();
+            $table->unsignedBigInteger('bimbel_id')->nullable();
             $table->foreign('bimbel_id')->references('id')->on('bimbels')->onDelete('cascade');
 
             $table->timestamps();

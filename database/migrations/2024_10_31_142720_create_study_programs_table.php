@@ -9,16 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('majors', function (Blueprint $table) {
+        Schema::create('study_programs', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('university_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('university_id');
             $table->string('name');
-            $table->string('code')->nullable();
-
             $table->timestamps();
+
+            $table->foreign('university_id')
+                  ->references('id')
+                  ->on('universities')
+                  ->onDelete('cascade');
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('majors');
+        Schema::dropIfExists('study_programs');
     }
 };

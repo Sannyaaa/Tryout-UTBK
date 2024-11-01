@@ -15,7 +15,7 @@ class QuestionPractice extends Model
         return $this->belongsTo(ClassBimbel::class);
     }
 
-    public function answer(){
-        return $this->hasOne(Answer::class);
+    public function answer_practice(){
+        return $this->hasOne(AnswerPractice::class);
     }
 }

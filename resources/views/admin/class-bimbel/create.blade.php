@@ -192,10 +192,10 @@
 
                     <div class="flex justify-between">
                         <x-secondary-href href="{{ $back ?? route('admin.class-bimbel.index') }}">
-                            Back
+                            Kembali
                         </x-secondary-href>
                         <x-primary-button type="submit">
-                            Add Class
+                            Tambah Kelas
                         </x-primary-button>
                     </div>
                 </div>

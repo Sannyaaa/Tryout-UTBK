@@ -8,9 +8,12 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClassBimbelController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\PackageMemberController;
+use App\Http\Controllers\QuestionPracticeController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\TryoutController;
+use App\Http\Controllers\UniversityDataController;
+use App\Http\Controllers\UniversityScraperController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +52,11 @@ Route::resource('/category', CategoryController::class);
 
 
 
+Route::get('/fetch-universities', [UniversityScraperController::class, 'fetchUniversities']);
+Route::get('/fetch-study-programs', [UniversityScraperController::class, 'fetchStudyPrograms']);
+
+
+
 
 
 
@@ -63,7 +71,7 @@ Route::post('/user/bulk-delete', [UserController::class, 'bulkDelete'])->name('u
 Route::resource('/discount', DiscountController::class);
 Route::post('/discount/bulk-delete', [DiscountController::class, 'bulkDelete'])->name('discount.bulkDelete');
 
-Route::resource('/question-practice', QuestionController::class);
-Route::post('/question/bulk-delete', [QuestionController::class, 'bulkDelete'])->name('question.bulkDelete');
-Route::get('/class/{class_bimbel}/question/create', [ClassBimbelController::class, 'question_create'])->name('class.question.create');
-Route::get('/class/{class_bimbel}/question/{practice_question}/edit', [ClassBimbelController::class, 'question_edit'])->name('class.question.edit');
+Route::resource('/question-practice', QuestionPracticeController::class);
+Route::post('/question/bulk-delete', [QuestionPracticeController::class, 'bulkDelete'])->name('question.bulkDelete');
+Route::get('/class-bimbel/{class_bimbel}/question/create', [ClassBimbelController::class, 'question_create'])->name('class.question.create');
+Route::get('/class-bimbel/{class_bimbel}/question/{question}/edit', [ClassBimbelController::class, 'question_edit'])->name('class.question.edit');

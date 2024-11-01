@@ -68,13 +68,13 @@
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
                             <x-input-label for="name" :value="__('Nama')" />
-                            <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Discount" required=""/>
+                            <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Voucher" required=""/>
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
                         
                         <div>
-                            <x-input-label for="code" :value="__('Code Diskon')" />
-                            <x-text-input type="text" :value="old('code')" name="code" id="code" placeholder="Masukan Code Discount" required=""/>
+                            <x-input-label for="code" :value="__('Code Voucher')" />
+                            <x-text-input type="text" :value="old('code')" name="code" id="code" placeholder="Masukan Code Voucher" required=""/>
                             <x-input-error :messages="$errors->get('code')" class="mt-2" />
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                         <div>
                             <x-input-label for="discount_type" :value="__('Tipe Diskon')" />
                             <x-select-input id="discount_type" name="discount_type">
-                                <option selected="" disabled>Select Tipe</option>
+                                <option selected="" disabled>Pilih Tipe</option>
                                 <option value="percentage" {{ old('discount_type') == 'percentage' ? 'selected' : '' }}>Diskon Persen (%)</option>
                                 <option value="fixed" {{ old('discount_type') == 'fixed' ? 'selected' : '' }}>Diskon Tetap (Rp)</option>
                             </x-select-input>
@@ -110,22 +110,22 @@
 
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
-                            <x-input-label for="start_date" :value="__('Start Date')" />
+                            <x-input-label for="start_date" :value="__('Tanggal Mulai')" />
                             <x-text-input type="date" :value="old('start_date')" name="start_date" id="start_date" placeholder="Masukan tanggal mulai" required=""/>
                             <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
                         </div>
                         <div>
-                            <x-input-label for="end_date" :value="__('end Date')" />
+                            <x-input-label for="end_date" :value="__('Tanggal Selesai')" />
                             <x-text-input type="date" :value="old('end_date')" name="end_date" id="end_date" placeholder="Masukan tanggal selesai" required=""/>
                             <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
                         </div>
                     </div>
                     <div class="flex justify-between">
                             <x-secondary-href href="{{ route('admin.discount.index') }}">
-                                Back
+                                Kembali
                             </x-secondary-href>
                             <x-primary-button type="submit">
-                                Add Discount
+                                Tambah Diskon
                             </x-primary-button>
                     </div>
             </form>
