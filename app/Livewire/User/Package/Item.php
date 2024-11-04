@@ -105,8 +105,8 @@ class Item extends Component
             // Buat order baru
             $order = Order::create([
                 'user_id' => $user->id,
-                'package_id' => $this->package->id,
-                'voucher_id' => $this->applied_voucher?->id,
+                'package_member_id' => $this->package->id,
+                'discount_id' => $this->applied_voucher?->id,
                 'invoice' => Order::generateInvoice(),
                 'original_price' => $this->package->price,
                 'final_price' => $this->final_price,
@@ -137,9 +137,9 @@ class Item extends Component
                 'customer_details' => $customer_details,
                 'item_details' => $item_details,
                 'callbacks' => [
-                    'finish' => route('payment.finish', ['invoice' => $order->invoice]),
-                    'unfinish' => route('payment.unfinish', ['invoice' => $order->invoice]),
-                    'error' => route('payment.error', ['invoice' => $order->invoice]),
+                    'finish' => route('user.payment.finish', ['invoice' => $order->invoice]),
+                    'unfinish' => route('user.payment.unfinish', ['invoice' => $order->invoice]),
+                    'error' => route('user.payment.error', ['invoice' => $order->invoice]),
                 ]
             ];
 

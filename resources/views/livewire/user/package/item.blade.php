@@ -34,24 +34,40 @@
                     <h1 class="mt-3 text-3xl font-bold text-gray-900 sm:text-5xl sm:leading-none sm:tracking-tight dark:text-white">{{ $package->name }}</h1>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 md:gap-6">
-                    <div class="col-span-2">
+                    <div class=" md:col-span-2">
                         <div class="relative aspect-video overflow-hidden bg-cover align-middle mt-4">
                             <img class="object-cover object-center w-full h-full rounded-md" src="{{ $package->image != null ? Storage::url($package->image) : asset('build/assets/Photo-Image-Icon-Graphics-10388619-1-1-580x386.jpg') }}" alt="package image" />
                         </div>
                         <div>
-                            <div class="my-3 space-y-2">
-                                <h1 class=" text-2xl font-bold text-gray-900 sm:text-4xl sm:leading-none sm:tracking-tight dark:text-white">Deskripsi</h1>
+                            <div class="my-6 space-y-2">
+                                <h1 class=" text-xl font-bold text-gray-900 sm:text-2xl sm:leading-none sm:tracking-tight dark:text-white">Deskripsi</h1>
                         
-                                <p class="mb-6 font-normal text-gray-500 text-lg dark:text-gray-400">{{ $package->description }}</p>
+                                <p class="mb-4 font-normal text-gray-500 text-lg dark:text-gray-400">{{ $package->description }}</p>
+                            </div>
+
+                            <div class="my-6 space-y-2">
+                                <h2 class=" text-xl font-bold text-gray-800 sm:text-2xl sm:leading-none sm:tracking-tight dark:text-white">Benefit Yang Didapat :</h2>
+                        
+                                <div class="mb-4 grid grid-cols-1 lg:grid-cols-2 text-left space-y-2">
+                                    @foreach ($package->benefits as $benefit)
+                                        <div class="flex items-center space-x-3 text-gray-500 font-medium text-lg">
+                                            <!-- Icon -->
+                                            <div class="p-1 bg-sky-400 rounded-full">
+                                                <svg class="flex-shrink-0 w-5 h-5 text-gray-100 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            </div>
+                                            <span>{{ $benefit->benefit }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
 
                             @if (
                                 $package->tryout_id != null && $package->tryout->is_together == 'together'
                             )
-                                <div class="my-3 space-y-2">
-                                    <h1 class=" text-2xl font-bold text-gray-900 sm:text-4xl sm:leading-none sm:tracking-tight dark:text-white">Tanggal Pengerjaan</h1>
+                                <div class="my-6 space-y-2">
+                                    <h1 class=" text-2xl font-bold text-gray-900 mb-4 sm:text-2xl sm:leading-none sm:tracking-tight dark:text-white">Tanggal Pengerjaan Tryout</h1>
                         
-                                    <div class="text-xl font-semibold text-gray-500 my-2">
+                                    <div class="text-xl font-semibold text-gray-500">
                                         <span class="py-1 px-4 bg-sky-400 bg-opacity-30 border-sky-400 border-2 text-sky-600 rounded-lg font-semibold"><i class="fa-solid fa-calendar-days mr-2"></i> {{ \Carbon\Carbon::parse($package->tryout->start_date)->format('j F Y') }} </span>
                                         
                                         <span class="mx-3">sampai</span>
@@ -60,33 +76,17 @@
                                     </div>
                                 </div>
                             @endif
-
-                            <div class="my-3 space-y-2">
-                                <h1 class=" text-2xl font-bold text-gray-900 sm:text-4xl sm:leading-none sm:tracking-tight dark:text-white">Benefit Yang Didapat</h1>
-                        
-                                <ul role="list" class="mb-4 space-y-2 text-left">
-                                    @foreach ($package->benefits as $benefit)
-                                        <li class="flex items-center space-x-3 text-gray-500 font-medium text-lg">
-                                            <!-- Icon -->
-                                            <div class="p-1 bg-sky-400 rounded-full">
-                                                <svg class="flex-shrink-0 w-5 h-5 text-gray-100 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            </div>
-                                            <span>{{ $benefit->benefit }}</span>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
                         </div>
                     </div>
 
-                    <div class="col-span-1 ">
+                    <div class="col-span-1">
                         <div class="mx-auto max-w-4xl flex-1 space-y-6 mt-5 lg:w-full">
                             <div class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:p-6">
                                 @if(!$applied_voucher)
                                     <form class="space-y-4" wire:submit.prevent="applyVoucher">
                                         <div>
                                             <x-input-label for="voucher" :value="__('Masukkan Vouchermu')" />
-                                            <div class="flex gap-2">
+                                            <div class="space-y-3">
                                                 <x-text-input 
                                                     type="text" 
                                                     wire:model="voucher" 
@@ -103,15 +103,15 @@
                                         </div>
                                     </form>
                                 @else
-                                    <div class="space-y-4">
-                                        <div class="flex justify-between items-center">
+                                    <div class="">
+                                        <div class="space-y-4">
                                             <div>
                                                 <p class="font-medium">Voucher Terpakai:</p>
-                                                <p class="text-green-600">{{ $applied_voucher->code }}</p>
+                                                <p class="text-sky-500 font-semibold text-2xl">{{ $applied_voucher->code }}</p>
                                             </div>
                                             <button 
                                                 wire:click="removeVoucher" 
-                                                class="text-red-600 hover:text-red-800"
+                                                class="bg-rose-500 hover:bg-rose-600 text-white font-semibold py-3 px-4 rounded-lg"
                                             >
                                                 Hapus Voucher
                                             </button>
@@ -121,7 +121,7 @@
                                 {{-- @livewire('user.package.discount-voucher',['package_id' => $package->id]) --}}
                             </div>
                             <div class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:p-6">
-                                <p class="text-xl font-semibold text-gray-900 dark:text-white">Order summary</p>
+                                <p class="text-xl font-semibold text-gray-900 dark:text-white">Informasi Harga</p>
 
                                 <div class="space-y-4">
                                     <div class="space-y-2">
@@ -148,9 +148,36 @@
                                     </dl>
                                 </div>
 
-                                <x-primary-button type="submit" class="w-full">
-                                    Checkout Sekarang
-                                </x-primary-button>
+                                {{-- Checkout Button --}}
+                                <div class="flex justify-end">
+                                    <x-primary-button 
+                                        wire:click="checkout"
+                                        wire:loading.attr="disabled"
+                                        class="px-6 py-3"
+                                    >
+                                        <span wire:loading.remove wire:target="checkout">
+                                            Checkout Sekarang
+                                        </span>
+                                        <span wire:loading wire:target="checkout">
+                                            Processing...
+                                        </span>
+                                    </x-primary-button>
+                                </div>
+
+                                {{-- Loading States & Notifications --}}
+                                <div wire:loading.delay wire:target="applyVoucher">
+                                    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                                        <div class="bg-white p-4 rounded-lg">
+                                            Processing...
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (session()->has('error'))
+                                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
                             </div>
 
                             {{-- <div class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">

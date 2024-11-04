@@ -12,6 +12,7 @@
 
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+        @livewireStyles()
         @yield('head-styles')
 
         <!-- Styles -->
@@ -44,10 +45,10 @@
     <!-- ===== Sidebar End ===== -->
     
     <!-- ===== Page Wrapper Start ===== -->
-    <div class="flex overflow-hidden bg-gray-50 dark:bg-gray-900">
+    <div class="flex overflow-hidden bg-slate-100 dark:bg-slate-900">
       
       <!-- ===== Content Area Start ===== -->
-      <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-72 dark:bg-gray-900">
+      <div id="main-content" class="relative w-full h-full overflow-y-auto bg-slate-100 lg:ml-72 dark:bg-slate-900">
         
         @include('layouts.dashboard.header')
 
@@ -70,6 +71,7 @@
     <script src="{{ asset('js/charts.js') }}"></script>
     <script src="./path/to/flowbite/dist/flowbite.js"></script>
     {{-- <script src="./path/to/flowbite/dist/flowbite.js"></script> --}}
+    @livewireScripts()
 
     @yield('body-scripts')
 

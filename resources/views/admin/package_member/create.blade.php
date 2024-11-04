@@ -9,12 +9,8 @@
                 <div class="bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg shadow-lg py-4 px-3">
                     <nav class="flex" aria-label="Breadcrumb">
                         <ol class="inline-flex items-center space-x-1 text-sm font-semibold md:space-x-2">
-                        <li class="inline-flex items-center">
-<<<<<<< HEAD
+                        <li class="inline-flex items-center">   
                             <a href="{{ route('dashboard') }}" class="inline-flex items-center text-gray-50 hover:text-sky-200 dark:text-gray-300 dark:hover:text-white">
-=======
-                            <a href="#" class="inline-flex items-center text-gray-50 hover:text-sky-200 dark:text-gray-300 dark:hover:text-white">
->>>>>>> aa20d73b36865d88ed981bc409eb4e877f9e47f7
                             <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
                                 Dashboard
                             </a>
@@ -22,21 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-<<<<<<< HEAD
                             <a href="{{ route('admin.tryout.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Tryout</a>
-=======
-                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
->>>>>>> aa20d73b36865d88ed981bc409eb4e877f9e47f7
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-<<<<<<< HEAD
                             <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Buat Tryout</span>
-=======
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">All Class</span>
->>>>>>> aa20d73b36865d88ed981bc409eb4e877f9e47f7
                             </div>
                         </li>
                         </ol>
@@ -101,11 +89,7 @@
                         <div class="benefits-container space-y-3">
                             <div class="benefit-input flex gap-2">
                                 <x-text-input type="text" name="benefits[]" placeholder="Enter benefit" required/>
-<<<<<<< HEAD
-                                <button type="button" class="add-benefit px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">
-=======
                                 <button type="button" class="add-benefit px-3 py-2 text-sm font-medium text-white bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg focus:ring-4 focus:ring-blue-300">
->>>>>>> aa20d73b36865d88ed981bc409eb4e877f9e47f7
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                                     </svg>
@@ -120,12 +104,6 @@
                         <x-input-error :messages="$errors->get('price')" class="mt-2" />
                     </div>
 
-<<<<<<< HEAD
-                    <div class="grid lg:grid-cols-2 gap-3">
-                        <div>
-                            <x-input-label for="tryout_id" :value="__('Tryout')" />
-                            <x-select-input id="tryout_id" name="tryout_id" >
-=======
                     <div class="space-y-4">
                         <!-- Input Radio untuk memilih antara Tryout dan Bimbel -->
                         <div>
@@ -146,7 +124,6 @@
                         <div id="tryoutContainer">
                             <x-input-label for="tryout_id" :value="__('Tryout')" />
                             <x-select-input id="tryout_id" name="tryout_id">
->>>>>>> aa20d73b36865d88ed981bc409eb4e877f9e47f7
                                 <option selected="" disabled>Select Tryout</option>
                                 @foreach ($tryout as $tryouts)
                                     <option value="{{ $tryouts->id }}" {{ old('tryout_id') == $tryouts->id ? 'selected' : '' }}>{{ $tryouts->name }}</option>
@@ -154,17 +131,11 @@
                             </x-select-input>
                             <x-input-error :messages="$errors->get('tryout_id')" class="mt-2" />
                         </div>
-<<<<<<< HEAD
-                        <div>
-                            <x-input-label for="bimbel_id" :value="__('Bimbel')" />
-                            <x-select-input id="bimbel_id" name="bimbel_id" >
-=======
 
                         <!-- Dropdown untuk Bimbel -->
                         <div id="bimbelContainer" style="display: none;">
                             <x-input-label for="bimbel_id" :value="__('Bimbel')" />
                             <x-select-input id="bimbel_id" name="bimbel_id">
->>>>>>> aa20d73b36865d88ed981bc409eb4e877f9e47f7
                                 <option selected="" disabled>Select Bimbel</option>
                                 @foreach ($bimbel as $bimbels)
                                     <option value="{{ $bimbels->id }}" {{ old('bimbel_id') == $bimbels->id ? 'selected' : '' }}>{{ $bimbels->name }}</option>

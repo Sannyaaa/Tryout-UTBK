@@ -8,15 +8,17 @@ use Illuminate\Http\Request;
 class PaymentController extends Controller
 {
     //
-    public function finish()
+    public function finish($invoice)
     {
-        // $order = Order::where('invoice', $invoice)
-        //     ->where('user_id', auth()->id())
-        //     ->firstOrFail();
+        $order = Order::where('invoice', $invoice)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
+        
+        $order->payment_status = 'paid';
 
-        // Tambahkan logika untuk status selesai
-        // Misalnya, redirect ke halaman sukses atau dashboard
-        return redirect()->route('payment.success', ['invoice' => $invoice]);
+        $order->save();
+
+        return redirect()->route('user.payment.success', ['invoice' => $invoice]);
     }
 
     public function unfinish($invoice)
