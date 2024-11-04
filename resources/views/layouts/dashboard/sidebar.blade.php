@@ -102,21 +102,11 @@
                     <li>
                         <x-sidebar-link-dropdown link="{{ route('admin.tryout.create') }}" name="Buat" />
                     </li>
-                </x-slot>
-            </x-sidebar-dropdown>
-          </li>
-
-          <li>
-            <!-- Dropdown Menu -->
-            <x-sidebar-dropdown id="question" name="Pertanyaan">
-                {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
-                <i class="fa-solid fa-circle-question"></i>
-                <x-slot name="content">
                     <li>
-                        <x-sidebar-link-dropdown link="{{ route('admin.question.index') }}" name="List" />
+                        <x-sidebar-link-dropdown link="{{ route('admin.question.index') }}" name="List Pertanyaan" />
                     </li>
                     <li>
-                        <x-sidebar-link-dropdown link="{{ route('admin.question.create') }}" name="Buat" />
+                        <x-sidebar-link-dropdown link="{{ route('admin.question.create') }}" name="Buat Pertanyaan" />
                     </li>
                 </x-slot>
             </x-sidebar-dropdown>
@@ -172,6 +162,12 @@
           </li>
 
           <li>
+            <x-sidebar-link link="{{ route('admin.order.index') }}" token="order" name="Transaction">
+              <i class="fa-solid fa-book-open"></i>
+            </x-sidebar-link>
+          </li>
+
+          <li>
             <!-- Dropdown Menu -->
             <x-sidebar-dropdown id="user" name="User">
                 {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
@@ -188,7 +184,7 @@
           </li>
         </ul>
         <div class="pt-2 space-y-2">
-          <x-sidebar-link link="{{ route('profile.edit') }}"  name="Profile">
+          <x-sidebar-link link="{{ route('profile.edit') }}" token="profile" name="Profile">
             <i class="fa-solid fa-user"></i>
           </x-sidebar-link>
           <form method="POST" action="{{ route('logout') }}" class="">

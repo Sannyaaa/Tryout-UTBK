@@ -4,12 +4,12 @@
 <div class="p-4 mt-12">
     <div class="p-6 bg-white rounded-lg shadow">
         <div class="mb-4 flex justify-between items-center">
-            <h2 class="text-xl font-semibold">Categories Management</h2>
+            <h2 class="text-xl font-semibold">Category</h2>
             
             <!-- Add New Button -->
             <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" 
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
-                Add New
+                Tambah Category Baru
             </button>
         </div>
 
