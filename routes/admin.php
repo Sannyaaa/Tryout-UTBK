@@ -6,6 +6,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\BimbelController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClassBimbelController;
+use App\Http\Controllers\CombinedCategoriesController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\PackageMemberController;
 use App\Http\Controllers\QuestionPracticeController;
@@ -39,7 +40,7 @@ Route::get('/bimbel/{bimbel}/class/create', [BimbelController::class, 'class_cre
 Route::get('/bimbel/{bimbel}/class/{class_bimbel}/edit', [BimbelController::class, 'class_edit'])->name('bimbel.class.edit');
 
 Route::post('/sub_categories/bulk-delete', [SubCategoriesController::class, 'bulkDelete'])->name('sub_categories.bulkDelete');
-Route::resource('//category/sub_categories', SubCategoriesController::class);
+Route::resource('/category/sub_categories', SubCategoriesController::class);
 
 Route::post('/question/bulk-delete', [QuestionController::class, 'bulkDelete'])->name('question.bulkDelete');
 Route::resource('/question', QuestionController::class);
@@ -49,6 +50,10 @@ Route::resource('/package_member', PackageMemberController::class);
 
 Route::post('/category/bulk-delete', [CategoryController::class, 'bulkDelete'])->name('category.bulkDelete');
 Route::resource('/category', CategoryController::class);
+
+Route::resource('combined-categories', CombinedCategoriesController::class);
+Route::get('/admin/combined-categories/{id}/edit', [CombinedCategoriesController::class, 'edit'])
+    ->name('admin.combined-categories.edit');
 
 
 

@@ -42,7 +42,7 @@
             </x-sidebar-link>
           </li> --}}
           <li>
-            <x-sidebar-link link="{{route('user.bimbels')}}" token="bimbel" name="Paket Pembelian">
+            <x-sidebar-link link="{{route('user.packages')}}" token="paket" name="Paket Pembelian">
             </x-sidebar-link>
           </li>
           {{-- <li>

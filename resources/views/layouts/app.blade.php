@@ -30,6 +30,34 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.2.2/css/tom-select.min.css" rel="stylesheet">
+        <style>
+        /* Optional: Custom styling untuk Tom Select */
+        .ts-wrapper {
+            width: 100%;
+        }
+
+        .ts-control {
+            border-radius: 0.375rem;
+            border-color: #d1d5db;
+            padding: 0.5rem;
+        }
+
+        .ts-dropdown {
+            border-radius: 0.375rem;
+            border-color: #d1d5db;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .ts-dropdown .option {
+            padding: 0.5rem;
+        }
+
+        .ts-dropdown .active {
+            background-color: #e5e7eb;
+        }
+        </style>
+
     </head>
     <body>
     <!-- ===== Preloader Start ===== -->
@@ -52,7 +80,7 @@
       <!-- ===== Sidebar End ===== -->
 
       <!-- ===== Content Area Start ===== -->
-      <div id="main-content" class="relative w-auto h-full overflow-y-auto bg-gray-50 lg:ml-72 dark:bg-gray-900">
+      <div id="main-content" class="relative w-auto h-full overflow-y-auto bg-gray-50 lg:ml-80 dark:bg-gray-900">
 
         @include('layouts.dashboard.header')
 

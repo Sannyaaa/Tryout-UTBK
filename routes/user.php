@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Livewire\User\Package\All;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/dashboard', function () {
     return view('welcome');
@@ -13,9 +15,18 @@ Route::get('/tryout/item/{id}', App\Livewire\User\Tryout\Item::class)->name('try
 Route::get('/tryout/item/{id}/{paper}', App\Livewire\User\Tryout\Paper::class)->name('tryouts.paper');
 Route::get('/tryout/item/question', App\Livewire\User\Tryout\Question::class)->name('tryouts.question');
 Route::get('/event/tryout', App\Livewire\User\Tryout\Event::class)->name('tryouts.event');
-Route::get('/bimbel', App\Livewire\User\Bimbel\All::class)->name('bimbels');
-Route::get('/bimbel/{id}', App\Livewire\User\Bimbel\Item::class)->name('bimbels.item');
+Route::get('/paket', All::class)->name('packages');
+Route::get('/paket/{id}', App\Livewire\User\Package\Item::class)->name('package.item');
 
 // Route::get('/bimbel', App\Livewire\User\Bimbels::class)->name('bimbels');
 // Route::get('/bimbel/owned', App\Livewire\User\BimbelsOwned::class)->name('bimbels.owned');
 
+// Callback routes dari Midtrans
+Route::get('/payment/finish/{invoice}', [PaymentController::class, 'finish'])
+    ->name('payment.finish');
+
+Route::get('/payment/unfinish/{invoice}', [PaymentController::class, 'unfinish'])
+    ->name('payment.unfinish');
+
+Route::get('/payment/error/{invoice}', [PaymentController::class, 'error'])
+    ->name('payment.error');

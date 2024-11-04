@@ -22,15 +22,11 @@ return new class extends Migration
                 $table->string('access')->default('yes')->nullable();
                 $table->enum('role',['admin','user','mentor'])->default('user');
                 
-                $table->unsignedBigInteger('university_id')->nullable();
-                $table->foreign('university_id')->references('id')->on('universities')->onDelete('cascade');
-                $table->unsignedBigInteger('major_id')->nullable();
-                $table->foreign('major_id')->references('id')->on('majors')->onDelete('cascade');
+                $table->unsignedBigInteger('data_universitas_id')->nullable();
+                $table->foreign('data_universitas_id')->references('id')->on('data_universitas');
 
-                $table->unsignedBigInteger('second_university_id')->nullable();
-                $table->foreign('second_university_id')->references('id')->on('universities')->onDelete('cascade');
-                $table->unsignedBigInteger('second_major_id')->nullable();
-                $table->foreign('second_major_id')->references('id')->on('majors')->onDelete('cascade');
+                $table->unsignedBigInteger('second_data_universitas_id')->nullable();
+                $table->foreign('second_data_universitas_id')->references('id')->on('data_universitas');
 
             });
         });

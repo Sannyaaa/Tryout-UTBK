@@ -19,6 +19,7 @@ class Paper extends Component
 
     public function mount(Request $request){
         $this->item_id = $request->segment(4);
+        
         $this->paper_id = $request->segment(5);
         // dd($id);
     }
