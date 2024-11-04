@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ClassBimbelExport;
 use App\Models\AnswerPractice;
 use Carbon\Carbon;
 use App\Models\User;
@@ -10,8 +11,10 @@ use App\Models\ClassBimbel;
 use App\Models\QuestionPractice;
 use Illuminate\Http\Request;
 use App\Models\sub_categories;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClassBimbelController extends Controller
 {
@@ -20,18 +23,9 @@ class ClassBimbelController extends Controller
      */
     public function index(Request $request)
     {
-        //
-
         try {
             if ($request->ajax()) {
-                $query = ClassBimbel::with(['bimbel','user','sub_categories'])->orderBy('created_at', 'desc');
-                
-                // Check if a sub_category filter is applied
-                // if ($request->has('sub_category') && $request->sub_category != '') {
-                //     $query->whereHas('sub_categories', function($q) use ($request) {
-                //         $q->where('name', $request->sub_category);
-                //     });
-                // }
+                $query = ClassBimbel::with(['bimbel', 'user', 'sub_categories'])->orderBy('created_at', 'desc');
 
                 if ($request->sub_categories) {
                     $query->where('sub_categories_id', $request->sub_categories);
@@ -40,7 +34,7 @@ class ClassBimbelController extends Controller
                 return DataTables::of($query)
                     ->addIndexColumn()
                     ->addColumn('checkbox', function($class) {
-                        return '<input type="checkbox" class="class-bimbel-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $class->id . '">';
+                        return '<input type="checkbox" class="class-bimbel-checkbox" value="' . $class->id . '">';
                     })
                     ->addColumn('date', function($class) {
                         return date('j F Y', strtotime($class->date)) .' '. date('h:i A', strtotime($class->start_time));
@@ -77,17 +71,24 @@ class ClassBimbelController extends Controller
                     ->make(true);
             }
 
-            //
-            $subCategories = sub_categories::all(); //
+            // Ekspor ke Excel
+            if ($request->has('export_excel')) {
+                $data = ClassBimbel::with(['bimbel', 'user', 'sub_categories'])->get(); // Ambil data
+                return Excel::download(new ClassBimbelExport($data), 'class_bimbel_data.xlsx');
+            }
+
+            // Ekspor ke PDF
+            if ($request->has('export_pdf')) {
+                $data = ClassBimbel::with(['bimbel', 'user', 'sub_categories'])->get(); // Ambil data
+                $pdf = Pdf::loadView('admin.class-bimbel.pdf', compact('data'));
+                return $pdf->download('class_bimbel_data.pdf');
+            }
+
+            $subCategories = sub_categories::all(); // Ambil semua sub kategori
             return view('admin.class-bimbel.index', compact('subCategories'));
         } catch (\Exception $e) {
             Log::error('Error in index method: ' . $e->getMessage());
-            Log::error('Stack trace: ' . $e->getTraceAsString());
-
-            if ($request->ajax()) {
-                return response()->json(['error' => 'An error occurred while processing your request.'], 500);
-            }
-            return back()->with('error', 'An error occurred while loading the page. Please try again.');
+            return response()->json(['error' => 'An error occurred while processing your request.'], 500);
         }
     }
 

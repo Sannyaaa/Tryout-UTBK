@@ -37,8 +37,6 @@
                 @csrf
                 @method('PUT')
                 <div class="space-y-4">
-                    
-                    <div class="grid lg:grid-cols-2 gap-3">
                         <div>
                             <x-input-label for="class_bimbel_id" :value="__('Kelas')" />
                             <x-select-input id="class_bimbel_id" name="class_bimbel_id">
@@ -60,7 +58,6 @@
                             <x-file-input type="file" name="image" id="image" placeholder="Masukan Image Question" />
                             <x-input-error :messages="$errors->get('image')" class="mt-2" />
                         </div>
-                    </div>
 
                     <div>
                         <x-input-label for="question" :value="__('Pertanyaan')" />
@@ -122,7 +119,7 @@
                             Kembali
                         </x-secondary-href>
                         <x-primary-button type="submit">
-                            Tambah Pertanyaan
+                            Edit Pertanyaan
                         </x-primary-button>
                     </div>
                 </div>
