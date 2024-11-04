@@ -33,6 +33,12 @@
           </li>
 
           <li>
+            <x-sidebar-link link="{{ route('admin.combined-categories.index') }}" token="combined-categories" name="Category">
+              <i class="fa-solid fa-book-open"></i>
+            </x-sidebar-link>
+          </li>
+
+          <li>
             <x-sidebar-link link="{{ route('admin.bimbel.index') }}" token="bimbel" name="Bimbel">
               <i class="fa-solid fa-book-open"></i>
             </x-sidebar-link>
@@ -68,10 +74,10 @@
             </x-sidebar-link>
           </li> --}}
 
-          <li>
+          {{-- <li>
             <!-- Dropdown Menu -->
             <x-sidebar-dropdown id="category" name="Categori">
-                {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
                 <i class="fa-regular fa-file-lines"></i>
                 <x-slot name="content">
                     <li>
@@ -82,7 +88,7 @@
                     </li>
                 </x-slot>
             </x-sidebar-dropdown>
-          </li>
+          </li> --}}
 
           <li>
             <!-- Dropdown Menu -->
