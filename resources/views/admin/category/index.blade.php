@@ -24,7 +24,7 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">All Category</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Semua Category</span>
                             </div>
                         </li>
                         </ol>
@@ -38,7 +38,7 @@
                         <div class="flex space-x-1">
                             <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
                         <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                            Delete Selected
+                            Hapus Yang dipilih
                         </button>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
 
                 <!-- Modal toggle -->
                 <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                    Add Category
+                    Tambah category baru
                 </button>
 
                 <!-- Main modal -->
@@ -61,13 +61,13 @@
                             <!-- Modal header -->
                             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                    Create New Category
+                                    Tambah category baru
                                 </h3>
                                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                     </svg>
-                                    <span class="sr-only">Close modal</span>
+                                    <span class="sr-only">Tutup modal</span>
                                 </button>
                             </div>
                             <!-- Modal body -->
@@ -88,7 +88,7 @@
                                     </div>
                                 </div>
                                 <x-primary-button type="submit">
-                                    Add Category
+                                    Tambah category
                                 </x-primary-button>
                             </form>
                         </div>
@@ -103,13 +103,13 @@
                             <!-- Modal header -->
                             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                    Edit Bimbel
+                                    Edit Category
                                 </h3>
                                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editModal">
                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                     </svg>
-                                    <span class="sr-only">Close modal</span>
+                                    <span class="sr-only">Tutup modal</span>
                                 </button>
                             </div>
                             <!-- Modal body -->
@@ -119,7 +119,7 @@
                                 <div class="grid gap-4 mb-4">
                                     <div>
                                         <x-input-label for="edit_name" :value="__('Nama')" />
-                                        <x-text-input type="text" name="name" id="edit_name" placeholder="Masukan Nama bimbel" required=""/>
+                                        <x-text-input type="text" name="name" id="edit_name" placeholder="Masukan Nama Category" required=""/>
                                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
                                     
@@ -155,7 +155,7 @@
                                             </div>
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Name
+                                            Nama
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Description

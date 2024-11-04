@@ -3,7 +3,7 @@
 @section('content')
     <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
         <div class="mb-4 col-span-full xl:mb-2">
-            <nav class="flex mb-5" aria-label="Breadcrumb">
+            <nav class="flex mb-5 mt-5" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
                 <li class="inline-flex items-center">
                     <a href="#" class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white">
@@ -279,91 +279,84 @@
                     @method('PUT')
                     @csrf
                     <div class="grid grid-cols-6 gap-6">
+                        <!-- Nama -->
                         <div class="col-span-6 sm:col-span-3">
                             <x-input-label for="name" :value="__('Nama')" />
                             <x-text-input id="name" class="block mt-1 w-full"
-                            type="name"
-                            name="name"
-                            value="{{ $user->name }}"
-                            required autocomplete="name" />
+                                type="text"
+                                name="name"
+                                value="{{ old('name', $user->name) }}"
+                                required autocomplete="name" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
+
+                        <!-- Email -->
                         <div class="col-span-6 sm:col-span-3">
                             <x-input-label for="email" :value="__('Email')" />
                             <x-text-input id="email" class="block mt-1 w-full"
-                            type="email"
-                            name="email"
-                            value="{{ $user->email }}"
-                            required autocomplete="email" />
+                                type="email"
+                                name="email"
+                                value="{{ old('email', $user->email) }}"
+                                required autocomplete="email" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <x-input-label for="phone" :value="__('phone')" />
-                            <x-text-input id="phone" class="block mt-1 w-full"
-                            type="number"
-                            name="phone"
-                            value="{{ $user->phone ?? '' }}"
-                            autocomplete="phone" />
-                            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-                        </div>
+
+                        <!-- Role -->
                         <div class="col-span-6 sm:col-span-3">
                             <x-input-label for="role" :value="__('Role')" />
-                            <x-select-input id="role" name="role" >
-                                <option selected="" disabled>pilih role</option>
+                            <x-select-input id="role" name="role">
+                                <option selected disabled>Pilih Role</option>
                                 <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin</option>
                                 <option value="mentor" {{ old('role', $user->role) == 'mentor' ? 'selected' : '' }}>Mentor</option>
                                 <option value="user" {{ old('role', $user->role) == 'user' ? 'selected' : '' }}>User</option>
                             </x-select-input>
                             <x-input-error :messages="$errors->get('role')" class="mt-2" />
                         </div>
-                        {{-- <div class="col-span-6 sm:col-span-3">
-                            <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
-                            <input type="text" name="country" id="country" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="United States" required>
-                        </div>
+
+                        <!-- Phone -->
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
-                            <input type="text" name="city" id="city" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="e.g. San Francisco" required>
+                            <x-input-label for="phone" :value="__('Phone')" />
+                            <x-text-input id="phone" class="block mt-1 w-full"
+                                type="number"
+                                name="phone"
+                                value="{{ old('phone', $user->phone) }}"
+                                autocomplete="phone" />
+                            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                         </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-                            <input type="text" name="address" id="address" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="e.g. California" required>
+
+                        <!-- Select inputs dengan Tom Select -->
+                        <div class=" col-span-6 sm:col-span-3">
+                            <x-input-label for="data_universitas_id" :value="__('Universitas 1')" />
+                            <x-select-input id="data_universitas_id" name="data_universitas_id" class="select-university">
+                                <option value="">Pilihan Universitas 1</option>
+                                @foreach ($university as $universitas)
+                                    <option value="{{ $universitas->id }}" {{ old('data_universitas_id', $user->data_universitas_id) == $universitas->id ? 'selected' : '' }}>
+                                        {{ $universitas->nama_universitas }}
+                                    </option>
+                                @endforeach
+                            </x-select-input>
                         </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                            <input type="email" name="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="example@company.com" required>
+
+                        <div class=" col-span-6 sm:col-span-3">
+                            <x-input-label for="second_data_universitas_id" :value="__('Universitas 2')" />
+                            <x-select-input id="second_data_universitas_id" name="second_data_universitas_id" class="select-university">
+                                <option value="">Pilihan Universitas 2</option>
+                                @foreach ($university as $universitas)
+                                    <option value="{{ $universitas->id }}" {{ old('second_data_universitas_id', $user->second_data_universitas_id) == $universitas->id ? 'selected' : '' }}>
+                                        {{ $universitas->nama_universitas }}
+                                    </option>
+                                @endforeach
+                            </x-select-input>
                         </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
-                            <input type="number" name="phone-number" id="phone-number" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="e.g. +(12)3456 789" required>
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="birthday" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Birthday</label>
-                            <input type="number" name="birthday" id="birthday" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="15/08/1990" required>
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="organization" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization</label>
-                            <input type="text" name="organization" id="organization" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Company Name" required>
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-                            <input type="text" name="role" id="role" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="React Developer" required>
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="department" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
-                            <input type="text" name="department" id="department" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Development" required>
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="zip-code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Zip/postal code</label>
-                            <input type="number" name="zip-code" id="zip-code" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="123456" required>
-                        </div> --}}
+
+
+                        <!-- Tombol Submit -->
                         <div class="col-span-6 sm:col-full">
-                            {{-- <x-text-input type="submit">
-                                Update 
-                            </x-text-input> --}}
                             <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Update Data</button>
                         </div>
                     </div>
                 </form>
+
             </div>
             
             {{-- <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -577,5 +570,32 @@
             </div>
         </div>
     </div> --}}
+@endsection
+
+@section('scripts')
+    <!-- Tambahkan JavaScript Tom Select di bagian bawah body -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.2.2/js/tom-select.complete.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Inisialisasi Tom Select untuk semua select dengan class select-university
+    const selectElements = document.querySelectorAll('.select-university');
+    selectElements.forEach(function(select) {
+        new TomSelect(select, {
+            create: false,
+            sortField: {
+                field: "text",
+                direction: "asc"
+            },
+            placeholder: 'Cari universitas...',
+            plugins: {
+                clear_button: {
+                    title: 'Hapus pilihan'
+                }
+            }
+        });
+    });
+});
+</script>
 @endsection
     

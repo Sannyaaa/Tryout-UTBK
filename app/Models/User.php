@@ -29,7 +29,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'otp',
         'access',
         'role',
-        
+        'data_universitas_id',
+        'second_data_universitas_id',
     ];
 
     /**
@@ -58,5 +59,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function classBimbel()
     {
         return $this->hasMany(ClassBimbel::class);
+    }
+
+    public function data_universitas(){
+        return $this->belongsTo(DataUniversitas::class, 'data_universitas_id');
+    }
+
+    public function second_data_universitas(){
+        return $this->belongsTo(DataUniversitas::class, 'second_data_universitas_id');
     }
 }

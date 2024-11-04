@@ -27,12 +27,12 @@ class SubCategoriesController extends Controller
                         return '<input type="checkbox" class="sub_categories-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $sub_categories->id . '">';
                     })
                     ->addColumn('action', function ($sub_categories) {
-                        $editBtn = '<button class="edit-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+                        $editBtn = '<button class="edit-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
                             data-id="'.$sub_categories->id.'" 
                             data-name="'.$sub_categories->name.'" 
                             data-description="'.$sub_categories->description.'"
                             data-duration="'.$sub_categories->duration.'"
-                            data-category="'.$sub_categories->category->name.'">
+                            data-categories_id="'.$sub_categories->categories_id.'">  <!-- Add this line -->
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                             Update
                         </button>';
@@ -148,17 +148,28 @@ class SubCategoriesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $sub_categories = sub_categories::find($id);
-
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'duration' => 'nullable|string',
-            'category' => 'nullable|string',
-        ]);
-
         try {
+            Log::info('Update request received for sub_category ID: ' . $id);
+            Log::info('Request data:', $request->all());  // Log semua data request
+            
+            $sub_categories = sub_categories::find($id);
+            
+            if (!$sub_categories) {
+                Log::error('Sub category with ID ' . $id . ' not found');
+                throw new \Exception('Sub category not found');
+            }
+
+            $data = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'duration' => 'nullable|string',
+                'categories_id' => 'nullable|exists:categories,id',
+            ]);
+
+            Log::info('Validated data:', $data);  // Log data yang sudah divalidasi
+
             $sub_categories->update($data);
+            Log::info('Sub category updated successfully');
             
             if ($request->ajax()) {
                 return response()->json([
@@ -169,16 +180,32 @@ class SubCategoriesController extends Controller
 
             return redirect()->route('admin.sub_categories.index')
                 ->with('success', 'sub_categories updated successfully');
-        } catch (\Exception $e) {
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation error in update sub_categories:');
+            Log::error($e->errors());
+            
             if ($request->ajax()) {
                 return response()->json([
                     'success' => false,
-                    'message' => $e->getMessage()
+                    'message' => 'Validation error',
+                    'errors' => $e->errors()
+                ], 422);
+            }
+            return redirect()->back()->withErrors($e->errors())->withInput();
+
+        } catch (\Exception $e) {
+            Log::error('Error in update sub_categories: ' . $e->getMessage());
+            Log::error('Stack trace: ' . $e->getTraceAsString());
+            
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error updating sub_categories: ' . $e->getMessage()
                 ], 500);
             }
-
             return redirect()->back()
-                ->with('error', $e->getMessage());
+                ->with('error', 'Error updating sub_categories: ' . $e->getMessage());
         }
     }
 

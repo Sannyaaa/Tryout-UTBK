@@ -18,7 +18,7 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="{{ route('admin.class-bimbel.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
+                            <a href="{{ route('admin.class-bimbel.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Kelas</a>
                             </div>
                         </li>
                         <li>
@@ -40,9 +40,9 @@
                     
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
-                            <x-input-label for="class_bimbel_id" :value="__('Class')" />
+                            <x-input-label for="class_bimbel_id" :value="__('Kelas')" />
                             <x-select-input id="class_bimbel_id" name="class_bimbel_id">
-                                <option selected disabled>Select Mapel</option>
+                                <option selected disabled>Pilih Kelas</option>
                                 @foreach ($classes as $class)
                                     <option value="{{ $class->id }}" {{ old('class_bimbel_id', $classBimbel->id ?? '') == $class->id ? 'selected' : '' }}>
                                         {{ $class->name }}
@@ -63,8 +63,8 @@
                     </div>
 
                     <div>
-                        <x-input-label for="question" :value="__('Question')" />
-                        <x-text-area id="question" name="question" rows="4" placeholder="Masukan question">{{ old('question', $question->question) }}</x-text-area>
+                        <x-input-label for="question" :value="__('Pertanyaan')" />
+                        <x-text-area id="question" name="question" rows="4" placeholder="Masukan Pertanyaan">{{ old('question', $question->question) }}</x-text-area>
                         <x-input-error :messages="$errors->get('question')" class="mt-2" />
                     </div>
                     
@@ -99,9 +99,9 @@
                     </div>
 
                     <div>
-                        <x-input-label for="corect_answer" :value="__('Corect Answer')" />
+                        <x-input-label for="corect_answer" :value="__('Jawaban Benar')" />
                         <x-select-input id="corect_answer" name="corect_answer" >
-                            <option selected="" disabled>Select Corect Answer</option>
+                            <option selected="" disabled>Piliih Jawaban Benar </option>
                             <option value="a" {{ old('corect_answer', $question->corect_answer) == 'a' ? 'selected' : '' }}>A</option>
                             <option value="b" {{ old('corect_answer', $question->corect_answer) == 'b' ? 'selected' : '' }}>B</option>
                             <option value="c" {{ old('corect_answer', $question->corect_answer) == 'c' ? 'selected' : '' }}>C</option>
@@ -112,17 +112,17 @@
                     </div>
 
                     <div>
-                        <x-input-label for="explanation" :value="__('explanation')" />
-                        <x-text-area id="explanation" name="explanation" rows="4" placeholder="Masukan explanation">{{ old('explanation', $question->explanation) }}</x-text-area>
+                        <x-input-label for="explanation" :value="__('Penjelasan')" />
+                        <x-text-area id="explanation" name="explanation" rows="4" placeholder="Masukan Penjelasan">{{ old('explanation', $question->explanation) }}</x-text-area>
                         <x-input-error :messages="$errors->get('explanation')" class="mt-2" />
                     </div>
                     
                     <div class="flex justify-between">
                         <x-secondary-href href="{{  $back ?? route('admin.question.index') }}">
-                            Back
+                            Kembali
                         </x-secondary-href>
                         <x-primary-button type="submit">
-                            Add question
+                            Tambah Pertanyaan
                         </x-primary-button>
                     </div>
                 </div>

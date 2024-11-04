@@ -112,7 +112,7 @@
                                 </div>
                             @endif
                         </div>
-                        <button type="button" class="add-benefit mt-2 px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">
+                        <button type="button" class="add-benefit mt-2 px-3 py-2 text-sm font-medium text-white bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg focus:ring-4 focus:ring-blue-300">
                             <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                             </svg>
@@ -169,7 +169,7 @@
                     
                     <div class="flex justify-between">
                             <x-secondary-href href="{{ route('admin.package_member.index') }}">
-                                Back
+                                Kembali
                             </x-secondary-href>
                             <x-primary-button type="submit">
                                 Edit Package member

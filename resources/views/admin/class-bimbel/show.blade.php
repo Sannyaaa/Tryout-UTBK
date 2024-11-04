@@ -18,13 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="{{ route('admin.class-bimbel.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
+                            <a href="{{ route('admin.class-bimbel.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Kelas</a>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Detail Class</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Detail Kelas</span>
                             </div>
                         </li>
                         </ol>
@@ -38,7 +38,7 @@
                 <main class="rounded-lg bg-white shadow mx-auto px-4 py-10">
                     <div class="grid lg:grid-cols-2 gap-2">
                         <div class="w-full lg:w-2/3 px-4">
-                            <h3 class="text-sm text-gray-500 mb-4">Name Class <br>
+                            <h3 class="text-sm text-gray-500 mb-4">Nama kelas <br>
                                 <span class="text-lg font-bold text-gray-800">{{ $classBimbel->name }}</span>
                             </h3>
                             <h3 class="text-sm text-gray-500 mb-4">Bimbel <br>
@@ -76,7 +76,7 @@
                     Daftar Pertanyaan
                 </h3>
                 <a href="{{ route('admin.class.question.create', $classBimbel->id) }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    Add new Question
+                    Tambah Pertanyaan Baru
                 </a>
             </div>
 
