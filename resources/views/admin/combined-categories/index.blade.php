@@ -95,11 +95,11 @@
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><p class="text-gray-600 text-sm">{{ $category->description }}</p></td>
                                         <td class="p-4 space-x-2 whitespace-nowrap">
                                             <div class="flex justify-start gap-1">
-                                                <a href="{{ route('admin.combined-categories.edit', [$category->id]) }}" 
+                                                <a href="{{ route('admin.combined-categories.edit', [$category->id, 'type' => 'category']) }}" 
                                                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700">
                                                     Edit
                                                 </a>
-                                                <form action="{{ route('admin.category.destroy', $category->id) }}" method="POST" class="inline-block">
+                                                <form action="{{ route('admin.combined-categories.destroy', [$category->id, 'type' => 'category']) }}" method="POST" class="inline-block">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg">
@@ -116,11 +116,11 @@
                                                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><p class="text-gray-600 text-sm">{{ $subcategory->description }}</p></td>
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                                     <div class="flex justify-start gap-1">
-                                                        <a href="{{ route('admin.combined-categories.edit', [$subcategory->id]) }}" 
+                                                        <a href="{{ route('admin.combined-categories.edit', [$subcategory->id, 'type' => 'subcategory']) }}" 
                                                             class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700">
                                                             Edit
                                                         </a>
-                                                        <form action="{{ route('admin.sub_categories.destroy', $subcategory->id) }}" method="POST" class="inline-block">
+                                                        <form action="{{ route('admin.combined-categories.destroy', [$subcategory->id, 'type' => 'subcategory']) }}" method="POST" class="inline-block">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg">

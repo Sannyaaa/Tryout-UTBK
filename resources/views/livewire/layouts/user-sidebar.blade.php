@@ -10,6 +10,12 @@
       <div class="flex-1 px-3 space-y-1 rounded-lg bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
         <ul class="pb-2 space-y-2">
           <li>
+            <a href="#" class="flex justify-center py-4 bg-sky-50 rounded-lg">
+              <span class="self-center text-3xl font-semibold sm:text-4xl whitespace-nowrap text-sky-800 dark:text-white bg-sky-50">Flowbite</span>
+            </a>
+          </li>
+
+          <li>
             <form action="#" method="GET" class="lg:hidden">
               <label for="mobile-search" class="sr-only">Search</label>
               <div class="relative">
@@ -26,15 +32,17 @@
                 <span class="ml-3" sidebar-toggle-item>Dashboard</span>
             </a> --}}
             <x-sidebar-link link="/" token="dashboard" name="Dashboard">
-              {{-- <i class="fa-solid fa-tv"></i> --}}
+              <i class="fa-solid fa-tv"></i>
             </x-sidebar-link>
           </li>
           <li>
             <x-sidebar-link link="{{route('user.tryouts')}}" token="tryout" name="Tryout">
+              <i class="fa-regular fa-file-lines"></i>
             </x-sidebar-link>
           </li>
           <li>
             <x-sidebar-link link="{{route('user.tryouts.event')}}" token="event" name="Event Tryout">
+              <i class="fa-regular fa-bell"></i>
             </x-sidebar-link>
           </li>
           {{-- <li>
@@ -43,6 +51,12 @@
           </li> --}}
           <li>
             <x-sidebar-link link="{{route('user.packages')}}" token="paket" name="Paket Pembelian">
+              <i class="fa-solid fa-tags"></i>
+            </x-sidebar-link>
+          </li>
+          <li>
+            <x-sidebar-link link="{{route('user.my-packages')}}" token="paketku" name="Paket Saya">
+              <i class="fa-solid fa-user-tag"></i>
             </x-sidebar-link>
           </li>
           {{-- <li>

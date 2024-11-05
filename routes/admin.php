@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClassBimbelController;
 use App\Http\Controllers\CombinedCategoriesController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PackageMemberController;
 use App\Http\Controllers\QuestionPracticeController;
 use App\Http\Controllers\SubCategoriesController;
@@ -80,3 +81,6 @@ Route::resource('/question-practice', QuestionPracticeController::class);
 Route::post('/question/bulk-delete', [QuestionPracticeController::class, 'bulkDelete'])->name('question.bulkDelete');
 Route::get('/class-bimbel/{class_bimbel}/question/create', [ClassBimbelController::class, 'question_create'])->name('class.question.create');
 Route::get('/class-bimbel/{class_bimbel}/question/{question}/edit', [ClassBimbelController::class, 'question_edit'])->name('class.question.edit');
+
+Route::resource('/order', OrderController::class);
+Route::post('/order/bulk-delete', [OrderController::class, 'bulkDelete'])->name('order.bulkDelete');

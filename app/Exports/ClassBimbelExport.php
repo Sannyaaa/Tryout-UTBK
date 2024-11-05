@@ -2,13 +2,13 @@
 
 namespace App\Exports;
 
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class ClassBimbelExport implements FromCollection
+class ClassBimbelExport implements FromCollection, WithHeadings, WithMapping
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     protected $data;
 
     public function __construct($data)
@@ -26,7 +26,7 @@ class ClassBimbelExport implements FromCollection
         return [
             'ID',
             'Bimbel',
-            'User ',
+            'Guru    ',
             'Sub Category',
             'Date',
             'Start Time',
@@ -38,16 +38,17 @@ class ClassBimbelExport implements FromCollection
 
     public function map($class): array
     {
+        Log::info('Exporting class: ', [$class]); // Log data class
         return [
-            $class->id,
-            $class->bimbel->name, // Mengambil nama bimbel
-            $class->user->name, // Mengambil nama user
-            $class->sub_categories->name, // Mengambil nama sub kategori
-            date('j F Y', strtotime($class->date)),
-            date('h:i A', strtotime($class->start_time)),
-            date('h:i A', strtotime($class->end_time)),
-            $class->created_at->format('j F Y H:i:s'),
-            $class->updated_at->format('j F Y H:i:s'),
+            $class->id ?? 'N/A',
+            $class->bimbel->name ?? 'N/A',
+            $class->user->name ?? 'N/A',
+            $class->sub_categories->name ?? 'N/A',
+            date('j F Y', strtotime($class->date)) ?? 'N/A',
+            date('h:i A', strtotime($class->start_time)) ?? 'N/A',
+            date('h:i A', strtotime($class->end_time)) ?? 'N/A',
+            $class->created_at->format('j F Y H:i:s') ?? 'N/A',
+            $class->updated_at->format('j F Y H:i:s') ?? 'N/A',
         ];
     }
 }

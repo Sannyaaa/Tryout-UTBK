@@ -36,8 +36,8 @@
                 <div class="flex items-center mb-4 sm:mb-0">
                     <div class="flex items-center w-full sm:justify-end gap-3">
                         <div class="flex items-center gap-2">
-                            <button id="exportExcel" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Export Excel</button>
-                            <button id="exportPdf" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Export PDF</button>
+                            <button id="exportExcel" class="px-4 py-2 bg-gradient-to-tr from-emerald-400 to-emerald-500 text-white rounded-lg">Export Excel</button>
+                            {{-- <button id="exportPdf" class="px-4 py-2 bg-gradient-to-tr from-rose-400 to-rose-500 text-white rounded-lg">Export PDF</button> --}}
                         </div>
                         <div class="flex space-x-1">
                             <!-- Tambahkan tombol bulk delete yang awalnya hidden -->

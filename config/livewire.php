@@ -157,4 +157,12 @@ return [
     */
 
     'pagination_theme' => 'tailwind',
+
+    'persist_query_string' => true,
+
+    'asset_url' => null,
+
+    'middleware' => ['web'],
+
+    'back_button_cache' => true,
 ];

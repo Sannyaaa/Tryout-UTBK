@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TryoutExport;
 use App\Livewire\User\Tryouts;
 use App\Models\Answer;
 use App\Models\batch;
 use App\Models\Question;
 use App\Models\sub_categories;
 use App\Models\tryout;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
 use function Pest\Laravel\get;
@@ -74,6 +77,19 @@ class TryoutController extends Controller
                     })
                     ->rawColumns(['action', 'image', 'checkbox'])
                     ->make(true);
+            }
+
+            // Ekspor ke Excel
+            if ($request->has('export_excel')) {
+                $data = tryout::all(); // Ambil data
+                return Excel::download(new TryoutExport($data), 'tryout_data.xlsx');
+            }
+
+            // Ekspor ke PDF
+            if ($request->has('export_pdf')) {
+                $data = tryout::all(); // Ambil data
+                $pdf = Pdf::loadView('admin.tryout.pdf', compact('data'));
+                return $pdf->download('tryout_data.pdf');
             }
 
             $tryout = tryout::all(); //

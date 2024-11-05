@@ -40,12 +40,12 @@ class ClassBimbelController extends Controller
                         return date('j F Y', strtotime($class->date)) .' '. date('h:i A', strtotime($class->start_time));
                     })
                     ->addColumn('action', function ($class) {
-                        $showBtn = '<a href="' . route('admin.class-bimbel.show', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-emerald-400 to-emerald-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        $showBtn = '<a href="' . route('admin.class-bimbel.show', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-emerald-400 to-emerald-500 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             
                             Show
                         </a>';
 
-                        $editBtn = '<a href="' . route('admin.class-bimbel.edit', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        $editBtn = '<a href="' . route('admin.class-bimbel.edit', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Update
                         </a>';
                         
