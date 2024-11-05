@@ -3,10 +3,17 @@
 namespace App\Livewire\User\Tryout;
 
 use App\Models\Category;
+use Illuminate\Http\Request;
 use Livewire\Component;
 
 class Item extends Component
 {
+    public $tryoutId;
+
+    public function mount(Request $request) {
+        $this->tryoutId = $request->segment(4);
+    }
+
     public function render()
     {
         $categories = Category::

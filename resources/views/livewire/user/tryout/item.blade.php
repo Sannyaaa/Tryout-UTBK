@@ -28,7 +28,7 @@
                                 </span>
                             </div>
                             <div class="w-3/6 px-5 flex align-middle justify-end text-sky-500">
-                                <a href="{{route('user.tryouts.paper', [1, $sub_item->id])}}" class="flex items-center">
+                                <a href="{{route('user.tryouts.paper', [$tryoutId, $sub_item->id])}}" class="flex items-center">
                                     <button class="p-3 px-4 flex items-center text-white bg-sky-500 rounded-lg font-semibold"><i class="fa-solid fa-arrow-right-long"></i>&nbsp; Kerjakan</button>
                                 </a>
                                 {{-- <i class="my-auto me-2 fa-solid fa-circle-check"></i> <span class="my-auto">Selesai</span> --}}

@@ -12,7 +12,7 @@
 
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-        @yield('head-styles')
+        @stack('head-styles')
 
         <!-- Styles -->
         <style>
@@ -71,7 +71,6 @@
     <script src="./path/to/flowbite/dist/flowbite.js"></script>
     {{-- <script src="./path/to/flowbite/dist/flowbite.js"></script> --}}
 
-    @yield('body-scripts')
-
+    @stack('body-scripts')
   </body>
 </html>
