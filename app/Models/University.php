@@ -8,10 +8,10 @@ class University extends Model
 {
     //
 
-    protected $fillable = ['name', 'code', 'city', 'province', 'website'];
+    protected $fillable = ['name'];
 
-    public function majors()
+    public function studyPrograms()
     {
-        return $this->hasMany(Major::class);
+        return $this->hasMany(StudyProgram::class);
     }
 }

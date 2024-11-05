@@ -18,13 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="{{ route('admin.class-bimbel.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
+                            <a href="{{ route('admin.class-bimbel.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Kelas</a>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Edit Class</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Edit Kelas</span>
                             </div>
                         </li>
                         </ol>
@@ -75,7 +75,7 @@
                         <div>
                             <x-input-label for="sub_categories_id" :value="__('Mapel')" />
                             <x-select-input id="sub_categories_id" name="sub_categories_id" >
-                                <option selected="" disabled>Select Mapel</option>
+                                <option selected="" disabled>Pilih Mapel</option>
                                 @foreach ($subCategories as $sub_categories_id)
                                     <option value="{{ $sub_categories_id->id }}" {{ old('sub_categories_id', $classBimbel->sub_categories_id)  == $sub_categories_id->id ? 'selected' : '' }}>{{ $sub_categories_id->name }}</option>
                                 @endforeach
@@ -88,7 +88,7 @@
                         <div>
                             <x-input-label for="bimbel_id" :value="__('Bimbel')" />
                             <x-select-input id="bimbel_id" name="bimbel_id" >
-                                <option selected="" disabled>Select Bimbel</option>
+                                <option selected="" disabled>Pilih Bimbel</option>
                                 @foreach ($bimbels as $bimbel)
                                     <option value="{{ $bimbel->id }}" {{ old('bimbel_id', $classBimbel->bimbel_id == $bimbel->id) ? 'selected' : '' }}>{{ $bimbel->name }}</option>
                                 @endforeach
@@ -98,7 +98,7 @@
                         <div>
                             <x-input-label for="user_id" :value="__('Pengajar')" />
                             <x-select-input id="user_id" name="user_id" >
-                                <option selected="" disabled>Select Pengajar</option>
+                                <option selected="" disabled>Pilih Pengajar</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}" {{ old('user_id', $classBimbel->user_id == $user->id) ? 'selected' : '' }}>{{ $user->name }}</option>
                                 @endforeach
@@ -142,10 +142,10 @@
 
                     <div class="flex justify-between">
                         <x-secondary-href href="{{ $back ?? route('admin.class-bimbel.index') }}">
-                            Back
+                            Kembali
                         </x-secondary-href>
                         <x-primary-button type="submit">
-                            Edit Class
+                            Edit Kelas
                         </x-primary-button>
                     </div>
                 </div>

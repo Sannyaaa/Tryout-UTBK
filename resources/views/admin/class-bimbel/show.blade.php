@@ -18,13 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="{{ route('admin.class-bimbel.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
+                            <a href="{{ route('admin.class-bimbel.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Kelas</a>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Detail Class</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Detail Kelas</span>
                             </div>
                         </li>
                         </ol>
@@ -38,7 +38,7 @@
                 <main class="rounded-lg bg-white shadow mx-auto px-4 py-10">
                     <div class="grid lg:grid-cols-2 gap-2">
                         <div class="w-full lg:w-2/3 px-4">
-                            <h3 class="text-sm text-gray-500 mb-4">Name Class <br>
+                            <h3 class="text-sm text-gray-500 mb-4">Nama kelas <br>
                                 <span class="text-lg font-bold text-gray-800">{{ $classBimbel->name }}</span>
                             </h3>
                             <h3 class="text-sm text-gray-500 mb-4">Bimbel <br>
@@ -73,10 +73,10 @@
         
             <div class="items-center justify-between block my-6 sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
                 <h3 class="text-2xl text-gray-800 font-bold">
-                    Daftar Pertanyaan {{ $classBimbel->name }}
+                    Daftar Pertanyaan
                 </h3>
                 <a href="{{ route('admin.class.question.create', $classBimbel->id) }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    Add new Question
+                    Tambah Pertanyaan Baru
                 </a>
             </div>
 
@@ -115,17 +115,18 @@
                                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                             <td class="p-4 text-base font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{$i + 1}}</td>
                                                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$question->question}}</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$question->created_at->format('J M d')}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$question->created_at->format('j F Y')}}</td>
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                                     <div class="flex justify-start gap-1">
-                                                        <a href="{{ route('admin.tryout.question.edit', [$tryout->id, $question->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                        <a href="{{ route('admin.class.question.edit', [ 'class_bimbel' => $classBimbel->id, 'question' => $question->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                                                             Update
                                                         </a>
-                                                        <form action="{{ route('admin.tryout.question.destroy', [$tryout->id, $question->id]) }}" method="POST">
+                                                        <form action="{{ route('admin.question-practice.destroy',  $question->id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                                                            <x-text-input type="hidden" value="{{ route('admin.class-bimbel.show', $classBimbel->id) }}" name="back" id="back" />
+                                                            <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-tr from-rose-400 to-rose-500 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                                                                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                                                                 Delete item
                                                             </button>

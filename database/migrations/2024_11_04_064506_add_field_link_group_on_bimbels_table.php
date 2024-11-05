@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('majors', function (Blueprint $table) {
-            $table->id();
+        Schema::table('bimbels', function (Blueprint $table) {
+            //
 
-            $table->foreignId('university_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->string('code')->nullable();
+            $table->string('link_group')->after('description')->nullable();
 
-            $table->timestamps();
         });
     }
 
@@ -27,6 +24,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('majors');
+        Schema::table('bimbels', function (Blueprint $table) {
+            //
+
+            $table->dropColumn('link_group');
+            
+        });
     }
 };

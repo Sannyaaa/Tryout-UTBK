@@ -53,7 +53,7 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">All User</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Semua User</span>
                             </div>
                         </li>
                         </ol>
@@ -67,7 +67,7 @@
                         <div class="flex space-x-1">
                             <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
                             <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                                Delete Selected
+                                Hapus yang dipilih
                             </button>
                         </div>
                     </div>
@@ -75,14 +75,14 @@
                 <div class="flex justify-center items-center gap-2">
                     <div class="">
                         <select id="user_role_filter" class="p-2 border rounded">
-                            <option value="">All Role</option>
+                            <option value="">Semua Role</option>
                             <option value="admin">Admin</option>
                             <option value="mentor">Mentor</option>
                             <option value="user">User</option>
                         </select>
                     </div>
                     <a href="{{ route('admin.user.create') }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                        Add User
+                        Tambah User baru
                     </a>
                 </div>
                 
@@ -108,7 +108,7 @@
                                             </div>
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Name
+                                            Nama
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Email

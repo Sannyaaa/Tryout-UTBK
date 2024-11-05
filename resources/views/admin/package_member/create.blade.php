@@ -10,7 +10,7 @@
                     <nav class="flex" aria-label="Breadcrumb">
                         <ol class="inline-flex items-center space-x-1 text-sm font-semibold md:space-x-2">
                         <li class="inline-flex items-center">
-                            <a href="#" class="inline-flex items-center text-gray-50 hover:text-sky-200 dark:text-gray-300 dark:hover:text-white">
+                            <a href="{{ route('dashboard') }}" class="inline-flex items-center text-gray-50 hover:text-sky-200 dark:text-gray-300 dark:hover:text-white">
                             <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
                                 Dashboard
                             </a>
@@ -18,13 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
+                            <a href="{{ route('admin.tryout.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Paket</a>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">All Class</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Buat Paket</span>
                             </div>
                         </li>
                         </ol>
@@ -67,19 +67,19 @@
                 <div class="space-y-4">
 
                     <div>
-                        <x-input-label for="name" :value="__('Name Package Member')" />
-                        <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan name" required=""/>
+                        <x-input-label for="name" :value="__('Nama Package Member')" />
+                        <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama" required=""/>
                         <x-input-error :messages="$errors->get('price')" class="mt-2" />
                     </div>
 
                     <div>
                         <x-input-label for="image" :value="__('Image')" />
-                        <x-file-input type="file" name="image" id="image" placeholder="Masukan Image package_member" required=""/>
+                        <x-file-input type="file" name="image" id="image" placeholder="Masukan Image Package member" />
                         <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
 
                     <div>
-                        <x-input-label for="description" :value="__('description')" />
+                        <x-input-label for="description" :value="__('Deskripsi')" />
                         <x-text-area id="description" name="description" rows="4" placeholder="Masukan description"/>
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
@@ -99,11 +99,14 @@
                     </div>
 
                     <div>
-                        <x-input-label for="price" :value="__('Price')" />
-                        <x-text-input type="number" :value="old('price')" name="price" id="price" placeholder="Masukan price" required=""/>
+                        <x-input-label for="price" :value="__('Harga')" />
+                        <x-text-input type="number" :value="old('price')" name="price" id="price" placeholder="Masukan Harga"/>
                         <x-input-error :messages="$errors->get('price')" class="mt-2" />
                     </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> f25e0d093d48277d89b1594fe3d509fd2b175766
                     <div class="space-y-4">
                         <!-- Input Radio untuk memilih antara Tryout dan Bimbel -->
                         <div>
@@ -124,7 +127,7 @@
                         <div id="tryoutContainer">
                             <x-input-label for="tryout_id" :value="__('Tryout')" />
                             <x-select-input id="tryout_id" name="tryout_id">
-                                <option selected="" disabled>Select Tryout</option>
+                                <option selected="" disabled>Pilih Tryout</option>
                                 @foreach ($tryout as $tryouts)
                                     <option value="{{ $tryouts->id }}" {{ old('tryout_id') == $tryouts->id ? 'selected' : '' }}>{{ $tryouts->name }}</option>
                                 @endforeach
@@ -136,7 +139,7 @@
                         <div id="bimbelContainer" style="display: none;">
                             <x-input-label for="bimbel_id" :value="__('Bimbel')" />
                             <x-select-input id="bimbel_id" name="bimbel_id">
-                                <option selected="" disabled>Select Bimbel</option>
+                                <option selected="" disabled>Pilih Bimbel</option>
                                 @foreach ($bimbel as $bimbels)
                                     <option value="{{ $bimbels->id }}" {{ old('bimbel_id') == $bimbels->id ? 'selected' : '' }}>{{ $bimbels->name }}</option>
                                 @endforeach

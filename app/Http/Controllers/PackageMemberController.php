@@ -34,7 +34,7 @@ class PackageMemberController extends Controller
                         return asset('storage/' . $package_member->image);
                     })
                     ->addColumn('action', function ($package_member) {
-                        $editBtn = '<a href="' . route('admin.package_member.edit', $package_member->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        $editBtn = '<a href="' . route('admin.package_member.edit', $package_member->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                             Update
                         </a>';
@@ -100,7 +100,7 @@ class PackageMemberController extends Controller
      */
     public function create()
     {
-        $tryout = tryout::all();
+        $tryout = tryout::where('is_free', 'paid')->get();
         $bimbel = Bimbel::all();
         return view('admin.package_member.create', compact('tryout', 'bimbel'));
     }
@@ -112,21 +112,23 @@ class PackageMemberController extends Controller
     {
         // Validate package member data
         $data = $request->validate([
-            'tryout_id' => 'nullable|exists:tryouts,id',
-            'bimbel_id' => 'nullable|exists:bimbels,id',
-            'name' => 'nullable|string',
+            'tryout_id' => 'required_without:bimbel_id|exists:tryouts,id',
+            'bimbel_id' => 'required_without:tryout_id|exists:bimbels,id',
+            'name' => 'required|string',
             'description' => 'nullable|string',
-            'price' => 'nullable|string',
-            'benefits' => 'nullable|array|min:1',
-            'benefits.*' => 'nullable|string',
+            'price' => 'required|string',
+            'benefits' => 'required|array|min:1',
+            'benefits.*' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ],[
+            'bimbel_id.required_without' => 'Bimbel atau Tryout harus diisi.',
+            'tryout_id.required_without' => 'Tryout atau Bimbel harus diisi.',
         ]);
 
         // Handle image upload
         if ($request->hasFile('image')) {
             $image = $request->file('image')->store('assets', 'public');
             $data['image'] = $image;
-        } else {
-            return redirect()->back()->with('error', 'File gambar tidak ditemukan');
         }
 
         try {
@@ -134,7 +136,7 @@ class PackageMemberController extends Controller
 
             // Create package member
             $package_member = Package_member::create($data);
-
+            
             // Create benefits
             foreach ($request->benefits as $benefitText) {
                 Benefit::create([

@@ -24,7 +24,7 @@ class CategoryController extends Controller
                         return '<input type="checkbox" class="Category-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $Category->id . '">';
                     })
                     ->addColumn('action', function ($Category) {
-                        $editBtn = '<button class="edit-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+                        $editBtn = '<button class="edit-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
                             data-id="'.$Category->id.'" 
                             data-name="'.$Category->name.'" 
                             data-description="'.$Category->description.'">

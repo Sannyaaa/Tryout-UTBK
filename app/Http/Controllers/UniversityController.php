@@ -233,7 +233,7 @@ class UniversityController extends Controller
                     }
                 } catch (\Exception $e) {
                     // Log error tapi lanjutkan proses
-                    \Log::warning("Gagal mengambil prodi untuk {$uni['nama']}: " . $e->getMessage());
+                    Log::warning("Gagal mengambil prodi untuk {$uni['nama']}: " . $e->getMessage());
                 }
 
                 $count++;

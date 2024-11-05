@@ -24,7 +24,7 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">All Sub Category</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Semua Sub Category</span>
                             </div>
                         </li>
                         </ol>
@@ -38,7 +38,7 @@
                         <div class="flex space-x-1">
                             <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
                         <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                            Delete Selected
+                            Hapus yang dipilih
                         </button>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
 
                 <!-- Modal toggle -->
                 <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                    Add Sub Category
+                    Tambah Sub Category baru
                 </button>
 
                 <!-- Main modal -->
@@ -61,13 +61,13 @@
                             <!-- Modal header -->
                             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                    Create Sub Categories
+                                    Tambah Sub Category baru
                                 </h3>
                                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                     </svg>
-                                    <span class="sr-only">Close modal</span>
+                                    <span class="sr-only">Tutup modal</span>
                                 </button>
                             </div>
                             <!-- Modal body -->
@@ -75,22 +75,22 @@
                                 @csrf
                                 @method('POST')
                                 <div class="py-3">
-                                    <div>
+                                    <div class="mb-4">
                                         <x-input-label for="name" :value="__('Nama')" />
-                                        <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama" required=""/>
+                                        <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama Sub Category" />
                                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
 
-                                    <div>
+                                    <div class="mb-4">
                                         <x-input-label for="description" :value="__('Description')" />
                                         <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
                                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
 
-                                    <div>
+                                    <div class="mb-4">
                                         <x-input-label for="categories_id" :value="__('Category')" />
                                         <x-select-input id="categories_id" name="categories_id" >
-                                            <option selected="" disabled>Select Category</option>
+                                            <option selected="" disabled>Pilih Category</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}" {{ old('categories_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                             @endforeach
@@ -98,19 +98,19 @@
                                         <x-input-error :messages="$errors->get('categories_id')" class="mt-2" />
                                     </div>
 
-                                    <div>
+                                    <div class="mb-4">
+                                        <label for="add_duration">Tambah Durasi</label>
                                         <input type="checkbox" id="add_duration" name="add_duration">
-                                        <label for="add_duration">Add Duration</label>
                                     </div>
 
                                     <div id="duration_field" style="display: none;">
-                                        <x-input-label for="duration" :value="__('Duration (menit)')" />
-                                        <x-text-input type="number" name="duration" id="duration" placeholder="Enter Duration" />
+                                        <x-input-label for="duration" :value="__('Durasi (menit)')" />
+                                        <x-text-input type="number" name="duration" id="duration" placeholder="Masukan Durasi   " />
                                         <x-input-error :messages="$errors->get('duration')" class="mt-2" />
                                     </div>
                                 </div>
                                 <x-primary-button type="submit">
-                                    Add sub_categories
+                                    Tambah Sub Category
                                 </x-primary-button>
                             </form>
                         </div>
@@ -122,45 +122,45 @@
                     <div class="relative p-4 w-full max-w-lg max-h-full">
                         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Edit sub_categories</h3>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Edit Sub Category</h3>
                                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editModal">
                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                     </svg>
-                                    <span class="sr-only">Close modal</span>
+                                    <span class="sr-only">Tutup modal</span>
                                 </button>
                             </div>
-                            <form id="editForm" method="POST" class="p-4 md:p-5">
+                            <form id="editForm" method="POST" class="p-4 md:p-5" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="grid gap-4 mb-4">
-                                    <div>
+                                    <div class="mb-4">
                                         <x-input-label for="edit_name" :value="__('Nama')" />
-                                        <x-text-input type="text" name="name" id="edit_name" placeholder="Masukan Nama sub_categories" required=""/>
+                                        <x-text-input type="text" name="name" id="edit_name" placeholder="Masukan Nama Sub Category" />
                                         <x-input-error :messages="$errors->get('name')" class="mt-2 " />
                                     </div>
-                                    <div>
+                                    <div class="mb-4">
                                         <x-input-label for="edit_description" :value="__('Deskripsi')" />
-                                        <x-text-input type="text" name="description" id="edit_description" placeholder="Masukan Deskripsi sub_categories" required=""/>
+                                        <x-text-input type="text" name="description" id="edit_description" placeholder="Masukan Deskripsi Sub Category" />
                                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
-                                    <div>
-                                        <x-input-label for="categories_id" :value="__('Category')" />
-                                        <x-select-input id="categories_id" name="categories_id" >
-                                            <option selected="" disabled>Select Category</option>
+                                    <div class="mb-4">
+                                        <x-input-label for="edit_categories_id" :value="__('Category')" />
+                                        <x-select-input id="edit_categories_id" name="categories_id" > <!-- Change name to categories_id -->
+                                            <option selected="" disabled>Pilih Category</option>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}" {{ $sub_categories->categories_id  == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </x-select-input>
                                         <x-input-error :messages="$errors->get('categories_id')" class="mt-2" />
                                     </div>
-                                    <div>
+                                    <div class="mb-4">
                                         <input type="checkbox" id="edit_add_duration" name="add_duration">
-                                        <label for="edit_add_duration">Add Duration</label>
+                                        <label for="edit_add_duration">Tambah Durasi</label>
                                     </div>
                                     <div id="edit_duration_field" style="display: none;">
                                         <x-input-label for="edit_duration" :value="__('Duration (menit)')" />
-                                        <x-text-input type="number" name="duration" id="edit_duration" placeholder="Enter Duration" />
+                                        <x-text-input type="number" name="duration" id="edit_duration" placeholder="Masukan Durasi" />
                                         <x-input-error :messages="$errors->get('duration')" class="mt-2" />
                                     </div>
                                 </div>
@@ -191,7 +191,7 @@
                                             Description
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Duration
+                                            Durasi
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Category
@@ -335,42 +335,44 @@
                         $('#edit_duration').val(''); // Clear the duration input if hidden
                     }
                 });
-
-                // Open Edit Modal with existing data
-                $(document).on('click', '.edit-btn', function(e) {
-                    e.preventDefault();
-                    const id = $(this).data('id');
-                    const name = $(this).data('name');
-                    const description = $(this).data('description');
-                    const duration = $(this).data('duration'); // Get duration
-                    const categories_id = $(this).data('categories_id');
-
-                    // Populate the edit form fields
-                    $('#editForm').attr('action', `/admin/sub_categories/${id}`);
-                    $('#edit_name').val(name);
-                    $('#edit_description').val(description);
-                    $('#edit_categories_id').val(categories_id);
-
-                    // Set duration field
-                    if (duration) {
-                        $('#edit_add_duration').prop('checked', true); // Check the checkbox
-                        $('#edit_duration_field').show(); // Show duration field
-                        $('#edit_duration').val(duration); // Set the duration input
-                    } else {
-                        $('#edit_add_duration').prop('checked', false); // Uncheck the checkbox
-                        $('#edit_duration_field').hide(); // Hide duration field
-                        $('#edit_duration').val(''); // Clear the duration input
-                    }
-
-                    $('#editModal').removeClass('hidden'); // Open modal
-                });
             });
 
-            // Handle submit form edit
+            //Menyalin// Open Edit Modal with existing data
+            $(document).on('click', '.edit-btn', function(e) {
+                e.preventDefault();
+                const id = $(this).data('id');
+                const name = $(this).data('name');
+                const description = $(this).data('description');
+                const duration = $(this).data('duration');
+                const categories_id = $(this).data('categories_id'); // Get categories_id
+
+                // Populate the edit form fields
+                $('#editForm').attr('action', `/admin/category/sub_categories/${id}`);
+                $('#edit_name').val(name);
+                $('#edit_description').val(description);
+                $('#edit_categories_id').val(categories_id); // Set the category select value
+
+                // Set duration field
+                if (duration) {
+                    $('#edit_add_duration').prop('checked', true);
+                    $('#edit_duration_field').show();
+                    $('#edit_duration').val(duration);
+                } else {
+                    $('#edit_add_duration').prop('checked', false);
+                    $('#edit_duration_field').hide();
+                    $('#edit_duration').val('');
+                }
+
+                $('#editModal').removeClass('hidden');
+            });
+
+            // Add logging to see what data is being sent
             $('#editForm').on('submit', function(e) {
                 e.preventDefault();
                 const form = $(this);
                 const url = form.attr('action');
+                
+                console.log('Form data being sent:', form.serialize()); // Add this line for debugging
                 
                 $.ajax({
                     url: url,
@@ -378,15 +380,13 @@
                     data: form.serialize(),
                     success: function(response) {
                         if(response.success) {
-                            // Tutup modal
                             $('#editModal').addClass('hidden');
-                            // Refresh table
                             table.ajax.reload();
-                            // Show success message
                             alert('sub_categories updated successfully');
                         }
                     },
                     error: function(xhr) {
+                        console.error('Update error:', xhr.responseText); // Add this line for debugging
                         alert('Error updating sub_categories');
                     }
                 });
