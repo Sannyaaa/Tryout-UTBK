@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrderExport;
 use App\Models\Discount;
 use App\Models\Order;
 use App\Models\Package_member;
+use App\Models\Tryout;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -60,6 +64,19 @@ class OrderController extends Controller
                     ->rawColumns(['action', 'image', 'checkbox'])
                     ->make(true);
             }
+
+             // Ekspor ke Excel
+            if ($request->has('export_excel')) {
+                $data = Order::with(['package_member', 'discount'])->get(); // Ambil data
+                return Excel::download(new OrderExport($data), 'order_data.xlsx');
+            }
+
+            // // Ekspor ke PDF
+            // if ($request->has('export_pdf')) {
+            //     $data = Order::with(['package_member'])->get(); // Ambil data
+            //     $pdf = Pdf::loadView('admin.order.pdf', compact('data'));
+            //     return $pdf->download('order_data.pdf');
+            // }
 
             $order = Order::all(); //
             return view('admin.order.index', compact('order'));

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PaketMemberExport;
 use App\Livewire\User\Tryouts;
 use App\Models\batch;
 use App\Models\Benefit;
@@ -9,10 +10,12 @@ use App\Models\Bimbel;
 use App\Models\Discount;
 use App\Models\Package_member;
 use App\Models\tryout;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
 class PackageMemberController extends Controller
@@ -56,6 +59,19 @@ class PackageMemberController extends Controller
                     })
                     ->rawColumns(['action', 'image', 'checkbox'])
                     ->make(true);
+            }
+
+             // Ekspor ke Excel
+            if ($request->has('export_excel')) {
+                $data = Package_member::with(['tryout', 'bimbel'])->get(); // Ambil data
+                return Excel::download(new PaketMemberExport($data), 'paket_data.xlsx');
+            }
+
+            // Ekspor ke PDF
+            if ($request->has('export_pdf')) {
+                $data = Package_member::with(['tryout', 'bimbel'])->get(); // Ambil data
+                $pdf = Pdf::loadView('admin.package_member.pdf', compact('data'));
+                return $pdf->download('paket_data.pdf');
             }
 
             return view('admin.package_member.index');

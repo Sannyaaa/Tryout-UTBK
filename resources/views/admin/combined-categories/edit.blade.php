@@ -28,10 +28,12 @@
                 <select name="parent_category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:ring-1 block w-full p-2.5">
                     <option value="">None (Save as Category)</option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" 
-                            {{ (isset($item->categories_id) && $item->categories_id == $category->id) ? 'selected' : '' }}>
-                            {{ $category->name }}
-                        </option>
+                        @if ($category->id != $item->id)
+                            <option value=" {{ $category->id }}" 
+                                {{ $item->categories_id == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                        @endif
                     @endforeach
                 </select>
             </div>

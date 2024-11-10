@@ -11,7 +11,6 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
         @livewireStyles()
         @yield('head-styles')
 
@@ -73,7 +72,6 @@
     {{-- <script src="./path/to/flowbite/dist/flowbite.js"></script> --}}
     @livewireScripts()
 
-    @yield('body-scripts')
-
+    @stack('body-scripts')
   </body>
 </html>

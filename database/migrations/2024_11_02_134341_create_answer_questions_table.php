@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('question_practices', function (Blueprint $table) {
+        Schema::create('answer_questions', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('class_bimbel_id')->constrained()->cascadeOnDelete();
-            $table->string('question')->nullable();
-            $table->string('image')->nullable();
-            $table->string('correct_answer');
-            $table->longText('explanation')->nullable();
-
+            $table->foreignId('question_id');
+            $table->enum('answer', ['a', 'b', 'c', 'd', 'e']);
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('question_practices');
+        Schema::dropIfExists('answer_questions');
     }
 };

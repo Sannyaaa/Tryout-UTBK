@@ -110,7 +110,7 @@ class QuestionPracticeController extends Controller
         
         $data = $request->validate([
             'question' => 'required|string',
-            'corect_answer' => 'required|string',
+            'correct_answer' => 'required|string',
             'explanation' => 'required|string',
             'class_bimbel_id' => 'required|exists:class_bimbels,id',
             'image' => 'nullable|image|max:2048',
@@ -173,7 +173,7 @@ class QuestionPracticeController extends Controller
         // Validasi data pertanyaan
         $data = $request->validate([
             'question' => 'required|string',
-            'corect_answer' => 'required|string',
+            'correct_answer' => 'required|string',
             'explanation' => 'required|string',
             'class_bimbel_id' => 'required|exists:class_bimbels,id',
             'image' => 'nullable|image|max:2048',

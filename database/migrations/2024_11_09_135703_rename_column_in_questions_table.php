@@ -9,12 +9,10 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('universities', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->timestamps();
+        Schema::table('questions', function (Blueprint $table) {
+            $table->renameColumn('corect_answer', 'correct_answer');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('universities');
+        Schema::table('questions', function (Blueprint $table) {
+            $table->renameColumn('correct_answer', 'corect_answer');
+        });
     }
 };

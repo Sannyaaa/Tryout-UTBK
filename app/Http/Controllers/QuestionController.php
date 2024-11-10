@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\QuestionExport;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\sub_categories;
 use App\Models\tryout;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
 class QuestionController extends Controller
@@ -60,6 +63,20 @@ class QuestionController extends Controller
                     ->rawColumns(['action', 'image', 'checkbox', 'created_at'])
                     ->make(true);
             }
+
+             // Ekspor ke Excel
+            if ($request->has('export_excel')) {
+                $data = Question::with(['tryout', 'answer', 'sub_categories'])->get(); // Ambil data
+                return Excel::download(new QuestionExport($data), 'question_data.xlsx');
+            }
+
+            // Ekspor ke PDF
+            if ($request->has('export_pdf')) {
+                $data = Question::with(['tryout', 'answer', 'sub_categories'])->get(); // Ambil data
+                $pdf = Pdf::loadView('admin.question.pdf', compact('data'));
+                return $pdf->download('question_data.pdf');
+            }
+
 
              $subCategories = sub_categories::all();
              $tryout = tryout::all();
@@ -122,7 +139,7 @@ class QuestionController extends Controller
         $data = $request->validate([
             'sub_categories_id' => 'required|exists:sub_categories,id',
             'question' => 'nullable|string',
-            'corect_answer' => 'required|string',
+            'correct_answer' => 'required|string',
             'explanation' => 'required|string',
             'tryout_id' => 'required|exists:tryouts,id',
             
@@ -135,7 +152,7 @@ class QuestionController extends Controller
         
         try{
             $question = Question::create($data);
-
+            
             // answer
             $answer = $request->validate([
                 'a' => 'required|string',
@@ -144,10 +161,11 @@ class QuestionController extends Controller
                 'd' => 'required|string',
                 'e' => 'required|string',
             ]);
-
+            
             $answer['question_id'] = $question->id;
-
-            Answer::create($answer);
+            
+            $p = Answer::create($answer);
+            // dd($p);
 
             Log::info("berhasil");
             return redirect()->route('admin.question.index')->with('success', 'question created successfully.');
@@ -192,7 +210,7 @@ class QuestionController extends Controller
         $data = $request->validate([
             'sub_categories_id' => 'required|exists:sub_categories,id',
             'question' => 'nullable|string',
-            'corect_answer' => 'required|string',
+            'correct_answer' => 'required|string',
             'explanation' => 'required|string',
             'tryout_id' => 'required|exists:tryouts,id',
         ]);

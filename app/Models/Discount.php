@@ -13,4 +13,8 @@ class Discount extends Model
     public function package_members(){
         $this->belongsToMany(Package_member::class,'discount_package_member');
     }
+
+    public function order(){
+        return $this->hasMany(Order::class);
+    }
 }

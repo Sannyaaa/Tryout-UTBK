@@ -41,6 +41,6 @@ prefix('/admin')->name('admin.')->group(function() {
 
 Route::
 middleware(['auth'])->
-prefix('/user')->name('user.')->group(function() {
+name('user.')->group(function() {
     require __DIR__.'/user.php';
 });
