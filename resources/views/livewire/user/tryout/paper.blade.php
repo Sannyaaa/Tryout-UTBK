@@ -8,11 +8,13 @@
                         <h1 class="text-3xl font-bold">{{$paper->name}}</h1>
                     </div>
                     {{-- <hr class="border border-gray-300 my-5">  --}}
+                    @if ($paper->duration)
                     <div class="bg-white border rounded-lg shadow p-8 mb-4 text-lg text-sky-500 flex items-center" wire:ignore>
                         <i class="fa-regular fa-clock my-auto me-4 text-2xl"></i>
-                        <span class="my-auto me-4">Sisa waktu:</span>
-                        <span id="timer" class="my-auto"></span> <!-- Timer Display -->
+                        <span class="my-auto me-2">Sisa waktu:</span>
+                        <span id="timer" class="my-auto"><i>Memulai timer...</i></span> <!-- Timer Display -->
                     </div>
+                    @endif
                     <div class="bg-white border rounded-lg shadow p-8 mb-4 grid grid-cols-5">
                         {{-- <input type="number" name="" wire:model.live="q" id="questionid"> --}}
                         @foreach ($questions as $item)
@@ -150,7 +152,7 @@
     // @endforeach
 
 </script>
-
+@if ($paper->duration)
 <script>
     let timerStarted = false; // Flag to check if the timer has started
     let duration = {{$paper->duration * 60}}; // Set the timer duration in seconds
@@ -166,7 +168,8 @@
             if (remainingTime <= 0) {
                 clearInterval(interval);
                 display.textContent = "00:00"; // Stop at 0
-                alert("Waktu habis!");
+                // alert("Waktu habis!");
+                submitAnswers(); // Call the submit function
                 return; // Exit if time is up
             }
 
@@ -195,5 +198,11 @@
         }
     });
 
+    function submitAnswers() {
+        // Trigger the submitAnswers function in Livewire
+        @this.submitAnswers();
+    }
+
 </script>
+@endif
 @endpush

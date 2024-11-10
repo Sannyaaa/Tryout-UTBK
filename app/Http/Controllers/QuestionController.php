@@ -119,7 +119,7 @@ class QuestionController extends Controller
         $data = $request->validate([
             'sub_categories_id' => 'required|exists:sub_categories,id',
             'question' => 'nullable|string',
-            'corect_answer' => 'required|string',
+            'correct_answer' => 'required|string',
             'explanation' => 'required|string',
             'tryout_id' => 'required|exists:tryouts,id',
             
@@ -191,7 +191,7 @@ class QuestionController extends Controller
         $data = $request->validate([
             'sub_categories_id' => 'required|exists:sub_categories,id',
             'question' => 'nullable|string',
-            'corect_answer' => 'required|string',
+            'correct_answer' => 'required|string',
             'explanation' => 'required|string',
             'tryout_id' => 'required|exists:tryouts,id',
         ]);

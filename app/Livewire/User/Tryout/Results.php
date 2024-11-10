@@ -2,47 +2,29 @@
 
 namespace App\Livewire\User\Tryout;
 
-use App\Models\AnswerQuestion;
 use App\Models\Question;
 use App\Models\Result;
-use App\Models\sub_categories;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Collection;
-use Livewire\Attributes\Url;
 use Livewire\Component;
 
-class Paper extends Component
+class Results extends Component
 {
-
-    // #[Url]
     public $q;
 
-    public $itemId;
-    public $paperId;
-    // public $activeItemId;
-    // Collections of answers
-    public $answers;
+    public $resultsId;
     public $questions;
-    
 
-    public function mount(Request $request){
-        $this->answers = [];
-        
-        $this->itemId = $request->segment(3);
-        $this->paperId = $request->segment(4);
-        
-        $this->q = Question::where('tryout_id', $this->itemId)
-            ->where('sub_categories_id', $this->paperId)
+    public $results; 
+
+    public function mount(Request $request) {
+        $this->resultsId = $request->segment(3);
+        $this->results = Result::whereId($this->resultsId)->first();
+
+        $this->q = Question::where('tryout_id', $this->results->tryout_id)
+            ->where('sub_categories_id', $this->results->sub_category_id)
             ->min('id');
     }
 
-    
-    public function changeNumber($value)
-    {
-        $this->q = $value;
-    }
-    
     public function previousQuestion()
     {
         // Decrement the index if it's greater than 0
@@ -86,7 +68,7 @@ class Paper extends Component
             dd("the end");
         }
     }
-    
+
     public function isFirstQuestion()
     {
         return $this->q === $this->questions->first()->id;
@@ -96,11 +78,11 @@ class Paper extends Component
     {
         return $this->q === $this->questions->last()->id;
     }
-
+    
     public function render()
     {
-        $question = Question::where('tryout_id', $this->itemId)
-                ->where('sub_categories_id', $this->paperId)
+        $question = Question::where('tryout_id', $this->results->tryout_id)
+                ->where('sub_categories_id', $this->results->sub_category_id)
                 ->where('id', $this->q)
                 ->with('answer')
                 ->first();
@@ -108,66 +90,18 @@ class Paper extends Component
         if ($question) {
             $question->count = 1; // Assigning a fixed new ID of 1, or you can assign any other logic
         }
-    
 
-        $this->questions = Question::where('tryout_id', $this->itemId)
-            ->where('sub_categories_id', $this->paperId)
-            ->get() 
+        $this->questions = Question::where('tryout_id', $this->results->tryout_id)
+            ->where('sub_categories_id', $this->results->sub_category_id)
+            ->get()
             ->map(function ($question, $index) {
                 // Assign a new ID starting from 1
                 $question->count = $index + 1; // Adding 1 to start from 1 instead of 0
                 return $question;
         });
-        
-    
-        return view('livewire.user.tryout.paper', [
-            'question' => $question,
-            'paper' => sub_categories::where('id', $this->paperId)->first(),
+
+        return view('livewire.user.tryout.results', [
+            'question' => $question
         ]);
-    }
-
-    public function submitAnswers() {
-        // dd($this->answers);
-
-        $correctAnswers = 0;
-        $incorrectAnswers = 0;
-        $unanswered = 0;
-        $score = 0;
-
-        $result = Result::create([
-            'user_id' => Auth::user()->id,
-            'tryout_id' => $this->itemId,
-            'sub_category_id' => $this->paperId,
-        ]);
-
-        foreach ($this->answers as $key => $value) {
-            $getCorrectAnswer = Question::whereId($key)->first()->correct_answer;
-
-            if ($value == $getCorrectAnswer) {
-                $correctAnswers++;
-                $score += 4;
-            } elseif ($value == null) {
-                $unanswered++;
-            } else {
-                $incorrectAnswers++;
-                $score -= 1;
-            }
-
-            AnswerQuestion::create([
-                'question_id' => $key,
-                'user_id' => Auth::user()->id,
-                'answer' => $value,
-                'result_id' => $result->id,
-            ]);
-        }
-
-        Result::whereId($result->id)->update([
-            'correct_answers' =>  $correctAnswers,
-            'incorrect_answers' => $incorrectAnswers,
-            'unanswered' => $unanswered,
-            'score' => $score,
-        ]);
-
-        return redirect()->route('user.tryouts.results', $result->id);
     }
 }
