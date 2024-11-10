@@ -34,7 +34,11 @@
             </div>
             <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700 mb-4">
                 <div class="flex items-center mb-4 sm:mb-0">
-                    <div class="flex items-center w-full sm:justify-end">
+                    <div class="flex items-center w-full sm:justify-end gap-3">
+                        <div class="flex items-center gap-2">
+                            <button id="exportExcel" class="px-4 py-2 bg-gradient-to-tr from-emerald-400 to-emerald-500 text-white rounded-lg">Export Excel</button>
+                            {{-- <button id="exportPdf" class="px-4 py-2 bg-gradient-to-tr from-rose-400 to-rose-500 text-white rounded-lg">Export PDF</button> --}}
+                        </div>
                         <div class="flex space-x-1">
                             <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
                             <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
@@ -333,6 +337,15 @@ $(document).ready(function() {
         }
     });
 });
+</script>
+<script>
+    document.getElementById('exportExcel').addEventListener('click', function() {
+        window.location.href = '{{ route("admin.class-bimbel.index") }}?export_excel=true';
+    });
+
+    document.getElementById('exportPdf').addEventListener('click', function() {
+        window.location.href = '{{ route("admin.class-bimbel.index") }}?export_pdf=true';
+    });
 </script>
 @endsection
 

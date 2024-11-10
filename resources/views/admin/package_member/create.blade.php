@@ -103,10 +103,6 @@
                         <x-text-input type="number" :value="old('price')" name="price" id="price" placeholder="Masukan Harga"/>
                         <x-input-error :messages="$errors->get('price')" class="mt-2" />
                     </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> f25e0d093d48277d89b1594fe3d509fd2b175766
                     <div class="space-y-4">
                         <!-- Input Radio untuk memilih antara Tryout dan Bimbel -->
                         <div>

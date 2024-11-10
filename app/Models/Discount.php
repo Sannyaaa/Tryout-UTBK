@@ -9,4 +9,9 @@ class Discount extends Model
     //
 
     protected $fillable = ['name', 'discount_value', 'code', 'description', 'discount_type', 'start_date', 'end_date'];
+
+    public function order(){
+        return $this->hasMany(Order::class);
+    }
+
 }
