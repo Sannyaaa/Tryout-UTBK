@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="p-4 mt-12">
-    <div class="p-6 bg-white block rounded-lg shadow sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+    <div class="p-6 bg-white block rounded-lg shadow sm:flex items-center justify-between \bg-b \bg-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:\bg-gray-700">
         <div class="w-full mb-1">
             <div class="mx-6 relative -mt-12 mb-6">
                 <div class="bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg shadow-lg py-4 px-3">
@@ -18,13 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Questions</a>
+                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Latihan</a>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">All Question</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Semua Latihan</span>
                             </div>
                         </li>
                         </ol>
@@ -38,47 +38,46 @@
                         <div class="flex space-x-1">
                             <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
                             <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                                Delete Selected
+                                Hapus Yang dipilih
                             </button>
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('admin.question.create') }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                    Add Question
-                </a>
-                
-
-                <!-- Modal toggle -->
-                {{-- <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                    Add Bimbel
-                </button> --}}
-
+                <div class="flex justify-center items-center gap-2">
+                    <div class="">
+                        <select id="payment_status" class="p-2 bquestion-practice rounded">
+                            <option value="">Status Pembayaran</option>
+                            <option value="pending">Pending</option>
+                            <option value="paid">Dibayar</option>
+                        </select>
+                    </div>
+                    <x-primary-link href="{{ route('admin.question-practice.create') }}">
+                        + Latihan
+                    </x-primary-link>
+                </div>
             </div>
 
             <div class="flex flex-col">
                 <div class="">
                     <div class="align-middle">
                         <div class=" overflow-x-scroll lg:overflow-x-hidden">
-                            <table id="questionTable" class="w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
+                            <table id="question-practiceTable" class="w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
                                 <thead class="bg-gray-100 dark:bg-gray-700">
                                     <tr>
                                         <th scope="col" class="p-4">
                                             <div class="flex items-center">
-                                                <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 bquestion-practice-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:bquestion-practice-gray-600">
                                                 <label for="checkbox-all" class="sr-only">checkbox</label>
                                             </div>
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Tryout
+                                            Pertanyaan
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Sub categories
+                                            Kelas
                                         </th>
-                                        {{-- <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Image
-                                        </th> --}}
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Question
+                                            Tanggal
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Actions
@@ -87,37 +86,37 @@
                                 </thead >
                                 {{-- <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                                     
-                                    @foreach ($question as $questions)
+                                    @foreach ($question-practice as $question-practices)
                                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                                 <td class="w-4 p-4">
                                                     <div class="flex items-center">
                                                         <input id="checkbox" aria-describedby="checkbox-1" type="checkbox"
-                                                            class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
+                                                            class="w-4 h-4 bquestion-practice-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:bquestion-practice-gray-600">
                                                         <label for="checkbox" class="sr-only">checkbox</label>
                                                     </div>
                                                 </td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><img src="{{ Storage::url($questions->image) }}" class="w-[100px]" alt=""></td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->name}}</td>
-                                                @if ($questions->is_free == 'free')
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><img src="{{ Storage::url($question-practices->image) }}" class="w-[100px]" alt=""></td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$question-practices->name}}</td>
+                                                @if ($question-practices->is_free == 'free')
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Gratis</td>
                                                 @else
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Berbayar</td>
                                                 @endif
-                                                @if ($questions->is_together == 'basic')
+                                                @if ($question-practices->is_together == 'basic')
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Biasa</td>
                                                 @else
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Serentak</td>
                                                 @endif
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->start_date}}</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->end_date}}</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->batch->name}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$question-practices->start_date}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$question-practices->end_date}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$question-practices->batch->name}}</td>
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                                     <div class="flex justify-start gap-1">
-                                                        <a href="{{ route('admin.question.edit', $questions->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                        <a href="{{ route('admin.question-practice.edit', $question-practices->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                                                             Update
                                                         </a>
-                                                        <form action="{{ route('admin.question.destroy', $questions->id) }}" method="POST">
+                                                        <form action="{{ route('admin.question-practice.destroy', $question-practices->id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
@@ -141,8 +140,8 @@
 
 
 
-{{-- <div class="w-full p-4 bg-white border-t border-gray-200">
-    {{ $question->links() }}
+{{-- <div class="w-full p-4 bg-white bquestion-practice-t bquestion-practice-gray-200">
+    {{ $question-practice->links() }}
 </div>   --}}
 
 
@@ -159,22 +158,17 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    var table = $('#questionTable').DataTable({
+    var table = $('#question-practiceTable').DataTable({
         processing: true,
         serverSide: true,
+        order:[[4,'desc']],
+        // ajax: "{{ route('admin.question-practice.index') }}",
         ajax: {
-            url: "{{ route('admin.question.index') }}",
-            type: 'GET',
-            error: function (xhr, error, thrown) {
-                console.log('DataTables error:', error);
-            }
-        },
+                url: "{{ route('admin.question-practice.index') }}",
+                data: function (d) {
+                    d.payment_status = $('#payment_status').val();
+                }
+            },
         columns: [
             {
                 data: 'checkbox',
@@ -183,18 +177,10 @@ $(document).ready(function() {
                 searchable: false,
                 width: '5%'
             },
-            {data: 'tryout.name', name: 'tryout.name', defaultContent: ''},
-            {data: 'sub_categories.name', name: 'sub_categories.name', defaultContent: ''},
-            // {
-            //     data: 'image',
-            //     name: 'image',
-            //     orderable: false,
-            //     searchable: false,
-            //     render: function(data) {
-            //         return data ? '<img src="' + data + '" width="100" height="100">' : '';
-            //     }
-            // },
-            {data: 'question', name: 'question', defaultContent: ''},
+            {data: 'question', name: 'question'},
+            {data: 'class_bimbel.name', name: 'class_bimbel.name'},
+            // {data: 'user.name', name: 'user.name'},
+            {data: 'created_at', name: 'created_at'},
             {
                 data: 'action',
                 name: 'action',
@@ -204,24 +190,28 @@ $(document).ready(function() {
         ]
     });
 
+    $('#payment_status').change(function(){
+        table.draw();
+    });
+
     // Handle "select all" checkbox
     $('#checkbox-all').on('click', function() {
-        $('.question-checkbox').prop('checked', this.checked);
+        $('.question-practice-checkbox').prop('checked', this.checked);
         updateBulkDeleteButton();
     });
 
     // Handle individual checkbox changes
-    $('#questionTable').on('change', '.question-checkbox', function() {
+    $('#question-practiceTable').on('change', '.question-practice-checkbox', function() {
         updateBulkDeleteButton();
         
         // Update "select all" checkbox
-        var allChecked = $('.question-checkbox:checked').length === $('.question-checkbox').length;
+        var allChecked = $('.question-practice-checkbox:checked').length === $('.question-practice-checkbox').length;
         $('#checkbox-all').prop('checked', allChecked);
     });
 
     // Update bulk delete button visibility
     function updateBulkDeleteButton() {
-        var checkedCount = $('.question-checkbox:checked').length;
+        var checkedCount = $('.question-practice-checkbox:checked').length;
         if (checkedCount > 0) {
             $('#bulkDeleteBtn').show();
         } else {
@@ -233,12 +223,12 @@ $(document).ready(function() {
     $('#bulkDeleteBtn').on('click', function() {
         if (confirm('Are you sure you want to delete selected items?')) {
             var selectedIds = [];
-            $('.question-checkbox:checked').each(function() {
+            $('.question-practice-checkbox:checked').each(function() {
                 selectedIds.push($(this).val());
             });
 
             $.ajax({
-                url: "{{ route('admin.question.bulkDelete') }}",
+                url: "{{ route('admin.question-practice.bulkDelete') }}",
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -271,14 +261,14 @@ $(document).ready(function() {
     
 <script type="text/javascript">
         $(document).ready(function () {
-            var table = $('#questionTable').DataTable({
+            var table = $('#question-practiceTable').DataTable({
                 processing: true,
                 serverSide: true,
-                order: [[5,'desc']],
-                ordering: true,
-                ajax: "{{ route('admin.question.index') }}",
+                question-practice: [[5,'desc']],
+                question-practiceing: true,
+                ajax: "{{ route('admin.question-practice.index') }}",
                 columns: [
-                    {data: 'image', name: 'image', orderable: false, searchable: false},
+                    {data: 'image', name: 'image', question-practiceable: false, searchable: false},
                     {data: 'name', name: 'name'},
                     {data: 'description', name: 'description'},
                     {data: 'is_free', name: 'is_free'},
@@ -287,7 +277,7 @@ $(document).ready(function() {
                     {data: 'end_date', name: 'end_date'},
                     {data: 'batch_id', name: 'batch_id'},
                     {data: 'created_at', name: 'created_at'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                    {data: 'action', name: 'action', question-practiceable: false, searchable: false},
                 ]
             });
         });

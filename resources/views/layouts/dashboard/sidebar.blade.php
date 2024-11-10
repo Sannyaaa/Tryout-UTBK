@@ -58,6 +58,12 @@
                         <x-sidebar-link-dropdown link="{{ route('admin.class-bimbel.create') }}" name="Buat" />
                         {{-- <a href="{{ route('admin.class-bimbel.create') }}" name="Buat</a> --}}
                     </li>
+                    <li>
+                        <x-sidebar-link-dropdown link="{{ route('admin.question-practice.index') }}" name="List Pertanyaan" />
+                    </li>
+                    <li>
+                        <x-sidebar-link-dropdown link="{{ route('admin.question-practice.create') }}" name="Buat Pertanyaan" />
+                    </li>
                 </x-slot>
             </x-sidebar-dropdown>
           </li>
@@ -162,7 +168,13 @@
           </li>
 
           <li>
-            <x-sidebar-link link="{{ route('admin.order.index') }}" token="order" name="Transaction">
+            <x-sidebar-link link="{{ route('admin.order.index') }}" token="order" name="Transaksi">
+              <i class="fa-solid fa-book-open"></i>
+            </x-sidebar-link>
+          </li>
+
+          <li>
+            <x-sidebar-link link="{{ route('admin.testimonial.index') }}" token="testimonial" name="Testimonial">
               <i class="fa-solid fa-book-open"></i>
             </x-sidebar-link>
           </li>

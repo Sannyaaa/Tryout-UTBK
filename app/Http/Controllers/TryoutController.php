@@ -23,7 +23,7 @@ class TryoutController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $query = tryout::orderBy('created_at', 'desc');
+                $query = tryout::all();
                 
                // Check if a filter is applied
                 if ($request->has('is_free') && $request->is_free != '') {
@@ -38,6 +38,9 @@ class TryoutController extends Controller
                     ->addIndexColumn()
                     ->addColumn('checkbox', function($tryout) {
                         return '<input type="checkbox" class="tryout-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $tryout->id . '">';
+                    })
+                    ->addColumn('created_at', function($tryout) {
+                        return date('j F Y', strtotime($tryout->created_at));
                     })
                     // ->addColumn('image', function ($tryout) {
                     //     return asset('storage/' . $tryout->image);
@@ -158,7 +161,16 @@ class TryoutController extends Controller
     public function show(tryout $tryout)
     {
         $question = Question::where('tryout_id', $tryout->id)->get();
-        return view('admin.tryout.show', compact('tryout','question'));
+        $tryout = tryout::with(['question.sub_categories'])->withCount(['question as total_question'])->findOrFail($tryout->id);
+
+        $subCategories = $tryout->question()->select('sub_categories_id')->with('sub_categories')->selectRaw('sub_categories_id, count(*) as question_count')->groupBy('sub_categories_id')->get();
+
+        return view('admin.tryout.show', compact('tryout','question','subCategories'));
+    }
+
+    public function subCategory(tryout $tryout, sub_categories $sub_categories){
+        $questions = Question::where('tryout_id', $tryout->id)->where('sub_categories_id', $sub_categories->id)->orderByDesc('created_at')->get();
+        return view('admin.tryout.sub-category', compact('questions','tryout'));
     }
 
     /**

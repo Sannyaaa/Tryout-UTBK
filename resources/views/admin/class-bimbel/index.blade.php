@@ -241,6 +241,8 @@ $(document).ready(function() {
     var table = $('#classBimbelTable').DataTable({
         processing: true,
         serverSide: true,
+        // ordering: true,
+        order: [[2,'desc']],
         // ajax: "{{ route('admin.class-bimbel.index') }}",
         ajax: {
                 url: "{{ route('admin.class-bimbel.index') }}",

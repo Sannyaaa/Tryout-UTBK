@@ -6,6 +6,7 @@ use App\Livewire\User\Tryouts;
 use App\Models\batch;
 use App\Models\Benefit;
 use App\Models\Bimbel;
+use App\Models\Discount;
 use App\Models\Package_member;
 use App\Models\tryout;
 use Illuminate\Http\Request;
@@ -32,6 +33,9 @@ class PackageMemberController extends Controller
                     })
                     ->addColumn('image', function ($package_member) {
                         return asset('storage/' . $package_member->image);
+                    })
+                    ->addColumn('created_at', function($tryout) {
+                        return date('j F Y', strtotime($tryout->created_at));
                     })
                     ->addColumn('action', function ($package_member) {
                         $editBtn = '<a href="' . route('admin.package_member.edit', $package_member->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -102,7 +106,8 @@ class PackageMemberController extends Controller
     {
         $tryout = tryout::where('is_free', 'paid')->get();
         $bimbel = Bimbel::all();
-        return view('admin.package_member.create', compact('tryout', 'bimbel'));
+        $discounts = Discount::all();
+        return view('admin.package_member.create', compact('tryout', 'bimbel','discounts'));
     }
 
     /**
@@ -119,6 +124,8 @@ class PackageMemberController extends Controller
             'price' => 'required|string',
             'benefits' => 'required|array|min:1',
             'benefits.*' => 'required|string',
+            'discounts' => 'array',
+            'discounts.*' => 'integer|exists:discounts,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ],[
             'bimbel_id.required_without' => 'Bimbel atau Tryout harus diisi.',
@@ -143,6 +150,10 @@ class PackageMemberController extends Controller
                     'package_member_id' => $package_member->id,
                     'benefit' => $benefitText,
                 ]);
+            }
+
+            if($request->has('discounts')){
+                $package_member->discounts()->attach($request->discounts);
             }
 
             DB::commit();
@@ -172,11 +183,13 @@ class PackageMemberController extends Controller
             return redirect()->back()->with('error', 'package_member not found.');
         }
 
+        // $package_member::wi
         $tryout = tryout::all();
         $bimbel = Bimbel::all();
+        $discounts = Discount::all();
         $benefit = $package_member->benefit; // Ambil jawaban yang terkait dengan pertanyaan
 
-        return view('admin.package_member.edit', compact('package_member', 'benefit', 'tryout', 'bimbel'));
+        return view('admin.package_member.edit', compact('package_member', 'discounts','benefit', 'tryout', 'bimbel'));
     }
 
     /**
@@ -195,6 +208,8 @@ class PackageMemberController extends Controller
             'price' => 'nullable|string',
             'benefits' => 'nullable|array|min:1',
             'benefits.*' => 'nullable|string',
+            'discounts' => 'array',
+            'discounts.*' => 'integer|exists:discounts,id',
         ]);
 
         // Handle image upload if there's a new image
@@ -222,6 +237,8 @@ class PackageMemberController extends Controller
                     'benefit' => $benefitText,
                 ]);
             }
+            
+            $package_member->discounts()->sync($request->discounts);
 
             DB::commit();
             return redirect()->route('admin.package_member.index')

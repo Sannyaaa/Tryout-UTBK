@@ -4,7 +4,10 @@ namespace App\Livewire\User\Owned;
 
 use App\Models\Bimbel;
 use App\Models\ClassBimbel;
+use App\Models\Package_member;
 use App\Models\sub_categories;
+use App\Models\Testimonial;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
@@ -16,6 +19,8 @@ class Bimbels extends Component
     protected $paginationTheme = 'tailwind';
 
     public $bimbel;
+    public $package;
+    public $content;
     public $subCategories;
 
     #[Url(history: true)]
@@ -26,8 +31,25 @@ class Bimbels extends Component
 
     public function mount($id)
     {
-        $this->bimbel = Bimbel::findOrFail($id);
+        $this->package = Package_member::findOrFail($id);
+        $this->bimbel = Bimbel::findOrFail($this->package->bimbel_id);
         $this->subCategories = sub_categories::all();
+    }
+
+    public function saveTestimonial()
+    {
+        $this->validate([
+            'content' => 'required|string|max:500',
+        ]);
+        
+        $testi = Testimonial::create([
+            'package_member_id' => $this->package->id,
+            'user_id' => auth()->id(),
+            'content' => $this->content,
+        ]);
+
+        $this->content = '';
+        // $this->dispatchBrowserEvent('close-modal', ['modalId' => 'bimbel-testimonial-modal']);
     }
 
     // Ubah method updating menjadi updated
@@ -56,10 +78,13 @@ class Bimbels extends Component
 
         $queryClass = $query->paginate(10);
 
+        $now = Carbon::now();
+
         return view('livewire.user.owned.bimbels', [
             'queryClass' => $queryClass,
             'bimbel' => $this->bimbel,
-            'subCategories' => $this->subCategories
+            'subCategories' => $this->subCategories,
+            'now' => $now
         ]);
     }
 }

@@ -19,7 +19,7 @@ class QuestionController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $query = Question::with('tryout','sub_categories')->orderBy('created_at', 'desc');
+                $query = Question::with('tryout','sub_categories')->get();
                 
                 if ($request->tryout) {
                     $query->where('tryout_id', $request->tryout);
@@ -36,6 +36,9 @@ class QuestionController extends Controller
                     })
                     ->addColumn('image', function ($question) {
                         return asset('storage/' . $question->image);
+                    })
+                    ->addColumn('created_at', function($class) {
+                        return date('j F Y', strtotime($class->created_at));
                     })
                     ->addColumn('action', function ($question) {
                         $editBtn = '<a href="' . route('admin.question.edit', $question->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -54,7 +57,7 @@ class QuestionController extends Controller
                         
                         return $editBtn . $deleteBtn;
                     })
-                    ->rawColumns(['action', 'image', 'checkbox'])
+                    ->rawColumns(['action', 'image', 'checkbox', 'created_at'])
                     ->make(true);
             }
 
@@ -128,10 +131,8 @@ class QuestionController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image')->store('assets', 'public');
             $data['image'] = $image;
-        } else {
-            return redirect()->back()->with('error', 'File gambar tidak ditemukan');
         }
-
+        
         try{
             $question = Question::create($data);
 

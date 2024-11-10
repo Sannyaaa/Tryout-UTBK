@@ -68,4 +68,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function second_data_universitas(){
         return $this->belongsTo(DataUniversitas::class, 'second_data_universitas_id');
     }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
 }

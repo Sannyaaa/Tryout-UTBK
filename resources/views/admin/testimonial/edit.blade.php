@@ -18,13 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="{{ route('admin.question.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Latihan</a>
+                            <a href="{{ route('admin.order.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Order</a>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Buat Latihan</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Edit Order</span>
                             </div>
                         </li>
                         </ol>
@@ -61,96 +61,42 @@
                 Add new product
             </button>
         </div> --}}
-            <form action="{{ route('admin.question-practice.store') }}" method="POST" enctype="multipart/form-data">
+        
+            <form action="{{ route('admin.testimonial.update', $testimonial->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="space-y-4">
-                    
+
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
-                            <x-input-label for="class_bimbel_id" :value="__('Kelas')" />
-                            <x-select-input id="class_bimbel_id" name="class_bimbel_id">
-                                <option selected disabled>Select Kelas</option>
-                                @foreach ($classes as $class)
-                                    <option value="{{ $class->id }}" {{ old('class_bimbel_id', $classBimbel->id ?? '') == $class->id ? 'selected' : '' }}>
-                                        {{ $class->name }}
-                                    </option>
-                                @endforeach
-                            </x-select-input>
-                            <x-input-error :messages="$errors->get('class_bimbel_id')" class="mt-2" />
+                            <x-input-label for="email" :value="__('Pengguna')" />
+                            <x-text-input type="text" :value="$testimonial->user->email ?? old('email')" name="email" id="email" placeholder="Masukan Nama testimonial" disabled/>
+                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                         <div>
-                            <x-text-input type="hidden" value="{{ $back ?? '' }}" name="back" id="back" />
-                            <x-input-label for="image" :value="__('Image')" />
-                            <x-file-input type="file" name="image" id="image" placeholder="Masukan Image Pertanyaan" />
-                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                            <x-input-label for="package_member_id" :value="__('Paket yang Dibeli')" />
+                            <x-text-input type="text" :value="$testimonial->package_member->name ?? old('package_member_id')" name="package_member_id" id="package_member_id" placeholder="Masukan Nama testimonial" disabled/>
+                            <x-input-error :messages="$errors->get('package_member_id')" class="mt-2" />
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1">
+                        <div>
+                            <x-input-label for="content" :value="__('Konten')" />
+                            <x-text-area name="content" id="content">
+                                {{ $testimonial->content }}
+                            </x-text-area>
                         </div>
                     </div>
 
-                    <div>
-                        <x-input-label for="question" :value="__('Pertanyaan')" />
-                        <x-text-area id="question" name="question" rows="4" placeholder="Masukan Pertanyaan"/>
-                        <x-input-error :messages="$errors->get('question')" class="mt-2" />
-                    </div>
-
-                    <div>
-                        <x-input-label for="a" :value="__('Jawaban A')" />
-                        <x-text-input type="text" :value="old('a')" name="a" id="a" placeholder="Masukan jawaban A" required=""/>
-                        <x-input-error :messages="$errors->get('a')" class="mt-2" />
-                    </div>
-
-                    <div>
-                        <x-input-label for="b" :value="__('Jawaban B')" />
-                        <x-text-input type="text" :value="old('b')" name="b" id="b" placeholder="Masukan jawaban B" required=""/>
-                        <x-input-error :messages="$errors->get('b')" class="mt-2" />
-                    </div>
-
-                    <div>
-                        <x-input-label for="c" :value="__('Jawaban C')" />
-                        <x-text-input type="text" :value="old('c')" name="c" id="c" placeholder="Masukan jawaban C" required=""/>
-                        <x-input-error :messages="$errors->get('c')" class="mt-2" />
-                    </div>
-
-                    <div>
-                        <x-input-label for="d" :value="__('Jawaban D')" />
-                        <x-text-input type="text" :value="old('d')" name="d" id="d" placeholder="Masukan jawaban D" required=""/>
-                        <x-input-error :messages="$errors->get('d')" class="mt-2" />
-                    </div>
-
-                    <div>
-                        <x-input-label for="e" :value="__('Jawaban E')" />
-                        <x-text-input type="text" :value="old('e')" name="e" id="e" placeholder="Masukan jawaban E" required=""/>
-                        <x-input-error :messages="$errors->get('e')" class="mt-2" />
-                    </div>
-
-                    <div>
-                        <x-input-label for="corect_answer" :value="__('Jawaban Benar')" />
-                        <x-select-input id="corect_answer" name="corect_answer" >
-                            <option selected="" disabled>Pilih Jawaban Benar</option>
-                            <option value="a" {{ old('corect_answer') == 'a' ? 'selected' : '' }}>A</option>
-                            <option value="b" {{ old('corect_answer') == 'b' ? 'selected' : '' }}>B</option>
-                            <option value="c" {{ old('corect_answer') == 'c' ? 'selected' : '' }}>C</option>
-                            <option value="d" {{ old('corect_answer') == 'd' ? 'selected' : '' }}>D</option>
-                            <option value="e" {{ old('corect_answer') == 'e' ? 'selected' : '' }}>E</option>
-                        </x-select-input>
-                        <x-input-error :messages="$errors->get('corect_answer')" class="mt-2" />
-                    </div>
-
-                    <div>
-                        <x-input-label for="explanation" :value="__('Penjelasan')" />
-                        <x-text-area id="explanation" name="explanation" rows="4" placeholder="Masukan Penjalasan"/>
-                        <x-input-error :messages="$errors->get('explanation')" class="mt-2" />
-                    </div>
-                    
                     <div class="flex justify-between">
-                        <x-secondary-href href="{{ route('admin.question.index') }}">
+                        <x-secondary-href href="{{ route('admin.testimonial.index') }}">
                             Kembali
                         </x-secondary-href>
-                        <x-primary-button type="submit">
-                            Tambah Pertanyaan
+                        <x-primary-button>
+                            Edit Order
                         </x-primary-button>
                     </div>
-                </div>
             </form>
         </div>
     </div>

@@ -204,6 +204,7 @@ $(document).ready(function() {
     var table = $('#userTable').DataTable({
         processing: true,
         serverSide: true,
+        order: [[ 5,'desc' ]],
         // ajax: "{{ route('admin.user.index') }}",
         ajax: {
                 url: "{{ route('admin.user.index') }}",

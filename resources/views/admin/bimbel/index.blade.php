@@ -86,6 +86,12 @@
                                         <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
                                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
+
+                                    <div class="mb-4">
+                                        <x-input-label for="link_group" :value="__('Link Group')" />
+                                        <x-text-input type="text" :value="old('link_group')" name="link_group" id="link_group" placeholder="Masukan Nama bimbel" />
+                                        <x-input-error :messages="$errors->get('link_group')" class="mt-2" />
+                                    </div>
                                 </div>
                                 <x-primary-button type="submit">
                                     + Bimbel
@@ -128,6 +134,12 @@
                                         <x-text-area id="edit_description" name="description" rows="4"  placeholder="Masukan Description"/>
                                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
+
+                                    <div>
+                                        <x-input-label for="edit_link_group" :value="__('Link Group')" />
+                                        <x-text-input type="text" name="link_group" id="edit_link_group" placeholder="Masukan Link" />
+                                        <x-input-error :messages="$errors->get('link_group')" class="mt-2" />
+                                    </div>
                                 </div>
                                 <div class="flex items-center space-x-4">
                                     <x-primary-button type="submit">
@@ -159,6 +171,12 @@
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Deskripsi
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Link Group
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Tanggal Buat
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Aksi
@@ -242,6 +260,8 @@ $(document).ready(function() {
     var table = $('#bimbelTable').DataTable({
         processing: true,
         serverSide: true,
+        ordering: true,
+        order: [[4, 'desc']],
         ajax: "{{ route('admin.bimbel.index') }}",
         columns: [
             {
@@ -254,6 +274,8 @@ $(document).ready(function() {
             
             {data: 'name', name: 'name'},
             {data: 'description', name: 'description'},
+            {data: 'link_group', name: 'link_group'},
+            {data: 'created_at', name: 'created_at'},
             {
                 data: 'action',
                 name: 'action',
@@ -323,14 +345,14 @@ $(document).ready(function() {
     });
 
     // Fungsi untuk membuka modal edit
-    function openEditModal(id, name, description, batch_id) {
+    function openEditModal(id, name, description, link_group) {
         // Set form action URL
         $('#editForm').attr('action', `/admin/bimbel/${id}`);
         
         // Set nilai input
         $('#edit_name').val(name);
         $('#edit_description').val( description);
-        $('#edit_batch_id').val( batch_id);
+        $('#edit_link_group').val( link_group);
         
         // Buka modal
         $('#editModal').removeClass('hidden');
@@ -342,9 +364,9 @@ $(document).ready(function() {
         const id = $(this).data('id');
         const name = $(this).data('name');
         const description = $(this).data('description');
-        const batch_id = $(this).data('batch_id');
+        const link_group = $(this).data('link_group');
         
-        openEditModal(id, name, description, batch_id);
+        openEditModal(id, name, description, link_group);
     });
 
     // Handle submit form edit

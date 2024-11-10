@@ -19,4 +19,12 @@ class Package_member extends Model
     public function bimbel(){
         return $this->belongsTo(Bimbel::class);
     }
+
+    public function discounts(){
+        return $this->belongsToMany(Discount::class, 'discount_package_member');
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
 }

@@ -19,7 +19,7 @@ class OrderController extends Controller
         //
         try {
             if ($request->ajax()) {
-                $query = Order::with('package_member')->orderBy('created_at', 'desc');
+                $query = Order::with('package_member');
                 
                // Check if a filter is applied
                 if ($request->has('payment_status') && $request->payment_status != '') {
@@ -86,7 +86,7 @@ class OrderController extends Controller
                 ], 400);
             }
 
-            Tryout::whereIn('id', $ids)->delete();
+            Order::whereIn('id', $ids)->delete();
 
             return response()->json([
                 'success' => true,
@@ -132,7 +132,6 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         //
-
         $packages = Package_member::all();
         $vouchers = Discount::all();
 
@@ -153,6 +152,10 @@ class OrderController extends Controller
             'discount_id' => 'nullable|string',
         ]);
 
+        if($request->payment_status == 'paid' || $order->payment == 'pending'){
+            $data['payment_status'] = 'paid';
+            $data['is_admin'] = 'yes';
+        }
         $order->update($data);
         return redirect()->route('admin.order.index')->with('success', 'Order updated successfully');
     }

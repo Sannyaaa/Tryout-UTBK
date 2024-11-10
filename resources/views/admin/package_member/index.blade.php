@@ -60,9 +60,9 @@
                                                 <label for="checkbox-all" class="sr-only">checkbox</label>
                                             </div>
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        {{-- <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Image
-                                        </th>
+                                        </th> --}}
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Nama
                                         </th>
@@ -74,6 +74,9 @@
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Bimbel
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Tangal Buat
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Actions
@@ -163,6 +166,7 @@ $(document).ready(function() {
     var table = $('#package_memberTable').DataTable({
         processing: true,
         serverSide: true,
+        order: [[ 6,'desc' ]],
         ajax: {
             url: "{{ route('admin.package_member.index') }}",
             type: 'GET',
@@ -178,19 +182,20 @@ $(document).ready(function() {
                 searchable: false,
                 width: '5%'
             },
-            {
-                data: 'image',
-                name: 'image',
-                orderable: false,
-                searchable: false,
-                render: function(data) {
-                    return data ? '<img src="' + data + '" width="100" height="100">' : '';
-                }
-            },
+            // {
+            //     data: 'image',
+            //     name: 'image',
+            //     orderable: false,
+            //     searchable: false,
+            //     render: function(data) {
+            //         return data ? '<img src="' + data + '" width="100" height="100">' : '';
+            //     }
+            // },
             {data: 'name', name: 'name', defaultContent: ''},
             {data: 'price', name: 'price', defaultContent: ''},
             {data: 'tryout.name', name: 'tryout.name', defaultContent: ''},
             {data: 'bimbel.name', name: 'bimbel.name', defaultContent: ''},
+            {data: 'created_at', name: 'created_at', defaultContent: ''},
             {
                 data: 'action', 
                 name: 'action',

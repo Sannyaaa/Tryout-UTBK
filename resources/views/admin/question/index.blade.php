@@ -99,6 +99,9 @@
                                             Question
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Tanggal Buat
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Actions
                                         </th>
                                     </tr>
@@ -186,6 +189,7 @@ $(document).ready(function() {
     var table = $('#questionTable').DataTable({
         processing: true,
         serverSide: true,
+        order: [[ 4,'desc' ]],
         ajax: {
             url: "{{ route('admin.question.index') }}",
             type: 'GET',
@@ -217,6 +221,7 @@ $(document).ready(function() {
             //     }
             // },
             {data: 'question', name: 'question', defaultContent: ''},
+            {data: 'created_at', name: 'created_at', defaultContent: ''},
             {
                 data: 'action',
                 name: 'action',

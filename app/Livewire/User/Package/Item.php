@@ -11,6 +11,7 @@ use App\Models\Discount;
 use Illuminate\Http\Request;
 use Livewire\Attributes\Rule;
 use App\Models\Package_member;
+use App\Models\Testimonial;
 
 class Item extends Component
 {
@@ -46,6 +47,12 @@ class Item extends Component
             ->first();
         // dd($voucher);
         if ($voucher) {
+
+            if (!$this->package->discounts->contains($voucher->id)) {
+                // Diskon tidak terkait dengan package
+                $this->addError('voucher', 'Voucher yang anda masukkan tidak berlaku untuk paket ini.');
+                return;
+            }
 
             // Hitung discount
             if ($voucher->discount_type === 'percentage') {
@@ -151,6 +158,8 @@ class Item extends Component
                 'snap_token' => $snapToken,
             ]);
 
+            // dd($order);
+
             // Redirect langsung ke Midtrans
             return redirect()->away($this->getMidtransRedirectUrl($snapToken));
 
@@ -178,6 +187,8 @@ class Item extends Component
 
         $except = Package_member::where('id', '!=',$package)->get();
 
-        return view('livewire.user.package.item');
+        $testimonials = Testimonial::where('package_member_id',$id)->get();
+
+        return view('livewire.user.package.item',compact('testimonials'));
     }
 }

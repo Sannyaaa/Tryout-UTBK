@@ -23,12 +23,20 @@ class BimbelController extends Controller
 
         try {
             if ($request->ajax()) {
-                $query = Bimbel::orderBy('created_at', 'desc');
+                $query = Bimbel::all();
                 
                 return DataTables::of($query)
                     ->addIndexColumn()
                     ->addColumn('checkbox', function($bimbel) {
                         return '<input type="checkbox" class="bimbel-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $bimbel->id . '">';
+                    })
+                    ->addColumn('created_at', function($bimbel) {
+                        return date('j F Y', strtotime($bimbel->created_at)) ;
+                    })
+                    ->addColumn('link_group', function($bimbel) {
+                        $link = $bimbel->link_group != null ? '<a href="'. $bimbel->link_group .'" target="__blank" class=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" >Link</a>' : 'belum ada';
+
+                        return $link;
                     })
                     ->addColumn('action', function ($bimbel) {
                         $editBtn = '<button class="edit-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
@@ -59,7 +67,7 @@ class BimbelController extends Controller
                         
                         return $action;
                     })
-                    ->rawColumns(['action', 'checkbox'])
+                    ->rawColumns(['action', 'checkbox', 'link_group'])
                     ->make(true);
             }
 

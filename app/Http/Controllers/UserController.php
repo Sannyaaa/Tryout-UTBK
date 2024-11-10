@@ -19,7 +19,7 @@ class UserController extends Controller
 
         try {
             if ($request->ajax()) {
-                $query = User::orderBy('created_at', 'desc');
+                $query = User::query();
                 
                 if ($request->has('role') && $request->role != '') {
                     $query->where('role', $request->role);
