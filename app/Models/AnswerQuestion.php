@@ -13,4 +13,9 @@ class AnswerQuestion extends Model
     public function result() {
         return $this->belongsTo('App\Models\Result');
     }
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
 }

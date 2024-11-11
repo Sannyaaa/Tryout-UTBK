@@ -104,7 +104,7 @@ class Paper extends Component
                 ->where('id', $this->q)
                 ->with('answer')
                 ->first();
-        // dd($question);
+        // dd($question->answer);
         if ($question) {
             $question->count = 1; // Assigning a fixed new ID of 1, or you can assign any other logic
         }
@@ -122,7 +122,7 @@ class Paper extends Component
     
         return view('livewire.user.tryout.paper', [
             'question' => $question,
-            'paper' => sub_categories::where('id', $this->paperId)->first(),
+            'paper' => sub_categories::where('id', $this->paperId)->first()
         ]);
     }
 
