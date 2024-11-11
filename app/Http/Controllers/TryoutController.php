@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Exports\TryoutExport;
 use App\Livewire\User\Tryouts;
 use App\Models\Answer;
+use App\Models\AnswerQuestion;
 use App\Models\batch;
 use App\Models\Question;
+use App\Models\Result;
 use App\Models\sub_categories;
 use App\Models\tryout;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -179,14 +181,24 @@ class TryoutController extends Controller
         $question = Question::where('tryout_id', $tryout->id)->get();
         $tryout = tryout::with(['question.sub_categories'])->withCount(['question as total_question'])->findOrFail($tryout->id);
 
-        $subCategories = $tryout->question()->select('sub_categories_id')->with('sub_categories')->selectRaw('sub_categories_id, count(*) as question_count')->groupBy('sub_categories_id')->get();
+        $subCategories = $tryout->question()
+                ->select('sub_categories_id')
+                ->with(['sub_categories' => function($query){
+                    $query->withCount('results as total_participants');
+                }])
+                ->selectRaw('sub_categories_id, count(*) as question_count')
+                ->groupBy('sub_categories_id')
+                ->get();
 
         return view('admin.tryout.show', compact('tryout','question','subCategories'));
     }
 
     public function subCategory(tryout $tryout, sub_categories $sub_categories){
         $questions = Question::where('tryout_id', $tryout->id)->where('sub_categories_id', $sub_categories->id)->orderByDesc('created_at')->get();
-        return view('admin.tryout.sub-category', compact('questions','tryout'));
+
+        $results = Result::with(['user','answer_question'])->where('tryout_id', $tryout->id)->where('sub_category_id', $sub_categories->id)->get();
+
+        return view('admin.tryout.sub-category', compact('questions','tryout','results'));
     }
 
     /**
@@ -379,6 +391,13 @@ class TryoutController extends Controller
             Log::error('Error in delete question: ' . $e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while deleting the question.');
         }
+    }
+
+    public function result(tryout $tryout, sub_categories $sub_categories, Result $result){
+
+        $results = AnswerQuestion::with(['question','result'])->where('result_id', $result->id)->get();
+
+        return view('admin.tryout.result', compact('tryout','sub_categories','result','results'));
     }
 
 }

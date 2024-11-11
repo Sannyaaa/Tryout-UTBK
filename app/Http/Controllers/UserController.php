@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Result;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -146,7 +147,9 @@ class UserController extends Controller
     {
         //
 
-        return view('admin.user.edit', compact('user'));
+        $results = Result::where('user_id', $user->id)->get();
+
+        return view('admin.user.edit', compact('user','results'));
     }
 
     /**

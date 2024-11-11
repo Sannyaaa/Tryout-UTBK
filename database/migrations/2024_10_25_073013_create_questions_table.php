@@ -16,10 +16,10 @@ return new class extends Migration
 
             $table->foreignId('sub_categories_id')->constrained()->cascadeOnDelete();
             $table->foreignId('tryout_id')->constrained()->cascadeOnDelete();
-            $table->string('question')->nullable();
+            $table->string('question');
             $table->string('image')->nullable();
             $table->string('correct_answer');
-            $table->longText('explanation');
+            $table->longText('explanation')->nullable();
 
             $table->timestamps();
         });

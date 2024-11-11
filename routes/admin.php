@@ -20,9 +20,7 @@ use App\Http\Controllers\UniversityScraperController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('all-universities',[UniversityController::class,'getAllUniversities'])->name('get-universities');
 
@@ -30,6 +28,7 @@ Route::get('all-universities',[UniversityController::class,'getAllUniversities']
 Route::resource('/tryout', TryoutController::class);
 Route::post('/tryout/bulk-delete', [TryoutController::class, 'bulkDelete'])->name('tryout.bulkDelete');
 Route::get('/tryout/{tryout}/subcategory/{sub_categories}',[TryoutController::class,'subCategory'])->name('tryout.sub-category');
+Route::get('/tryout/{tryout}/subcategory/{sub_categories}/result/{result}',[TryoutController::class,'result'])->name('tryout.result');
 
 Route::get('/tryout/{tryout}/question/create', [TryoutController::class, 'question_create'])->name('tryout.question.create');
 Route::post('/tryout/{tryout}/question/', [TryoutController::class, 'question_store'])->name('tryout.question.store');

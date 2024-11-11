@@ -31,7 +31,7 @@
         <div>
             @if ($todayClasses->isNotEmpty())
                 @foreach ($todayClasses as $class)
-                    @if (\Carbon\Carbon::now() > \Carbon\Carbon::parse($class->start_time) )
+                    {{-- @if (\Carbon\Carbon::now() > \Carbon\Carbon::parse($class->start_time) ) --}}
                         <div id="alert-additional-content-1" class="p-4 mb-4 text-sky-800 border border-sky-300 rounded-lg bg-sky-50 dark:bg-gray-800 dark:text-sky-400 dark:border-sky-800" role="alert">
                             <div class="flex items-center">
                                 <div class="h-fit">
@@ -60,9 +60,9 @@
                                         </button>
                                     </div>
                                 </div>
-                            </div>    
+                            </div>
                         </div>
-                    @endif
+                    {{-- @endif --}}
                 @endforeach
             @endif
         </div>

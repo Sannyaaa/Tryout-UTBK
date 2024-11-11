@@ -128,14 +128,98 @@
                     </div>
                 </div>
                 <div class="flex justify-between">
-                    <x-secondary-href href="{{ route('admin.user.index') }}">
-                        Back
-                    </x-secondary-href>
+                    
                     <x-primary-button type="submit">
                         Add User
                     </x-primary-button>
                 </div>
+            </div>
         </form>
+
+        <div>
+            <div class="items-center justify-between block my-6 sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+                <h3 class="text-2xl text-gray-800 font-bold">
+                    Daftar Hasil Tryout
+                </h3>
+                {{-- <a href="{{ route('admin.tryout.question.create', $tryout->id) }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
+                    Add new Question
+                </a> --}}
+                {{-- <x-primary-link href="{{ route('admin.tryout.question.create', $tryout->id) }}">
+                    Buat Pertanyaan
+                </x-primary-link> --}}
+            </div>
+
+            <div class="flex flex-col">
+                <div class="overflow-x-auto">
+                    <div class="inline-block min-w-full align-middle">
+                        <div class="overflow-hidden shadow">
+                            <table class="min-w-full divide-y divide-gray-200 border-gray-200 border-2 whitespace-nowrap dark:divide-gray-600">
+                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                    <tr>
+                                        <th scope="col" class="p-4 text-xs font-semibold text-left text-gray-500 uppercase dark:text-gray-400">
+                                            No
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Tryout
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Total Poin
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Benar
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Salah
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Tidak Dijawab
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Tanggal Submit
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">    
+                                    @forelse ($results as $i => $result)
+                                        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                            <td class="p-4 text-base font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{$i + 1}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$result->tryout->name}} - {{ $result->sub_category->name }}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$result->score}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$result->correct_answers}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$result->incorrect_answers}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$result->unanswered}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ \Carbon\Carbon::parse($result->created_at)->format('d F Y') }}</td>
+                                            <td class="p-4 space-x-2 whitespace-nowrap">
+                                                {{-- @dd($result->sub_category_id) --}}
+                                                <div class="flex justify-start gap-1">
+                                                    <a href="{{ route('admin.tryout.result', [$result->tryout_id, $result->sub_category_id, $result->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:ring-emerald-300 dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-emerald-800">
+                                                        Detail
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>  
+                                    @empty
+                                        <tr class="text-center text-gray-900">
+                                            <td class="py-5 text-center" colspan="7">
+                                                <p class="text-sm">Belum ada hasil yang ditemukan.</p>
+                                                <p class="text-sm">Silahkan lakukan pencarian atau cetak hasil di halaman yang sama.</p>
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+
+        <x-secondary-href href="{{ route('admin.user.index') }}">
+            Back
+        </x-secondary-href>
     </div>
 </div>
 

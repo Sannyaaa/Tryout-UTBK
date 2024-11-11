@@ -11,6 +11,7 @@ use App\Models\sub_categories;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreBimbelRequest;
 use App\Models\ClassBimbel;
+use App\Models\Order;
 
 class BimbelController extends Controller
 {
@@ -161,7 +162,11 @@ class BimbelController extends Controller
 
         $classes = ClassBimbel::where('bimbel_id', $bimbel->id)->get();
 
-        return view('admin.bimbel.show', compact('bimbel','classes'));
+        $users = User::whereHas('orders.package_member.bimbel', function ($query) use ($bimbel) {
+            $query->where('id', $bimbel->id);
+        })->get();
+
+        return view('admin.bimbel.show', compact('bimbel','classes','users'));
     }
 
     /**

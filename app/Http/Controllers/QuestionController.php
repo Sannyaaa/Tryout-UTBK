@@ -138,7 +138,7 @@ class QuestionController extends Controller
         // question
         $data = $request->validate([
             'sub_categories_id' => 'required|exists:sub_categories,id',
-            'question' => 'nullable|string',
+            'question' => 'required|string',
             'correct_answer' => 'required|string',
             'explanation' => 'required|string',
             'tryout_id' => 'required|exists:tryouts,id',
@@ -149,7 +149,7 @@ class QuestionController extends Controller
             $image = $request->file('image')->store('assets', 'public');
             $data['image'] = $image;
         }
-        
+        // dd($data);
         try{
             $question = Question::create($data);
             
