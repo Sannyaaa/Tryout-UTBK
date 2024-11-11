@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $fillable = ['sub_categories_id', 'question', 'image', 'correct_answer', 'explanation', 'tryout_id'];
+    protected $fillable = ['sub_categories_id', 'question', 'image', 'corect_answer', 'explanation', 'tryout_id'];
 
     public function sub_categories(){
         return $this->belongsTo(sub_categories::class);
@@ -19,4 +19,5 @@ class Question extends Model
     public function answer(){
         return $this->hasOne(Answer::class);
     }
+    
 }

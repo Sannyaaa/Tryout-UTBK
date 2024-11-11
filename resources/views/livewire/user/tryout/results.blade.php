@@ -23,12 +23,12 @@
                     <h1 class="font-bold text-4xl">Paper Tryout 1</h1>
                     <div class="my-4">
                         <span>dikerjakan oleh</span>
-                        <span class="font-medium">Nama Orang</span>
+                        <span class="font-medium">{{Auth::user()->name}}</span>
                     </div>
                     <div class="flex">
-                        <div class="w-1/3 py-6 text-center">
+                        <div class="w-full py-6 text-center">
                             <h1 class="text-6xl font-bold">
-                                70
+                                {{$results->score}}
                             </h1>
                             <h3 class="text-xl font-medium text-gray-500 ">Nilai anda</h3>
                         </div>
@@ -40,7 +40,7 @@
                         </div> --}}
                     </div>
                     <hr class="my-6">
-                    <div style="width: 100%; height: 400px;">
+                    <div wire:ignore>
                         <canvas id="donut"></canvas>
                     </div>
                     <hr class="my-6">
@@ -53,7 +53,7 @@
                                 </tr>
                                 <tr>
                                     <th class="text-start font-normal">Pertanyaan Dijawab</th>
-                                    <th class="text-end font-bold text-lg ">{{$results->correct_answers + $results->incorrect_answers}}</th>
+                                    <th class="text-end font-bold text-lg ">{{$totalAnswered = $results->correct_answers + $results->incorrect_answers}}</th>
                                 </tr>
                                 <tr>
                                     <th class="text-start font-normal">Jawaban Benar</th>
@@ -65,7 +65,7 @@
                                 </tr>
                                 <tr>
                                     <th class="text-start font-normal">Tidak dijawab</th>
-                                    <th class="text-end font-bold text-lg text-gray-500">5</th>
+                                    <th class="text-end font-bold text-lg text-gray-500">{{$totalQuestions - $totalAnswered}}</th>
                                 </tr>
                             </tbody>
                         </table>
@@ -113,13 +113,19 @@
                                         name="option{{$question->id}}" 
                                         wire:key="question-{{ $question->id }}-option-{{ $option }}"
                                         wire:model="answers.{{$question->id}}" 
-                                        {{-- wire:change="selectAnswer({{$option}})" --}}
                                         value="{{$option}}" 
+                                        disabled
                                         class="appearance-none w-6 h-6 me-2 border-2 border-blue-500 rounded-full" 
                                     />
                                     <label class="ms-2 text-lg">{{strtoupper($option)}}. {{$question->answer->$option}}</label>
                                 </div>
                             @endforeach
+                        </div>
+                        <div class="px-2 py-4 text-lg border-4 border-sky-400 rounded-lg">
+                            <h3 class="mx-2 text-sky-500 font-semibold">Jawaban yang benar: <span class="font-bold">{{strtoupper($question->correct_answer)}}</span></h3>
+                            <hr class="my-4 border">
+                            <h3 class="mx-2 pb-2 text-xl font-medium">Pembahasan:</h3>
+                            <p class="mx-2 text-lg">{{$question->explanation}}</p>
                         </div>
                     </div>
                 </div>
@@ -131,47 +137,43 @@
 </div>
 
 @push('head-styles')
-<style>
-    #donut {
-        width: 100% !important;
-        height: 400px; /* Set a fixed height */
-    }
-</style>
 @endpush
 
 @push('body-scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 <script>
-    const ctx = document.getElementById('donut');
-
-    new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: [
-                'Jawaban Benar',
-                'Jawaban Salah',
-                'Tidak Dijawab'
-            ],
-            datasets: [{
-                label: 'Nilai',
-                data: [30, 10, 5],
-                backgroundColor: [
-                'rgb(56 189 248)',
-                'rgb(244 63 94)',
-                'rgb(156 163 175)'
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('donut').getContext('2d');
+    
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Jawaban Benar',
+                    'Jawaban Salah',
+                    'Tidak Dijawab'
                 ],
-                hoverOffset: 14
-            }]
-        },
-        options: {
-            responsive: true, // Make the chart responsive
-            maintainAspectRatio: true, // Adjust based on your layout
-            plugins: {
-                legend: {
-                    display: false
+                datasets: [{
+                    label: 'Nilai',
+                    data: [{{$results->correct_answers}}, {{$results->incorrect_answers}}, {{$totalQuestions - $totalAnswered}}],
+                    backgroundColor: [
+                    'rgb(56 189 248)',
+                    'rgb(244 63 94)',
+                    'rgb(156 163 175)'
+                    ],
+                    hoverOffset: 14
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
                 }
             }
-        }
+        });
     });
 </script>
 
