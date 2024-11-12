@@ -23,7 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('all-universities',[UniversityController::class,'getAllUniversities'])->name('get-universities');
+// Route::get('all-universities',[UniversityController::class,'getAllUniversities'])->name('get-universities');
 
 // ihsan
 Route::post('/tryout/bulk-delete', [TryoutController::class, 'bulkDelete'])->name('tryout.bulkDelete');
@@ -56,10 +56,13 @@ Route::resource('combined-categories', CombinedCategoriesController::class);
 Route::get('/admin/combined-categories/{id}/edit', [CombinedCategoriesController::class, 'edit'])
     ->name('admin.combined-categories.edit');
 
+Route::get('/get-provinsi', [ProfileController::class, 'getProvinsi'])->name('get-provinsi');
+Route::get('/get-kabupaten/{provinsi}', [ProfileController::class, 'getKabupaten'])->name('get-kabupaten');
+Route::get('/get-sekolah/{provinsi}/{kabupaten}', [ProfileController::class, 'getSekolah'])->name('get-sekolah');
+// Route::get('api/sekolah/{id}', [ProfileController::class, 'getSekolah']);
 
-
-Route::get('/fetch-universities', [UniversityScraperController::class, 'fetchUniversities']);
-Route::get('/fetch-study-programs', [UniversityScraperController::class, 'fetchStudyPrograms']);
+// Route::get('/fetch-universities', [UniversityScraperController::class, 'fetchUniversities']);
+// Route::get('/fetch-study-programs', [UniversityScraperController::class, 'fetchStudyPrograms']);
 
 
 

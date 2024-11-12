@@ -349,6 +349,56 @@
                             </x-select-input>
                         </div>
 
+                        <div class="col-span-6 sm:col-span-3">
+                            <x-input-label for="sekolah_id" :value="__('Sekolah')" />
+                            <x-select-input id="sekolah_id" name="sekolah_id" class="select-sekolah" data-plugin="tomselect">
+                                <option value="">Pilih Sekolah</option>
+                                @foreach ($sekolah as $sekolahItem)
+                                    <option value="{{ $sekolahItem->id }}" {{ old('sekolah_id', $user->sekolah->id ?? '') == $sekolahItem->id ? 'selected' : '' }}>
+                                        {{ $sekolahItem->sekolah }}
+                                    </option>
+                                @endforeach
+                            </x-select-input>
+                        </div>
+
+                        {{-- <div class="col-span-6 sm:col-span-3">
+                            <x-input-label for="provinsi_id" :value="__('Provinsi Sekolah')" />
+                            <x-select-input id="provinsi_id" name="provinsi_id" class="select-provinsi" data-plugin="tomselect">
+                                <option value="">Pilih Provinsi</option>
+                                @foreach ($provinsi as $provinsiItem)
+                                    <option value="{{ $provinsiItem->id }}" {{ old('provinsi_id', $user->sekolah->provinsi_id ?? '') == $provinsiItem->id ? 'selected' : '' }}>
+                                        {{ $provinsiItem->nama_provinsi }}
+                                    </option>
+                                @endforeach
+                            </x-select-input>
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            <x-input-label for="kabupaten_id" :value="__('Kabupaten / Kota Sekolah')" />
+                            <x-select-input id="kabupaten_id" name="kabupaten_id" class="select-kabupaten" data-plugin="tomselect">
+                                <option value="">Pilih Kabupaten</option>
+                                @foreach ($kota as $kabupaten_kota_Item)
+                                    <option value="{{ $kabupaten_kota_Item->id }}" {{ old('kabupaten_kota_id', $user->sekolah->kabupaten_kota_id ?? '') == $kabupaten_kota_Item->id ? 'selected' : '' }}>
+                                        {{ $kabupaten_kota_Item->nama_kabupaten_kota }}
+                                    </option>
+                                @endforeach
+                            </x-select-input>
+                        </div> --}}
+
+                        <!-- Role -->
+                        <div class="col-span-6 sm:col-span-3">
+                            <x-input-label for="status" :value="__('Status')" />
+                            <x-select-input id="status" name="status">
+                                <option selected disabled>Pilih Status</option>
+                                <option value="kelas_10" {{ old('status', $user->status) == 'kelas_10' ? 'selected' : '' }}>Kelas 10</option>
+                                <option value="kelas_11" {{ old('status', $user->status) == 'kelas_11' ? 'selected' : '' }}>Kelas 11</option>
+                                <option value="kelas_12" {{ old('status', $user->status) == 'kelas_12' ? 'selected' : '' }}>Kelas 12</option>
+                                <option value="Kuliah" {{ old('status', $user->status) == 'Kuliah' ? 'selected' : '' }}>Kuliah</option>
+                                <option value="gep_year" {{ old('status', $user->status) == 'gep_year' ? 'selected' : '' }}>Gap Year</option>
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('status')" class="mt-2" />
+                        </div>
+
 
                         <!-- Tombol Submit -->
                         <div class="col-span-6 sm:col-full">
@@ -597,5 +647,342 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+{{-- <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Inisialisasi Tom Select untuk semua select dengan class select-university
+    const selectElements = document.querySelectorAll('.select-sekolah');
+    selectElements.forEach(function(select) {
+        new TomSelect(select, {
+            create: false,
+            sortField: {
+                field: "text",
+                direction: "asc"
+            },
+            placeholder: 'Cari sekolah...',
+            plugins: {
+                clear_button: {
+                    title: 'Hapus pilihan'
+                }
+            }
+        });
+    });
+});
+</script> --}}
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new TomSelect('.select-sekolah', {
+                placeholder: 'Pilih sekolah',
+                searchField: ['text'],
+                valueField: 'value',  // Menentukan field untuk value
+                labelField: 'text',   // Menentukan field untuk label
+                load: function(query, callback) {
+                    if (!query.length) return callback();
+                    
+                    // Tambahkan minimum karakter untuk pencarian (opsional)
+                    if (query.length < 2) return callback();
+                    
+                    fetch(`/search-sekolah?search=${encodeURIComponent(query)}`)  // Sesuaikan dengan endpoint API Anda
+                        .then(response => {
+                            if (!response.ok) throw new Error('Network error');
+                            return response.json();
+                        })
+                        .then(json => {
+                            callback(json.data.map(item => ({
+                                text: item.sekolah,
+                                value: item.id
+                            })));
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            callback();
+                        });
+                },
+                // Tambahkan plugin dan opsi tambahan
+                plugins: {
+                    clear_button: {
+                        title: 'Hapus pilihan'
+                    }
+                },
+                render: {
+                    option: function(item, escape) {
+                        return `<div>${escape(item.text)}</div>`;
+                    },
+                    item: function(item, escape) {
+                        return `<div>${escape(item.text)}</div>`;
+                    }
+                },
+                onInitialize: function() {
+                    this.on('item_add', function(value, item) {
+                        const hiddenInput = document.getElementById('selected-sekolah-id');
+                        if (hiddenInput) {
+                            hiddenInput.value = value;
+                        }
+                    });
+                }
+            });
+        });
+</script>
+{{-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Provinsi
+            new TomSelect('.select-provinsi', {
+                placeholder: 'Pilih Provinsi',
+                searchField: ['text'],
+                load: function(query, callback) {
+                    if (!query.length) return callback();
+                    fetch('{{ route('profile.edit') }}?provinsi=' + encodeURIComponent(query))
+                        .then(response => response.json())
+                        .then(json => callback(json.data.map(item => ({ text: item.provinsi, value: item.provinsi }))))
+                        .catch(() => callback());
+                }
+            });
+
+            // Kota
+            new TomSelect('.select-kota', {
+                placeholder: 'Pilih Kota',
+                searchField: ['text'],
+                load: function(query, callback) {
+                    if (!query.length) return callback();
+                    fetch('{{ route('profile.edit') }}?provinsi=' + encodeURIComponent($('.select-provinsi').val()) + '&kota=' + encodeURIComponent(query))
+                        .then(response => response.json())
+                        .then(json => callback(json.data.map(item => ({ text: item.kabupaten_kota, value: item.kabupaten_kota }))))
+                        .catch(() => callback());
+                }
+            });
+
+            // Sekolah
+            new TomSelect('.select-sekolah', {
+                placeholder: 'Pilih Sekolah',
+                searchField: ['text'],
+                load: function(query, callback) {
+                    if (!query.length) return callback();
+                    fetch('{{ route('profile.edit') }}?provinsi=' + encodeURIComponent($('.select-provinsi').val()) + '&kota=' + encodeURIComponent($('.select-kota').val()) + '&search=' + encodeURIComponent(query))
+                        .then(response => response.json())
+                        .then(json => callback(json.data.map(item => ({ text: item.sekolah, value: item.id }))))
+                        .catch(() => callback());
+                }
+            });
+        });
+    </script> --}}
 @endsection
+{{-- @push('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Provinsi
+            new TomSelect('.select-provinsi', {
+                placeholder: 'Pilih Provinsi',
+                searchField: ['text'],
+                load: function(query, callback) {
+                    if (!query.length) return callback();
+                    fetch('{{ route('profile.edit') }}?provinsi=' + encodeURIComponent(query))
+                        .then(response => response.json())
+                        .then(json => callback(json.data.map(item => ({ text: item.provinsi, value: item.provinsi }))))
+                        .catch(() => callback());
+                }
+            });
+
+            // Kota
+            new TomSelect('.select-kota', {
+                placeholder: 'Pilih Kota',
+                searchField: ['text'],
+                load: function(query, callback) {
+                    if (!query.length) return callback();
+                    fetch('{{ route('profile.edit') }}?provinsi=' + encodeURIComponent($('.select-provinsi').val()) + '&kota=' + encodeURIComponent(query))
+                        .then(response => response.json())
+                        .then(json => callback(json.data.map(item => ({ text: item.kabupaten_kota, value: item.kabupaten_kota }))))
+                        .catch(() => callback());
+                }
+            });
+
+            // Sekolah
+            new TomSelect('.select-sekolah', {
+                placeholder: 'Pilih Sekolah',
+                searchField: ['text'],
+                load: function(query, callback) {
+                    if (!query.length) return callback();
+                    fetch('{{ route('profile.edit') }}?provinsi=' + encodeURIComponent($('.select-provinsi').val()) + '&kota=' + encodeURIComponent($('.select-kota').val()) + '&search=' + encodeURIComponent(query))
+                        .then(response => response.json())
+                        .then(json => callback(json.data.map(item => ({ text: item.sekolah, value: item.id }))))
+                        .catch(() => callback());
+                }
+            });
+        });
+    </script>
+@endpush --}}
+
+{{-- @push('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Provinsi
+            new TomSelect('.select-provinsi', {
+                placeholder: 'Pilih Provinsi',
+                onInitialize: function() {
+                    this.on('item_add', function(value, item) {
+                        loadKabupaten(value);
+                    });
+                }
+            });
+
+            // Kabupaten
+            new TomSelect('.select-kabupaten', {
+                placeholder: 'Pilih Kabupaten',
+                onInitialize: function() {
+                    this.on('item_add', function(value, item) {
+                        loadSekolah(value);
+                    });
+                }
+            });
+
+            // Sekolah
+            new TomSelect('.select-sekolah', {
+                placeholder: 'Pilih Sekolah'
+            });
+
+            function loadProvinsi() {
+                fetch('{{ route('admin.get-provinsi') }}')
+                    .then(response => response.json())
+                    .then(data => {
+                        const provinsiSelect = document.querySelector('.select-provinsi').tomselect;
+                        data.forEach(provinsi => {
+                            provinsiSelect.addOption({
+                                text: provinsi.provinsi,
+                                value: provinsi.provinsi
+                            });
+                        });
+                    });
+            }
+
+            function loadKabupaten(provinsi) {
+                fetch(`{{ route('admin.get-kabupaten', ':provinsi') }}`.replace(':provinsi', provinsi))
+                    .then(response => response.json())
+                    .then(data => {
+                        const kabupatenSelect = document.querySelector('.select-kabupaten').tomselect;
+                        kabupatenSelect.clear();
+                        kabupatenSelect.clearOptions();
+                        data.forEach(kabupaten => {
+                            kabupatenSelect.addOption({
+                                text: kabupaten.kabupaten_kota,
+                                value: kabupaten.kabupaten_kota
+                            });
+                        });
+                    });
+            }
+
+            function loadSekolah(kabupaten) {
+                const provinsi = document.querySelector('.select-provinsi').value;
+                fetch(`{{ route('admin.get-sekolah', [':provinsi', ':kabupaten']) }}`.replace(':provinsi', provinsi).replace(':kabupaten', kabupaten))
+                    .then(response => response.json())
+                    .then(data => {
+                        const sekolahSelect = document.querySelector('.select-sekolah').tomselect;
+                        sekolahSelect.clear();
+                        sekolahSelect.clearOptions();
+                        data.forEach(sekolah => {
+                            sekolahSelect.addOption({
+                                text: sekolah.sekolah,
+                                value: sekolah.id
+                            });
+                        });
+                    });
+            }
+
+            loadProvinsi();
+        });
+    </script>
+@endpush --}}
+
+{{-- @push('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inisialisasi Provinsi
+            const provinsiSelect = new TomSelect('.select-provinsi', {
+                placeholder: 'Pilih Provinsi',
+                onChange: function(value) {
+                    // Jika Provinsi berubah, muat Kabupaten
+                    if (value) {
+                        loadKabupaten(value);  // Panggil loadKabupaten saat provinsi berubah
+                    }
+                }
+            });
+
+            // Inisialisasi Kabupaten
+            const kabupatenSelect = new TomSelect('.select-kabupaten', {
+                placeholder: 'Pilih Kabupaten',
+                onChange: function(value) {
+                    // Jika Kabupaten berubah, muat Sekolah
+                    if (value) {
+                        loadSekolah(value);  // Panggil loadSekolah saat kabupaten berubah
+                    }
+                }
+            });
+
+            // Inisialisasi Sekolah
+            const sekolahSelect = new TomSelect('.select-sekolah', {
+                placeholder: 'Pilih Sekolah'
+            });
+
+            // Fungsi untuk memuat provinsi
+            function loadProvinsi() {
+                fetch('{{ route('admin.get-provinsi') }}')
+                    .then(response => response.json())
+                    .then(data => {
+                        const provinsiSelect = document.querySelector('.select-provinsi').tomselect;
+                        data.forEach(provinsi => {
+                            provinsiSelect.addOption({
+                                text: provinsi.nama_provinsi,
+                                value: provinsi.id
+                            });
+                        });
+                    });
+            }
+
+            // Fungsi untuk memuat kabupaten berdasarkan provinsi
+            function loadKabupaten(provinsiId) {
+                fetch(`{{ route('admin.get-kabupaten', ':provinsi') }}`.replace(':provinsi', provinsiId))
+                    .then(response => response.json())
+                    .then(data => {
+                        kabupatenSelect.clearOptions();
+                        data.forEach(kabupaten => {
+                            kabupatenSelect.addOption({
+                                text: kabupaten.nama_kabupaten_kota,
+                                value: kabupaten.id
+                            });
+                        });
+                    });
+            }
+
+            // Fungsi untuk memuat sekolah berdasarkan provinsi dan kabupaten
+            function loadSekolah(kabupatenId) {
+                const provinsiId = document.querySelector('.select-provinsi').value;
+                fetch(`{{ route('admin.get-sekolah', [':provinsi', ':kabupaten']) }}`.replace(':provinsi', provinsiId).replace(':kabupaten', kabupatenId))
+                    .then(response => response.json())
+                    .then(data => {
+                        sekolahSelect.clearOptions();
+                        data.forEach(sekolah => {
+                            sekolahSelect.addOption({
+                                text: sekolah.sekolah,
+                                value: sekolah.id
+                            });
+                        });
+                    });
+            }
+
+            // Panggil loadProvinsi pada saat halaman dimuat untuk memastikan data provinsi dimuat
+            loadProvinsi();
+
+            // Pastikan jika user sudah memilih provinsi atau kabupaten sebelumnya, kabupaten dan sekolah juga terisi
+            const selectedProvinsiId = '{{ old('provinsi_id', $user->sekolah->provinsi_id) }}';
+            if (selectedProvinsiId) {
+                loadKabupaten(selectedProvinsiId);
+            }
+
+            const selectedKabupatenId = '{{ old('kabupaten_kota_id', $user->sekolah->kabupaten_kota_id) }}';
+            if (selectedKabupatenId) {
+                loadSekolah(selectedKabupatenId);
+            }
+        });
+    </script>
+@endpush --}}
+
     

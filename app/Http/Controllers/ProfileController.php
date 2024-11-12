@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\DataUniversitas;
+use App\Models\KabupatenKota;
+use App\Models\Provinsi;
+use App\Models\Sekolah;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,25 +20,47 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request)  
     {
+        // $search = $request->input('search');
+    
+        // Ambil data sekolah yang nama sekolahnya sesuai dengan pencarian
+        $sekolah = Sekolah::when($request->has('search'), function ($query) use ($request) {
+            $query->where('sekolah', 'like', '%' . $request->search . '%');
+        })->get();
 
-        $universitas = DataUniversitas::all();
+        // return response()->json($sekolah);
+
+        $university = DataUniversitas::all(); // Ambil data universitas (jika diperlukan)
+
+        // Ambil data user untuk menampilkan data yang sudah ada
         return view('profile.edit', [
             'user' => $request->user(),
-            'university' => $universitas
+            // 'provinsi' => $provinsi,
+            // 'kota' => $kota,
+            'sekolah' => $sekolah,
+            'university' => $university
         ]);
     }
+
 
     /**
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request)
     {
-        Log::info('Data Universitas ID yang dikirim:', [
-            'data_universitas_id' => $request->input('data_universitas_id'),
-            'second_data_universitas_id' => $request->input('second_data_universitas_id')
-        ]);
+        try {
+            // Mengambil input dari request
+            Log::info('Data Universitas ID yang dikirim:', [
+                'data_universitas_id' => $request->input('data_universitas_id'),
+                'second_data_universitas_id' => $request->input('second_data_universitas_id'),
+                'sekolah_id' => $request->input('sekolah_id'),
+                'status' => $request->input('status'),
+            ]);
+        } catch (\Exception $e) {
+            // Log error jika terjadi exception
+            Log::error('Error saat mencatat data universitas: ' . $e->getMessage());
+        }
 
         $request->user()->fill($request->validated());
 
@@ -43,6 +68,8 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
+
+        // dd($request);
         try {
             $request->user()->save();
             return Redirect::route('profile.edit')->with('status', 'profile-updated');
@@ -54,6 +81,39 @@ class ProfileController extends Controller
             return back()->withErrors(['error' => 'Terjadi kesalahan saat memperbarui profil']);
         }
     }
+
+
+    // public function getProvinsi(Request $request)
+    // {
+    //     // Ambil semua data provinsi yang ada
+    //     $provinsi = Provinsi::all();
+
+    //     return response()->json($provinsi); // Kembalikan data dalam format JSON
+    // }
+
+
+    // public function getKabupaten(Request $request, $provinsi)
+    // {
+    //     // Ambil semua kabupaten yang berkaitan dengan provinsi yang dipilih
+    //     $kabupaten = KabupatenKota::where('provinsi_id', $provinsi)->get();
+
+    //     return response()->json($kabupaten); // Kembalikan data dalam format JSON
+    // }
+
+
+    // public function getSekolah(Request $request, $provinsi, $kabupaten)
+    // {
+    //     // Ambil semua sekolah berdasarkan provinsi dan kabupaten
+    //     // Ambil sekolah dengan relasi provinsi dan kabupaten
+    //     $sekolah = Sekolah::with(['provinsi', 'kabupatenKota'])
+    //         ->where('provinsi_id', $provinsi)
+    //         ->where('kabupaten_kota_id', $kabupaten)
+    //         ->get();
+
+
+    //     return response()->json($sekolah); // Kembalikan data dalam format JSON
+    // }
+
 
 
 

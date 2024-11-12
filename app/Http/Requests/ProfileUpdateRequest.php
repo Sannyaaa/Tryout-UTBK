@@ -25,9 +25,11 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
-            'data_universitas_id' => ['required', 'exists:data_universitas,id'], // Validasi untuk universitas pertama
-            'second_data_universitas_id' => ['required', 'exists:data_universitas,id'], // Validasi untuk universitas kedua
+            'data_universitas_id' => ['nullable', 'exists:data_universitas,id'], // Validasi untuk universitas pertama
+            'second_data_universitas_id' => ['nullable', 'exists:data_universitas,id'], // Validasi untuk universitas kedua
             'phone' => ['nullable', 'string', 'max:15'], // Jika ada nomor telepon
+            'status' => ['nullable', 'string'], // Jika ada nomor telepon
+            'sekolah_id' => ['nullable', 'exists:sekolahs,id'], // Validasi untuk universitas kedua
         ];
     }
 }

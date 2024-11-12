@@ -38,7 +38,7 @@
                     <div class="grid lg:grid-cols-2 gap-2">
                         <div class="w-full lg:w-2/3 px-4">
                             <h2 class="text-sm text-gray-500 mb-4">Name Tryout <br><span class="text-lg font-bold text-gray-800">{{ $tryout->name }}</span></h2>
-                            <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-gray-800">{{ $tryout->description }}</span></p>
+                            <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-gray-800">{!! $tryout->description !!}</span></p>
                         </div>
                         <div class="w-full px-4">
                         <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
@@ -114,7 +114,7 @@
                                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                             <td class="p-4 text-base font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{$i + 1}}</td>
                                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->sub_categories->name}}</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->question}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{!! $questions->question !!}</td>
                                                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->corect_answer}}</td>
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                                     <div class="flex justify-start gap-1">
