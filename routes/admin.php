@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PackageMemberController;
 use App\Http\Controllers\QuestionPracticeController;
 use App\Http\Controllers\SubCategoriesController;
+use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\TryoutController;
 use App\Http\Controllers\UniversityDataController;
@@ -19,12 +20,13 @@ use App\Http\Controllers\UniversityScraperController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-
 // Route::get('all-universities',[UniversityController::class,'getAllUniversities'])->name('get-universities');
 
 // ihsan
-Route::post('/tryout/bulk-delete', [TryoutController::class, 'bulkDelete'])->name('tryout.bulkDelete');
 Route::resource('/tryout', TryoutController::class);
+Route::post('/tryout/bulk-delete', [TryoutController::class, 'bulkDelete'])->name('tryout.bulkDelete');
+Route::get('/tryout/{tryout}/subcategory/{sub_categories}',[TryoutController::class,'subCategory'])->name('tryout.sub-category');
+Route::get('/tryout/{tryout}/subcategory/{sub_categories}/result/{result}',[TryoutController::class,'result'])->name('tryout.result');
 
 Route::get('/tryout/{tryout}/question/create', [TryoutController::class, 'question_create'])->name('tryout.question.create');
 Route::post('/tryout/{tryout}/question/', [TryoutController::class, 'question_store'])->name('tryout.question.store');
@@ -78,9 +80,12 @@ Route::resource('/discount', DiscountController::class);
 Route::post('/discount/bulk-delete', [DiscountController::class, 'bulkDelete'])->name('discount.bulkDelete');
 
 Route::resource('/question-practice', QuestionPracticeController::class);
-Route::post('/question/bulk-delete', [QuestionPracticeController::class, 'bulkDelete'])->name('question.bulkDelete');
+Route::post('/question/bulk-delete', [QuestionPracticeController::class, 'bulkDelete'])->name('question-practice.bulkDelete');
 Route::get('/class-bimbel/{class_bimbel}/question/create', [ClassBimbelController::class, 'question_create'])->name('class.question.create');
 Route::get('/class-bimbel/{class_bimbel}/question/{question}/edit', [ClassBimbelController::class, 'question_edit'])->name('class.question.edit');
 
 Route::resource('/order', OrderController::class);
 Route::post('/order/bulk-delete', [OrderController::class, 'bulkDelete'])->name('order.bulkDelete');
+
+Route::resource('/testimonial', TestimonialController::class);
+Route::post('/testimonial/bulk-delete', [TestimonialController::class, 'bulkDelete'])->name('testimonial.bulkDelete');

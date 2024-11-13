@@ -104,6 +104,9 @@
                                             Tanggal selesai
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Tanggal Buat
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Actions
                                         </th>
                                     </tr>
@@ -185,6 +188,7 @@ $(document).ready(function() {
     var table = $('#tryoutTable').DataTable({
         processing: true,
         serverSide: true,
+        order: [[ 6,'desc' ]],
         // ajax: "{{ route('admin.tryout.index') }}",
         ajax: {
                 url: "{{ route('admin.tryout.index') }}",
@@ -226,6 +230,7 @@ $(document).ready(function() {
             },
             {data: 'start_date', name: 'start_date'},
             {data: 'end_date', name: 'end_date'},
+            {data: 'created_at', name: 'created_at'},
             {
                 data: 'action',
                 name: 'action',

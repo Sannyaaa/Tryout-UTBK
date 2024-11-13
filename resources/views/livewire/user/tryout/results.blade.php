@@ -15,66 +15,45 @@
         <div class="flex">
 
             {{-- Summary/Ringkasan hasil pengerjaan tryout --}}
-
             <div class="w-1/3">
-                <div class="bg-white border rounded-lg shadow p-8 mb-4 me-2">
-                    <h5 class="text-lg font-semibold text-gray-500">Hasil pengerjaan tryout</h5>
-                    <hr class="my-4">
-                    <h1 class="font-bold text-4xl">Paper Tryout 1</h1>
-                    <div class="my-4">
-                        <span>dikerjakan oleh</span>
-                        <span class="font-medium">{{Auth::user()->name}}</span>
+                <div class="">
+                    <div class="bg-white border rounded-lg shadow p-8 mb-4">
+                        <h1 class="text-3xl text-gray-700 font-bold">{{$results->tryout->name}}</h1>
                     </div>
-                    <div class="flex">
-                        <div class="w-full py-6 text-center">
-                            <h1 class="text-6xl font-bold">
-                                {{$results->score}}
-                            </h1>
-                            <h3 class="text-xl font-medium text-gray-500 ">Nilai anda</h3>
+                    {{-- <hr class="border border-gray-300 my-5">  --}}
+                    {{-- @if ($paper->duration)
+                        <div class="bg-white border rounded-lg shadow p-8 mb-4 text-lg text-sky-500 flex items-center" wire:ignore>
+                            <i class="fa-regular fa-clock my-auto me-4 text-2xl"></i>
+                            <span class="my-auto me-2">Sisa waktu:</span>
+                            <span id="timer" class="my-auto"><i>Memulai timer...</i></span> <!-- Timer Display -->
                         </div>
-                        {{-- <div class="w-1/2 py-6 border-s text-center">
-                            <h1 class="text-6xl font-bold">
-                                32:10
-                            </h1>
-                            <h3 class="text-xl font-medium text-gray-500 ">Waktu ditempuh</h3>
+                    @endif --}}
+                    <div class="bg-white border rounded-lg shadow p-8 mb-4 grid grid-cols-5">
+                        {{-- <input type="number" name="" wire:model.live="q" id="questionid"> --}}
+                        @foreach ($questions as $item)
+                            <div class="px-2 py-4">
+                                <button wire:click="changeNumber({{$item->id}})" class="w-3/4 h-14 border rounded-lg
+                                    {{ $q == $item->id ? 'bg-sky-400 text-white' : 'bg-gray-200' }}
+                                ">
+                                    {{$item->count}}
+                                </button>
+                            </div>
+                        @endforeach
+                        {{-- <div class="px-2 py-4">
+                            <button class="w-3/4 h-14 border-4 border-sky-400 box-border rounded-lg text-sky-400 text-2xl font-bold" wire:click="submitAnswers()">
+                                &raquo;
+                            </button>
                         </div> --}}
                     </div>
-                    <hr class="my-6">
-                    <div wire:ignore>
-                        <canvas id="donut"></canvas>
-                    </div>
-                    <hr class="my-6">
-                    <div>
-                        <table class="table-fixed w-full border-separate border-spacing-y-2">
-                            <tbody>
-                                <tr>
-                                    <th class="text-start font-normal">Total Pertanyaan</th>
-                                    <th class="text-end font-bold text-lg"></th>
-                                </tr>
-                                <tr>
-                                    <th class="text-start font-normal">Pertanyaan Dijawab</th>
-                                    <th class="text-end font-bold text-lg ">{{$totalAnswered = $results->correct_answers + $results->incorrect_answers}}</th>
-                                </tr>
-                                <tr>
-                                    <th class="text-start font-normal">Jawaban Benar</th>
-                                    <th class="text-end font-bold text-lg text-sky-500">{{$results->correct_answers}}</th>
-                                </tr>
-                                <tr>
-                                    <th class="text-start font-normal">Jawaban Salah</th>
-                                    <th class="text-end font-bold text-lg text-rose-600">{{$results->incorrect_answers}}</th>
-                                </tr>
-                                <tr>
-                                    <th class="text-start font-normal">Tidak dijawab</th>
-                                    <th class="text-end font-bold text-lg text-gray-500">{{$totalQuestions - $totalAnswered}}</th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    {{-- <div class="bg-white border rounded-lg shadow p-8 mb-4">
+                        <button class="w-full py-4 rounded-lg text-lg font-semibold text-white text-center bg-gradient-to-tr from-sky-400 to-sky-500" wire:click="submitAnswers()">
+                            Selesai Tes
+                        </button>
+                    </div> --}}
                 </div>
             </div>
-
+            
             {{-- Pembahasan Tryout --}}
-
             <div class="w-2/3">
                 <div class="bg-white border rounded-lg shadow p-8 mb-4 ms-2">
                     <h5 class="text-lg font-semibold text-gray-500">Pembahasan</h5>
@@ -92,11 +71,9 @@
                                 <h5 class="text-xl font-semibold text-sky-500 text-center">Pertanyaan {{$question->count}}</h5>
                             </span>
                             <div class="w-1/3 text-end">
-        
                                 @if (!$this->isLastQuestion())
                                 <button wire:click="nextQuestion" for="next" class="px-3 py-1 bg-sky-500 rounded text-white text-2xl">&raquo;</button>
                                 @endif
-        
                             </div>
                         </div>
                         <hr>
@@ -132,6 +109,58 @@
                 {{-- <div class="h-full bg-white border rounded-lg shadow">
                 </div> --}}
             </div>
+
+            {{-- <div class="w-1/3">
+                <div class="bg-white border rounded-lg shadow p-8 mb-4 me-2">
+                    <h5 class="text-lg font-semibold text-gray-500">Hasil pengerjaan tryout</h5>
+                    <hr class="my-4">
+                    <h1 class="font-bold text-4xl">Paper Tryout 1</h1>
+                    <div class="my-4">
+                        <span>dikerjakan oleh</span>
+                        <span class="font-medium">{{Auth::user()->name}}</span>
+                    </div>
+                    <div class="flex">
+                        <div class="w-full py-6 text-center">
+                            <h1 class="text-6xl font-bold">
+                                {{$results->score}}
+                            </h1>
+                            <h3 class="text-xl font-medium text-gray-500 ">Nilai anda</h3>
+                        </div>
+                    </div>
+                    <hr class="my-6">
+                    <div wire:ignore>
+                        <canvas id="donut"></canvas>
+                    </div>
+                    <hr class="my-6">
+                    <div>
+                        <table class="table-fixed w-full border-separate border-spacing-y-2">
+                            <tbody>
+                                <tr>
+                                    <th class="text-start font-normal">Total Pertanyaan</th>
+                                    <th class="text-end font-bold text-lg"></th>
+                                </tr>
+                                <tr>
+                                    <th class="text-start font-normal">Pertanyaan Dijawab</th>
+                                    <th class="text-end font-bold text-lg ">{{$totalAnswered = $results->correct_answers + $results->incorrect_answers}}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-start font-normal">Jawaban Benar</th>
+                                    <th class="text-end font-bold text-lg text-sky-500">{{$results->correct_answers}}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-start font-normal">Jawaban Salah</th>
+                                    <th class="text-end font-bold text-lg text-rose-600">{{$results->incorrect_answers}}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-start font-normal">Tidak dijawab</th>
+                                    <th class="text-end font-bold text-lg text-gray-500">{{$totalQuestions - $totalAnswered}}</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> --}}
+
         </div>
     </div>
 </div>
@@ -140,7 +169,7 @@
 @endpush
 
 @push('body-scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const ctx = document.getElementById('donut').getContext('2d');
@@ -175,6 +204,6 @@
             }
         });
     });
-</script>
+</script> --}}
 
 @endpush

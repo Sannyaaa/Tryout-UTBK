@@ -18,18 +18,25 @@
                             <div class="w-3/6">
                                 <h3 class="font-medium text-lg">{{$sub_item->name}}</h3>
                                 @if ($sub_item->duration)
-                                <span class="text-sky-500">
-                                    <i class="fa-regular fa-clock"></i>
-                                    <span class="me-2">{{$sub_item->duration}} Menit</span>
-                                    {{-- <i class="fa-regular fa-file"></i> --}}
-                                    {{-- <span></span> --}}
-                                </span>
+                                    <span class="text-sky-500">
+                                        <i class="fa-regular fa-clock"></i>
+                                        <span class="me-2">{{$sub_item->duration}} Menit</span>
+                                        {{-- <i class="fa-regular fa-file"></i> --}}
+                                        {{-- <span></span> --}}
+                                    </span>
                                 @endif
                             </div>
-                            <div class="w-3/6 px-5 flex align-middle justify-end text-sky-500">
+                            <div class="w-3/6 px-5 flex align-middle justify-end text-sky-500 gap-4">
                                 <a href="{{route('user.tryouts.paper', [$tryoutId, $sub_item->id])}}" class="flex items-center">
                                     <button class="p-3 px-4 flex items-center text-white bg-sky-500 rounded-lg font-semibold"><i class="fa-solid fa-circle-play"></i>&nbsp; Kerjakan</button>
                                 </a>
+                                @if ($sub_item->is_completed)
+                                    <a href="{{ route('user.tryouts.history', [$tryoutId, $sub_item->id]) }}" class="flex items-center">
+                                        <button class="p-3 px-4 flex items-center text-white bg-green-500 rounded-lg font-semibold">
+                                            <i class="fa-solid fa-circle-check"></i>&nbsp; Riwayat
+                                        </button>
+                                    </a>
+                                @endif
                                 {{-- <i class="my-auto me-2 fa-solid fa-circle-check"></i> <span class="my-auto">Selesai</span> --}}
                             </div>
                         </div>
@@ -38,6 +45,5 @@
                 @endforeach
             </div>
         </div>
-        
     </div>
 </div>

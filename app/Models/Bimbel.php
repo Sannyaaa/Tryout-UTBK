@@ -8,7 +8,7 @@ class Bimbel extends Model
 {
     //
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description','link_group'];
 
     public function classBimbel()
     {

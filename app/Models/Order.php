@@ -16,6 +16,7 @@ class Order extends Model
         'original_price',
         'final_price',
         'payment_status',
+        'is_admin',
         'payment_url',
         'snap_token',
         'metadata',

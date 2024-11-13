@@ -104,6 +104,7 @@ class Paper extends Component
                 ->where('id', $this->q)
                 ->with('answer')
                 ->first();
+                
         // dd($question->answer);
         if ($question) {
             $question->count = 1; // Assigning a fixed new ID of 1, or you can assign any other logic

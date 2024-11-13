@@ -111,6 +111,9 @@
                                 <option value="paid" {{ $order->payment_status == 'paid' ? 'selected' : '' }}>Sudah Dibayar</option>
                             </x-select-input>
                             <x-input-error :messages="$errors->get('payment_status')" class="mt-2" />
+                            @if ($order->is_admin == 'yes')
+                                <span class="text-sm text-emerald-500">* perubahan status oleh admin</span>
+                            @endif
                         </div>
                     </div>
 

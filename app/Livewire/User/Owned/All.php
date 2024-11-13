@@ -2,7 +2,9 @@
 
 namespace App\Livewire\User\Owned;
 
+use App\Models\ClassBimbel;
 use App\Models\Order;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class All extends Component
@@ -13,7 +15,7 @@ class All extends Component
     {
         $query = Order::where('user_id', auth()->id())
             ->where('payment_status', 'paid')
-            ->with(['package_member']);
+            ->with(['package_member','user']);
 
         // Filter berdasarkan tipe paket
         if ($this->selectedType !== 'all') {
@@ -26,6 +28,13 @@ class All extends Component
             });
         }
 
+        $todayClasses = ClassBimbel::whereHas('bimbel.package_member.orders', function ($query) {
+            $query->where('user_id', auth()->id())
+                ->where('payment_status', 'paid');
+        })
+        ->where('date', Carbon::today())
+        ->get();
+
         $purchasedPackages = $query->get()
             ->map(function($order) {
                 return $order->package_member;
@@ -34,7 +43,8 @@ class All extends Component
             ->values(); // Reset index array
 
         return view('livewire.user.owned.all', [
-            'purchasedPackages' => $purchasedPackages
+            'purchasedPackages' => $purchasedPackages,
+            'todayClasses' => $todayClasses,
         ]);
     }
 }

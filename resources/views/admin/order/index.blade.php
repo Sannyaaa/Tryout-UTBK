@@ -88,10 +88,10 @@
                                             Total Harga
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Tanggal
+                                            Status
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Status
+                                            Tanggal
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Actions
@@ -175,6 +175,7 @@ $(document).ready(function() {
     var table = $('#orderTable').DataTable({
         processing: true,
         serverSide: true,
+        order:[[5,'desc']],
         // ajax: "{{ route('admin.order.index') }}",
         ajax: {
                 url: "{{ route('admin.order.index') }}",
@@ -193,8 +194,8 @@ $(document).ready(function() {
             {data: 'invoice', name: 'invoice'},
             {data: 'package_member.name', name: 'package_member.name'},
             {data: 'final_price', name: 'final_price'},
-            {data: 'created_at', name: 'created_at'},
             {data: 'payment_status', name: 'payment_status'},
+            {data: 'created_at', name: 'created_at'},
             {
                 data: 'action',
                 name: 'action',

@@ -31,33 +31,33 @@
                 <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
                 <span class="ml-3" sidebar-toggle-item>Dashboard</span>
             </a> --}}
-            <x-sidebar-link link="/" token="dashboard" name="Dashboard">
+            <x-user-sidebar-link link="/" token="dashboard" name="Dashboard">
               <i class="fa-solid fa-tv"></i>
-            </x-sidebar-link>
+            </x-user-sidebar-link>
           </li>
           <li>
-            <x-sidebar-link link="{{route('user.tryouts')}}" token="tryout" name="Tryout">
+            <x-user-sidebar-link link="{{route('user.tryouts')}}" token="tryout" name="Tryout">
               <i class="fa-regular fa-file-lines"></i>
-            </x-sidebar-link>
+            </x-user-sidebar-link>
           </li>
           <li>
-            <x-sidebar-link link="{{route('user.tryouts.event')}}" token="event" name="Event Tryout">
+            <x-user-sidebar-link link="{{route('user.tryouts.event')}}" token="event" name="Event Tryout">
               <i class="fa-regular fa-bell"></i>
-            </x-sidebar-link>
+            </x-user-sidebar-link>
           </li>
           {{-- <li>
-            <x-sidebar-link link="/" name="Bimbel">
-            </x-sidebar-link>
+            <x-user-sidebar-link link="/" name="Bimbel">
+            </x-user-sidebar-link>
           </li> --}}
           <li>
-            <x-sidebar-link link="{{route('user.packages')}}" token="paket" name="Paket Pembelian">
+            <x-user-sidebar-link link="{{route('user.packages')}}" token="paket" name="Paket Pembelian">
               <i class="fa-solid fa-tags"></i>
-            </x-sidebar-link>
+            </x-user-sidebar-link>
           </li>
           <li>
-            <x-sidebar-link link="{{route('user.my-packages')}}" token="paketku" name="Paket Saya">
+            <x-user-sidebar-link link="{{route('user.my-packages')}}" token="paketku" name="Paket Saya">
               <i class="fa-solid fa-user-tag"></i>
-            </x-sidebar-link>
+            </x-user-sidebar-link>
           </li>
           {{-- <li>
             <!-- Dropdown Menu -->

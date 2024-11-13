@@ -12,12 +12,17 @@ Route::get('/tryout/item/{id}', App\Livewire\User\Tryout\Item::class)->name('try
 Route::get('/tryout/item/{id}/{paper}', App\Livewire\User\Tryout\Paper::class)->name('tryouts.paper');
 Route::get('/tryout/item/question', App\Livewire\User\Tryout\Question::class)->name('tryouts.question');
 Route::get('/tryout/results/{id}', App\Livewire\User\Tryout\Results::class)->name('tryouts.results');
+Route::get('/tryout/{tryout}/history/{sub_categories}', App\Livewire\User\Tryout\History::class)->name('tryouts.history');
 Route::get('/event/tryout', App\Livewire\User\Tryout\Event::class)->name('tryouts.event');
 Route::get('/paket', All::class)->name('packages');
 Route::get('/paket/{id}', App\Livewire\User\Package\Item::class)->name('package.item');
 
 Route::get('/paketku', App\Livewire\User\Owned\All::class)->name('my-packages');
 Route::get('/paketku/{id}/bimbel', App\Livewire\User\Owned\Bimbels::class)->name('my-bimbel');
+Route::get('/paketku/latihan/bimbel/{paper}', App\Livewire\User\Owned\Practice\Paper::class)->name('my-bimbel.paper');
+Route::get('/paketku/latihan/result/{result}', App\Livewire\User\Owned\Practice\Result::class)->name('my-bimbel.practice.result');
+Route::get('/paketku/latihan/history/{class_bimbel}', App\Livewire\User\Owned\Practice\History::class)->name('my-bimbel.practice.history');
+
 
 // Route::get('/bimbel', App\Livewire\User\Bimbels::class)->name('bimbels');
 // Route::get('/bimbel/owned', App\Livewire\User\BimbelsOwned::class)->name('bimbels.owned');

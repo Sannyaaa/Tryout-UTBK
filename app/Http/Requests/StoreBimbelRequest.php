@@ -25,6 +25,7 @@ class StoreBimbelRequest extends FormRequest
             //
             'name' => ['required', 'string', 'max:255'],
             'description' => ['string','nullable'],
+            'link_group' => ['string','nullable'],
             //
         ];
     }

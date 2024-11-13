@@ -25,8 +25,7 @@ class ClassBimbelController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $query = ClassBimbel::with(['bimbel', 'user', 'sub_categories'])->orderBy('created_at', 'desc');
-
+                $query = ClassBimbel::with(['bimbel','user','sub_categories'])->get();
                 if ($request->sub_categories) {
                     $query->where('sub_categories_id', $request->sub_categories);
                 }

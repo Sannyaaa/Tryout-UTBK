@@ -1,4 +1,4 @@
-<div>
+`<div>
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
     <div class="mt-10 mx-4">
         <div class="py-10 px-7 bg-white rounded-md shadow flex border-y">

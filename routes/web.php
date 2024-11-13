@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UniversityController;
 
 
+
 Route::get('/test', function () {
     return view('test');
 });

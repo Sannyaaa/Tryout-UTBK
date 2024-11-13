@@ -27,6 +27,46 @@
                 {{-- <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Bimbels</h1> --}}
             </div>
         </div>
+
+        <div>
+            @if ($todayClasses->isNotEmpty())
+                @foreach ($todayClasses as $class)
+                    {{-- @if (\Carbon\Carbon::now() > \Carbon\Carbon::parse($class->start_time) ) --}}
+                        <div id="alert-additional-content-1" class="p-4 mb-4 text-sky-800 border border-sky-300 rounded-lg bg-sky-50 dark:bg-gray-800 dark:text-sky-400 dark:border-sky-800" role="alert">
+                            <div class="flex items-center">
+                                <div class="h-fit">
+                                    <svg class="flex-shrink-0 w-10 h-10 me-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                    </svg>
+                                    <span class="sr-only">Info</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold">Pemberitahuan Kelas Bimbel</h3>
+                                    <div class="mt-2 mb-4 text-sm">
+                                        <p>Hai {{ Auth::user()->name }}, mau memberi tahu kalau kamu hari ini ada kelas dengan informasi sebagai berikut :</p>
+                                        Nama Kelas : <span class=" capitalize">{{ $class->name }}</span>
+                                        <br>
+                                        Waktu : <span class=" capitalize">{{ \Carbon\Carbon::parse($class->start_time)->format('H:i') }} s/d Selesai</span>
+                                    </div>
+                                    <div class="flex">
+                                        <a href="{{ route('user.my-bimbel', $class->bimbel_id) }}" class="text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-sky-200 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800">
+                                            <svg class="me-2 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                                                <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                                            </svg>
+                                            Lihat Kelas
+                                        </a>
+                                        <button type="button" class="text-sky-800 bg-transparent border border-sky-800 hover:bg-sky-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-sky-200 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-sky-600 dark:border-sky-600 dark:text-sky-400 dark:hover:text-white dark:focus:ring-sky-800" data-dismiss-target="#alert-additional-content-1" aria-label="Close">
+                                            X Tutup
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{-- @endif --}}
+                @endforeach
+            @endif
+        </div>
+
         <div>
             <!-- Filter Section -->
             <div class="flex items-center space-x-4 mb-6 font-semibold">
@@ -125,15 +165,22 @@
                                         <div class="space-y-2">
                                             
                                             <div class="flex items-center text-gray-600">
-                                                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                {{-- <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                                                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                                </svg>
-                                                <span>{{ $package->bimbel->classBimbel->count() }} Kelas</span>
+                                                </svg> --}}
+                                                <div>
+                                                    <span class="mx-1"><i class="fa-solid fa-chalkboard-user"></i></span> {{ $package->bimbel->classBimbel->count() }} Kelas
+                                                </div>
                                             </div>
                                             <div class="flex items-center text-gray-600">
                                                 <div class="">
                                                     <span class="mx-1"><i class="fa-solid fa-calendar"></i></span> {{ \Carbon\Carbon::parse($package->bimbel->classBimbel->first()->date)->format('j F Y') }} - {{ \Carbon\Carbon::parse($package->bimbel->classBimbel->last()->date)->format('j F Y') }}</div>
+                                            </div>
+                                            <div class="flex items-center text-gray-600">
+                                                <div>
+                                                    <span class="mx-1"><i class="fa-solid fa-users"></i></i></span> {{ $package->orders->count() }} Peserta
+                                                </div>
                                             </div>
                                         </div>
                                         {{-- <div class="border-2 rounded-lg border-sky-400 py-2 px-3 w-fit font-bold">
@@ -143,7 +190,7 @@
                                         </div> --}}
                                     </div>
                                     <div class="pb-5 px-6 pt-1 bg-white rounded-b-lg">
-                                        <a href="{{ route('user.my-bimbel', $package->bimbel->id) }}" class="w-full">
+                                        <a href="{{ route('user.my-bimbel', $package->id) }}" class="w-full">
                                             <button class="text-white font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-sky-700 w-full p-3 rounded-lg">
                                                 Lihat Kelas
                                                 <i class="fa-solid fa-arrow-right-long"></i>
