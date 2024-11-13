@@ -147,7 +147,6 @@
                                 <tbody class="bg-white divide-y divide-gray-200 text-gray-700 text-sm">
                                     @forelse($queryClass as $class)
                                         @php
-                                            
                                             $tanggalMulai = \Carbon\Carbon::parse($class->date);
                                             $waktuMulai = \Carbon\Carbon::parse($class->start_time);
                                             $hariSesuai = $tanggalMulai->isSameDay($now) || $tanggalMulai->lessThanOrEqualTo($now);
@@ -170,15 +169,20 @@
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 {{ $class->sub_categories->name }}
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 whitespace-nowrap gap-3">
                                                 @if ($hariSesuai)
-                                                    <a href="#" target="_blank" class="text-sky-50 gap-1 bg-sky-500 hover:bg-sky-600 px-4 py-2 border-2 border-sky-200 rounded-lg">
+                                                    <a href="{{ route('user.my-bimbel.paper', $class->id) }}" target="_blank" class="text-sky-50 gap-1 bg-sky-500 hover:bg-sky-600 px-4 py-2 border-2 border-sky-200 rounded-lg">
                                                         <i class="fa-regular fa-pen-to-square"></i> Kerjakan
                                                     </a>
+                                                    @if ($class->is_completed)
+                                                        <a href="{{ route('user.my-bimbel.practice.history', $class->id) }}" title="Riwayat" target="_blank" class="text-sky-50 gap-1 bg-sky-500 hover:bg-sky-600 px-4 py-2 ms-3 border-2 border-sky-200 rounded-lg">
+                                                            <i class="fa-solid fa-clock-rotate-left"></i>
+                                                        </a>
+                                                    @endif
                                                 @else
-                                                    <a href="#" target="_blank" class="text-sky-500 hover:text-sky-600 gap-1 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
+                                                    <span title="Belum Tersedia" class="text-sky-500 hover:text-sky-600 gap-1 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
                                                         <i class="fa-regular fa-pen-to-square"></i> Kerjakan
-                                                    </a>
+                                                    </span>
                                                 @endif
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
@@ -187,9 +191,9 @@
                                                         <i class="fa-solid fa-video"></i> Gabung
                                                     </a>
                                                 @else
-                                                    <a href="{{ $class->link_zoom }}" target="_blank" class="text-sky-500 hover:text-sky-600 gap-1 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
+                                                    <span title="Belum Tersedia" class="text-sky-500 hover:text-sky-600 gap-1 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
                                                         <i class="fa-solid fa-video"></i> Gabung
-                                                    </a>
+                                                    </span>
                                                 @endif
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
@@ -198,7 +202,7 @@
                                                         <i class="fa-regular fa-circle-play"></i> Nonton
                                                     </a>
                                                 @else
-                                                    <span disabled title="Belum Ada" class="text-sky-500 hover:text-sky-600 gap-1 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
+                                                    <span disabled title="Belum Tersedia" class="text-sky-500 hover:text-sky-600 gap-1 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
                                                         <i class="fa-regular fa-circle-play"></i> Nonton
                                                     </span>
                                                 @endif
@@ -209,9 +213,9 @@
                                                         <i class="fa-regular fa-newspaper"></i> Pelajari
                                                     </a>
                                                 @else
-                                                    <a href="{{ $class->materi }}" target="_blank" class="text-sky-500 hover:text-sky-600 gap-1 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
+                                                    <span title="Belum Tersedia" class="text-sky-500 hover:text-sky-600 gap-1 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
                                                         <i class="fa-regular fa-newspaper"></i> Pelajari
-                                                    </a>
+                                                    </span>
                                                 @endif
                                             </td>
                                             {{-- <td class="px-6 py-4 whitespace-nowrap">

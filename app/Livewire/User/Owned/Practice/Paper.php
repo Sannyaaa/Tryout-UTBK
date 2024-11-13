@@ -1,20 +1,17 @@
 <?php
 
-namespace App\Livewire\User\Tryout;
+namespace App\Livewire\User\Owned\Practice;
 
-use App\Models\AnswerQuestion;
-use App\Models\Question;
-use App\Models\Result;
-use App\Models\sub_categories;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Collection;
-use Livewire\Attributes\Url;
 use Livewire\Component;
+use Illuminate\Http\Request;
+use App\Models\QuestionPractice;
+use Illuminate\Support\Facades\Auth;
+use App\Models\AnswerQuestionPractice;
+use App\Models\ClassBimbel;
+use App\Models\ResultPractice;
 
 class Paper extends Component
 {
-
     // #[Url]
     public $q;
 
@@ -28,12 +25,10 @@ class Paper extends Component
 
     public function mount(Request $request){
         $this->answers = [];
-        
-        $this->itemId = $request->segment(3);
+
         $this->paperId = $request->segment(4);
         
-        $this->q = Question::where('tryout_id', $this->itemId)
-            ->where('sub_categories_id', $this->paperId)
+        $this->q = QuestionPractice::where('class_bimbel_id', $this->paperId)
             ->min('id');
     }
 
@@ -99,31 +94,27 @@ class Paper extends Component
 
     public function render()
     {
-        $question = Question::where('tryout_id', $this->itemId)
-                ->where('sub_categories_id', $this->paperId)
+        $question = QuestionPractice::where('class_bimbel_id', $this->paperId)
                 ->where('id', $this->q)
-                ->with('answer')
+                ->with('answer_practice')
                 ->first();
-                
         // dd($question->answer);
         if ($question) {
             $question->count = 1; // Assigning a fixed new ID of 1, or you can assign any other logic
         }
-    
-
-        $this->questions = Question::where('tryout_id', $this->itemId)
-            ->where('sub_categories_id', $this->paperId)
+        
+        $this->questions = QuestionPractice::where('class_bimbel_id', $this->paperId)
             ->get() 
             ->map(function ($question, $index) {
                 // Assign a new ID starting from 1
                 $question->count = $index + 1; // Adding 1 to start from 1 instead of 0
                 return $question;
         });
-        
-    
-        return view('livewire.user.tryout.paper', [
+
+        return view('livewire.user.owned.practice.paper',[
             'question' => $question,
-            'paper' => sub_categories::where('id', $this->paperId)->first()
+            'answers' => $this->answers,
+            'paper' => ClassBimbel::where('id',$this->paperId)->get(),
         ]);
     }
 
@@ -135,14 +126,13 @@ class Paper extends Component
         $unanswered = 0;
         $score = 0;
 
-        $result = Result::create([
+        $result = ResultPractice::create([
             'user_id' => Auth::user()->id,
-            'tryout_id' => $this->itemId,
-            'sub_category_id' => $this->paperId,
+            'class_bimbel_id' => $this->paperId,
         ]);
 
         foreach ($this->answers as $key => $value) {
-            $getCorrectAnswer = Question::whereId($key)->first()->correct_answer;
+            $getCorrectAnswer = QuestionPractice::whereId($key)->first()->correct_answer;
 
             if ($value == $getCorrectAnswer) {
                 $correctAnswers++;
@@ -154,21 +144,25 @@ class Paper extends Component
                 $score -= 1;
             }
 
-            AnswerQuestion::create([
-                'question_id' => $key,
+            // dd($value);
+
+            AnswerQuestionPractice::create([
+                'question_practice_id' => $key,
                 'user_id' => Auth::user()->id,
                 'answer' => $value,
-                'result_id' => $result->id,
+                'result_practice_id' => $result->id,
             ]);
         }
 
-        Result::whereId($result->id)->update([
+        // dd($correctAnswers);
+
+        ResultPractice::whereId($result->id)->update([
             'correct_answers' =>  $correctAnswers,
             'incorrect_answers' => $incorrectAnswers,
             'unanswered' => $unanswered,
             'score' => $score,
         ]);
 
-        return redirect()->route('user.tryouts.results', $result->id);
+        return redirect()->route('user.my-bimbel.result', $result->id);
     }
 }

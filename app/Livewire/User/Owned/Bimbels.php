@@ -5,6 +5,7 @@ namespace App\Livewire\User\Owned;
 use App\Models\Bimbel;
 use App\Models\ClassBimbel;
 use App\Models\Package_member;
+use App\Models\ResultPractice;
 use App\Models\sub_categories;
 use App\Models\Testimonial;
 use Carbon\Carbon;
@@ -65,6 +66,7 @@ class Bimbels extends Component
         $query = ClassBimbel::query()
             ->where('bimbel_id', $this->bimbel->id)
             ->orderBy('date');
+        
         if ($this->search) {
             $query->where(function($q) {
                 $q->where('name', 'LIKE', '%'. $this->search. '%')
@@ -77,6 +79,12 @@ class Bimbels extends Component
         }
 
         $queryClass = $query->paginate(10);
+
+        foreach($queryClass as $item){
+            $item->is_completed = ResultPractice::where('class_bimbel_id',$item->id)
+                    ->where('user_id',auth()->id())
+                    ->exists();
+        }
 
         $now = Carbon::now();
 

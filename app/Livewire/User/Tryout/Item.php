@@ -2,10 +2,11 @@
 
 namespace App\Livewire\User\Tryout;
 
-use App\Models\Category;
+use App\Models\Result;
 use App\Models\Tryout;
-use Illuminate\Http\Request;
 use Livewire\Component;
+use App\Models\Category;
+use Illuminate\Http\Request;
 
 class Item extends Component
 {
@@ -22,12 +23,18 @@ class Item extends Component
     public function render()
     {
         $categories = Category::with('sub_categories')->get();
-        // dd($categories);
         
-        // foreach($categories as $item) {
-        //     echo $item;
-        // }
-        // die();
+        // Ambil ID user yang sedang login
+        $userId = auth()->id();
+
+        // Cek setiap sub-category yang sudah pernah dikerjakan user
+        foreach ($categories as $category) {
+            foreach ($category->sub_categories as $subCategory) {
+                $subCategory->is_completed = Result::where('user_id', $userId)
+                                                ->where('sub_category_id', $subCategory->id)
+                                                ->exists();
+            }
+        }
 
         return view('livewire.user.tryout.item', compact('categories')); 
     }
