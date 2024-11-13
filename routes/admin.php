@@ -19,9 +19,6 @@ use App\Http\Controllers\UniversityScraperController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 // Route::get('all-universities',[UniversityController::class,'getAllUniversities'])->name('get-universities');
 

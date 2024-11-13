@@ -8,7 +8,7 @@ class QuestionPractice extends Model
 {
     //
 
-    protected $fillable = ['question', 'image', 'corect_answer', 'explanation', 'class_bimbel_id'];
+    protected $fillable = ['question', 'image', 'correct_answer', 'explanation', 'class_bimbel_id'];
 
 
     public function class_bimbel(){

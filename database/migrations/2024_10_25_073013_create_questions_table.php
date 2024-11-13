@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('tryout_id')->constrained()->cascadeOnDelete();
             $table->string('question')->nullable();
             $table->string('image')->nullable();
-            $table->string('corect_answer');
+            $table->string('correct_answer');
             $table->longText('explanation');
 
             $table->timestamps();

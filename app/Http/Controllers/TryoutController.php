@@ -239,7 +239,7 @@ class TryoutController extends Controller
         $data = $request->validate([
             'sub_categories_id' => 'required|exists:sub_categories,id',
             'question' => 'nullable|string',
-            'corect_answer' => 'required|string',
+            'correct_answer' => 'required|string',
             'explanation' => 'required|string',
             'image' => 'nullable|image|max:2048',
         ]);
@@ -306,7 +306,7 @@ class TryoutController extends Controller
         $data = $request->validate([
             'sub_categories_id' => 'required|exists:sub_categories,id',
             'question' => 'nullable|string',
-            'corect_answer' => 'required|string',
+            'correct_answer' => 'required|string',
             'explanation' => 'required|string',
         ]);
 

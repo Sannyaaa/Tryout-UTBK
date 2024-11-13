@@ -19,4 +19,5 @@ class Question extends Model
     public function answer(){
         return $this->hasOne(Answer::class);
     }
+    
 }

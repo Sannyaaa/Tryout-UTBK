@@ -96,16 +96,16 @@
                     </div>
 
                     <div>
-                        <x-input-label for="corect_answer" :value="__('Jawaban Benar')" />
-                        <x-select-input id="corect_answer" name="corect_answer" >
+                        <x-input-label for="correct_answer" :value="__('Jawaban Benar')" />
+                        <x-select-input id="correct_answer" name="correct_answer" >
                             <option selected="" disabled>Piliih Jawaban Benar </option>
-                            <option value="a" {{ old('corect_answer', $question->corect_answer) == 'a' ? 'selected' : '' }}>A</option>
-                            <option value="b" {{ old('corect_answer', $question->corect_answer) == 'b' ? 'selected' : '' }}>B</option>
-                            <option value="c" {{ old('corect_answer', $question->corect_answer) == 'c' ? 'selected' : '' }}>C</option>
-                            <option value="d" {{ old('corect_answer', $question->corect_answer) == 'd' ? 'selected' : '' }}>D</option>
-                            <option value="e" {{ old('corect_answer', $question->corect_answer) == 'e' ? 'selected' : '' }}>E</option>
+                            <option value="a" {{ old('correct_answer', $question->correct_answer) == 'a' ? 'selected' : '' }}>A</option>
+                            <option value="b" {{ old('correct_answer', $question->correct_answer) == 'b' ? 'selected' : '' }}>B</option>
+                            <option value="c" {{ old('correct_answer', $question->correct_answer) == 'c' ? 'selected' : '' }}>C</option>
+                            <option value="d" {{ old('correct_answer', $question->correct_answer) == 'd' ? 'selected' : '' }}>D</option>
+                            <option value="e" {{ old('correct_answer', $question->correct_answer) == 'e' ? 'selected' : '' }}>E</option>
                         </x-select-input>
-                        <x-input-error :messages="$errors->get('corect_answer')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('correct_answer')" class="mt-2" />
                     </div>
 
                     <div>
