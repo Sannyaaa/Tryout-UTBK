@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="p-4 mt-12">
     <div class="p-6 bg-white block rounded-lg shadow sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
         <div class="w-full mb-1">
@@ -17,13 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="{{ route('admin.tryout.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Class</a>
+                            <a href="{{ route('mentor.bimbel.index') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Bimbel</a>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Detail Tryout</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Detail Bimbel</span>
                             </div>
                         </li>
                         </ol>
@@ -34,33 +35,30 @@
 
 
             <div class="">
-                <main class="rounded-lg bg-white shadow mx-auto px-4 py-10">
+                <main class="rounded-lg bg-white shadow mx-auto px-4 py-8">
                     <div class="grid lg:grid-cols-2 gap-2">
                         <div class="w-full lg:w-2/3 px-4">
-                            <h2 class="text-sm text-gray-500 mb-4">Name Tryout <br><span class="text-lg font-bold text-gray-800">{{ $tryout->name }}</span></h2>
-                            <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-gray-800">{!! $tryout->description !!}</span></p>
+                            <h2 class="text-sm text-gray-500 mb-4">Name Bimbel <br><span class="text-lg font-bold text-gray-800">{{ $bimbel->name }}</span></h2>
+                            <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-gray-800">{{ $bimbel->description }}</span></p>
                         </div>
-                        <div class="w-full px-4">
-                        <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
-                            @if ( $tryout->is_free == 'free' )
-                                <span class="text-lg font-bold text-black mb-4">Gratis</span>
-                            @else
-                                <span class="text-lg font-bold text-black mb-4">Berbayar</span>
-                            @endif
-                        </h3>
-                        @php
-                            use Carbon\Carbon;
-                        @endphp
-                        <h3 class="text-sm text-gray-500  mb-4">Biasa / Serentak <br>
-                            @if ( $tryout->is_together == 'together' )
-                                <p class="text-lg font-bold text-black mb-4">Serentak</p>
-                                <span class="text-sm text-gray-500">Tanggal</span>
-                                <p class="text-lg font-bold text-black mb-4">{{ Carbon::parse($tryout->start_date)->format('d F Y') }} - {{ Carbon::parse($tryout->end_date)->format('d F Y') }} </p>
-                            @else
-                                <span class="text-lg font-bold text-black mb-4">Biasa</span>
-                            @endif
-                        </h3>
-                    </div>
+                        {{-- <div class="w-full lg:w-1/3 px-4">
+                            <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
+                                @if ( $bimbel->is_free == 'free' )
+                                    <span class="text-lg font-bold text-gray-800 mb-4">Gratis</span>
+                                @else
+                                    <span class="text-lg font-bold text-gray-800 mb-4">Berbayar</span>
+                                @endif
+                            </h3>
+                            <h3 class="text-sm text-gray-500 ">Biasa / Serentak <br>
+                                @if ( $bimbel->is_together == 'together' )
+                                    <span class="text-lg font-bold text-gray-800 mb-4">Serentak</span><br>
+                                    <span class="text-lg font-bold text-gray-800">Start Date = {{ $bimbel->start_date }}</span><br>
+                                    <span class="text-lg font-bold text-gray-800">End Date = {{ $bimbel->end_date }}</span><br>
+                                @else
+                                    <span class="text-lg font-bold text-gray-800 mb-4">Biasa</span>
+                                @endif
+                            </h3>
+                        </div> --}}
                     </div>
                 </main>
             </div>
@@ -69,77 +67,17 @@
         
             <div class="items-center justify-between block my-6 sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
                 <h3 class="text-2xl text-gray-800 font-bold">
-                    Daftar Pertanyaan {{ $tryout->name }}
+                    Daftar Class {{ $bimbel->name }}
                 </h3>
-                {{-- <a href="{{ route('admin.tryout.question.create', $tryout->id) }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                    Add new Question
-                </a> --}}
-                <x-primary-link href="{{ route('admin.combined-categories.index') }}">
-                    Buat Subcategory
-                </x-primary-link>
+                {{-- <x-primary-link href="{{ route('mentor.bimbel.class.create', $bimbel->id) }}">
+                    + Class
+                </x-primary-link> --}}
             </div>
 
             <div class="flex flex-col">
                 <div class="overflow-x-auto">
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden shadow">
-                            {{-- <table class="min-w-full divide-y divide-gray-200 border-gray-200 border-2 whitespace-nowrap dark:divide-gray-600">
-                                <thead class="bg-gray-100 dark:bg-gray-700">
-                                    <tr>
-                                        <th scope="col" class="p-4">
-                                            <div class="flex items-center">
-                                                <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                <label for="checkbox-all" class="sr-only">checkbox</label>
-                                            </div>
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Image
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-semibold text-left text-gray-500 uppercase dark:text-gray-400">
-                                            No
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Sub categories
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Question
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            correct answer
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Actions
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">    
-                                    @foreach ($question as $i => $questions)
-                                        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                            <td class="p-4 text-base font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{$i + 1}}</td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->sub_categories->name}}</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{!! $questions->question !!}</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$questions->corect_answer}}</td>
-
-                                                <td class="p-4 space-x-2 whitespace-nowrap">
-                                                    <div class="flex justify-start gap-1">
-                                                        <a href="{{ route('admin.tryout.question.edit', [$tryout->id, $questions->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
-                                                            Update
-                                                        </a>
-                                                        <form action="{{ route('admin.tryout.question.destroy', [$tryout->id, $questions->id]) }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-                                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                                                                Delete item
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            </tr>                   
-                                        @endforeach
-                                </tbody>
-                            </table> --}}
                             <table class="min-w-full divide-y divide-gray-200 border-gray-200 border-2 whitespace-nowrap dark:divide-gray-600">
                                 <thead class="bg-gray-100 dark:bg-gray-700">
                                     <tr>
@@ -152,47 +90,56 @@
                                         {{-- <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Image
                                         </th> --}}
-                                        <th scope="col" class="p-4 text-xs font-semibold text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4 text-sm font-semibold text-left text-gray-500 uppercase dark:text-gray-400">
                                             No
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Sub Categories
+                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Name
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Total Pertanyaan
+                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Sub categories
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Total Peserta
+                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Mentor
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Tanggal
+                                        </th>
+                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Actions
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">    
-                                    @foreach ($subCategories  as $i => $subCategory)
+                                    @foreach ($classes as $i => $class)
                                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                             <td class="p-4 text-base font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{$i + 1}}</td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$subCategory->sub_categories->name}}</td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$subCategory->question_count}}</td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$subCategory->sub_categories->total_participants}}</td>
-                                            <td class="p-4 space-x-2 whitespace-nowrap">
-                                                <div class="flex justify-start gap-1">
-                                                    <a href="{{ route('admin.tryout.sub-category', ['tryout' => $tryout->id, 'sub_categories' => $subCategory->sub_categories->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
-                                                        Detail
-                                                    </a>
-                                                  <a href="{{ route('admin.tryout.sub-category', ['tryout' => $tryout->id, 'sub_categories' => $subCategory->sub_categories->id, 'export_excel' => true]) }}" 
-                                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-green-400 to-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300">
-                                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                                                        </svg>
-                                                        Export to Excel
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>                   
-                                    @endforeach
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$class->name}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$class->sub_categories->name}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$class->user->name}}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$class->date}}</td>
+                                                <td class="p-4 space-x-2 whitespace-nowrap">
+                                                    <div class="flex justify-start gap-1">
+                                                        <a href="{{ route('mentor.class-bimbel.show', [$class->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-emerald-400 to-emerald-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                            {{-- <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg> --}}
+                                                            Show
+                                                        </a>
+                                                        <a href="{{ route('mentor.bimbel.class.edit', [$bimbel->id, $class->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
+                                                            Update
+                                                        </a>
+                                                        {{-- <form action="{{ route('mentor.class-bimbel.destroy', $class->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-tr from-rose-400 to-rose-500 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                                                                Delete
+                                                            </button>
+                                                        </form> --}}
+                                                    </div>
+                                                </td>
+                                            </tr>                   
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -200,10 +147,69 @@
                 </div>
             </div>
 
-            <div>
-                <x-primary-link href="{{ route('admin.tryout.index') }}" class="mt-4">
-                    Kembali
-                </x-primary-link>
+            <div class="items-center justify-between block my-6 sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+                <h3 class="text-2xl text-gray-800 font-bold">
+                    Daftar Peserta {{ $bimbel->name }}
+                </h3>
+            </div>
+
+            <div class="flex flex-col">
+                <div class="overflow-x-auto">
+                    <div class="inline-block min-w-full align-middle">
+                        <div class="overflow-hidden shadow">
+                            <table class="min-w-full divide-y divide-gray-200 border-gray-200 border-2 whitespace-nowrap dark:divide-gray-600">
+                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                    <tr>
+                                        {{-- <th scope="col" class="p-4">
+                                            <div class="flex items-center">
+                                                <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="checkbox-all" class="sr-only">checkbox</label>
+                                            </div>
+                                        </th> --}}
+                                        {{-- <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Image
+                                        </th> --}}
+                                        <th scope="col" class="p-4 text-sm font-semibold text-left text-gray-500 uppercase dark:text-gray-400">
+                                            No
+                                        </th>
+                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Name
+                                        </th>
+                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Email
+                                        </th>
+                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Phone
+                                        </th>
+                                        {{-- <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Action
+                                        </th> --}}
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">    
+                                    @forelse ($users as $i => $user)
+                                        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                            <td class="p-4 text-base font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{$i + 1}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$user->name}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$user->email}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$user->phone ?? '--'}}</td> 
+                                            {{-- <td class="p-4 space-x-2 whitespace-nowrap">
+                                                <div class="flex justify-start gap-1">
+                                                    <a href="{{ route('admin.user.edit', [$user->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-emerald-400 to-emerald-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
+                                                        Detail
+                                                    </a>
+                                                </div>
+                                            </td> --}}
+                                        </tr>
+                                    @empty
+                                        ---
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -228,10 +234,10 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    var table = $('#tryoutTable').DataTable({
+    var table = $('#bimbelTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.tryout.index') }}",
+        ajax: "{{ route('mentor.bimbel.index') }}",
         columns: [
             {
                 data: 'checkbox',
@@ -276,22 +282,22 @@ $(document).ready(function() {
 
     // Handle "select all" checkbox
     $('#checkbox-all').on('click', function() {
-        $('.tryout-checkbox').prop('checked', this.checked);
+        $('.bimbel-checkbox').prop('checked', this.checked);
         updateBulkDeleteButton();
     });
 
     // Handle individual checkbox changes
-    $('#tryoutTable').on('change', '.tryout-checkbox', function() {
+    $('#bimbelTable').on('change', '.bimbel-checkbox', function() {
         updateBulkDeleteButton();
         
         // Update "select all" checkbox
-        var allChecked = $('.tryout-checkbox:checked').length === $('.tryout-checkbox').length;
+        var allChecked = $('.bimbel-checkbox:checked').length === $('.bimbel-checkbox').length;
         $('#checkbox-all').prop('checked', allChecked);
     });
 
     // Update bulk delete button visibility
     function updateBulkDeleteButton() {
-        var checkedCount = $('.tryout-checkbox:checked').length;
+        var checkedCount = $('.bimbel-checkbox:checked').length;
         if (checkedCount > 0) {
             $('#bulkDeleteBtn').show();
         } else {
@@ -303,12 +309,12 @@ $(document).ready(function() {
     $('#bulkDeleteBtn').on('click', function() {
         if (confirm('Are you sure you want to delete selected items?')) {
             var selectedIds = [];
-            $('.tryout-checkbox:checked').each(function() {
+            $('.bimbel-checkbox:checked').each(function() {
                 selectedIds.push($(this).val());
             });
 
             $.ajax({
-                url: "{{ route('admin.tryout.bulkDelete') }}",
+                url: "{{ route('mentor.bimbel.bulkDelete') }}",
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -341,12 +347,12 @@ $(document).ready(function() {
     
 <script type="text/javascript">
         $(document).ready(function () {
-            var table = $('#tryoutTable').DataTable({
+            var table = $('#bimbelTable').DataTable({
                 processing: true,
                 serverSide: true,
                 order: [[5,'desc']],
                 ordering: true,
-                ajax: "{{ route('admin.tryout.index') }}",
+                ajax: "{{ route('mentor.bimbel.index') }}",
                 columns: [
                     {data: 'image', name: 'image', orderable: false, searchable: false},
                     {data: 'name', name: 'name'},

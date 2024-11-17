@@ -65,7 +65,7 @@
                         <button>
                             <img data-modal-target="image-modal" data-modal-toggle="image-modal" src="{{$question->image ?? ''}}" class="mb-2" style="max-height: 36rem;">
                         </button>
-                        <h3 class="text-2xl">{{ $question->question }}</h3>
+                        <h3 class="text-2xl">{!! $question->question !!}</h3>
                     </div>
                     <div class="p-8" wire:poll>
                         @foreach(['a', 'b', 'c', 'd', 'e'] as $option)

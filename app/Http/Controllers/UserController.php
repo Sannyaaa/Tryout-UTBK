@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ResultUserExport;
 use App\Models\Result;
+use App\Models\sub_categories;
+use App\Models\Tryout;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -143,9 +147,19 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $user, Request $request, Tryout $tryout, sub_categories $sub_categories )
     {
-        //
+        if ($request->has('export_excel')) {
+            try {
+                return Excel::download(
+                    new ResultUserExport($tryout, $sub_categories, $user), 
+                    'detail_hasil_tryout_' . $tryout->name . '_' . $sub_categories->name . '.xlsx'
+                );
+            } catch (\Exception $e) {
+                Log::error('Error in export: ' . $e->getMessage());
+                return back()->with('error', 'An error occurred while exporting the data.');
+            }
+        }
 
         $results = Result::where('user_id', $user->id)->get();
 

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DetailTryoutExport;
+use App\Exports\ResultUserExport;
 use App\Exports\TryoutExport;
+use App\Exports\UserAnswerExport;
 use App\Livewire\User\Tryouts;
 use App\Models\Answer;
 use App\Models\AnswerQuestion;
@@ -11,6 +14,7 @@ use App\Models\Question;
 use App\Models\Result;
 use App\Models\sub_categories;
 use App\Models\tryout;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -193,12 +197,31 @@ class TryoutController extends Controller
         return view('admin.tryout.show', compact('tryout','question','subCategories'));
     }
 
-    public function subCategory(tryout $tryout, sub_categories $sub_categories){
-        $questions = Question::where('tryout_id', $tryout->id)->where('sub_categories_id', $sub_categories->id)->orderByDesc('created_at')->get();
+    public function subCategory(Request $request, tryout $tryout, sub_categories $sub_categories)
+    {
+        if ($request->has('export_excel')) {
+            try {
+                return Excel::download(
+                    new DetailTryoutExport($tryout, $sub_categories), 
+                    'tryout_' . $tryout->name . '_' . $sub_categories->name . '_report.xlsx'
+                );
+            } catch (\Exception $e) {
+                Log::error('Error in export: ' . $e->getMessage());
+                return back()->with('error', 'An error occurred while exporting the data.');
+            }
+        }
 
-        $results = Result::with(['user','answer_question'])->where('tryout_id', $tryout->id)->where('sub_category_id', $sub_categories->id)->get();
+        $questions = Question::where('tryout_id', $tryout->id)
+            ->where('sub_categories_id', $sub_categories->id)
+            ->orderByDesc('created_at')
+            ->get();
 
-        return view('admin.tryout.sub-category', compact('questions','tryout','results'));
+        $results = Result::with(['user','answer_question'])
+            ->where('tryout_id', $tryout->id)
+            ->where('sub_category_id', $sub_categories->id)
+            ->get();
+
+        return view('admin.tryout.sub-category', compact('questions','tryout','results', 'sub_categories'));
     }
 
     /**
@@ -393,11 +416,26 @@ class TryoutController extends Controller
         }
     }
 
-    public function result(tryout $tryout, sub_categories $sub_categories, Result $result){
+    public function result(tryout $tryout, sub_categories $sub_categories, Result $result, Request $request, User $user)
+    {
+
+        if ($request->has('export_excel')) {
+            try {
+                return Excel::download(
+                    new UserAnswerExport($tryout, $sub_categories, $user, $result), 
+                    'detail_User_dan_Jawaban_' . $user->name . '_' . $sub_categories->name . '.xlsx'
+                );
+            } catch (\Exception $e) {
+                Log::error('Error in export: ' . $e->getMessage());
+                return back()->with('error', 'An error occurred while exporting the data.');
+            }
+        }
 
         $results = AnswerQuestion::with(['question','result'])->where('result_id', $result->id)->get();
 
         return view('admin.tryout.result', compact('tryout','sub_categories','result','results'));
     }
 
+
+    
 }

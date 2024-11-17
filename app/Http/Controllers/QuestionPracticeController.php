@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AnswerPractice;
 use App\Models\ClassBimbel;
+use App\Models\Question;
 use App\Models\QuestionPractice;
+use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Log;
 
@@ -97,7 +99,11 @@ class QuestionPracticeController extends Controller
         //
         $classes = ClassBimbel::all();
 
-        return view('admin.question-practice.create',compact('classes'));
+        if(Gate::allows('admin')){
+            return view('admin.question-practice.create',compact('classes'));
+        }elseif(Gate::allows('mentor')){
+            return view('mentor.question-practice.create',compact('classes'));
+        }
     }
 
     /**
@@ -137,12 +143,24 @@ class QuestionPracticeController extends Controller
 
             AnswerPractice::create($answer);
 
-            if($request->input('back')){
-                return redirect()->route('admin.class-bimbel.show', $request->input('back'))->with('success', 'Tryout berhasil ditambahkan.');
+            if(Gate::allows('admin')){
+                if($request->input('back')){
+                    return redirect()->route('admin.class-bimbel.show', $request->input('back'))->with('success', 'Question berhasil ditambahkan.');
+                }
+
+                Log::info("berhasil");
+                return redirect()->route('admin.question-practice.index')->with('success', 'question created successfully.');
+            
+            }elseif(Gate::allows('mentor')){
+                if($request->input('back')){
+                    return redirect()->route('mentor.class-bimbel.show', $request->input('back'))->with('success', 'Question berhasil ditambahkan.');
+                }
+
+                Log::info("berhasil");
+                return redirect()->route('mentor.question-practice.index')->with('success', 'question created successfully.');
             }
 
-            Log::info("berhasil");
-            return redirect()->route('admin.question-practice.index')->with('success', 'question created successfully.');
+            
         } catch (\Exception $e) {
             Log::error('Error in create question: ' . $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
@@ -219,11 +237,23 @@ class QuestionPracticeController extends Controller
             // Simpan jawaban ke database
             $answer->save();
 
-            if($request->input('back')){
-                return redirect( $request->input('back'))->with('success', 'Tryout berhasil ditambahkan.');
+            if(Gate::allows('admin')){
+                if($request->input('back')){
+                    return redirect()->route('admin.class-bimbel.show', $request->input('back'))->with('success', 'Question Behasil DI update');
+                }
+
+                Log::info("berhasil");
+                return redirect()->route('admin.question-practice.index')->with('success', 'question created successfully.');
+            
+            }elseif(Gate::allows('mentor')){
+                if($request->input('back')){
+                    return redirect()->route('mentor.class-bimbel.show', $request->input('back'))->with('success', 'Question Behasil DI update');
+                }
+
+                Log::info("berhasil");
+                return redirect()->route('mentor.question-practice.index')->with('success', 'question Update successfully.');
             }
 
-            return redirect()->route('admin.question.index')->with('success', 'Question and answers updated successfully.');
         } catch (\Exception $e) {
             Log::error('Error in update question: ' . $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());

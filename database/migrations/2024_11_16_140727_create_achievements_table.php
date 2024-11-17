@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('questions', function (Blueprint $table) {
-            $table->renameColumn('corect_answer', 'correct_answer');
+        Schema::create('achievements', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('achievement')->nullable();
+            $table->foreignId('mentor_id')->constrained()->onDelete('cascade');;
+
+            $table->timestamps();
         });
     }
 
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('questions', function (Blueprint $table) {
-            $table->renameColumn('correct_answer', 'corect_answer');
-        });
+        Schema::dropIfExists('achievements');
     }
 };

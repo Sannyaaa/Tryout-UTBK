@@ -14,7 +14,7 @@ class CombinedCategoriesController extends Controller
     public function index()
     {
         try {
-            $categories = Category::with('subcategories')->get();
+            $categories = Category::with('sub_categories')->get();
             return view('admin.combined-categories.index', compact('categories'));
         } catch (\Exception $e) {
             Log::error('Error in index method: ' . $e->getMessage());

@@ -36,6 +36,12 @@ prefix('/admin')->name('admin.')->group(function() {
 });
 
 Route::
+middleware(['auth','role:mentor'])->
+prefix('/mentor')->name('mentor.')->group(function() {
+    require __DIR__.'/mentor.php';
+});
+
+Route::
 middleware(['auth'])->
 name('user.')->group(function() {
     require __DIR__.'/user.php';
