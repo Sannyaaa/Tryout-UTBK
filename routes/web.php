@@ -5,9 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UniversityController;
 
-Route::get('/', function () {
-    return view('index');
-});
+
 
 Route::get('/test', function () {
     return view('test');
@@ -30,13 +28,17 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/fetch-universities', [UniversityController::class, 'fetchUniversities']);
-Route::get('/fetch-static-universities', [UniversityController::class, 'getStaticUniversities']);
 
 Route::
 middleware(['auth','role:admin'])->
 prefix('/admin')->name('admin.')->group(function() {
     require __DIR__.'/admin.php';
+});
+
+Route::
+middleware(['auth','role:mentor'])->
+prefix('/mentor')->name('mentor.')->group(function() {
+    require __DIR__.'/mentor.php';
 });
 
 Route::

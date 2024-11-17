@@ -84,7 +84,7 @@
 
                     <div>
                         <x-input-label for="description" :value="__('description')" />
-                        <x-text-area id="description" name="description" rows="4" placeholder="Masukan description">{{$package_member->description}}</x-text-area>
+                        <x-text-area id="description" name="description" rows="4" placeholder="Masukan description">{!! $package_member->description !!}</x-text-area>
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
 

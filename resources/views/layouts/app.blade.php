@@ -27,6 +27,11 @@
         {{-- CDN font awesome --}}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
+
+<link rel="stylesheet" href="sweetalert2.min.css">
+
+        <script src="sweetalert2.min.js"></script>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -57,6 +62,12 @@
         .ts-dropdown .active {
             background-color: #e5e7eb;
         }
+
+
+        .ck-editor__editable {
+            height: 150px;  /* Me/* Menentukan tinggi maksimum editor */
+        }
+
         </style>
 
     </head>
@@ -104,6 +115,32 @@
     <script src="{{ asset('js/dark-mode.js') }}"></script>
     <script src="{{ asset('js/charts.js') }}"></script>
     <script src="./path/to/flowbite/dist/flowbite.js"></script>
+    
+        <script src="sweetalert2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (session('success'))
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+            });
+            Toast.fire({
+            icon: "success",
+            title: "{{  session('success') }}",
+            });
+        </script>
+    @endif
+
+    {{-- ckeditor --}}
+
     </script>
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">

@@ -38,7 +38,7 @@
                     <div class="grid lg:grid-cols-2 gap-2">
                         <div class="w-full lg:w-2/3 px-4">
                             <h2 class="text-sm text-gray-500 mb-4">Name Tryout <br><span class="text-lg font-bold text-gray-800">{{ $tryout->name }}</span></h2>
-                            <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-gray-800">{{ $tryout->description }}</span></p>
+                            <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-gray-800">{!! $tryout->description !!}</span></p>
                         </div>
                         <div class="w-full px-4">
                         <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
@@ -69,12 +69,18 @@
                 <h3 class="text-2xl text-gray-800 font-bold">
                     Daftar Pertanyaan {{ $tryout->name }}
                 </h3>
-                {{-- <a href="{{ route('admin.tryout.question.create', $tryout->id) }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                    Add new Question
-                </a> --}}
-                <x-primary-link href="{{ route('admin.tryout.question.create', $tryout->id) }}">
-                    Buat Pertanyaan
-                </x-primary-link>
+                <div class="flex justify-center gap-3">
+                    <a href="{{ route('admin.tryout.sub-category', ['tryout' => $tryout->id, 'sub_categories' => $sub_categories->id, 'export_excel' => true]) }}" 
+                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-green-400 to-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        Export All to Excel
+                    </a>
+                    <x-primary-link href="{{ route('admin.tryout.question.create', $tryout->id) }}">
+                        Buat Pertanyaan
+                    </x-primary-link>
+                </div>
             </div>
 
             <div class="flex flex-col">
@@ -105,7 +111,7 @@
                                     @foreach ($questions as $i => $question)
                                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                             <td class="p-4 text-base font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{$i + 1}}</td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$question->question}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{!! $question->question !!}</td>
                                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$question->correct_answer}}</td>
                                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ Carbon::parse($question->created_at)->format('d F Y') }}</td>
                                             <td class="p-4 space-x-2 whitespace-nowrap">

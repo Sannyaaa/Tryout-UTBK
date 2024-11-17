@@ -109,8 +109,8 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    @if($category->subcategories->count() > 0)
-                                        @foreach($category->subcategories as $subcategory)   
+                                    @if($category->sub_categories->count() > 0)
+                                        @foreach($category->sub_categories as $subcategory)   
                                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><h3 class="text-lg font-medium"><h4 class="font-medium">---- {{ $subcategory->name }}</h4></h3></td>
                                                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><p class="text-gray-600 text-sm">{{ $subcategory->description }}</p></td>

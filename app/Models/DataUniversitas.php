@@ -13,4 +13,8 @@ class DataUniversitas extends Model
     public function user(){
         return $this->hasMany(User::class);
     }
+    
+    public function mentor(){
+        return $this->hasMany(Mentor::class);
+    }
 }

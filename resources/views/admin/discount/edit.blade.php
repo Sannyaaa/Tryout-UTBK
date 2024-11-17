@@ -81,7 +81,7 @@
 
                     <div>
                         <x-input-label for="description" :value="__('Description')" />
-                        <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description">{{$discount->description}}</x-text-area>
+                        <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description">{!! $discount->description !!}</x-text-area>
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
                     

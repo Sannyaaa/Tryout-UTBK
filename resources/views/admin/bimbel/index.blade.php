@@ -83,7 +83,7 @@
                                     
                                     <div class="mb-4">
                                         <x-input-label for="description" :value="__('Description')" />
-                                        <x-text-area id="description" name="description" rows="4" placeholder="Masukan Description"/>
+                                        <textarea name="description" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:ring-1 block w-full p-2.5"></textarea>
                                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
 
@@ -131,7 +131,7 @@
                                     
                                     <div>
                                         <x-input-label for="edit_description" :value="__('Description')" />
-                                        <x-text-area id="edit_description" name="description" rows="4"  placeholder="Masukan Description"/>
+                                        <textarea id="edit_description" name="description" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:ring-1 block w-full p-2.5"></textarea>
                                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
 
@@ -273,7 +273,15 @@ $(document).ready(function() {
             },
             
             {data: 'name', name: 'name'},
-            {data: 'description', name: 'description'},
+            {
+                data: 'description', // Mengambil data description
+                name: 'description',
+                render: function(data, type, row) {
+                    // Menghapus tag HTML dan menampilkan teks biasa
+                    var plainText = $('<div>').html(data).text();  // Menghapus HTML
+                    return plainText;  // Mengembalikan teks biasa
+                }
+            },
             {data: 'link_group', name: 'link_group'},
             {data: 'created_at', name: 'created_at'},
             {

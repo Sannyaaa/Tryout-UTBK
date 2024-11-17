@@ -12,6 +12,8 @@ use App\Models\QuestionPractice;
 use Illuminate\Http\Request;
 use App\Models\sub_categories;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
@@ -24,67 +26,140 @@ class ClassBimbelController extends Controller
     public function index(Request $request)
     {
         try {
-            if ($request->ajax()) {
-                $query = ClassBimbel::with(['bimbel','user','sub_categories'])->get();
-                if ($request->sub_categories) {
-                    $query->where('sub_categories_id', $request->sub_categories);
+            
+            if(Gate::allows('admin')){
+                
+                if ($request->ajax()) {
+                    $query = ClassBimbel::with(['bimbel','user','sub_categories'])->get();
+                    if ($request->sub_categories) {
+                        $query->where('sub_categories_id', $request->sub_categories);
+                    }
+
+                    return DataTables::of($query)
+                        ->addIndexColumn()
+                        ->addColumn('checkbox', function($class) {
+                            return '<input type="checkbox" class="class-bimbel-checkbox" value="' . $class->id . '">';
+                        })
+                        ->addColumn('date', function($class) {
+                            return date('j F Y', strtotime($class->date)) .' '. date('h:i A', strtotime($class->start_time));
+                        })
+                        ->addColumn('action', function ($class) {
+                            $showBtn = '<a href="' . route('admin.class-bimbel.show', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-emerald-400 to-emerald-500 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                
+                                Show
+                            </a>';
+
+                            $editBtn = '<a href="' . route('admin.class-bimbel.edit', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Update
+                            </a>';
+                            
+                            $deleteBtn = '<form action="' . route('admin.class-bimbel.destroy', $class->id) . '" method="POST" class="inline-block">
+                                ' . csrf_field() . '
+                                ' . method_field('DELETE') . '
+                                <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white  bg-gradient-to-tr from-rose-400 to-rose-500 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                                    Delete
+                                </button>
+                            </form>';
+                            
+                            $action = '<div class="flex items-center gap-2">
+                                ' 
+                                . $showBtn 
+                                .
+                                $editBtn . $deleteBtn .
+                                '
+                            </div>';
+                            
+                            return $action;
+                        })
+                        ->rawColumns(['action', 'date', 'checkbox'])
+                        ->make(true);
                 }
 
-                return DataTables::of($query)
-                    ->addIndexColumn()
-                    ->addColumn('checkbox', function($class) {
-                        return '<input type="checkbox" class="class-bimbel-checkbox" value="' . $class->id . '">';
-                    })
-                    ->addColumn('date', function($class) {
-                        return date('j F Y', strtotime($class->date)) .' '. date('h:i A', strtotime($class->start_time));
-                    })
-                    ->addColumn('action', function ($class) {
-                        $showBtn = '<a href="' . route('admin.class-bimbel.show', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-emerald-400 to-emerald-500 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                // Ekspor ke Excel
+                if ($request->has('export_excel')) {
+                    $data = ClassBimbel::with(['bimbel', 'user', 'sub_categories'])->get(); // Ambil data
+                    return Excel::download(new ClassBimbelExport($data), 'class_bimbel_data.xlsx');
+                }
+
+                // Ekspor ke PDF
+                if ($request->has('export_pdf')) {
+                    $data = ClassBimbel::with(['bimbel', 'user', 'sub_categories'])->get(); // Ambil data
+                    $pdf = Pdf::loadView('admin.class-bimbel.pdf', compact('data'));
+                    return $pdf->download('class_bimbel_data.pdf');
+                }
+
+                $subCategories = sub_categories::all(); // Ambil semua sub kategori
+                return view('admin.class-bimbel.index', compact('subCategories'));
+
+            }elseif(Gate::allows('mentor')){
+
+                if ($request->ajax()) {
+                    $query = ClassBimbel::with(['bimbel','user','sub_categories'])
+                    ->where('user_id', Auth::user()->id)->get();
+                    if ($request->sub_categories) {
+                        $query->where('sub_categories_id', $request->sub_categories);
+                    }
+
+                    return DataTables::of($query)
+                        ->addIndexColumn()
+                        // ->addColumn('checkbox', function($class) {
+                        //     return '<input type="checkbox" class="class-bimbel-checkbox" value="' . $class->id . '">';
+                        // })
+                        ->addColumn('date', function($class) {
+                            return date('j F Y', strtotime($class->date)) .' '. date('h:i A', strtotime($class->start_time));
+                        })
+                        ->addColumn('action', function ($class) {
+                            $showBtn = '<a href="' . route('mentor.class-bimbel.show', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-emerald-400 to-emerald-500 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                
+                                Show
+                            </a>';
+
+                            $editBtn = '<a href="' . route('mentor.class-bimbel.edit', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Update
+                            </a>';
                             
-                            Show
-                        </a>';
+                            // $deleteBtn = '<form action="' . route('mentor.class-bimbel.destroy', $class->id) . '" method="POST" class="inline-block">
+                            //     ' . csrf_field() . '
+                            //     ' . method_field('DELETE') . '
+                            //     <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white  bg-gradient-to-tr from-rose-400 to-rose-500 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                            //         Delete
+                            //     </button>
+                            // </form>';
+                            
+                            $action = '<div class="flex items-center gap-2">
+                                ' 
+                                . $showBtn 
+                                .
+                                $editBtn .
+                                '
+                            </div>';
+                            
+                            return $action;
+                        })
+                        ->rawColumns(['action', 'date'])
+                        ->make(true);
+                }
 
-                        $editBtn = '<a href="' . route('admin.class-bimbel.edit', $class->id) . '" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Update
-                        </a>';
-                        
-                        $deleteBtn = '<form action="' . route('admin.class-bimbel.destroy', $class->id) . '" method="POST" class="inline-block">
-                            ' . csrf_field() . '
-                            ' . method_field('DELETE') . '
-                            <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white  bg-gradient-to-tr from-rose-400 to-rose-500 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-                                Delete
-                            </button>
-                        </form>';
-                        
-                        $action = '<div class="flex items-center gap-2">
-                            ' 
-                             . $showBtn 
-                            .
-                              $editBtn . $deleteBtn .
-                            '
-                        </div>';
-                        
-                        return $action;
-                    })
-                    ->rawColumns(['action', 'date', 'checkbox'])
-                    ->make(true);
+                // // Ekspor ke Excel
+                // if ($request->has('export_excel')) {
+                //     $data = ClassBimbel::with(['bimbel', 'user', 'sub_categories'])
+                //     ->where('user_id', Auth::user()->id)->get(); // Ambil data
+                //     return Excel::download(new ClassBimbelExport($data), 'class_bimbel_data.xlsx');
+                // }
+
+                // // Ekspor ke PDF
+                // if ($request->has('export_pdf')) {
+                //     $data = ClassBimbel::with(['bimbel', 'user', 'sub_categories'])
+                //     ->where('user_id')->get(); // Ambil data
+                //     $pdf = Pdf::loadView('mentor.class-bimbel.pdf', compact('data'));
+                //     return $pdf->download('class_bimbel_data.pdf');
+                // }
+
+                $subCategories = sub_categories::all(); // Ambil semua sub kategori
+                return view('mentor.class-bimbel.index', compact('subCategories'));
+
             }
 
-            // Ekspor ke Excel
-            if ($request->has('export_excel')) {
-                $data = ClassBimbel::with(['bimbel', 'user', 'sub_categories'])->get(); // Ambil data
-                return Excel::download(new ClassBimbelExport($data), 'class_bimbel_data.xlsx');
-            }
-
-            // Ekspor ke PDF
-            if ($request->has('export_pdf')) {
-                $data = ClassBimbel::with(['bimbel', 'user', 'sub_categories'])->get(); // Ambil data
-                $pdf = Pdf::loadView('admin.class-bimbel.pdf', compact('data'));
-                return $pdf->download('class_bimbel_data.pdf');
-            }
-
-            $subCategories = sub_categories::all(); // Ambil semua sub kategori
-            return view('admin.class-bimbel.index', compact('subCategories'));
         } catch (\Exception $e) {
             Log::error('Error in index method: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while processing your request.'], 500);
@@ -141,7 +216,11 @@ class ClassBimbelController extends Controller
 
         $classes = ClassBimbel::all();
 
-        return view('admin.question-practice.create', compact('classBimbel','back','classes'));
+        if(Gate::allows('admin')){
+            return view('admin.question-practice.create', compact('classBimbel','back','classes'));
+        }elseif(Gate::allows('mentor')){
+            return view('mentor.question-practice.create', compact('classBimbel','back','classes'));
+        }
     }
 
     /**
@@ -227,9 +306,13 @@ class ClassBimbelController extends Controller
     {
         //
 
-        $questions = QuestionPractice::where('class_bimbel_id',$classBimbel->id)->get();
+        $questions = QuestionPractice::where('class_bimbel_id', $classBimbel->id)->get();
 
-        return view('admin.class-bimbel.show', compact('classBimbel','questions'));
+        if(Gate::allows('admin')){
+            return view('admin.class-bimbel.show', compact('classBimbel','questions'));
+        }elseif(Gate::allows('mentor')){
+            return view('mentor.class-bimbel.show', compact('classBimbel','questions'));
+        }
     }
 
     /**
@@ -245,13 +328,17 @@ class ClassBimbelController extends Controller
 
         $subCategories = sub_categories::all();
 
-        return view('admin.class-bimbel.edit', compact( 'classBimbel', 'bimbels', 'users','subCategories'));
+        if(Gate::allows('admin')){
+            return view('admin.class-bimbel.edit', compact( 'classBimbel', 'bimbels', 'users','subCategories'));
+        }elseif(Gate::allows('mentor')){
+            return view('mentor.class-bimbel.edit', compact( 'classBimbel', 'bimbels', 'users','subCategories'));
+        }
     }
 
     public function question_edit(ClassBimbel $classBimbel, QuestionPractice $question)
     {
         //
-        $back = route('admin.class-bimbel.show',$classBimbel->id);
+        $back = $classBimbel->id;
 
         $classes = ClassBimbel::all();
 
@@ -262,7 +349,11 @@ class ClassBimbelController extends Controller
         $answer = AnswerPractice::where('question_practice_id', $question->id)->first(); // Ambil jawaban yang terkait dengan pertanyaan
         // dd($answer);
 
-        return view('admin.question-practice.edit', compact('classBimbel','back','classes','question','answer'));
+        if(Gate::allows('admin')){
+            return view('admin.question-practice.edit', compact('classBimbel','back','classes','question','answer'));
+        }elseif(Gate::allows('mentor')){
+            return view('mentor.question-practice.edit', compact('classBimbel','back','classes','question','answer'));
+        }
     }
 
     /**

@@ -16,13 +16,13 @@ return new class extends Migration
 
         Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('tryout_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('tryout_id')->constrained()->cascadeOnDelete();
             $table->integer('correct_answers');
             $table->integer('incorrect_answers');
             $table->integer('unanswered');
             $table->integer('score');
-            $table->foreignId('sub_category_id')->constrained();
+            $table->foreignId('sub_category_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -73,7 +73,7 @@
 
                     <div>
                         <x-input-label for="question" :value="__('Question')" />
-                        <x-text-area id="question" name="question" rows="4">{{ old('question', $question->question) }}</x-text-area>
+                        <x-text-area id="question" name="question" rows="4">{!! old('question', $question->question) !!}</x-text-area>
                         <x-input-error :messages="$errors->get('question')" class="mt-2" />
                     </div>
 
@@ -123,7 +123,7 @@
                     
                     <div>
                         <x-input-label for="explanation" :value="__('Explanation')" />
-                        <x-text-area id="explanation" name="explanation" rows="4">{{ old('explanation', $question->explanation) }}</x-text-area>
+                        <x-text-area id="explanation" name="explanation" rows="4">{!! old('explanation', $question->explanation) !!}</x-text-area>
                         <x-input-error :messages="$errors->get('explanation')" class="mt-2" />
                     </div>
 

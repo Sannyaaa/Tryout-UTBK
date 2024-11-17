@@ -66,7 +66,7 @@
                                     </a>
                                 </div>
                                 <p class="font-medium text-gray-500 dark:text-gray-400 mb-3">
-                                    {{ Str::limit($package->description, 100, '...') }}
+                                    {!! Str::limit($package->description, 100, '...') !!}
                                 </p>
                                 <div class="flex justify-between items-baseline mb-2">
                                     <x-primary-link href="{{ route('user.package.item', $package->id) }}">

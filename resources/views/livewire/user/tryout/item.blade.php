@@ -5,7 +5,7 @@
             <div class="w-2/6 py-5">
                 <h1 class="text-4xl pb-5 font-bold">{{$tryout->name}}</h1>
                 <p>
-                    {{$tryout->description}}
+                    {!! $tryout->description !!}
                 </p>
             </div>
             <hr class="border h-100">

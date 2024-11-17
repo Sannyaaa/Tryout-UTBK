@@ -42,7 +42,7 @@
                             <div class="my-6 space-y-2">
                                 <h1 class=" text-xl font-bold text-gray-900 sm:text-2xl sm:leading-none sm:tracking-tight dark:text-white">Deskripsi</h1>
                         
-                                <p class="mb-4 font-normal text-gray-500 text-lg dark:text-gray-400">{{ $package->description }}</p>
+                                <p class="mb-4 font-normal text-gray-500 text-lg dark:text-gray-400">{!! $package->description !!}</p>
                             </div>
 
                             <div class="my-6 space-y-2">

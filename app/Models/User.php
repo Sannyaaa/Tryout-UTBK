@@ -31,6 +31,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
         'data_universitas_id',
         'second_data_universitas_id',
+        'sekolah_id',
+        'status',
     ];
 
     /**
@@ -69,7 +71,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(DataUniversitas::class, 'second_data_universitas_id');
     }
 
+    public function sekolah(){
+        return $this->belongsTo(Sekolah::class, 'sekolah_id');
+    }
     public function orders(){
         return $this->hasMany(Order::class);
     }
+
+    public function mentor()
+    {
+        return $this->hasOne(Mentor::class);
+    }
+
 }

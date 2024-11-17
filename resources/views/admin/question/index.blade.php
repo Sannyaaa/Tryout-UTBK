@@ -224,7 +224,17 @@ $(document).ready(function() {
             //         return data ? '<img src="' + data + '" width="100" height="100">' : '';
             //     }
             // },
-            {data: 'question', name: 'question', defaultContent: ''},
+            // {data: 'question', name: 'question', defaultContent: ''},
+            {
+                data: 'question', // Mengambil data question
+                name: 'question',
+                defaultContent: '',
+                render: function(data, type, row) {
+                    // Menghapus tag HTML dan menampilkan teks biasa
+                    var plainText = $('<div>').html(data).text();  // Menghapus HTML
+                    return plainText;  // Mengembalikan teks biasa
+                }
+            },
             {data: 'created_at', name: 'created_at', defaultContent: ''},
             {
                 data: 'action',
