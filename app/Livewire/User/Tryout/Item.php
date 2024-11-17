@@ -7,6 +7,7 @@ use App\Models\Tryout;
 use Livewire\Component;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Item extends Component
 {
@@ -14,28 +15,46 @@ class Item extends Component
 
     public $tryout;
 
+    public $user;
+
     public function mount(Request $request) {
         $this->tryoutId = $request->segment(3);
 
         $this->tryout = Tryout::where('id', $this->tryoutId)->first();
+
+        $this->user = auth()->user();
     }
 
     public function render()
     {
         $categories = Category::with('sub_categories')->get();
+
+        $totalSubCategories = DB::table('sub_categories')->count();
         
-        // Ambil ID user yang sedang login
-        $userId = auth()->id();
+        $filterFirst = Result::select('user_id', DB::raw('SUM(score) as total_score'))
+            ->join('users', 'results.user_id', '=', 'users.id')
+            ->where('users.data_universitas_id', $this->user->second_data_universitas_id)
+            ->where('users.second_data_universitas_id', $this->user->data_universitas_id)
+            ->where('results.tryout_id', $this->tryoutId)
+            ->groupBy('results.user_id')
+            ->havingRaw('COUNT(DISTINCT results.sub_category_id) = ?', [$totalSubCategories])
+            ->orderByDesc('total_score')
+            ->get();
+
 
         // Cek setiap sub-category yang sudah pernah dikerjakan user
         foreach ($categories as $category) {
             foreach ($category->sub_categories as $subCategory) {
-                $subCategory->is_completed = Result::where('user_id', $userId)
+                $subCategory->is_completed = Result::where('tryout_id',$this->tryoutId)
                                                 ->where('sub_category_id', $subCategory->id)
-                                                ->exists();
+                                                ->where('user_id', $this->user->id)
+                                                ->first();
             }
         }
 
-        return view('livewire.user.tryout.item', compact('categories')); 
+        return view('livewire.user.tryout.item', [
+            'categories' => $categories,
+            'firstFilters' => $filterFirst
+        ]); 
     }
 }

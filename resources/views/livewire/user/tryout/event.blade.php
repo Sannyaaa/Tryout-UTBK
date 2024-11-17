@@ -29,7 +29,7 @@
         </div>
         <div>
             {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
-            <div class="mx-5 mt-10">
+            <div class=" mt-10">
                 <div class="flex items-center gap-2 mb-4">
                     <div>
                         <span class="relative flex h-4 w-4">
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 <div class="pb-5 px-6 pt-1 bg-white rounded-b-lg">
-                                    <a href="#" class="w-full">
+                                    <a href="{{ route('user.tryouts.event.item', $going->id) }}" class="w-full">
                                         <button class="text-white font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-sky-700 w-full p-3 rounded-lg">
                                             Kerjakan
                                             <i class="fa-solid fa-arrow-right-long"></i>

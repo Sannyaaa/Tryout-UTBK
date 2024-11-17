@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('answer_questions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('question_id');
-            $table->enum('answer', ['a', 'b', 'c', 'd', 'e']);
+            $table->enum('answer', ['a', 'b', 'c', 'd', 'e'])->nullable();
             $table->foreignId('user_id');
             $table->timestamps();
         });

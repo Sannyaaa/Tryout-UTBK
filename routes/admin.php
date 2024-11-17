@@ -88,3 +88,6 @@ Route::post('/order/bulk-delete', [OrderController::class, 'bulkDelete'])->name(
 
 Route::resource('/testimonial', TestimonialController::class);
 Route::post('/testimonial/bulk-delete', [TestimonialController::class, 'bulkDelete'])->name('testimonial.bulkDelete');
+
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');

@@ -59,6 +59,11 @@
               <i class="fa-solid fa-user-tag"></i>
             </x-user-sidebar-link>
           </li>
+          <li>
+            <x-user-sidebar-link link="{{route('user.profile')}}" token="profile" name="Profile">
+              <i class="fa-solid fa-user"></i>
+            </x-user-sidebar-link>
+          </li>
           {{-- <li>
             <!-- Dropdown Menu -->
             <x-sidebar-dropdown id="dropdown-tryout" name="Tryout">

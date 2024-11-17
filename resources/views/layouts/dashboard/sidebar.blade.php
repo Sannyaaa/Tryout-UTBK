@@ -196,7 +196,7 @@
           </li>
         </ul>
         <div class="pt-2 space-y-2">
-          <x-sidebar-link link="{{ route('profile.edit') }}" token="profile" name="Profile">
+          <x-sidebar-link link="{{ route('admin.profile.edit') }}" token="profile" name="Profile">
             <i class="fa-solid fa-user"></i>
           </x-sidebar-link>
           <form method="POST" action="{{ route('logout') }}" class="">

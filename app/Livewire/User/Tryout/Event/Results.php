@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\User\Tryout;
+namespace App\Livewire\User\Tryout\Event;
 
 use App\Models\Result;
 use Livewire\Component;
@@ -12,7 +12,7 @@ use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 class Results extends Component
 {
     public $resultId;
-    public $currentQuestionId;
+    public $q;
     public $questions;
     public $result;
     public $totalResult;
@@ -21,29 +21,28 @@ class Results extends Component
     public $averageScore;
     public $userRank;
     public $chartData;
-    public $currentQuestionNumber;
 
-    protected $queryString = ['currentQuestionId'];
+    protected $updatesQueryString = ['q'];
 
     public function mount(Request $request) 
     {
-        $resultId = $request->segment(3);
+        $resultId = $request->segment(4);
         $this->resultId = $resultId;
         $this->result = Result::findOrFail($resultId);
         
-        $this->questions = Question::where('tryout_id', $this->result->tryout_id)
+        // Load questions dan simpan sebagai collection
+        $this->questions = collect(Question::where('tryout_id', $this->result->tryout_id)
             ->where('sub_categories_id', $this->result->sub_category_id)
-            ->orderBy('id')
             ->get()
             ->map(function ($question, $index) {
                 $question->count = $index + 1;
                 return $question;
-            });
+            }));
             
-        // Set initial question if not set in URL
-        $this->currentQuestionId = $this->currentQuestionId ?? $this->questions->first()->id;
-        $this->updateCurrentQuestionNumber();
+        // Set initial question
+        $this->q = $this->questions->first()->id;
         
+        // Load user answers dengan eager loading
         $answers = AnswerQuestion::with('question')
             ->where('result_id', $this->resultId)
             ->get();
@@ -51,6 +50,7 @@ class Results extends Component
         foreach ($answers as $answer) {
             $this->userAnswers[$answer->question_id] = $answer->answer;
             
+            // Check if answer is correct
             if ($answer->answer === null) {
                 $this->answeredQuestions[$answer->question_id] = null;
             } else {
@@ -63,7 +63,7 @@ class Results extends Component
         $this->determineUserRank();
         $this->prepareChartData();
     }
-    
+
     public function calculateAverageScore(){
         $this->averageScore = Result::where('tryout_id',$this->result->tryout_id)
                                 ->where('sub_category_id', $this->result->sub_category_id)
@@ -90,92 +90,100 @@ class Results extends Component
         $this->chartData = json_encode($allResults);
     }
 
-    public function updateCurrentQuestionNumber()
+    public function changeNumber($id)
     {
-        $this->currentQuestionNumber = $this->questions
-            ->firstWhere('id', $this->currentQuestionId)
-            ->count;
-    }
-
-    public function changeNumber($questionId)
-    {
-        $question = $this->questions->firstWhere('id', $questionId);
+        $question = $this->questions->firstWhere('id', $id);
         
         if ($question) {
-            $this->currentQuestionId = $questionId;
-            $this->updateCurrentQuestionNumber();
-            $this->dispatch('questionChanged', [
-                'count' => $this->currentQuestionNumber,
-                'id' => $questionId
-            ]);
+            $this->q = $id;
+            // Emit event untuk update UI
+            $this->dispatch('questionChanged', count: $question->count);
         }
     }
 
     public function previousQuestion()
     {
-        $currentIndex = $this->questions->search(function($question) {
-            return $question->id === $this->currentQuestionId;
-        });
+        $currentId = $this->q;
+        $questionIds = $this->questions->pluck('id')->sort()->values()->toArray();
+        $currentPosition = array_search($currentId, $questionIds);
         
-        if ($currentIndex > 0) {
-            $previousQuestion = $this->questions[$currentIndex - 1];
-            $this->changeNumber($previousQuestion->id);
+        if ($currentPosition > 0) {
+            $this->q = $questionIds[$currentPosition - 1];
         }
     }
 
     public function nextQuestion()
     {
-        $currentIndex = $this->questions->search(function($question) {
-            return $question->id === $this->currentQuestionId;
-        });
+        $currentId = $this->q;
+        $questionIds = $this->questions->pluck('id')->sort()->values()->toArray();
+        $currentPosition = array_search($currentId, $questionIds);
         
-        if ($currentIndex < $this->questions->count() - 1) {
-            $nextQuestion = $this->questions[$currentIndex + 1];
-            $this->changeNumber($nextQuestion->id);
+        if ($currentPosition < count($questionIds) - 1) {
+            $this->q = $questionIds[$currentPosition + 1];
         }
     }
 
     public function isFirstQuestion()
     {
-        return $this->currentQuestionId === $this->questions->first()->id;
+        return $this->q === $this->questions->pluck('id')->min();
     }
     
     public function isLastQuestion()
     {
-        return $this->currentQuestionId === $this->questions->last()->id;
+        return $this->q === $this->questions->pluck('id')->max();
     }
 
-    // ... other existing methods remain the same ...
+    public function updating($name, $value)
+    {
+        if ($name === 'q') {
+            // Validate question exists
+            if (!$this->questions->contains('id', $value)) {
+                return false;
+            }
+        }
+    }
 
     public function render()
     {
-        $question = Question::where('id', $this->currentQuestionId)
+        $question = Question::where('id', $this->q)
             ->with('answer')
             ->first();
 
-        $this->totalResult = Result::where('tryout_id', $this->result->tryout_id)
-            ->where('sub_category_id', $this->result->sub_category_id)
-            ->get();
+        $this->totalResult = Result::where('tryout_id',$this->result->tryout_id)
+                            ->where('sub_category_id', $this->result->sub_category_id)
+                            ->get();
 
-        $chart = LarapexChart::barChart()
-            ->setTitle('')
-            ->setXAxis(['Rata-Rata', 'Nilai Anda'])
-            ->setDataset([
-                [
-                    'name' => 'Rata-Rata',
-                    'data' => [$this->averageScore]
-                ],
-                [
-                    'name' => 'Nilai Anda',
-                    'data' => [$this->result->score]
-                ]
-            ])
-            ->setColors(['#38bdf8', '#0ea5e9']);
+        // Pastikan questions terdefinisi
+        if (!isset($this->questions)) {
+            $this->questions = collect(Question::where('tryout_id', $this->result->tryout_id)
+                ->where('sub_categories_id', $this->result->sub_category_id)
+                ->get()
+                ->map(function ($q, $index) {
+                    $q->count = $index + 1;
+                    return $q;
+                }));
+        }
+
+        $chart = LarapexChart::setType('bar')
+        ->setXAxis(['Rata-Rata', 'Nilai Anda'])
+        ->setDataset([
+            [
+                'name' => 'Rata-Rata',
+                'data' => [$this->averageScore]
+            ],
+            [
+                'name' => 'Nilai Anda',
+                'data' => [$this->result->score]
+            ]
+        ])
+        ->setColors(['#60a5fa', '#0ea5e9']); 
 
         return view('livewire.user.tryout.results', [
             'question' => $question,
             'questions' => $this->questions,
             'paper' => $question->subCategory,
+            // 'tryout' => $question->tryout,
+            // 'userAnswers' => $this->userAnswers,
             'chartData' => $this->chartData,
             'averageScore' => $this->averageScore,
             'userRank' => $this->userRank,

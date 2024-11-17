@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\User\Tryout;
+namespace App\Livewire\User\Tryout\Event;
 
 use App\Models\AnswerQuestion;
 use App\Models\Question;
@@ -9,8 +9,6 @@ use App\Models\sub_categories;
 use App\Models\Tryout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Collection;
-use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class Paper extends Component
@@ -30,8 +28,8 @@ class Paper extends Component
     public function mount(Request $request){
         $this->answers = [];
         
-        $this->itemId = $request->segment(3);
-        $this->paperId = $request->segment(4);
+        $this->itemId = $request->segment(4);
+        $this->paperId = $request->segment(5);
         
         $this->q = Question::where('tryout_id', $this->itemId)
             ->where('sub_categories_id', $this->paperId)
@@ -177,14 +175,6 @@ class Paper extends Component
             'score' => $score,
         ]);
 
-        $tryout = Tryout::where('id', $this->itemId)->first();
-
-        if ($tryout->is_together == 'together') {
-            return redirect()->route('user.tryouts.event.results', $result->id);
-        } else {
-            return redirect()->route('user.tryouts.results', $result->id);
-        }
-        
-
+        return redirect()->route('user.tryouts.results', $result->id);
     }
 }
