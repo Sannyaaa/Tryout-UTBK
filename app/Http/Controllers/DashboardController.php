@@ -14,7 +14,7 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         if($user->role == 'user'){
-            return view('user.dashboard');
+            return view('livewire.user.dashboard');
         }else{
             return view('admin.dashboard');
         }

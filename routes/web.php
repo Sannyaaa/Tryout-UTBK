@@ -15,7 +15,7 @@ Route::get('/gatau', function () {
     return 'gatau';
 });
 
-Route::get('/dashboard', [DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard-proccess', [DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard-proccess');
 
 Route::middleware('auth')->group(function () {
     
@@ -36,7 +36,7 @@ prefix('/admin')->name('admin.')->group(function() {
 });
 
 Route::
-middleware(['auth','role:mentor'])->
+middleware(['auth','role:admin'])->
 prefix('/mentor')->name('mentor.')->group(function() {
     require __DIR__.'/mentor.php';
 });

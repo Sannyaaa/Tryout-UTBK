@@ -5,7 +5,7 @@
 
     <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
 
-        <div class="mt-8 col-span-full">
+        <div class="mt-8 mb-2 col-span-full">
             <div class="bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg shadow-lg py-4 px-3">
                 <nav class="flex" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 text-sm font-semibold md:space-x-2">
@@ -33,13 +33,31 @@
         </div>
         <div class="col-span-2">
             <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                <div class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
+                    <img class="mb-4 rounded-lg w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0" src="/images/users/bonnie-green-2x.png" alt="Jese picture">
+                    <div>
+                        <h3 class="mb-1 text-xl font-bold text-gray-900 dark:text-white">Profile picture</h3>
+                        <div class="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                            JPG, GIF or PNG. Max size of 800K
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                <svg class="w-4 h-4 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z"></path><path d="M9 13h2v5a1 1 0 11-2 0v-5z"></path></svg>
+                                Upload picture
+                            </button>
+                            <button type="button" class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                
                 <div class="flex justify-between">
                     <div>
                         <h3 class="mb-1 text-2xl font-semibold dark:text-white">Informasi Personal</h3>
                         <p class="text-sm mb-4">Pastikan informasi yang kamu masukan benar!</p>
-                    </div>
-                    <div>
-                        {{-- <a href="{{ route('admin.get-universities') }}" class="px-6 py-3 bg-indigo-600 rounded-md font-semibold text-white">Ambil Univ</a> --}}
                     </div>
                 </div>
                 <form action="{{ route('profile.update', $user->id) }}" enctype="multipart/form-data" method="POST">
@@ -68,18 +86,6 @@
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
 
-                        <!-- Role -->
-                        <div class="col-span-6 sm:col-span-3">
-                            <x-input-label for="role" :value="__('Role')" />
-                            <x-select-input id="role" name="role">
-                                <option selected disabled>Pilih Role</option>
-                                <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="mentor" {{ old('role', $user->role) == 'mentor' ? 'selected' : '' }}>Mentor</option>
-                                <option value="user" {{ old('role', $user->role) == 'user' ? 'selected' : '' }}>User</option>
-                            </x-select-input>
-                            <x-input-error :messages="$errors->get('role')" class="mt-2" />
-                        </div>
-
                         <!-- Phone -->
                         <div class="col-span-6 sm:col-span-3">
                             <x-input-label for="phone" :value="__('Phone')" />
@@ -91,9 +97,41 @@
                             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                         </div>
 
+                        <div class=" col-span-full">
+                            <div>
+                                <h3 class="text-2xl font-semibold dark:text-white">Data Sekolah</h3>
+                            </div>
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            <x-input-label for="sekolah_id" :value="__('Sekolah')" />
+                            <x-select-input id="sekolah_id" name="sekolah_id" class="select-sekolah" data-plugin="tomselect">
+                                <option value="">Pilih Sekolah</option>
+                                @foreach ($sekolah as $sekolahItem)
+                                    <option value="{{ $sekolahItem->id }}" {{ old('sekolah_id', $user->sekolah->id ?? '') == $sekolahItem->id ? 'selected' : '' }}>
+                                        {{ $sekolahItem->sekolah }}
+                                    </option>
+                                @endforeach
+                            </x-select-input>
+                        </div>
+
+                        <!-- Role -->
+                        <div class="col-span-6 sm:col-span-3">
+                            <x-input-label for="status" :value="__('Status')" />
+                            <x-select-input id="status" name="status">
+                                <option selected disabled>Pilih Status</option>
+                                <option value="kelas_10" {{ old('status', $user->status) == 'kelas_10' ? 'selected' : '' }}>Kelas 10</option>
+                                <option value="kelas_11" {{ old('status', $user->status) == 'kelas_11' ? 'selected' : '' }}>Kelas 11</option>
+                                <option value="kelas_12" {{ old('status', $user->status) == 'kelas_12' ? 'selected' : '' }}>Kelas 12</option>
+                                <option value="Kuliah" {{ old('status', $user->status) == 'Kuliah' ? 'selected' : '' }}>Kuliah</option>
+                                <option value="gep_year" {{ old('status', $user->status) == 'gep_year' ? 'selected' : '' }}>Gap Year</option>
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('status')" class="mt-2" />
+                        </div>
+
                         <!-- Select inputs dengan Tom Select -->
                         <div class=" col-span-6 sm:col-span-3">
-                            <x-input-label for="data_universitas_id" :value="__('Universitas 1')" />
+                            <x-input-label for="data_universitas_id" :value="__('Universitas Pertama')" />
                             <x-select-input id="data_universitas_id" name="data_universitas_id" class="select-university">
                                 <option value="">Pilihan Universitas 1</option>
                                 @foreach ($university as $universitas)
@@ -105,7 +143,7 @@
                         </div>
 
                         <div class=" col-span-6 sm:col-span-3">
-                            <x-input-label for="second_data_universitas_id" :value="__('Universitas 2')" />
+                            <x-input-label for="second_data_universitas_id" :value="__('Universitas Kedua')" />
                             <x-select-input id="second_data_universitas_id" name="second_data_universitas_id" class="select-university">
                                 <option value="">Pilihan Universitas 2</option>
                                 @foreach ($university as $universitas)
@@ -115,7 +153,6 @@
                                 @endforeach
                             </x-select-input>
                         </div>
-
 
                         <!-- Tombol Submit -->
                         <div class="col-span-6 sm:col-full">
@@ -178,9 +215,6 @@
             </div>
         </div>
     </div>
-</div>
-
-@push('body-scripts')
     <!-- Tambahkan JavaScript Tom Select di bagian bawah body -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.2.2/js/tom-select.complete.min.js"></script>
 
@@ -205,4 +239,4 @@
             });
         });
     </script>
-@endpush
+</div>

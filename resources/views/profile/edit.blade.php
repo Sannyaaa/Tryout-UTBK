@@ -124,30 +124,6 @@
                             </x-select-input>
                         </div>
 
-                        {{-- <div class="col-span-6 sm:col-span-3">
-                            <x-input-label for="provinsi_id" :value="__('Provinsi Sekolah')" />
-                            <x-select-input id="provinsi_id" name="provinsi_id" class="select-provinsi" data-plugin="tomselect">
-                                <option value="">Pilih Provinsi</option>
-                                @foreach ($provinsi as $provinsiItem)
-                                    <option value="{{ $provinsiItem->id }}" {{ old('provinsi_id', $user->sekolah->provinsi_id ?? '') == $provinsiItem->id ? 'selected' : '' }}>
-                                        {{ $provinsiItem->nama_provinsi }}
-                                    </option>
-                                @endforeach
-                            </x-select-input>
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-3">
-                            <x-input-label for="kabupaten_id" :value="__('Kabupaten / Kota Sekolah')" />
-                            <x-select-input id="kabupaten_id" name="kabupaten_id" class="select-kabupaten" data-plugin="tomselect">
-                                <option value="">Pilih Kabupaten</option>
-                                @foreach ($kota as $kabupaten_kota_Item)
-                                    <option value="{{ $kabupaten_kota_Item->id }}" {{ old('kabupaten_kota_id', $user->sekolah->kabupaten_kota_id ?? '') == $kabupaten_kota_Item->id ? 'selected' : '' }}>
-                                        {{ $kabupaten_kota_Item->nama_kabupaten_kota }}
-                                    </option>
-                                @endforeach
-                            </x-select-input>
-                        </div> --}}
-
                         <!-- Role -->
                         <div class="col-span-6 sm:col-span-3">
                             <x-input-label for="status" :value="__('Status')" />
@@ -169,7 +145,6 @@
                         </div>
                     </div>
                 </form>
-
             </div>
             
         </div>

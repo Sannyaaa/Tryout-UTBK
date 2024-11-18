@@ -3,9 +3,14 @@
 use App\Livewire\User\Package\All;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
+use App\Livewire\User\Dashboard;
 use App\Livewire\User\Owned\All as OwnedAll;
 use App\Livewire\User\Payment\Success;
 use App\Livewire\User\Profile;
+
+
+Route::get('/dashboard',Dashboard::class)->name('dashboard');
+
 
 Route::get('/tryout', App\Livewire\User\Tryouts::class)->name('tryouts');
 // Route::get('/tryout/owned', App\Livewire\User\TryoutsOwned::class)->name('tryouts.owned');

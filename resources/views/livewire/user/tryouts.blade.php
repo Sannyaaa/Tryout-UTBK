@@ -1,50 +1,95 @@
 <div>
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
-    <div class="mt-10">
-        <h1 class="ms-5 text-lg font-semibold">Tryout Terbaru</h1>
-        <div class="grid grid-cols-3">
-            @php 
-                
-            @endphp
-            @foreach  ($tryouts as $item)
-                <div class="m-5">
-                    <div class="border rounded-lg shadow">
-                        <div class="px-4 py-2 rounded-t-lg bg-gradient-to-tr from-sky-400 to-sky-500">
-                            <h4 class="font-bold text-white">SNBT 1</h4>
-                        </div>
-                        <div class="py-4 px-6 bg-white">
-                            <div class="flex justify-between align-middle pb-4">
-                                <h1 class="my-auto font-bold text-3xl w-fit">
-                                    {{$item->name}}
-                                </h1>
-                                
-                                <span class="my-auto text-lg font-bold text-sky-400">
-                                    <h6>Gratis</h6>
-                                </span>
-                            </div>
-                            <div class="pe-6 pb-4">
-                                <p>
-                                    {{$item->description}}
-                                </p>
-                            </div>
-                            <div class="border-2 rounded-lg border-sky-400 py-2 px-3 w-fit font-bold">
-                                {{-- <span class="text-sky-400 border-e-2 border-sky-400 w-1/2 text-center"><i class="fa-solid fa-calendar"></i> 14 Juli 2024</span> --}}
-                                {{-- <hr class="border border-sky-400"> --}}
-                                <span class="text-sky-400"><i class="fa-solid fa-user-group"></i> 20 Peserta</span>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="py-4 px-6 bg-white rounded-b-lg">
-                            <a href="{{route('user.tryouts.item', $item->id)}}" class="w-full">
-                                <button class="text-white font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-sky-700 w-full p-3 rounded-lg">
-                                    Kerjakan
-                                    <i class="fa-solid fa-arrow-right-long"></i>
-                                </button>
+    <div class="p-4 mt-12">
+        <div class="mx-10">
+            <div class=" relative mb-8">
+                <div class="bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg shadow-lg py-4 px-3">
+                    <nav class="flex" aria-label="Breadcrumb">
+                        <ol class="inline-flex items-center space-x-1 text-sm font-semibold md:space-x-2">
+                        <li class="inline-flex items-center">
+                            <a href="#" class="inline-flex items-center text-gray-50 hover:text-sky-200 dark:text-gray-300 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                                Dashboard
                             </a>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Tryout</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Semua Tryout</span>
+                            </div>
+                        </li>
+                        </ol>
+                    </nav>
+                    {{-- <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Bimbels</h1> --}}
+                </div>
+            </div>
+            <h1 class="ms-5 text-lg font-semibold">Tryout Terbaru</h1>
+            <div class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
+                @php 
+                    
+                @endphp
+                @foreach  ($tryouts as $item)
+                    <div class="">
+                        <div class="border rounded-lg shadow hover:shadow-lg transition-all duration-200 overflow-hidden">
+                            <div class="py-4 px-6 bg-white font-semibold">
+                                <div class="flex justify-between align-middle pb-4">
+                                    <h1 class="my-auto font-bold text-slate-600 text-4xl w-fit">
+                                        {{$item->name}}
+                                    </h1>
+                                </div>
+                                <div class="space-y-2">
+
+                                    <div class="flex items-center text-gray-600 font-medium">
+                                        <span class="text-sky-500 text-xl me-2">
+                                            <i class="fa-solid fa-file-circle-question"></i>
+                                        </span>
+                                        Jumlah Soal : <span class="font-semibold ms-1">{{ $item->question->count() }} Soal</span>
+                                    </div>
+                                    @if ($item->is_together == 'together')
+                                        <div class="flex items-center text-gray-600">
+                                            <div class="">
+                                                <span class="mx-1"><i class="fa-solid fa-calendar"></i></span> {{ \Carbon\Carbon::parse($item->start_date)->format('j F Y') }} - {{ \Carbon\Carbon::parse($item->end_date)->format('j F Y') }}</div>
+                                        </div>
+                                    @endif
+                                </div>
+                                {{-- <div class="border-2 rounded-lg border-sky-400 py-2 px-3 w-fit font-bold">
+                                    <span class="text-sky-400 border-e-2 border-sky-400 w-1/2 text-center"><i class="fa-solid fa-calendar"></i> 14 Juli 2024</span>
+                                    <hr class="border border-sky-400">
+                                    <span class="text-sky-400"><i class="fa-solid fa-user-group"></i> 20 Peserta</span>
+                                </div> --}}
+                            </div>
+                            <div class="pb-5 px-6 pt-1 bg-white">
+                                <a href="{{ route('user.tryouts.item',$item->id) }}" class="w-full">
+                                    <button class="text-white font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-sky-700 w-full p-3 rounded-lg">
+                                        Lihat Detail
+                                        <i class="fa-solid fa-arrow-right-long"></i>
+                                    </button>
+                                </a>
+                            </div>
+                            {{-- <div class="flex justify-between items-center">
+                                <x-primary-link href="#
+                                {{ route('user.bimbel.material', $package->id) }}
+                                " 
+                                            class="bg-green-500 hover:bg-green-600">
+                                    Lihat Materi
+                                </x-primary-link>
+                                <a href="#
+                                {{ route('user.bimbel.schedule', $package->id) }}
+                                " 
+                                class="text-green-500 hover:text-green-700 font-medium">
+                                    Jadwal Bimbel
+                                </a>
+                            </div> --}}
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
 </div>

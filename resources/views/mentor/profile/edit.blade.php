@@ -218,25 +218,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.2.2/js/tom-select.complete.min.js"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Inisialisasi Tom Select untuk semua select dengan class select-university
-    const selectElements = document.querySelectorAll('.select-university');
-    selectElements.forEach(function(select) {
-        new TomSelect(select, {
-            create: false,
-            sortField: {
-                field: "text",
-                direction: "asc"
-            },
-            placeholder: 'Cari universitas...',
-            plugins: {
-                clear_button: {
-                    title: 'Hapus pilihan'
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inisialisasi Tom Select untuk semua select dengan class select-university
+        const selectElements = document.querySelectorAll('.select-university');
+        selectElements.forEach(function(select) {
+            new TomSelect(select, {
+                create: false,
+                sortField: {
+                    field: "text",
+                    direction: "asc"
+                },
+                placeholder: 'Cari universitas...',
+                plugins: {
+                    clear_button: {
+                        title: 'Hapus pilihan'
+                    }
                 }
-            }
+            });
         });
     });
-});
 </script>
 
 <script>

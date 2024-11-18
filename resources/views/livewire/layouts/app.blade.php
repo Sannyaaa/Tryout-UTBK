@@ -11,6 +11,9 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.2.2/css/tom-select.min.css" rel="stylesheet">
+
         @livewireStyles()
         @yield('head-styles')
 

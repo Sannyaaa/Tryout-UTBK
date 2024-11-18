@@ -27,7 +27,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            'login' => ['required', 'string'],
             'password' => ['required', 'string'],
         ];
     }
@@ -37,19 +37,21 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): void
+    public function authenticate()
     {
-        $this->ensureIsNotRateLimited();
+        $login = $this->input('login');
+        $password = $this->input('password');
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+        // Tentukan apakah input adalah email atau nomor WhatsApp
+        $credentials = filter_var($login, FILTER_VALIDATE_EMAIL)
+            ? ['email' => $login, 'password' => $password]
+            : ['phone' => $login, 'password' => $password];
 
+        if (!Auth::attempt($credentials)) {
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'login' => __('Email atau nomor WhatsApp tidak valid.'),
             ]);
         }
-
-        RateLimiter::clear($this->throttleKey());
     }
 
     /**

@@ -77,75 +77,76 @@
                                 </div>
                             @endif
 
-                            <div class="my-6 space-y-2 w-full lg:w-5/6">
-                                <h2 class=" text-xl font-bold text-gray-800 sm:text-2xl sm:leading-none sm:tracking-tight dark:text-white mb-4">Apa Kata Mereka :</h2>
-                        
-                                <div class="">
-                                    
-                                    <div id="default-carousel" class="relative w-full" data-carousel="slide">
-                                        <!-- Carousel wrapper -->
-                                        <div class="relative h-40 overflow-hidden rounded-lg">
-                                            <!-- Item 1 -->
-                                            @forelse ($testimonials as $testimonial)
-                                                <div class="hidden duration-700 ease-in-out px-20" data-carousel-item>
-                                                    <div class="p-4 mb-4 text-sky-800 border border-sky-300 rounded-lg bg-sky-50 dark:bg-gray-800 dark:text-sky-400 dark:border-sky-800">
-                                                        <div class="flex items-center">
-                                                            <div class="flex-shrink-0">
-                                                                <img class="w-8 h-8 rounded-full" src="{{ Storage::url($testimonial->user->avatar) }}" alt="Neil image">
+                            @if ($testimonials->isNotEmpty())
+                                <div class="my-6 space-y-2 w-full lg:w-5/6">
+                                    <h2 class=" text-xl font-bold text-gray-800 sm:text-2xl sm:leading-none sm:tracking-tight dark:text-white mb-4">Apa Kata Mereka :</h2>
+                            
+                                    <div class="">
+                                        <div id="default-carousel" class="relative w-full" data-carousel="slide">
+                                            <!-- Carousel wrapper -->
+                                            <div class="relative h-40 overflow-hidden rounded-lg">
+                                                <!-- Item 1 -->
+                                                @forelse ($testimonials as $testimonial)
+                                                    <div class="hidden duration-700 ease-in-out px-20" data-carousel-item>
+                                                        <div class="p-4 mb-4 text-sky-800 border border-sky-300 rounded-lg bg-sky-50 dark:bg-gray-800 dark:text-sky-400 dark:border-sky-800">
+                                                            <div class="flex items-center">
+                                                                <div class="flex-shrink-0">
+                                                                    <img class="w-8 h-8 rounded-full" src="{{ Storage::url($testimonial->user->avatar) }}" alt="Neil image">
+                                                                </div>
+                                                                <div class="flex-1 min-w-0 ms-4">
+                                                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                                        {{ $testimonial->name ?? $testimonial->user->name }}
+                                                                    </p>
+                                                                    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                                                        {{ $testimonial->name ?? $testimonial->user->email }}
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                            <div class="flex-1 min-w-0 ms-4">
-                                                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                                    {{ $testimonial->name ?? $testimonial->user->name }}
-                                                                </p>
-                                                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                                                    {{ $testimonial->name ?? $testimonial->user->email }}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="mx-3">
-                                                                <p class="text-base  font-medium text-sky-900 dark:text-white my-3">
-                                                                    {{ $testimonial->content }}
-                                                                </p>
-                                                                <span class="text-sm text-slate-500">{{ \Carbon\Carbon::parse($testimonial->created_at)->format('j F Y') }} </span>
+                                                            <div>
+                                                                <div class="mx-3">
+                                                                    <p class="text-base  font-medium text-sky-900 dark:text-white my-3">
+                                                                        {{ $testimonial->content }}
+                                                                    </p>
+                                                                    <span class="text-sm text-slate-500">{{ \Carbon\Carbon::parse($testimonial->created_at)->format('j F Y') }} </span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @empty
-                                                <div>
-                                                    Belum ada Testimoni untuk Paket ini.
-                                                </div>
-                                            @endforelse
+                                                @empty
+                                                    <div>
+                                                        Belum ada Testimoni untuk Paket ini.
+                                                    </div>
+                                                @endforelse
+                                            </div>
+                                            <!-- Slider indicators -->
+                                            {{-- <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                                                <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                                                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                                                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                                                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                                                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+                                            </div> --}}
+                                            <!-- Slider controls -->
+                                            <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sky-100 border-2 border-sky-300 text-sky-800 dark:bg-sky-800/30 group-hover:bg-sky-200 dark:group-hover:bg-sky-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-sky-800/70 group-focus:outline-none">
+                                                    <svg class="w-4 h-4 dark:text-white text-sky-600 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                                                    </svg>
+                                                    <span class="sr-only">Previous</span>
+                                                </span>
+                                            </button>
+                                            <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sky-100 border-2 border-sky-300  dark:bg-gray-800/30 group-hover:bg-sky-200 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                                    <svg class="w-4 h-4 dark:text-white text-sky-600 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                                    </svg>
+                                                    <span class="sr-only">Next</span>
+                                                </span>
+                                            </button>
                                         </div>
-                                        <!-- Slider indicators -->
-                                        {{-- <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                                            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-                                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-                                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-                                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-                                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-                                        </div> --}}
-                                        <!-- Slider controls -->
-                                        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sky-100 border-2 border-sky-300 text-sky-800 dark:bg-sky-800/30 group-hover:bg-sky-200 dark:group-hover:bg-sky-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-sky-800/70 group-focus:outline-none">
-                                                <svg class="w-4 h-4 dark:text-white text-sky-600 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                                                </svg>
-                                                <span class="sr-only">Previous</span>
-                                            </span>
-                                        </button>
-                                        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sky-100 border-2 border-sky-300  dark:bg-gray-800/30 group-hover:bg-sky-200 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                                <svg class="w-4 h-4 dark:text-white text-sky-600 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                                                </svg>
-                                                <span class="sr-only">Next</span>
-                                            </span>
-                                        </button>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
 

@@ -181,7 +181,7 @@ class Item extends Component
 
     public function render(Request $request)
     {
-        $id = $request->segment(3);
+        $id = $request->segment(2);
 
         $package = Package_member::find($id);
 
