@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\UniversityController;
 
-
+Route::get('/', [LandingController::class, 'home']);
 
 Route::get('/test', function () {
     return view('test');
