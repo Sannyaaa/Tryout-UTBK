@@ -33,6 +33,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'second_data_universitas_id',
         'sekolah_id',
         'status',
+        'tgl',
+        'jenis_kelamin',
     ];
 
     /**

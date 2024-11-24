@@ -25,6 +25,8 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+            'tgl' => ['nullable', 'date'],
+            'jenis_kelamin' => ['nullable'],
             'data_universitas_id' => ['nullable', 'exists:data_universitas,id'], // Validasi untuk universitas pertama
             'second_data_universitas_id' => ['nullable', 'exists:data_universitas,id'], // Validasi untuk universitas kedua
             'user_id' => ['nullable', 'exists:users,id'], // Validasi untuk universitas kedua
@@ -35,6 +37,7 @@ class ProfileUpdateRequest extends FormRequest
             'achievements' => ['array'],
             'achievements.*' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable'],
+            
         ];
     }
 

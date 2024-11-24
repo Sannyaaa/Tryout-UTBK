@@ -247,7 +247,6 @@ $(document).ready(function() {
         serverSide: true,
         // ordering: true,
         order: [[2,'desc']],
-        // ajax: "{{ route('admin.class-bimbel.index') }}",
         ajax: {
                 url: "{{ route('admin.class-bimbel.index') }}",
                 data: function (d) {
