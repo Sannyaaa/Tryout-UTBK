@@ -80,6 +80,8 @@ class ProfileController extends Controller
                     'name' => $request->name,
                     'email' => $request->email,
                     'phone' => $request->phone,
+                    'tgl' => $request->tgl,
+                    'jenis_kelamin' => $request->jenis_kelamin,
                     'status' => $request->status,
                     'data_universitas_id' => $request->data_universitas_id,
                     'second_data_universitas_id' => $request->second_data_universitas_id,
@@ -99,6 +101,8 @@ class ProfileController extends Controller
                     'name' => $request->name,
                     'email' => $request->email,
                     'phone' => $request->phone,
+                    'tgl' => $request->tgl,
+                    'jenis_kelamin' => $request->jenis_kelamin,
                 ]);
 
                 if ($user->isDirty('email')) {
@@ -107,6 +111,8 @@ class ProfileController extends Controller
 
                 $user->save();
             }
+
+            // dd($request->user());
 
 
             // Logika tambahan untuk mentor
@@ -137,11 +143,16 @@ class ProfileController extends Controller
 
                     Achievement::insert($achievements->toArray());
                 }
+                DB::commit();
+
+                return Redirect::route('mentor.profile.edit')->with('status', 'profile-updated');
             }
 
-            DB::commit();
+            if(Gate::allows('admin')){
+                DB::commit();
 
-            return Redirect::route('profile.edit')->with('status', 'profile-updated');
+                return Redirect::route('profile.edit')->with('status', 'profile-updated');
+            }
         } catch (Exception $e) {
             DB::rollBack();
             Log::error('Profile update error:', [
