@@ -82,13 +82,22 @@
                         <img src="{{ Storage::url($tryout->image) }}" class="w-[300px]" alt="">
                     </div>
                     
-                    <div class="grid lg:grid-cols-2 gap-3">
+                    <div class="grid lg:grid-cols-3 gap-3">
                         <div>
                             <x-input-label for="is_free" :value="__('Berbayar / Gratis')" />
                             <x-select-input id="is_free" name="is_free">
                                 <option selected="" disabled>Pilih is free</option>
                                 <option value="paid" {{ $tryout->is_free == 'paid' ? 'selected' : '' }}>Berbayar</option>
                                 <option value="free" {{ $tryout->is_free == 'free' ? 'selected' : '' }}>Gratis</option>
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
+                        </div>
+                        <div>
+                            <x-input-label for="is_ready" :value="__('Tampilkan / Tidak')" />
+                            <x-select-input id="is_ready" name="is_ready">
+                                <option selected="" disabled>Tampilkan atau Tidak</option>
+                                <option value="yes" {{ $tryout->is_ready == 'yes' ? 'selected' : '' }}>Tampilkan</option>
+                                <option value="no" {{ $tryout->is_ready == 'no' ? 'selected' : '' }}>Tahan</option>
                             </x-select-input>
                             <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
                         </div>
@@ -103,16 +112,16 @@
                         </div>
                     </div>
                     
-                    <div id="date-inputs" style="display: none;"> 
+                    <div id="date-inputs" style="{{ $tryout->is_together != null ? 'display: block;' : 'display: none;' }}"> 
                         <div class="grid lg:grid-cols-2 gap-3">
                             <div>
                                 <x-input-label for="start_date" :value="__('Tanggal mulai')" />
-                                <x-text-input type="date" :value="old('start_date')" name="start_date" id="start_date" placeholder="Masukan tanggal mulai"/>
+                                <x-text-input type="date" :value="old('start_date', $tryout->start_date)" name="start_date" id="start_date" placeholder="Masukan tanggal mulai"/>
                                 <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
                             </div>
                             <div>
                                 <x-input-label for="end_date" :value="__('Tanggal Selesai')" />
-                                <x-text-input type="date" :value="old('end_date')" name="end_date" id="end_date" placeholder="Masukan tanggal selesai"/>
+                                <x-text-input type="date" :value="old('end_date', $tryout->end_date)" name="end_date" id="end_date" placeholder="Masukan tanggal selesai"/>
                                 <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
                             </div>
                         </div>

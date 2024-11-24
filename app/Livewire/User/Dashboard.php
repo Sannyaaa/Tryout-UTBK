@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\Tryout;
 use Livewire\Component;
+use App\Models\Question;
 use App\Models\ClassBimbel;
 use App\Models\Package_member;
 use Illuminate\Support\Facades\DB;
@@ -58,6 +59,29 @@ class Dashboard extends Component
             ->havingRaw('COUNT(DISTINCT r.sub_category_id) = (SELECT COUNT(DISTINCT sub_category_id) FROM results WHERE tryout_id = r.tryout_id)')
             ->orderByDesc(DB::raw('MAX(r.created_at)')) // Urutkan berdasarkan waktu pengerjaan terbaru
             ->value('r.tryout_id');
+
+        $results = DB::table('results')
+                ->join('sub_categories', 'results.sub_category_id', '=', 'sub_categories.id')
+                ->select(
+                    'results.sub_category_id',
+                    'sub_categories.name as sub_category_name',
+                    DB::raw('(SELECT AVG(r.score) 
+                            FROM results r 
+                            WHERE r.sub_category_id = results.sub_category_id 
+                                AND r.tryout_id = results.tryout_id) as avg_score'),
+                    DB::raw('MAX(results.score) as max_score'),
+                    DB::raw('SUM(results.correct_answers) as total_correct'),
+                    DB::raw('SUM(results.incorrect_answers) as total_incorrect'),
+                    DB::raw('SUM(results.unanswered) as total_unanswered'),
+                    DB::raw('(SELECT COUNT(*) 
+                            FROM questions 
+                            WHERE questions.tryout_id = results.tryout_id 
+                                AND questions.sub_categories_id = results.sub_category_id) as total_questions')
+                )
+                ->where('results.user_id', $this->user->id)
+                ->where('results.tryout_id', $this->latestTryoutId)
+                ->groupBy('results.sub_category_id', 'results.tryout_id', 'sub_categories.name')
+                ->get();
         
         $filterFirst = DB::table('results')
                 ->join('users', 'results.user_id', '=', 'users.id')
@@ -141,6 +165,39 @@ class Dashboard extends Component
                 })->where('user_id', $this->user->id)
                 ->where('payment_status','paid')->get();
 
+        $totalScore = $firstUserRank['total_score'] ?? $secondUserRank['total_score'];
+
+        $questions = Question::where('tryout_id', $this->latestTryoutId)->count();
+
+        // $query = Order::where('user_id', auth()->id())
+        //     ->where('payment_status', 'paid')
+        //     ->with(['package_member','user']);
+
+        // $query->whereHas('package_member', function($q) {
+        //     $q->whereNotNull('bimbel_id');
+        // })->take(1);
+
+        // // dd($query);
+
+        $now = Carbon::now();
+
+        $queryClasses = ClassBimbel::whereHas('bimbel.package_member.orders', function ($query) {
+            $query->where('user_id', auth()->id())
+                ->where('payment_status', 'paid');
+        })
+        ->where('date', '>', $now)
+        ->orderBy('date')
+        ->limit(5)
+        ->get();
+
+        $transaction = Order::with('package_member')
+            ->where('user_id', auth()->id())
+            ->orderByDesc('created_at')
+            ->limit(5)
+            ->get();
+
+        $packages = Package_member::limit(3)->get();
+
         return view('livewire.user.dashboard',[
             'totalPackages' => $packages,
             'totalMyPackages' => $myPackages,
@@ -154,6 +211,12 @@ class Dashboard extends Component
             'isPaid' => $isPaid,
             'todayClasses' => $todayClasses,
             'ongoing' => $ongoing,
+            'results' => $results,
+            'totalScore' => $totalScore,
+            'questions' => $questions,
+            'queryClass' => $queryClasses,
+            'transactions' => $transaction,
+            'packages' => $packages,
         ]);
     }
 }

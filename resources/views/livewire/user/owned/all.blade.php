@@ -95,32 +95,35 @@
                             <div class="">
                                 <div class="border rounded-lg shadow hover:shadow-lg transition-all duration-200">
                                     <div class="px-6 py-3 rounded-t-lg bg-gradient-to-tr from-sky-400 to-sky-500">
-                                        <h4 class="font-semibold text-white">Tryout</h4>
+                                        <h4 class="font-semibold text-white">Tryout {{ $package->tryout->is_together == 'together' ? 'Serentak' : '' }}</h4>
                                     </div>
                                     <div class="py-4 px-6 bg-white font-semibold">
-                                        <div class="flex justify-between align-middle pb-4">
-                                            <h1 class="my-auto font-semibold font-gray-900 text-3xl w-fit">
+                                        <div class="flex justify-between align-middle pb-3">
+                                            <h1 class="my-auto font-bold text-gray-700 text-3xl w-fit">
                                                 {{$package->tryout->name}}
                                             </h1>
                                         </div>
                                         <div class="space-y-2">
 
-                                            <div class="flex items-center text-gray-600">
-                                                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                                </svg>
-                                                <span>{{ $package->tryout->question->count() }} Soal</span>
+                                            <div class="flex items-center text-gray-600 font-medium">
+                                                <span class="text-sky-500 text-lg mx-1">
+                                                    <i class="fa-solid fa-file-circle-question"></i>
+                                                </span>
+                                                Jumlah Soal : <span class="font-semibold ms-1">{{ $package->tryout->question->count() }} Soal</span>
                                             </div>
+                                            
                                             @if ($package->tryout->is_together == 'together')
                                                 <div class="flex items-center text-gray-600">
                                                     <div class="">
-                                                        <span class="mx-1"><i class="fa-solid fa-calendar"></i></span> {{ \Carbon\Carbon::parse($package->tryout->start_date)->format('j F Y') }} - {{ \Carbon\Carbon::parse($package->tryout->end_date)->format('j F Y') }}</div>
+                                                        <span class="mx-1 text-sky-500"><i class="fa-solid fa-calendar-days"></i></span> {{ \Carbon\Carbon::parse($package->tryout->start_date)->format('j F Y') }} - {{ \Carbon\Carbon::parse($package->tryout->end_date)->format('j F Y') }}</div>
                                                 </div>
                                             @endif
+                                            <div class=" text-sky-500 text-sm italic">
+                                                {{ $package->tryout->is_together == 'together' ? '* Kamu hanya bisa mengerjakan 1 kali saja' : '* Kamu bisa mengerjakan berulang kali' }}
+                                            </div>
                                         </div>
                                         {{-- <div class="border-2 rounded-lg border-sky-400 py-2 px-3 w-fit font-bold">
-                                            <span class="text-sky-400 border-e-2 border-sky-400 w-1/2 text-center"><i class="fa-solid fa-calendar"></i> 14 Juli 2024</span>
+                                            <span class="text-sky-400 border-e-2 border-sky-400 w-1/2 text-center"><i class="fa-solid fa-calendar-days"></i> 14 Juli 2024</span>
                                             <hr class="border border-sky-400">
                                             <span class="text-sky-400"><i class="fa-solid fa-user-group"></i> 20 Peserta</span>
                                         </div> --}}
@@ -157,8 +160,8 @@
                                         <h4 class="font-semibold text-white">Bimbel</h4>
                                     </div>
                                     <div class="py-4 px-6 bg-white font-semibold">
-                                        <div class="flex justify-between align-middle pb-4">
-                                            <h1 class="my-auto font-semibold font-gray-900 text-3xl w-fit">
+                                        <div class="flex justify-between align-middle pb-3">
+                                            <h1 class="my-auto font-semibold text-gray-700 text-3xl w-fit">
                                                 {{$package->bimbel->name}}
                                             </h1>
                                         </div>
@@ -170,21 +173,21 @@
                                                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                                 </svg> --}}
                                                 <div>
-                                                    <span class="mx-1"><i class="fa-solid fa-chalkboard-user"></i></span> {{ $package->bimbel->classBimbel->count() }} Kelas
+                                                    <span class="mx-1 text-sky-500"><i class="fa-solid fa-chalkboard-user"></i></span> Jumlah Kelas : {{ $package->bimbel->classBimbel->count() }} Kelas
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center text-gray-600">
+                                                <div>
+                                                    <span class="mx-1 text-sky-500"><i class="fa-solid fa-users"></i></i></span> Jumlah Peserta : {{ $package->orders->count() }} Peserta
                                                 </div>
                                             </div>
                                             <div class="flex items-center text-gray-600">
                                                 <div class="">
-                                                    <span class="mx-1"><i class="fa-solid fa-calendar"></i></span> {{ \Carbon\Carbon::parse($package->bimbel->classBimbel->first()->date)->format('j F Y') }} - {{ \Carbon\Carbon::parse($package->bimbel->classBimbel->last()->date)->format('j F Y') }}</div>
-                                            </div>
-                                            <div class="flex items-center text-gray-600">
-                                                <div>
-                                                    <span class="mx-1"><i class="fa-solid fa-users"></i></i></span> {{ $package->orders->count() }} Peserta
-                                                </div>
+                                                    <span class="mx-1 text-sky-500"><i class="fa-solid fa-calendar-days"></i></span> {{ \Carbon\Carbon::parse($package->bimbel->classBimbel->first()->date)->format('j F Y') }} - {{ \Carbon\Carbon::parse($package->bimbel->classBimbel->last()->date)->format('j F Y') }}</div>
                                             </div>
                                         </div>
                                         {{-- <div class="border-2 rounded-lg border-sky-400 py-2 px-3 w-fit font-bold">
-                                            <span class="text-sky-400 border-e-2 border-sky-400 w-1/2 text-center"><i class="fa-solid fa-calendar"></i> 14 Juli 2024</span>
+                                            <span class="text-sky-400 border-e-2 border-sky-400 w-1/2 text-center"><i class="fa-solid fa-calendar-days"></i> 14 Juli 2024</span>
                                             <hr class="border border-sky-400">
                                             <span class="text-sky-400"><i class="fa-solid fa-user-group"></i> 20 Peserta</span>
                                         </div> --}}

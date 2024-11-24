@@ -67,12 +67,36 @@
     </div>
     <!-- ===== Page Wrapper End ===== -->
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="{{ asset('js/index.js') }}"></script>
     <script src="{{ asset('js/sidebar.js') }}"></script>
     <script src="{{ asset('js/dark-mode.js') }}"></script>
     <script src="{{ asset('js/charts.js') }}"></script>
-    <script src="./path/to/flowbite/dist/flowbite.js"></script>
+    {{-- <script src="{{ asset('js/flowbite.js') }}"></script> --}}
     {{-- <script src="./path/to/flowbite/dist/flowbite.js"></script> --}}
+    <script src="sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (session('success'))
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+            });
+            Toast.fire({
+            icon: "success",
+            title: "{{  session('success') }}",
+            });
+        </script>
+    @endif
+
     @livewireScripts()
 
     @stack('body-scripts')

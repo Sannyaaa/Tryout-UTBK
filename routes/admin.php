@@ -22,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('all-universities',[UniversityController::class,'getAllUniversities'])->name('get-universities');
 
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+})->name('dashboard');
+
 // ihsan
 Route::resource('/tryout', TryoutController::class);
 Route::post('/tryout/bulk-delete', [TryoutController::class, 'bulkDelete'])->name('tryout.bulkDelete');

@@ -121,6 +121,7 @@ class TestimonialController extends Controller
 
         $data = $request->validate([
             'content' =>'required|string|max:255',
+            'is_show' =>'required|in:yes,no',
             'package_member_id' => 'required|integer|exists:package_members,id',
         ]);
 
@@ -158,6 +159,7 @@ class TestimonialController extends Controller
 
         $data = $request->validate([
             'content' =>'required|string|max:255',
+            'is_show' =>'required|in:yes,no',
         ]);
 
         $testimonial->update($data);

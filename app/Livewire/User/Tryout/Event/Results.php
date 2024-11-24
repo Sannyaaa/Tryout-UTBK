@@ -21,6 +21,8 @@ class Results extends Component
     public $averageScore;
     public $userRank;
     public $chartData;
+    public $currentQuestionNumber; 
+    public $currentQuestionId;
 
     protected $updatesQueryString = ['q'];
 
@@ -41,6 +43,8 @@ class Results extends Component
             
         // Set initial question
         $this->q = $this->questions->first()->id;
+        $this->currentQuestionId = $this->q;
+        $this->updateCurrentQuestionNumber();
         
         // Load user answers dengan eager loading
         $answers = AnswerQuestion::with('question')
@@ -90,12 +94,20 @@ class Results extends Component
         $this->chartData = json_encode($allResults);
     }
 
+    private function updateCurrentQuestionNumber()
+    {
+        $currentQuestion = $this->questions->firstWhere('id', $this->q);
+        $this->currentQuestionNumber = $currentQuestion ? $currentQuestion->count : 1;
+    }
+
     public function changeNumber($id)
     {
         $question = $this->questions->firstWhere('id', $id);
         
         if ($question) {
             $this->q = $id;
+            $this->currentQuestionId = $id;
+            $this->updateCurrentQuestionNumber();
             // Emit event untuk update UI
             $this->dispatch('questionChanged', count: $question->count);
         }
@@ -109,6 +121,8 @@ class Results extends Component
         
         if ($currentPosition > 0) {
             $this->q = $questionIds[$currentPosition - 1];
+            $this->currentQuestionId = $this->q;
+            $this->updateCurrentQuestionNumber();
         }
     }
 
@@ -120,6 +134,8 @@ class Results extends Component
         
         if ($currentPosition < count($questionIds) - 1) {
             $this->q = $questionIds[$currentPosition + 1];
+            $this->currentQuestionId = $this->q;
+            $this->updateCurrentQuestionNumber();
         }
     }
 

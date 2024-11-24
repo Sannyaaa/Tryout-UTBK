@@ -2,20 +2,18 @@
 
 namespace App\Livewire\User\Tryout\Event;
 
-use App\Models\User;
-use App\Models\Order;
 use App\Models\Result;
 use App\Models\Tryout;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\Question;
 use Illuminate\Http\Request;
-use Livewire\Attributes\Url;
-use Livewire\WithPagination;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Livewire\WithPagination;
+use Livewire\Attributes\Url;
 
-class Item extends Component
+class Statistik extends Component
 {
     use WithPagination;
 
@@ -171,6 +169,7 @@ class Item extends Component
         $results = DB::table('results')
                 ->join('sub_categories', 'results.sub_category_id', '=', 'sub_categories.id')
                 ->select(
+                    'results.id as result_id',
                     'results.sub_category_id',
                     'sub_categories.name as sub_category_name',
                     DB::raw('(SELECT AVG(r.score) 
@@ -188,28 +187,23 @@ class Item extends Component
                 )
                 ->where('results.user_id', $this->user->id)
                 ->where('results.tryout_id', $this->tryoutId)
-                ->groupBy('results.sub_category_id', 'results.tryout_id', 'sub_categories.name')
+                ->groupBy('results.id','results.sub_category_id', 'results.tryout_id', 'sub_categories.name')
                 ->get();
 
-        // $totalScore = $firstUserRank['total_score'] != null ? $secondUserRank['total_score'] : '';
+        $totalScore = $firstUserRank['total_score'] ?? $secondUserRank['total_score'];
 
-        $isPaid = Order::whereHas('package_member', function($query){
-                    return $query->where('tryout_id',$this->tryoutId);
-                })->where('user_id', $this->user->id)
-                ->where('payment_status','paid')->get();
-
-        return view('livewire.user.tryout.item', [
+        return view('livewire.user.tryout.event.statistik', [
             'categories' => $categories,
             'firstFilters' => $filterFirst,
             'secondFilters' => $filterSecond,
             // 'universities' => $universities,
             'firstRank' => $firstUserRank,
             'secondRank' => $secondUserRank,
-            'isPaid' => $isPaid,
+            'isPaid' => Auth::user()->is_paid,
             'tryout' => $this->tryout,
             'questions' => $questions,
             'results' => $results,
-            // 'totalScore' => $totalScore,
+            'totalScore' => $totalScore,
             // 'activeTab' => $this->activeTab,
             // 'totalSubCategories' => $totalSubCategories,
             // 'isCompleted' => $subCategory->is_completed,

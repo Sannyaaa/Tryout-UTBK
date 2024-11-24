@@ -8,7 +8,7 @@ class Testimonial extends Model
 {
     //
 
-    protected $fillable = ['user_id', 'content', 'name','package_member_id'];
+    protected $fillable = ['user_id', 'content', 'is_show', 'name','package_member_id'];
 
     public function user(){
         return $this->belongsTo(User::class);

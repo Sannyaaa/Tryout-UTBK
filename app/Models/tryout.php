@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tryout extends Model
 {
-    protected $fillable = ['name', 'description', 'start_date', 'end_date', 'is_free', 'is_together'];
+    protected $fillable = ['name', 'description', 'start_date', 'end_date', 'is_ready', 'is_free', 'is_together'];
 
     public function question(){
         return $this->hasMany(Question::class);

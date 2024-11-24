@@ -5,7 +5,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UniversityController;
 
-
+Route::get('/', function (){
+    return view('index');
+});
 
 Route::get('/test', function () {
     return view('test');
@@ -15,7 +17,7 @@ Route::get('/gatau', function () {
     return 'gatau';
 });
 
-Route::get('/dashboard-proccess', [DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard-proccess');
+Route::get('/dashboard-proccess', [DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     
