@@ -189,14 +189,17 @@
                     {{-- Latest Courses --}}
                     <section>
                         <div class="max-w-screen-xl mx-auto py-20">
-                            <h1 class="text-center text-5xl text-sky-400 font-bold">Tawaran Spesial</h1>
+                            <h1 class="text-center text-5xl text-sky-400 font-bold">Kursus Terbaru</h1>
                             <div>
                                 <div class="grid grid-cols-3 gap-4">
-                                    <div class="p-8 rounded-lg shadow-lg">
-                                        <h3 class="text-2xl font-semibold">Title</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, neque vel efficitur mollis, velit lectus facilisis velit, sit amet consectetur neque neque ac velit.
-                                        </p>
+                                    <div class="p-8 bg-white rounded-lg shadow-lg">
+                                        <h3 class="text-4xl text-gray-600 font-bold mb-4">Tryout 1</h3>
+                                        <div>
+                                            <span class="text-sky-500 text-xl me-2">
+                                                <i class="fa-solid fa-file-circle-question"></i>
+                                            </span>
+                                            Jumlah Soal : <span class="font-semibold ms-1">40 Soal</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
