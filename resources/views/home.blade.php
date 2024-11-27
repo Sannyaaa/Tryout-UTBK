@@ -71,6 +71,9 @@
                         {{-- Logo --}}
                         <div class="max-h-10 h-full">
                             <img class="max-h-10 m-auto" src="https://seeklogo.com/images/G/graduation-logo-9BC4C93202-seeklogo.com.png" alt="">
+                            {{-- <a href="#" class="flex justify-center py-4 bg-sky-50 rounded-lg">
+                                <span class="self-center text-3xl font-semibold sm:text-4xl whitespace-nowrap text-sky-800 dark:text-white bg-sky-50">Flowbite</span>
+                            </a> --}}
                         </div>
 
                         <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -83,10 +86,10 @@
                         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                             <ul class="text-lg flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                                 <li>
-                                    <a href="#" class="block py-2 px-3 text-white bg-sky-300 rounded-lg" aria-current="page">Login</a>
+                                    <a href="#" class="block py-2 px-3 text-white bg-sky-400 rounded-lg" aria-current="page">Login</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="block py-2 px-3 text-sky-300 rounded hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700 dark:hover:text-white">Register</a>
+                                    <a href="#" class="block py-2 px-3 text-sky-400 rounded hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700 dark:hover:text-white">Register</a>
                                 </li>
                             </ul>
                         </div>
@@ -97,7 +100,7 @@
             <div>
                 <main>
                     {{-- Header Section --}}
-                    <section>
+                    <section class="bg-sky-100">
                         <div class="max-w-screen-xl mx-auto h-screen flex items-center">
                             <div class="w-1/2 h-full flex">
                                 <div class="w-full h-1/2 my-auto p-6 flex flex-col justify-center items-start text-black">
@@ -162,9 +165,9 @@
                             </div>
                         </div>
                     </section> --}}
-                    {{-- Features --}}
-                    <section>
-                        <div class="max-w-screen-xl mx-auto py-20">
+                    {{-- Appeals --}}
+                    <section style="background: linear-gradient(180deg, rgb(224 242 254) 50%, rgb(249 250 251) 50%);">
+                        <div class="max-w-screen-xl mx-auto py-24">
                             {{-- <h1 class="mb-12 text-center text-6xl text-sky-400 font-bold">Features</h1> --}}
                             <div class="bg-sky-400 rounded-lg shadow-lg flex items-center text-white">
                                 <div class="w-1/4 py-5 px-10 my-5 border-e-2 border-white">
@@ -188,17 +191,162 @@
                     </section>
                     {{-- Latest Courses --}}
                     <section>
-                        <div class="max-w-screen-xl mx-auto py-20">
-                            <h1 class="text-center text-5xl text-sky-400 font-bold">Kursus Terbaru</h1>
+                        <div class="max-w-screen-xl mx-auto py-24">
+                            <h1 class="mb-12 text-center text-6xl text-sky-400 font-bold">Kursus Terbaru</h1>
                             <div>
                                 <div class="grid grid-cols-3 gap-4">
-                                    <div class="p-8 bg-white rounded-lg shadow-lg">
-                                        <h3 class="text-4xl text-gray-600 font-bold mb-4">Tryout 1</h3>
+                                    <div class="flex flex-col max-w-lg">
+                                        <div class="text-gray-900 bg-white hover:shadow-lg transition-all border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+                                            <div class="relative aspect-video overflow-hidden bg-cover align-middle p-2">
+                                                <img class="object-cover object-center w-full h-full rounded-md" 
+                                                    src="https://files.catbox.moe/kkm4kz.jpg" 
+                                                    alt="package image" />
+                                                <span class="relative bottom-10 -right-3 py-1 px-4 bg-sky-500 border-sky-400 border-2 text-white rounded-lg font-semibold">
+                                                    Tryout
+                                                </span>
+                                            </div>
+                                            <div class="px-5 py-3">
+                                                <div>
+                                                    <a href="#">
+                                                        <h5 class="text-2xl font-semibold hover:underline text-gray-900 dark:text-white">
+                                                            Package Name
+                                                        </h5>
+                                                    </a>
+                                                </div>
+                                                <p class="font-medium text-gray-500 dark:text-gray-400 mb-3">
+                                                    Deskripsi Package
+                                                </p>
+                                                <div class="flex justify-between items-baseline mb-2">
+                                                    <x-primary-link href="#">
+                                                        Lihat Detail
+                                                    </x-primary-link>
+                                                    <span class="mt-auto text-3xl font-bold">
+                                                        Rp 120.000
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    {{-- Features --}}
+                    <section>
+                        <div class="max-w-screen-xl mx-auto">
+                            <h1 class="mb-12 text-center text-6xl text-sky-400 font-bold">Fitur-fitur kami</h1>
+                            <div class="grid grid-cols-3 gap-12 text-white">
+                                <div class="p-8 bg-sky-400 rounded-lg shadow-lg">
+                                    <div class="w-min mb-6 px-6 py-4 bg-white rounded-lg text-2xl text-sky-400">
+                                        <i class="fa-solid fa-file"></i>
+                                    </div>
+                                    <h2 class="mb-2 text-4xl font-bold">Doing</h2>
+                                    <div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, neque vel efficitur mollis, velit lectus facilisis velit, sit amet consectetur neque neque ac velit.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="p-8 bg-sky-400 rounded-lg">
+                                    <div class="w-min mb-6 px-6 py-4 bg-white rounded-lg text-2xl text-sky-400">
+                                        <i class="fa-solid fa-hourglass-end"></i>
+                                    </div>
+                                    <h2 class="mb-2 text-4xl font-bold">Doing</h2>
+                                    <div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, neque vel efficitur mollis, velit lectus facilisis velit, sit amet consectetur neque neque ac velit.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="p-8 bg-sky-400 rounded-lg">
+                                    <div class="w-min mb-6 px-6 py-4 bg-white rounded-lg text-2xl text-sky-400">
+                                        <i class="fa-solid fa-chart-pie"></i>
+                                    </div>
+                                    <h2 class="mb-2 text-4xl font-bold">Doing</h2>
+                                    <div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, neque vel efficitur mollis, velit lectus facilisis velit, sit amet consectetur neque neque ac velit.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="p-8 bg-sky-400 rounded-lg">
+                                    <div class="w-min mb-6 px-6 py-4 bg-white rounded-lg text-2xl text-sky-400">
+                                        <i class="fa-solid fa-ranking-star"></i>
+                                    </div>
+                                    <h2 class="mb-2 text-4xl font-bold">Doing</h2>
+                                    <div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, neque vel efficitur mollis, velit lectus facilisis velit, sit amet consectetur neque neque ac velit.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="p-8 bg-sky-400 rounded-lg">
+                                    <div class="w-min mb-6 px-6 py-4 bg-white rounded-lg text-2xl text-sky-400">
+                                        <i class="fa-solid fa-calendar-day"></i>
+                                    </div>
+                                    <h2 class="mb-2 text-4xl font-bold">Doing</h2>
+                                    <div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, neque vel efficitur mollis, velit lectus facilisis velit, sit amet consectetur neque neque ac velit.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="p-8 bg-sky-400 rounded-lg">
+                                    <div class="w-min mb-6 px-6 py-4 bg-white rounded-lg text-2xl text-sky-400">
+                                        <i class="fa-solid fa-skull"></i>
+                                    </div>
+                                    <h2 class="mb-2 text-4xl font-bold">Doing</h2>
+                                    <div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, neque vel efficitur mollis, velit lectus facilisis velit, sit amet consectetur neque neque ac velit.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    {{-- Card Grids: Feedbacks --}}
+                    <section>
+                        <div class="max-w-screen-xl mx-auto py-24">
+                            <h1 class="text-center text-6xl font-bold text-sky-500">Ulasan</h1>
+                            {{-- <p class="w-3/4 mx-auto mt-4 mb-8 text-center text-gray-500">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas in excepturi explicabo omnis architecto molestiae ea ab, ratione iste nisi obcaecati aliquid inventore eveniet ducimus dolores perspiciatis ipsam dignissimos maxime?
+                            </p> --}}
+                            <div class="mt-4 grid grid-cols-3 gap-4">
+                                <div class="p-8 bg-white border rounded-lg shadow-sm hover:shadow-lg">
+                                    <h3 class="text-4xl font-bold">Andi</h3>
+                                    <span class="text-md text-gray-500 font-semibold">Pelajar</span>
+                                    <p class="mt-4">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, neque vel efficitur mollis, velit lectus facilisis velit, sit amet consectetur neque neque ac velit.
+                                    </p>
+                                    <div class="mt-4">
+                                        <span class="fa fa-star text-yellow-400"></span>
+                                        <span class="fa fa-star text-yellow-400"></span>
+                                        <span class="fa fa-star text-yellow-400"></span>
+                                        <span class="fa fa-star text-yellow-400"></span>
+                                        <span class="fa fa-star text-yellow-400"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    {{-- Card Grids: Teachers --}}
+                    <section>
+                        <div class="max-w-screen-xl mx-auto py-20">
+                            <h1 class="text-center text-6xl font-bold text-sky-500">Teachers</h1>
+                            {{-- <p class="w-3/4 mx-auto mt-4 mb-8 text-center text-gray-500">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas in excepturi explicabo omnis architecto molestiae ea ab, ratione iste nisi obcaecati aliquid inventore eveniet ducimus dolores perspiciatis ipsam dignissimos maxime?
+                            </p> --}}
+                            <div class="mt-4 grid grid-cols-3 gap-4">
+                                <div class="bg-white border rounded-lg shadow-sm hover:shadow-lg overflow-hidden">
+                                    <img class="w-full max-h-80 object-cover" src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+                                    <div class="p-8">
+                                        <h3 class="text-3xl font-semibold">Nama orang</h3>
                                         <div>
-                                            <span class="text-sky-500 text-xl me-2">
-                                                <i class="fa-solid fa-file-circle-question"></i>
-                                            </span>
-                                            Jumlah Soal : <span class="font-semibold ms-1">40 Soal</span>
+                                            <h6 class="mb-4 text-md text-gray-500 font-medium">Geometry Teacher</h6>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, neque vel efficitur mollis, velit lectus facilisis velit, sit amet consectetur neque neque ac velit.
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -223,37 +371,8 @@
                             </div>
                         </div>
                     </section>
-                    {{-- Card Grids --}}
-                    <section>
-                        <div class="max-w-screen-xl mx-auto py-20">
-                            <h1 class="text-center text-6xl font-bold text-sky-500">Title</h1>
-                            <p class="w-3/4 mx-auto mt-4 mb-8 text-center text-gray-500">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas in excepturi explicabo omnis architecto molestiae ea ab, ratione iste nisi obcaecati aliquid inventore eveniet ducimus dolores perspiciatis ipsam dignissimos maxime?
-                            </p>
-                            <div class="grid grid-cols-3 gap-4">
-                                <div class="p-8 rounded-lg shadow-lg">
-                                    <h3 class="text-2xl font-semibold">Title</h3>
-                                    <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, neque vel efficitur mollis, velit lectus facilisis velit, sit amet consectetur neque neque ac velit.
-                                    </p>
-                                </div>
-                                <div class="p-8 rounded-lg shadow-lg">
-                                    <h3 class="text-2xl font-semibold">Title</h3>
-                                    <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, neque vel efficitur mollis, velit lectus facilisis velit, sit amet consectetur neque neque ac velit.
-                                    </p>
-                                </div>
-                                <div class="p-8 rounded-lg shadow-lg">
-                                    <h3 class="text-2xl font-semibold">Title</h3>
-                                    <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, neque vel efficitur mollis, velit lectus facilisis velit, sit amet consectetur neque neque ac velit.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
                     {{--  --}}
-                    <section>
+                    {{-- <section>
                         <div class="max-w-screen-xl mx-auto flex items-top">
                             <div class="w-1/2 h-full flex">
                                 <div class="my-10 p-20 pe-10">
@@ -269,12 +388,107 @@
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section> --}}
                     {{-- Product Cards --}}
                     <section>
-                        
+                        <div class="mb-20"></div>
+                    </section>
+                    {{-- FAQ --}}
+                    <section>
+                        <div class="mb-20 max-w-screen-xl mx-auto">
+                            <h1 class="mb-8 text-center text-6xl font-bold text-sky-500">Pertanyaan Umum</h1>
+                            <div id="accordion-collapse" data-accordion="collapse" class="rounded-lg shadow-sm">
+                                <h2 id="accordion-collapse-heading-1">
+                                    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-lg focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-1" aria-expanded="true" aria-controls="accordion-collapse-body-1">
+                                        <span>What is Flowbite?</span>
+                                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                        </svg>
+                                    </button>
+                                </h2>
+                                <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+                                    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                                        <p class="mb-2 text-gray-500 dark:text-gray-400">Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.</p>
+                                        <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="/docs/getting-started/introduction/" class="text-blue-600 dark:text-blue-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
+                                    </div>
+                                </div>
+                                <h2 id="accordion-collapse-heading-2">
+                                    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-2" aria-expanded="false" aria-controls="accordion-collapse-body-2">
+                                        <span>Is there a Figma file available?</span>
+                                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                        </svg>
+                                    </button>
+                                </h2>
+                                <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
+                                    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+                                        <p class="mb-2 text-gray-500 dark:text-gray-400">Flowbite is first conceptualized and designed using the Figma software so everything you see in the library has a design equivalent in our Figma file.</p>
+                                        <p class="text-gray-500 dark:text-gray-400">Check out the <a href="https://flowbite.com/figma/" class="text-blue-600 dark:text-blue-500 hover:underline">Figma design system</a> based on the utility classes from Tailwind CSS and components from Flowbite.</p>
+                                    </div>
+                                </div>
+                                <h2 id="accordion-collapse-heading-3">
+                                    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-3" aria-expanded="false" aria-controls="accordion-collapse-body-3">
+                                        <span>What are the differences between Flowbite and Tailwind UI?</span>
+                                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                        </svg>
+                                    </button>
+                                </h2>
+                                <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
+                                    <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700 rounded-b-lg">
+                                        <p class="mb-2 text-gray-500 dark:text-gray-400">The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages.</p>
+                                        <p class="mb-2 text-gray-500 dark:text-gray-400">However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.</p>
+                                        <p class="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
+                                        <ul class="ps-5 text-gray-500 list-disc dark:text-gray-400">
+                                            <li><a href="https://flowbite.com/pro/" class="text-blue-600 dark:text-blue-500 hover:underline">Flowbite Pro</a></li>
+                                            <li><a href="https://tailwindui.com/" rel="nofollow" class="text-blue-600 dark:text-blue-500 hover:underline">Tailwind UI</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>
                 </main>
+                <footer class="w-full bg-sky-400">
+                    <div class="max-w-screen-xl mx-auto p-12 grid grid-cols-4">
+                        <div>
+                            <a href="#" class="flex justify-center my-auto py-4 bg-sky-50 rounded-lg">
+                                <span class="self-center text-3xl font-semibold sm:text-4xl whitespace-nowrap text-sky-800 dark:text-white bg-sky-50">Flowbite</span>
+                            </a>
+                        </div>
+                        <div class="px-12">
+                            <ul>
+                                <li class="mb-4"><a href="#" class="text-white dark:text-white hover:text-blue-600 dark:hover:text-blue-500">About</a></li>
+                                <li class="mb-4"><a href="#" class="text-white dark:text-white hover:text-blue-600 dark:hover:text-blue-500">About</a></li>
+                                <li class="mb-4"><a href="#" class="text-white dark:text-white hover:text-blue-600 dark:hover:text-blue-500">Support</a></li>
+                                <li class="mb-4"><a href="#" class="text-white dark:text-white hover:text-blue-600 dark:hover:text-blue-500">Support</a></li>
+                                <li class="mb-4"><a href="#" class="text-white dark:text-white hover:text-blue-600 dark:hover:text-blue-500">Blog</a></li>
+                                <li class="mb-4"><a href="#" class="text-white dark:text-white hover:text-blue-600 dark:hover:text-blue-500">Blog</a></li>
+                            </ul>
+                        </div>
+                        <div class="px-12">
+                            <ul>
+                                <li class="mb-4"><a href="#" class="text-white dark:text-white hover:text-blue-600 dark:hover:text-blue-500">About</a></li>
+                                <li class="mb-4"><a href="#" class="text-white dark:text-white hover:text-blue-600 dark:hover:text-blue-500">About</a></li>
+                                <li class="mb-4"><a href="#" class="text-white dark:text-white hover:text-blue-600 dark:hover:text-blue-500">Support</a></li>
+                                <li class="mb-4"><a href="#" class="text-white dark:text-white hover:text-blue-600 dark:hover:text-blue-500">Support</a></li>
+                                <li class="mb-4"><a href="#" class="text-white dark:text-white hover:text-blue-600 dark:hover:text-blue-500">Blog</a></li>
+                                <li class="mb-4"><a href="#" class="text-white dark:text-white hover:text-blue-600 dark:hover:text-blue-500">Blog</a></li>
+                            </ul>
+                        </div>
+                        <div class="px-12">
+                            <h5 class="mb-4 text-white text-lg font-semibold">Contact Us!</h5>
+                            {{-- <p> --}}
+                                <span class="text-white text-sm">Address:</span>
+                                <span class="text-gray-100 dark:text-gray-400">123 Main St, Anytown, USA</span><br class="mb-4">
+                                <span class="text-white text-sm">Phone:</span>
+                                <span class="text-gray-100 dark:text-gray-400">+1 (123) 456-7890</span><br class="mb-4">
+                                <span class="text-white text-sm">Email:</span>
+                                <span class="text-gray-100 dark:text-gray-400">info@example.com</span>
+                            {{-- </p> --}}
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
         
