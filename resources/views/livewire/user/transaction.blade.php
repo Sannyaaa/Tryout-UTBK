@@ -106,15 +106,15 @@
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 @if ($item->payment_status == 'paid')
                                                     <span class="px-4 py-2 capitalize bg-gradient-to-tr from-emerald-400 to-emerald-500 rounded-xl font-semibold text-white">
-                                                        {{ $item->payment_status }}
+                                                        Sudah Dibayar
                                                     </span>
                                                 @elseif ($item->payment_status == 'pending')
                                                     <span class="px-4 py-2 capitalize bg-gradient-to-tr from-yellow-300 to-yellow-400 rounded-xl font-semibold text-white">
-                                                        {{ $item->payment_status }}
+                                                        Belum Dibayar
                                                     </span>
                                                 @else
                                                     <span class="px-4 py-2 capitalize bg-gradient-to-tr from-rose-400 to-rose-500 rounded-xl font-semibold text-white">
-                                                        {{ $item->payment_status }}
+                                                        Dibatalkan
                                                     </span>
                                                 @endif
                                             </td>

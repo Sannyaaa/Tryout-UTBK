@@ -44,7 +44,7 @@
 
           <li>
             <x-user-sidebar-link link="{{route('user.tryouts.event')}}" token="event" name="Tryout Serentak">
-              <i class="fa-regular fa-bell"></i>
+              <i class="fa-solid fa-bell"></i>
             </x-user-sidebar-link>
           </li>
           {{-- <li>

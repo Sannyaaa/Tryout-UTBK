@@ -198,6 +198,11 @@ class Dashboard extends Component
 
         $packages = Package_member::limit(3)->get();
 
+        DB::table('orders')
+        ->where('payment_status','pending')
+        ->where('created_at', '<', $now->subHours(24))
+        ->update(['payment_status' => 'cancel']);
+
         return view('livewire.user.dashboard',[
             'totalPackages' => $packages,
             'totalMyPackages' => $myPackages,

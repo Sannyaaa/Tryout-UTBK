@@ -93,11 +93,17 @@
                                             </a>
                                         @endif
                                     @else
-                                        <a href="{{ route('user.tryouts.event.results', $sub_item->is_completed->id) }}" class="flex items-center">
-                                            <button class="p-3 px-4 flex items-center text-white bg-sky-500 rounded-lg font-semibold">
-                                                <i class="fa-solid fa-circle-check"></i>&nbsp; Lihat Pemabahasan
-                                            </button>
-                                        </a>
+                                        @if ( \Carbon\Carbon::today() > $tryout->end_date )
+                                            <a href="{{ route('user.tryouts.event.results', $sub_item->is_completed->id) }}"    class="flex items-center">
+                                                <button class="p-3 px-4 flex items-center text-white bg-sky-500 rounded-lg font-semibold">
+                                                    <i class="fa-solid fa-circle-check"></i>&nbsp; Lihat Pemabahasan
+                                                </button>
+                                            </a>
+                                        @else
+                                            <span class="text-sky-500 hover:text-sky-600 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 text-sm border-sky-200 rounded-lg h-fit my-auto">
+                                                * tunggu tryout selesai untuk melihat pembahasan
+                                            </span>
+                                        @endif
                                     @endif
                                 @else
                                     <div class="my-auto gap-2">

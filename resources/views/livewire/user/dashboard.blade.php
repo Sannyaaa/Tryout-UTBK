@@ -69,6 +69,9 @@
                             </div>
                         @endforeach
                     @endif
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="{{ asset('assets/Artboard 1.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
                     <!-- Item 2 -->
                     {{-- <div class="hidden duration-700 ease-in-out" data-carousel-item>
                         <img src="/docs/images/carousel/carousel-2.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
@@ -355,7 +358,7 @@
                             <h1 class="text-2xl font-semibold text-gray-700 sm:text-3xl sm:leading-none sm:tracking-tight dark:text-white mb-3">Daftar Transaksi</h1>
 
                             <x-primary-link href="{{ route('user.transaction') }}" class="my-auto">
-                                Lihat Detail
+                                Lihat Semua
                             </x-primary-link>
                         </div>
                         <!-- Table -->
@@ -381,6 +384,9 @@
                                             <th class="py-4 px-6 font-semibold">
                                                 Waktu
                                             </th>
+                                            <th class="py-4 px-6 font-semibold">
+                                                Aksi
+                                            </th>
                                         </tr>
                                     </thead>
                                     {{-- @dd($transactions) --}}
@@ -402,21 +408,42 @@
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     @if ($item->payment_status == 'paid')
                                                         <span class="px-4 py-2 capitalize bg-gradient-to-tr from-emerald-400 to-emerald-500 rounded-xl font-semibold text-white">
-                                                            {{ $item->payment_status }}
+                                                            Sudah Dibayar
                                                         </span>
                                                     @elseif ($item->payment_status == 'pending')
                                                         <span class="px-4 py-2 capitalize bg-gradient-to-tr from-yellow-300 to-yellow-400 rounded-xl font-semibold text-white">
-                                                            {{ $item->payment_status }}
+                                                            Belum Dibayar
                                                         </span>
                                                     @else
                                                         <span class="px-4 py-2 capitalize bg-gradient-to-tr from-rose-400 to-rose-500 rounded-xl font-semibold text-white">
-                                                            {{ $item->payment_status }}
+                                                            Dibatalkan
                                                         </span>
                                                     @endif
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ \Carbon\Carbon::parse($item->created_at)->format('j F Y') }}
                                                 </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                @if ($item->payment_status == 'pending')
+                                                    <a href="https://app.sandbox.midtrans.com/snap/v4/redirection/{{ $item->snap_token }}#/payment-list" target="_blank" class="text-sky-500 hover:text-sky-600 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
+                                                        <i class="fa-solid fa-money-bill-wave me-1"></i> Bayar
+                                                    </a>
+                                                @elseif ($item->payment_status == 'paid')
+                                                    @if ($item->package_member->bimbel_id != null)
+                                                        <a href="{{ route('user.my-bimbel', $item->package_member->bimbel_id) }}" title="Riwayat" target="_blank" class="text-sky-50 bg-sky-500 hover:bg-sky-600 px-4 py-2 border-2 border-sky-200 rounded-lg">
+                                                            <i class="fa-solid fa-eye me-1"></i> Lihat Bimbel
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ $item->package_member->tryout->is_together == 'together' ? route('user.tryouts.event.item', $item->package_member->tryout_id) : route('user.tryouts.item', $item->package_member->tryout_id) }}" title="Riwayat" target="_blank" class="text-sky-50 bg-sky-500 hover:bg-sky-600 px-4 py-2 border-2 border-sky-200 rounded-lg">
+                                                            <i class="fa-solid fa-eye me-1"></i> Lihat Tryout
+                                                        </a>
+                                                    @endif
+                                                @else
+                                                    <a href="{{ route('user.package.item', $item->package_member_id) }}" target="_blank" class="text-sky-500 hover:text-sky-600 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
+                                                        <i class="fa-solid fa-tags"></i> Beli Lagi
+                                                    </a>
+                                                @endif
+                                            </td>
                                             </tr>
                                         @empty
                                             <tr>

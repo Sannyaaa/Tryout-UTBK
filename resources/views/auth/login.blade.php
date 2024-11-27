@@ -89,11 +89,15 @@
                             {{ __('Kembali ke Beranda') }}
                         </a> --}}
 
-                        @if (Route::has('password.request'))
+                        <a class="underline text-sm text-sky-600 dark:text-sky-400 hover:text-sky-900 dark:hover:text-indigo-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-indigo-800" href="/">
+                            {{ __('Kembali ke Beranda') }}
+                        </a>
+
+                        {{-- @if (Route::has('password.request'))
                             <a class="underline text-sm text-sky-600 dark:text-sky-400 hover:text-sky-900 dark:hover:text-indigo-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-indigo-800" href="{{ route('password.request') }}">
                                 {{ __('lupa password?') }}
                             </a>
-                        @endif
+                        @endif --}}
                     </div>
                 
             </form>

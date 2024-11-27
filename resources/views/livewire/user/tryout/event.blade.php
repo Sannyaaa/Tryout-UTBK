@@ -41,6 +41,8 @@
                 <!-- Package Grid Section -->
                 <section class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
                     @forelse ($ongoing as $going)
+
+
                         {{-- <div class="border rounded-lg shadow hover:shadow-lg transition-all duration-200">
                             <div class="px-6 py-3 rounded-t-lg bg-gradient-to-tr from-sky-400 to-sky-500">
                                 <h4 class="font-bold text-white">ONGOING</h4>
@@ -77,6 +79,8 @@
                                 </a>
                             </div>
                         </div> --}}
+
+                        
                         <div class="w-full col-span-3 h-full bg-gradient-to-tr from-sky-400 to-sky-500 text-white px-16 py-10 rounded-lg">
                             <div class="">
                                 <div>
@@ -129,6 +133,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                     @empty
                         <div class="col-span-full text-center py-12">
                             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

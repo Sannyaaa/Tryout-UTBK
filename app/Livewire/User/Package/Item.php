@@ -187,7 +187,7 @@ class Item extends Component
 
         $except = Package_member::where('id', '!=',$package)->get();
 
-        $testimonials = Testimonial::where('package_member_id',$id)->get();
+        $testimonials = Testimonial::where('package_member_id',$id)->where('is_show','yes')->get();
 
         return view('livewire.user.package.item',compact('testimonials'));
     }
