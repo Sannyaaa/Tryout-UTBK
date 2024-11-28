@@ -10,6 +10,7 @@ use App\Http\Controllers\CombinedCategoriesController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PackageMemberController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\QuestionPracticeController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\TestimonialController;
@@ -54,6 +55,10 @@ Route::resource('/package_member', PackageMemberController::class);
 
 Route::post('/category/bulk-delete', [CategoryController::class, 'bulkDelete'])->name('category.bulkDelete');
 Route::resource('/category', CategoryController::class);
+
+Route::get('/page/home', [PageController::class,'homePage'])->name('home-page');
+Route::put('/page/edit-home/{id}', [PageController::class,'editHomePage'])->name('edit-home-page');
+Route::post('/page/create-home', [PageController::class,'createHomePage'])->name('create-home-page');
 
 Route::resource('combined-categories', CombinedCategoriesController::class);
 Route::get('/admin/combined-categories/{id}/edit', [CombinedCategoriesController::class, 'edit'])
