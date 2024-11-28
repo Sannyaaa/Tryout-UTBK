@@ -8,7 +8,7 @@
             
             <!-- Add New Button -->
             <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" 
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 font-medium rounded-lg text-sm px-5 py-2.5">
                 Tambah Category Baru
             </button>
         </div>

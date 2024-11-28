@@ -48,7 +48,7 @@
 
             <li>
               <x-sidebar-link link="{{ route('admin.combined-categories.index') }}" token="combined-categories" name="Category">
-                <i class="fa-solid fa-book-open"></i>
+                <i class="fa-solid fa-file"></i>
               </x-sidebar-link>
             </li>
 
@@ -183,13 +183,25 @@
 
             <li>
               <x-sidebar-link link="{{ route('admin.order.index') }}" token="order" name="Transaksi">
-                <i class="fa-solid fa-book-open"></i>
+                <i class="fa-solid fa-cart-shopping"></i>
+              </x-sidebar-link>
+            </li>
+
+            <li>
+              <x-sidebar-link link="{{ route('admin.report.index') }}" token="report" name="Laporan keuangan">
+                <i class="fa-solid fa-flag"></i>
+              </x-sidebar-link>
+            </li>
+
+            <li>
+              <x-sidebar-link link="{{ route('admin.promotion.index') }}" token="promotion" name="Promotion">
+                <i class="fa-solid fa-tag"></i>
               </x-sidebar-link>
             </li>
 
             <li>
               <x-sidebar-link link="{{ route('admin.testimonial.index') }}" token="testimonial" name="Testimonial">
-                <i class="fa-solid fa-book-open"></i>
+                <i class="fa-regular fa-comment"></i> 
               </x-sidebar-link>
             </li>
 

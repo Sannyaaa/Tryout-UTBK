@@ -10,7 +10,9 @@ use App\Http\Controllers\CombinedCategoriesController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PackageMemberController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\QuestionPracticeController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\UniversityController;
@@ -53,7 +55,7 @@ Route::resource('/category', CategoryController::class);
 
 Route::resource('combined-categories', CombinedCategoriesController::class);
 Route::get('/admin/combined-categories/{id}/edit', [CombinedCategoriesController::class, 'edit'])
-    ->name('admin.combined-categories.edit');
+->name('admin.combined-categories.edit');
 
 Route::get('/get-provinsi', [ProfileController::class, 'getProvinsi'])->name('get-provinsi');
 Route::get('/get-kabupaten/{provinsi}', [ProfileController::class, 'getKabupaten'])->name('get-kabupaten');
@@ -63,7 +65,12 @@ Route::get('/get-sekolah/{provinsi}/{kabupaten}', [ProfileController::class, 'ge
 // Route::get('/fetch-universities', [UniversityScraperController::class, 'fetchUniversities']);
 // Route::get('/fetch-study-programs', [UniversityScraperController::class, 'fetchStudyPrograms']);
 
+Route::resource('promotion', PromotionController::class);
+Route::post('/promotion/bulk-delete', [PromotionController::class, 'bulkDelete'])->name('promotion.bulkDelete');
 
+
+Route::resource('report', ReportController::class);
+Route::post('/report/bulk-delete', [ReportController::class, 'bulkDelete'])->name('report.bulkDelete');
 
 
 
