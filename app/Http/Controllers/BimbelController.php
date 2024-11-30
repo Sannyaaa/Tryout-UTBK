@@ -40,12 +40,12 @@ class BimbelController extends Controller
                             return date('j F Y', strtotime($bimbel->created_at)) ;
                         })
                         ->addColumn('link_group', function($bimbel) {
-                            $link = $bimbel->link_group != null ? '<a href="'. $bimbel->link_group .'" target="__blank" class=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" >Link</a>' : 'belum ada';
+                            $link = $bimbel->link_group != null ? '<a href="'. $bimbel->link_group .'" target="__blank" class=" py-2 px-3 text-sky-600 bg-sky-100 border-sky-300 rounded-lg focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-sky-800 dark:focus:ring-offset-sky-800 focus:ring-2 dark:bg-sky-700 dark:border-sky-600" >Link</a>' : 'belum ada';
 
                             return $link;
                         })
                         ->addColumn('action', function ($bimbel) {
-                            $editBtn = '<button class="edit-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+                            $editBtn = '<button class="edit-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
                                 data-id="'.$bimbel->id.'" 
                                 data-name="'.$bimbel->name.'" 
                                 data-description="'.$bimbel->description.'">

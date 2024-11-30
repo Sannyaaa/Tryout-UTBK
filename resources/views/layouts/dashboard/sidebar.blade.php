@@ -29,7 +29,7 @@
                   <span class="ml-3" sidebar-toggle-item>Dashboard</span>
               </a> --}}
               <x-sidebar-link link="{{ route('dashboard-mentor') }}" token="dashboard-mentor" name="Dashboard">
-                <i class="fa-solid fa-tv"></i>
+                <i class="fa-solid fa-display"></i>
               </x-sidebar-link>
             </li>
           @endif
@@ -37,78 +37,37 @@
           @if (Gate::allows('admin'))
             
             <li>
-              {{-- <a href="#" class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
-                  <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
-                  <span class="ml-3" sidebar-toggle-item>Dashboard</span>
-              </a> --}}
               <x-sidebar-link link="{{ route('dashboard') }}" token="dashboard" name="Dashboard">
-                <i class="fa-solid fa-tv"></i>
+                <i class="fa-solid fa-display"></i>
               </x-sidebar-link>
             </li>
 
-            <li>
-              <x-sidebar-link link="{{ route('admin.combined-categories.index') }}" token="combined-categories" name="Category">
-                <i class="fa-solid fa-book-open"></i>
-              </x-sidebar-link>
-            </li>
-
-            <li>
+            {{-- <li>
               <x-sidebar-link link="{{ route('admin.bimbel.index') }}" token="bimbel" name="Bimbel">
                 <i class="fa-solid fa-book-open"></i>
               </x-sidebar-link>
-            </li>
+            </li> --}}
 
             <li>
               <!-- Dropdown Menu -->
-              <x-sidebar-dropdown id="class-bimbel" name="Kelas Bimbel">
+              <x-sidebar-dropdown id="class-bimbel" name="Bimbel">
                   {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
-                  <i class="fa-solid fa-chalkboard-user"></i>
+                  <i class="fa-solid fa-book-open-reader"></i>
                   <x-slot name="content">
                       <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.class-bimbel.index') }}" name="List" />
+                          <x-sidebar-link-dropdown link="{{ route('admin.bimbel.index') }}" name="Daftar Bimbel" />
                           {{-- <a href="{{ route('admin.class-bimbel.index') }}" name="All Class</a> --}}
                       </li>
                       <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.class-bimbel.create') }}" name="Buat" />
-                          {{-- <a href="{{ route('admin.class-bimbel.create') }}" name="Buat</a> --}}
+                          <x-sidebar-link-dropdown link="{{ route('admin.class-bimbel.index') }}" name="Daftar Kelas" />
+                          {{-- <a href="{{ route('admin.class-bimbel.index') }}" name="All Class</a> --}}
                       </li>
                       <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.question-practice.index') }}" name="List Pertanyaan" />
-                      </li>
-                      <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.question-practice.create') }}" name="Buat Pertanyaan" />
+                          <x-sidebar-link-dropdown link="{{ route('admin.question-practice.index') }}" name="Daftar Pertanyaan" />
                       </li>
                   </x-slot>
               </x-sidebar-dropdown>
             </li>
-
-            {{-- <li>
-              <x-sidebar-link link="{{ route('admin.category.index') }}" name="Category Question">
-                <i class="fa-solid fa-tv"></i>
-              </x-sidebar-link>
-            </li>
-
-            <li>
-              <x-sidebar-link link="{{ route('admin.sub_categories.index') }}" name="Sub Category Question">
-                <i class="fa-solid fa-tv"></i>
-              </x-sidebar-link>
-            </li> --}}
-
-            {{-- <li>
-              <!-- Dropdown Menu -->
-              <x-sidebar-dropdown id="category" name="Categori">
-                  <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
-                  <i class="fa-regular fa-file-lines"></i>
-                  <x-slot name="content">
-                      <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.category.index') }}" name="Categori" />
-                      </li>
-                      <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.sub_categories.index') }}" name="Sub Categori" />
-                      </li>
-                  </x-slot>
-              </x-sidebar-dropdown>
-            </li> --}}
 
             <li>
               <!-- Dropdown Menu -->
@@ -117,25 +76,25 @@
                   <i class="fa-regular fa-file-lines"></i>
                   <x-slot name="content">
                       <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.tryout.index') }}" name="List" />
+                          <x-sidebar-link-dropdown link="{{ route('admin.tryout.index') }}" name="Daftar Tryout" />
                       </li>
                       <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.tryout.create') }}" name="Buat" />
-                      </li>
-                      <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.question.index') }}" name="List Pertanyaan" />
-                      </li>
-                      <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.question.create') }}" name="Buat Pertanyaan" />
+                          <x-sidebar-link-dropdown link="{{ route('admin.question.index') }}" name="Daftar Pertanyaan" />
                       </li>
                   </x-slot>
               </x-sidebar-dropdown>
             </li>
 
             <li>
+              <x-sidebar-link link="{{ route('admin.package_member.index') }}" token="package_member" name="Paket">
+                <i class="fa-solid fa-tags"></i>
+              </x-sidebar-link>
+            </li>
+
+            {{-- <li>
               <!-- Dropdown Menu -->
               <x-sidebar-dropdown id="package_member" name="Paket">
-                  {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
+                  <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
                   <i class="fa-solid fa-tags"></i>
                   <x-slot name="content">
                       <li>
@@ -146,7 +105,7 @@
                       </li>
                   </x-slot>
               </x-sidebar-dropdown>
-            </li>
+            </li> --}}
             
             <li>
               {{-- <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" aria-controls="dropdown-crud" data-collapse-toggle="dropdown-crud">
@@ -185,13 +144,13 @@
               <!-- Dropdown Menu -->
               <x-sidebar-dropdown id="page" name="Pengaturan Halaman">
                   {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
-                  <i class="fa-solid fa-ticket"></i>
+                  <i class="fa-solid fa-gears"></i>
                   <x-slot name="content">
                       <li>
                           <x-sidebar-link-dropdown link="{{ route('admin.home-page') }}" name="Halaman Home" />
                       </li>
                       <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.discount.create') }}" name="Buat" />
+                          <x-sidebar-link-dropdown link="{{ route('admin.component-page') }}" name="Komponen" />
                       </li>
                   </x-slot>
               </x-sidebar-dropdown>
@@ -223,6 +182,12 @@
                       </li>
                   </x-slot>
               </x-sidebar-dropdown>
+            </li>
+
+            <li>
+              <x-sidebar-link link="{{ route('admin.combined-categories.index') }}" token="combined-categories" name="Category">
+                <i class="fa-solid fa-book-open"></i>
+              </x-sidebar-link>
             </li>
 
           @elseif (Gate::allows('mentor'))

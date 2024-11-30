@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ComponentPage;
 use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\HomePage;
@@ -22,7 +23,7 @@ class PageController extends Controller
 
         $icons = json_decode(file_get_contents(resource_path('json/icons.json')), true);
 
-        return view('admin.halaman.edit',[
+        return view('admin.halaman.home',[
             'homePage' => $homePage,
             'faqs' => $faqs,
             'icons' => $icons,
@@ -186,4 +187,144 @@ class PageController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+    public function componentPage(){
+        $componentPage = ComponentPage::first();
+
+        return view('admin.halaman.component', compact('componentPage'));
+    }
+
+    public function componentStore(Request $request){
+        $data = $request->validate([
+            'navbar_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'footer_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'short_desc' => 'nullable|string',
+            'facebook' =>'required|string',
+            'instagram' =>'required|string',
+            'x' =>'required|string',
+            'youtube' =>'required|string',
+            'tiktok' =>'required|string',
+            'email' =>'required|email',
+            'phone' =>'required',
+            'address' =>'required|string',
+            'copyright' =>'required|string',
+        ]);
+
+        try {
+            $componentPage = ComponentPage::create([
+
+                'navbar_image' => $request->hasFile('navbar_image')? $request->file('navbar_image')->store('assets', 'public') : null,
+                'footer_image' => $request->hasFile('footer_image')? $request->file('footer_image')->store('assets', 'public') : null,
+
+                'short_desc' => $data['short_desc'],
+                'facebook' => $data['facebook'],
+                'instagram' => $data['instagram'],
+
+                'x' => $data['x'],
+                'youtube' => $data['youtube'],
+                'tiktok' => $data['tiktok'],
+
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'address' => $data['address'],
+                'copyright' => $data['copyright'],
+
+            ]);
+
+            return redirect()->route('admin.component-page')->with('success', 'Berhasil Ditambahkan.');
+
+        } catch (\Exception $e) {
+
+            Log::error('Error in create component: '. $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
+
+        }
+    }
+
+    public function componentUpdate(Request $request, ComponentPage $componentPage){
+        $data = $request->validate([
+            'navbar_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'footer_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'short_desc' => 'nullable|string',
+            'facebook' =>'required|string',
+            'instagram' =>'required|string',
+            'x' =>'required|string',
+            'youtube' =>'required|string',
+            'tiktok' =>'required|string',
+            'email' =>'required|email',
+            'phone' =>'required|numerik',
+            'address' =>'required|string',
+            'copyright' =>'required|string',
+        ]);
+
+        try {
+            $componentPage->update([
+                'navbar_image' => $request->hasFile('navbar_image')? $request->file('navbar_image')->store('assets', 'public') : $componentPage->navbar_image,
+                'footer_image' => $request->hasFile('footer_image')? $request->file('footer_image')->store('assets', 'public') : $componentPage->footer_image,
+
+                'short_desc' => $data['short_desc'],
+                'facebook' => $data['facebook'],
+                'instagram' => $data['instagram'],
+
+                'x' => $data['x'],
+                'youtube' => $data['youtube'],
+                'tiktok' => $data['tiktok'],
+
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'address' => $data['address'],
+                'copyright' => $data['copyright'],
+            ]);
+
+            return redirect()->route('admin.component-page')->with('success', 'Berhasil Diubah.');
+        } catch (\Exception $e) {
+            Log::error('Error in update component: '. $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    
+        // $componentPage = ComponentPage::first();
+        // $data = $request->validate([
+        //     'title' =>'required|string',
+        //     'description' => 'nullable|string',
+        //     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        // ]);
+
+        // try {
+        //     $componentPage->update([
+        //         'title' => $data['title'],
+        //         'description' => $data['description'],
+        //         'image' => $request->hasFile('image')? $request->file('image')->store('assets', 'public') : $componentPage->image,
+        //     ]);
+
+        //     return redirect()->route('admin.component')->with('success', 'Berhasil Diubah.');
+        // } catch (\Exception $e) {
+            // Log::error('Error in update component: '. $e->getMessage());
+        //     return redirect()->back()->with('error', $e->getMessage());
+        // }
+    
+        // return view('admin.halaman.component', compact('componentPage'));
+    
+        // $componentPage = ComponentPage::first();
+        // return view('admin.halaman.component', compact('componentPage'));
+    
+        // $data = $request->validate([
+        //     'title' =>'required|string',
+        //     'description' => 'nullable|string',
+        //     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        // ]);
+
+        // try {
+        //     $componentPage->update([
+        //         'title' => $data['title'],
+        //         'description' => $data['description'],
+        //         'image' => $request->hasFile('image')? $request->file('image')->store('assets', 'public') : $componentPage->image,
+        //     ]);
+
+        //     return redirect()->route('admin.component')->with('success', 'Berhasil Diubah.');
+        // } catch (\Exception $e) {
+        //     Log::error('Error in update component: '. $e->getMessage());
+        //     return redirect()->back()->with('error', $e->getMessage());
+        // }
+    }
+
 }

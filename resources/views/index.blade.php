@@ -6,9 +6,9 @@
             <div class="w-full md:flex py-16 lg:py-20 px-10 md:px-14 lg:px-20 xl:px-32 space-y-10">
                 <div class="w-4/5 md:w-1/2 flex justify-center items-center pe-10">
                     <div class="text-left w-full">
-                        <h1 class="text-5xl font-bold text-sky-950 md:text-6xl lg:text-7xl ">Latihan Lebih Seru, Hasil Lebih Optimal!</h1>
+                        <h1 class="text-5xl font-bold text-sky-950 md:text-6xl lg:text-7xl ">{{ $homePage->hero_title }}</h1>
 
-                        <p class="mt-6 text-lg  text-gray-600">Persiapkan Dirimu untuk UTBK Terbaikmu! Jadikan impianmu masuk PTN favorit menjadi kenyataan bersama Tryout UTBK kami. Pelajari materi, latih kemampuanmu, dan lihat hasil kemajuanmu secara langsung!</p>
+                        <div class="mt-6 text-lg  text-gray-600">{!! $homePage->hero_desc !!}</div>
 
                         <div class="mt-6 inline-flex items-center gap-x-6">
                             <x-primary-link href="{{ route('login') }}" class="py-1 px-2 rounded-full">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="w-full md:w-1/2 px-0 md:px-8 mx-auto my-auto">
                     <div class="overflow-hidden">
-                        <img src="{{ asset('assets/Webinar-bro.png') }}" alt="" class=" min-w-10">
+                        <img src="{{ Storage::url($homePage->hero_image) }}" alt="" class=" min-w-10">
                     </div>
                 </div>
             </div>
@@ -38,65 +38,28 @@
                 </div>
                 <div class="mt-6 px-4 sm:px-20 lg:px-40">
                     <div class="w-full flex flex-wrap justify-center">
-                        <div class="p-4 lg:p-6 max-w-xl w-full md:w-1/2">
-                            <div class="p-12 bg-sky-50 hover:bg-sky-200 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
-                                <div class="text-center mb-4">
-                                    <div class=" w-24 flex items-center justify-center text-sky-900 aspect-square rounded-full bg-sky-950 mx-auto">
-                                        <span class=" text-4xl text-sky-50"><i class="fa-solid fa-file-circle-check"></i></span>
+                        @foreach ($features as $feature)
+                            <div class="p-4 lg:p-6 max-w-xl w-full md:w-1/2">
+                                <div class="p-12 bg-sky-50 hover:bg-sky-200 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
+                                    <div class="text-center mb-4">
+                                        <div class=" w-24 flex items-center justify-center text-sky-900 aspect-square rounded-full bg-sky-950 mx-auto">
+                                            <span class=" text-4xl text-sky-50"><i class="{{ $feature->image }}"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <h2 class="text-2xl  font-bold text-gray-800">{{ $feature->name }}</h2>
+                                        <p class="mt-2 text-gray-600">{{ $feature->description }}</p>
                                     </div>
                                 </div>
-                                <div class="text-center">
-                                    <h2 class="text-2xl  font-bold text-gray-800">Simulasi Ujian Mirip Asli</h2>
-                                    <p class="mt-2 text-gray-600">Rasakan sensasi mengerjakan ujian tryout asli dengan waktu dan format soal yang sesuai dengan UTBK sebenarnya.</p>
-                                </div>
                             </div>
-                        </div>
-                        <div class="p-4 lg:p-6 max-w-xl w-full md:w-1/2">
-                            <div class="p-12 bg-sky-50 hover:bg-sky-200 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
-                                <div class="text-center mb-4">
-                                    <div class=" w-24 flex items-center justify-center text-sky-900 aspect-square rounded-full bg-sky-950 mx-auto">
-                                        <span class=" text-4xl text-sky-50"><i class="fa-solid fa-award"></i></span>
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <h2 class="text-2xl  font-bold text-gray-800">Analisis & Pembahasan Lengkap</h2>
-                                    <p class="mt-2 text-gray-600">Dapatkan laporan nilai, analisis kelemahan dan kekuatan, serta pembahasan soal untuk meningkatkan pemahaman.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 lg:p-6 max-w-xl w-full md:w-1/2">
-                            <div class="p-12 bg-sky-50 hover:bg-sky-200 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
-                                <div class="text-center mb-4">
-                                    <div class=" w-24 flex items-center justify-center text-sky-900 aspect-square rounded-full bg-sky-950 mx-auto">
-                                        <span class=" text-4xl text-sky-50"><i class="fa-solid fa-chalkboard-user"></i></span>
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <h2 class="text-2xl  font-bold text-gray-800">Kapan Saja, Di Mana Saja</h2>
-                                    <p class="mt-2 text-gray-600">Platform kami mudah diakses melalui perangkat apa saja. Kamu bisa belajar dan berlatih di mana pun dan kapan pun.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 lg:p-6 max-w-xl w-full md:w-1/2">
-                            <div class="p-12 bg-sky-50 hover:bg-sky-200 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
-                                <div class="text-center mb-4">
-                                    <div class=" w-24 flex items-center justify-center text-sky-900 aspect-square rounded-full bg-sky-950 mx-auto">
-                                        <span class=" text-4xl text-sky-50"><i class="fa-solid fa-graduation-cap"></i></span>
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <h2 class="text-2xl  font-bold text-gray-800">Mentor Berpengalaman</h2>
-                                    <p class="mt-2 text-gray-600">Belajar langsung dari pengajar yang paham strategi UTBK dan memiliki pengalaman dalam mengajar materi ujian.</p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
 
             <div class="my-32">
                 <div class="text-center w-3/5 md:w-2/5 mx-auto">
-                    <h1 class="text-4xl font-bold text-slate-800 md:text-5xl lg:text-6xl ">Categories <span class="text-yellow-300">Menu</span></h1>
+                    <h1 class="text-4xl font-bold text-sky-900 md:text-5xl lg:text-6xl ">Categories <span class="text-yellow-300">Menu</span></h1>
 
                     <p class="mt-6 text-lg  text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
                 </div>
@@ -126,19 +89,17 @@
                 <div class="px-10 md:flex">
                     <div class="w-full md:w-1/2 px-0 md:px-8 mx-auto my-auto">
                         <div class="overflow-hidden">
-                            <img src="{{ asset('assets/Certification-cuate.png') }}" alt="" class="min-w-10">
+                            <img src="{{ Storage::url($homePage->about_us_image) }}" alt="" class="min-w-10">
                         </div>
                     </div>
                     <div class="w-4/5 md:w-1/2 flex justify-center items-center">
                         <div class="text-left w-full pb-20 md:pt-20">
-                            <h1 class="text-5xl font-bold  text-sky-950 md:text-6xl lg:text-7xl ">With Our <span class="">Professional</span> Teacher</h1>
+                            <h1 class="text-5xl font-bold  text-sky-950 md:text-6xl lg:text-7xl ">{{ $homePage->about_us_title }}</h1>
 
-                            <p class="mt-6 text-lg  text-gray-600">Tryout UTBK kami didesain untuk memberikan simulasi ujian yang lengkap dan akurat. Didukung oleh soal-soal yang sesuai standar dan dipandu oleh pengajar berpengalaman, kami berkomitmen membantu kamu memahami materi dan strategi ujian secara mendalam.</p>
-
-                            <p class="mt-6 text-lg  text-gray-600">Kami hadir dengan misi membantumu menguasai materi UTBK melalui latihan yang interaktif dan analisis hasil yang mendalam. Bersama kami, capai nilai tertinggi dan wujudkan impian ke kampus impian!</p>
+                            <div class="mt-6 text-lg  text-gray-600">{!! $homePage->about_us_desc !!}</div>
                         
                             <div class="mt-10">
-                                {{-- <a href="{{ route('list-menu') }}" class="px-8 py-4 transition-all bg-slate-800 text-white hover:bg-white border-slate-800 border-4 hover:text-slate-800 rounded-xl font-bold text-lg">Explore Menu</a> --}}
+                                {{-- <a href="{{ route('list-menu') }}" class="px-8 py-4 transition-all bg-slate-800 text-white hover:bg-white border-slate-800 border-4 hover:text-sky-900 rounded-xl font-bold text-lg">Explore Menu</a> --}}
                             </div>
                         </div>
                     </div>
@@ -147,80 +108,61 @@
 
             <div class="mt-32">
                 <div class="text-center w-3/5 md:w-2/5 mx-auto">
-                    <h1 class="text-4xl font-bold  text-slate-800 md:text-5xl lg:text-6xl ">Our <span class="text-yellow-300">Favorite</span> Menu</h1>
+                    <h1 class="text-4xl font-bold  text-sky-900 md:text-5xl lg:text-6xl ">Paket Terbaru Kami</h1>
 
                     <p class="mt-6 text-lg  text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
                 </div>
-                <div class="mt-12 px-4 sm:px-16 lg:px-32">
+                <div class="mt-12 px-4 md:px-32 lg:px-40 xl:px-56">
                     <div class="w-full flex flex-wrap justify-center">
 
-                        {{-- @forelse ($menus as $menu)
-                            <div class="p-3 md:p-4 max-w-md md:w-1/2">
-                                <a href="{{ route('detail-menu',$menu->id) }}">
-                                    <div class="w-full max-w-sm bg-white group border-slate-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 dark:bg-gray-800 dark:border-gray-700 overflow-hidden">
-                                        <div class="relative aspect-video overflow-hidden bg-cover align-middle">
-                                            <img class="object-cover object-center w-full h-full" src="{{ Storage::url($menu->image) }}" alt="menu image" />
-                                            
-                                            <div class="hidden group-hover:flex transition-all duration-200 absolute -bottom-1 right-1 p-5 text-center text-white font-bold text-sm">
-                                                
-    
-                                                <span class="absolute top-0 bottom-0 left-0 right-0 text-sm font-bold text-white text-right">
-                                                    15 min
-                                                </span>
-    
-                                                <span class="absolute bottom-0 left-0 right-0 text-sm font-bold text-white text-left">
-                                                    30 min
-                                                </span>
-    
-                                            </div>
+                        <!-- Package Grid Section -->
+                        <section class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
+                            @foreach ($packages as $package)
+                                <div class="flex flex-col max-w-lg">
+                                    <div class="text-gray-900 bg-white hover:shadow-xl transition-all border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+                                        <div class="relative aspect-video overflow-hidden bg-cover align-middle p-2">
+                                            <img class="object-cover object-center w-full h-full rounded-md" 
+                                                src="{{ $package->image != null ? Storage::url($package->image) : asset('build/assets/Photo-Image-Icon-Graphics-10388619-1-1-580x386.jpg') }}" 
+                                                alt="package image" />
+                                            {{-- <span class="relative bottom-10 -right-3 py-1 px-4 bg-sky-500 border-sky-400 border-2 text-white rounded-lg font-semibold">
+                                                {{ $package->tryout_id != null ? 'Tryout' : 'Bimbel' }}
+                                            </span> --}}
                                         </div>
-                                        <div class="px-5 py-5">
+                                        <div class="px-5 py-2">
                                             <div>
-                                                <h5 class="text-xl font-semibold hover:underline  text-gray-900 dark:text-white">{{ $menu->name }} <span class="text-sm font-normal text-slate-400 italic">({{ $menu->category->name }})</span></h5>
-                                                
-                                                <p class="text-sm text-gray-600 dark:text-gray-400">
-                                                    {{ Str::limit($menu->description,60) }}...
-                                                </p>
+                                                <a href="{{ route('user.package.item', $package->id) }}">
+                                                    <h5 class="text-3xl font-bold hover:underline text-gray-800 uppercase dark:text-white mb-0">
+                                                        {{ $package->name }}
+                                                    </h5>
+                                                </a>
                                             </div>
-                                            <div class="flex items-center justify-between mt-2.5 mb-2">
-                                                <div class="flex items-center space-x-1 rtl:space-x-reverse">
-                                                    <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                                    </svg>
-                                                    <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                                    </svg>
-                                                    <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                                    </svg>
-                                                    <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                                    </svg>
-                                                    <svg class="w-4 h-4 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                                    </svg>
-                                                </div>
-                                                <span class="text-2xl font-bold text-gray-900 dark:text-white">Rp.{{ number_format($menu->price) }}</span>
-                                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
+                                            {{-- <p class="font-medium text-gray-500 dark:text-gray-400 mb-3">
+                                                {!! Str::limit($package->description, 100, '...') !!}
+                                            </p> --}}
+                                            <div class="space-y-1 my-2">
+                                                @foreach ($package->benefits as $benefit)
+                                                    <div class="flex items-center space-x-3 text-gray-500 font-medium text-sm">
+                                                        <!-- Icon -->
+                                                        <div class="p-1 bg-sky-400 rounded-full">
+                                                            <svg class="flex-shrink-0 w-4 h-4 text-gray-100 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                                        </div>
+                                                        <span>{{ $benefit->benefit }}</span>
+                                                    </div>
+                                                @endforeach
                                             </div>
-                                            <div class="flex items-center justify-between w-full font-semibold text-base space-x-4">
-                                                
-                                                <div class="flex w-full">
-                                                    <button class="w-full py-3 bg-yellow-300 hover:bg-yellow-400 font-semibold text-base rounded-xl text-yellow-900">See More</button>
-                                                </div>
-                                                <div class="bg-slate-800 hover:bg-slate-900 text-yellow-50 p-3 aspect-square text-lg flex items-center justify-center rounded-xl">
-                                                    <i class="fa-solid fa-cart-shopping my-auto"></i>
-                                                </div>
+                                            <div class="flex justify-between items-baseline my-3">
+                                                <x-primary-link href="{{ route('user.package.item', $package->id) }}">
+                                                    Lihat Detail
+                                                </x-primary-link>
+                                                <span class="mt-auto text-3xl font-bold">
+                                                    Rp.{{ number_format($package->price) }}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
-                                </a>
-                            </div>
-                        @empty
-                            <span class="text-center">
-                                Belum ada product
-                            </span>
-                        @endforelse --}}
+                                </div>
+                            @endforeach
+                        </section>
 
                     </div>
 
@@ -279,7 +221,7 @@
                         <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
                         <div class="max-w-2xl ltr:sm:text-left rtl:sm:text-right">
                             <div class="px-12 sm:px-20 lg:px-0">
-                                <h2 class="text-4xl font-bold  text-slate-800 md:text-5xl lg:text-6xl ">
+                                <h2 class="text-4xl font-bold  text-sky-900 md:text-5xl lg:text-6xl ">
                                     <span class="text-yellow-300">Testimonials</span> Our Customers
                                 </h2>
 
@@ -314,7 +256,7 @@
                             <button
                                 aria-label="Next slide"
                                 id="keen-slider-next-desktop"
-                                class="rounded-full border border-rose-600 p-3 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+                                class="rounded-full border border-sky-600 p-3 text-sky-600 transition hover:bg-sky-600 hover:text-white"
                             >
                                 <svg
                                 class="size-5 rtl:rotate-180"
@@ -343,12 +285,12 @@
                                             <div class="flex items-center gap-5 mb-5 sm:mb-5">
                                                 <img class="rounded-full border-white border-4 h-14 w-14" src="{{ $feedback->user->avatar ? Storage::url($feedback->user->avatar) : 'https://pagedone.io/asset/uploads/1696229969.png' }}" alt="avatar">
                                                 <div class="grid gap-1">
-                                                    <h5 class="text-slate-800 font-semibold transition-all duration-500  ">{{ $feedback->name }}</h5>
+                                                    <h5 class="text-sky-900 font-semibold transition-all duration-500  ">{{ $feedback->name }}</h5>
                                                     <span class="text-sm leading-6 text-gray-500">{{ $feedback->email }}</span>
                                                 </div>
                                             </div>
                                             <div
-                                                class="flex items-center mb-5 sm:mb-5 gap-2 text-slate-800 transition-all duration-500  ">
+                                                class="flex items-center mb-5 sm:mb-5 gap-2 text-sky-900 transition-all duration-500  ">
                                                 @for ($i = 0;$i < $feedback->rating;$i++)
                                                     <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -377,7 +319,7 @@
                         <button
                             aria-label="Previous slide"
                             id="keen-slider-previous"
-                            class="rounded-full border-4 border-slate-800 p-4 text-slate-800 transition hover:bg-yellow-300 hover:text-slate-800"
+                            class="rounded-full border-4 border-slate-800 p-4 text-sky-900 transition hover:bg-yellow-300 hover:text-sky-900"
                         >
                             <svg
                             class="size-5 -rotate-180 transform"
@@ -393,7 +335,7 @@
                         <button
                             aria-label="Next slide"
                             id="keen-slider-next"
-                            class="rounded-full border-4 border-slate-800 p-4 text-slate-800 transition hover:bg-yellow-300 hover:text-slate-800"
+                            class="rounded-full border-4 border-slate-800 p-4 text-sky-900 transition hover:bg-yellow-300 hover:text-sky-900"
                         >
                             <svg
                             class="h-5 w-5"

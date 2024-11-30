@@ -97,7 +97,7 @@
                     @yield('content')
                 </main>
 
-                <footer class="bg-gradient-to-r from-slate-800 to-slate-900 text-white">
+                <footer class="bg-gradient-to-r from-sky-900 to-sky-950 text-white">
                     <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
                         <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
                             <div>
@@ -174,13 +174,12 @@
                                 </div>
                                 <div>
                                     <p class="font-medium">
-                                        Legal
+                                        Contact
                                     </p>
                                     <nav class="flex flex-col mt-4 space-y-2 text-sm text-zinc-200">
-                                        <a class="hover:opacity-75" href> Privacy Policy </a>
+                                        <a class="hover:opacity-75" href>  </a>
                                         <a class="hover:opacity-75" href> Terms &amp; Conditions </a>
                                         <a class="hover:opacity-75" href> Returns Policy </a>
-                                        <a class="hover:opacity-75" href> Accessibility </a>
                                     </nav>
                                 </div>
                             </div>
