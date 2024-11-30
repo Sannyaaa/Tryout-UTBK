@@ -67,11 +67,20 @@
                 @method('PUT')
                 <div class="space-y-4">
 
-                    <div class="grid lg:grid-cols-2 gap-3">
+                    <div class="grid lg:grid-cols-3 gap-3">
                         <div>
                             <x-input-label for="email" :value="__('Pengguna')" />
                             <x-text-input type="text" :value="$testimonial->user->email ?? old('email')" name="email" id="email" placeholder="Masukan Nama testimonial" disabled/>
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        </div>
+                        <div>
+                            <x-input-label for="is_show" :value="__('Tampilkan / Tidak')" />
+                            <x-select-input id="is_show" name="is_show">
+                                <option selected="" disabled>Tampilkan atau Tidak</option>
+                                <option value="yes" {{ $tryout->is_show == 'yes' ? 'selected' : '' }}>Tampilkan</option>
+                                <option value="no" {{ $tryout->is_show == 'no' ? 'selected' : '' }}>Tahan</option>
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
                         </div>
                         <div>
                             <x-input-label for="package_member_id" :value="__('Paket yang Dibeli')" />

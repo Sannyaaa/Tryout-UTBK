@@ -35,30 +35,41 @@
               <i class="fa-solid fa-tv"></i>
             </x-user-sidebar-link>
           </li>
+
           <li>
             <x-user-sidebar-link link="{{route('user.tryouts')}}" token="tryout" name="Tryout">
               <i class="fa-regular fa-file-lines"></i>
             </x-user-sidebar-link>
           </li>
+
           <li>
-            <x-user-sidebar-link link="{{route('user.tryouts.event')}}" token="event" name="Event Tryout">
-              <i class="fa-regular fa-bell"></i>
+            <x-user-sidebar-link link="{{route('user.tryouts.event')}}" token="event" name="Tryout Serentak">
+              <i class="fa-solid fa-bell"></i>
             </x-user-sidebar-link>
           </li>
           {{-- <li>
             <x-user-sidebar-link link="/" name="Bimbel">
             </x-user-sidebar-link>
           </li> --}}
-          <li>
-            <x-user-sidebar-link link="{{route('user.packages')}}" token="paket" name="Paket Pembelian">
-              <i class="fa-solid fa-tags"></i>
-            </x-user-sidebar-link>
-          </li>
+          
           <li>
             <x-user-sidebar-link link="{{route('user.my-packages')}}" token="paketku" name="Paket Saya">
               <i class="fa-solid fa-user-tag"></i>
             </x-user-sidebar-link>
           </li>
+
+          <li>
+            <x-user-sidebar-link link="{{route('user.packages')}}" token="paket" name="Paket Pembelian">
+              <i class="fa-solid fa-shop"></i>
+            </x-user-sidebar-link>
+          </li>
+
+          <li>
+            <x-user-sidebar-link link="{{route('user.transaction')}}" token="transaction" name="Transaction">
+              <i class="fa-solid fa-tags"></i>
+            </x-user-sidebar-link>
+          </li>
+
           <li>
             <x-user-sidebar-link link="{{route('user.profile')}}" token="profile" name="Profile">
               <i class="fa-solid fa-user"></i>

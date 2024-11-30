@@ -36,8 +36,7 @@
                         <p class="mb-4 font-normal text-gray-500 text-lg dark:text-gray-400"></p>
                     </div>
                     <div class="inline-flex gap-3">
-
-                        <x-primary-link href="{{ route('user.tryouts.paper', [$tryoutId, $subCategoryId]) }}" target="__blank" class="flex items-center gap-2">
+                        <x-primary-link href="{{ route('user.tryouts.paper', [$tryoutId, $subCategoryId]) }}" target="__blank" class="flex items-center my-1">
                             <i class="fa-solid fa-circle-play"></i>&nbsp; Kerjakan Ulang
                         </x-primary-link>
                     </div>
@@ -133,7 +132,7 @@
                     </div>
                 </div>
                 <div>
-                    <x-primary-link href="{{ route('user.tryouts.item', $tryoutId) }}" class="mt-3">
+                    <x-primary-link href="{{ route('user.tryouts.item', $tryoutId) }}" class="py-1">
                         Kembali
                     </x-primary-link>
                 </div>

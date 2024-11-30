@@ -127,6 +127,7 @@ class DashboardController extends Controller
         }
     }
 
+
     public function index_mentor(){
         $classes = ClassBimbel::where('user_id', Auth::user()->id)->count();
         

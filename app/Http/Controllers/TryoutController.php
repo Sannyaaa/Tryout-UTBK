@@ -244,8 +244,9 @@ class TryoutController extends Controller
         $data = $request->validate([
             'name' => 'nullable|max:255',
             'description' => 'nullable|string',
-            'start_date' => 'nullable|string',
-            'end_date' => 'nullable|string',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
+            'is_ready' => ['required', 'in:yes,no'],
             'is_free' => ['required', 'in:paid,free'],
             'is_together' => ['required', 'in:basic,together'],
         ]);

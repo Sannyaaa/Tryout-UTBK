@@ -63,7 +63,7 @@
                                 </button>
 
                                 <h2 class="text-lg font-semibold text-gray-900">
-                                    Pertanyaan {{ $currentQuestionNumber }}
+                                    Pertanyaan 
                                 </h2>
 
                                 <button 
@@ -141,14 +141,12 @@
 
                 {{-- Left Sidebar with Navigation and Summary --}}
                 <div class="w-1/3 space-y-4">
-                    
-                    {{ $currentQuestionId }}
 
                     {{-- Question Navigation --}}
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                         <h2 class="text-lg font-semibold text-gray-900 mb-4">Navigasi Soal</h2>
                         <div class="grid grid-cols-5 gap-2">
-                            @foreach ($questions as $item)
+                            @foreach ($questions as $i => $item)
                                 <button 
                                     wire:click="changeNumber({{ $item->id }})"
                                     wire:key="nav-{{ $item->id }}"
@@ -161,7 +159,7 @@
                                             ? 'bg-red-100 text-red-700 hover:bg-red-200 ' . ($currentQuestionId == $item->id ? 'ring-red-300' : '') 
                                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200 ' . ($currentQuestionId == $item->id ? 'ring-gray-300' : '')) 
                                     }}">
-                                    {{ $item->count }}
+                                    {{ $i + 1 }}
                                 </button>
                             @endforeach
                         </div>
@@ -169,14 +167,14 @@
 
                     {{-- Back Button --}}
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                        <a href="{{ $result->tryout->is_together == 'together' ? route('user.tryouts.event') : route('user.tryouts') }}" 
+                        <a href="{{ $result->tryout->is_together == 'together' ? route('user.tryouts.event.item', $result->tryout_id) : route('user.tryouts.item', $result->tryout_id) }}" 
                             class="w-full inline-flex items-center justify-center py-3 px-4 rounded-lg text-white font-medium transition-colors
                             bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700
                             focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                             </svg>
-                            Kembali ke Daftar Tryout
+                            Kembali
                         </a>
                     </div>
                 </div>
@@ -238,25 +236,25 @@
         </div>
     </div>
 
-    <div class="mt-10 mx-4">
+    {{-- <div class="mt-10 mx-4">
         <div class="flex">
 
-            {{-- Summary/Ringkasan hasil pengerjaan tryout --}}
+            Summary/Ringkasan hasil pengerjaan tryout
             <div class="w-1/3">
                 <div class="">
                     <div class="bg-white border rounded-lg shadow p-8 mb-4">
-                        <h1 class="text-3xl text-gray-700 font-bold">{{$results->tryout->name}}</h1>
+                        <h1 class="text-3xl text-gray-700 font-bold">{{$result->tryout->name}}</h1>
                     </div>
-                    {{-- <hr class="border border-gray-300 my-5">  --}}
-                    {{-- @if ($paper->duration)
+                    <hr class="border border-gray-300 my-5"> 
+                    @if ($paper->duration)
                         <div class="bg-white border rounded-lg shadow p-8 mb-4 text-lg text-sky-500 flex items-center" wire:ignore>
                             <i class="fa-regular fa-clock my-auto me-4 text-2xl"></i>
                             <span class="my-auto me-2">Sisa waktu:</span>
                             <span id="timer" class="my-auto"><i>Memulai timer...</i></span> <!-- Timer Display -->
                         </div>
-                    @endif --}}
+                    @endif
                     <div class="bg-white border rounded-lg shadow p-8 mb-4 grid grid-cols-5">
-                        {{-- <input type="number" name="" wire:model.live="q" id="questionid"> --}}
+                        <input type="number" name="" wire:model.live="q" id="questionid">
                         @foreach ($questions as $item)
                             <div class="px-2 py-4">
                                 <button wire:click="changeNumber({{$item->id}})" class="w-3/4 h-14 border rounded-lg
@@ -266,21 +264,21 @@
                                 </button>
                             </div>
                         @endforeach
-                        {{-- <div class="px-2 py-4">
+                        <div class="px-2 py-4">
                             <button class="w-3/4 h-14 border-4 border-sky-400 box-border rounded-lg text-sky-400 text-2xl font-bold" wire:click="submitAnswers()">
                                 &raquo;
                             </button>
-                        </div> --}}
+                        </div>
                     </div>
-                    {{-- <div class="bg-white border rounded-lg shadow p-8 mb-4">
+                    <div class="bg-white border rounded-lg shadow p-8 mb-4">
                         <button class="w-full py-4 rounded-lg text-lg font-semibold text-white text-center bg-gradient-to-tr from-sky-400 to-sky-500" wire:click="submitAnswers()">
                             Selesai Tes
                         </button>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
             
-            {{-- Pembahasan Tryout --}}
+            Pembahasan Tryout
             <div class="w-2/3">
                 <div class="bg-white border rounded-lg shadow p-8 mb-4 ms-2">
                     <h5 class="text-lg font-semibold text-gray-500">Pembahasan</h5>
@@ -333,10 +331,10 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="h-full bg-white border rounded-lg shadow">
-                </div> --}}
+                 <div class="h-full bg-white border rounded-lg shadow">
+                </div> 
             </div>
-            {{-- <div class="w-1/3">
+            <div class="w-1/3">
                 <div class="bg-white border rounded-lg shadow p-8 mb-4 me-2">
                     <h5 class="text-lg font-semibold text-gray-500">Hasil pengerjaan tryout</h5>
                     <hr class="my-4">
@@ -385,10 +383,10 @@
                         </table>
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
         </div>
-    </div>
+    </div> --}}
 </div>
 
 @push('head-styles')

@@ -11,7 +11,7 @@
                         <p class="mt-6 text-lg  text-gray-600">Persiapkan Dirimu untuk UTBK Terbaikmu! Jadikan impianmu masuk PTN favorit menjadi kenyataan bersama Tryout UTBK kami. Pelajari materi, latih kemampuanmu, dan lihat hasil kemajuanmu secara langsung!</p>
 
                         <div class="mt-6 inline-flex items-center gap-x-6">
-                            <x-primary-link href="{{ route('login') }}" class="py-10 rounded-full">
+                            <x-primary-link href="{{ route('login') }}" class="py-1 px-2 rounded-full">
                                 Login
                             </x-primary-link>
                             

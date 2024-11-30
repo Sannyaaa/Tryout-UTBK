@@ -4,6 +4,7 @@ namespace App\Livewire\User\Tryout;
 
 use App\Models\Result;
 use App\Models\Tryout;
+use App\Models\Question;
 use Livewire\Component;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -49,6 +50,9 @@ class Item extends Component
                                                 ->where('sub_category_id', $subCategory->id)
                                                 ->where('user_id', $this->user->id)
                                                 ->first();
+                $subCategory->totalQuestion = Question::where('tryout_id',$this->tryoutId)
+                                                ->where('sub_categories_id', $subCategory->id)
+                                                ->count();
             }
         }
 

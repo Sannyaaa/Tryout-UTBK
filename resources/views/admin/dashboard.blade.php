@@ -8,7 +8,7 @@
                 <div class="flex items-center justify-between mb-4">
                 <div class="flex-shrink-0">
                     <span class="text-sm font-bold leading-none text-gray-900 sm:text-2xl dark:text-white">Hi, {{ Auth::user()->name }} 🎉</span>
-                    <h3 class="pt-3 text-base font-light text-gray-500 dark:text-gray-400">Ingatlah admin, Ada {{ $upcoming_tryouts }} tryout akan segera dimulai. Pastikan semua <br>persiapan sudah selesai agar semua sistem berfungsi dengan baik.</h3>
+                    <h3 class="pt-3 text-base font-light text-gray-500 dark:text-gray-400">Ingatlah admin, Ada {{ $upcoming_tryouts ?? '' }} tryout akan segera dimulai. Pastikan semua <br>persiapan sudah selesai agar semua sistem berfungsi dengan baik.</h3>
                 </div>
                 {{-- <div class="flex items-center justify-end flex-1 text-base font-medium text-green-500 dark:text-green-400">
                     12.5%
@@ -94,7 +94,7 @@
                 <div class="flex items-center justify-between sm:pt-6 ">
                     <div>
                         <a href="#" class="font-semibold text-slate-700 text-3xl dark:text-white">
-                        Rp {{ number_format($order) }}
+                        Rp {{ number_format($order) ?? '' }}
                         {{-- <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg> --}}
                         </a>
                     </div>
@@ -116,7 +116,7 @@
                     <div class="flex-none w-2/3 max-w-full px-3">
                         <div>
                         <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-gray-500 dark:text-white dark:opacity-60">Event Tryout Akan Datang</p>
-                        <h5 class="mb-2 font-semibold text-slate-700 text-lg dark:text-white">{{ $upcoming_tryouts }} </h5>
+                        <h5 class="mb-2 font-semibold text-slate-700 text-lg dark:text-white">{{ $upcoming_tryouts ?? '' }} </h5>
                         {{-- <p class="mb-0 dark:text-white dark:opacity-60">
                             <span class="text-sm font-bold leading-normal {{ $revenueDifference > 0 ? 'text-green-500' : ($revenueDifference < 0 ? 'text-red-500' : 'text-gray-500') }}">{{ $revenueDifference > 0 ? '+' : ''}}{{ number_format($revenueDifference) }}</span>
                             than yesterday

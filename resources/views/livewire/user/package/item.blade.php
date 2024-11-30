@@ -25,24 +25,25 @@
                         </li>
                         </ol>
                     </nav>
-                    {{-- <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Bimbels</h1> --}}
+                    {{-- <h1 class="text-xl font-semibold text-gray-800 sm:text-2xl dark:text-white">All Bimbels</h1> --}}
                 </div>
             </div>
             <div class="mx-6">
-                <div>
-                    <span class="py-2 px-4 bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg font-semibold text-white">{{ $package->tryout_id != null ? 'Tryout' : 'Bimbel' }}</span>
-                    <h1 class="mt-3 text-3xl font-bold text-gray-900 sm:text-5xl sm:leading-none sm:tracking-tight dark:text-white">{{ $package->name }}</h1>
-                </div>
+                
                 <div class="grid grid-cols-1 md:grid-cols-3 md:gap-6">
                     <div class=" md:col-span-2">
                         <div class="relative aspect-video overflow-hidden bg-cover align-middle mt-4">
                             <img class="object-cover object-center w-full h-full rounded-md" src="{{ $package->image != null ? Storage::url($package->image) : asset('build/assets/Photo-Image-Icon-Graphics-10388619-1-1-580x386.jpg') }}" alt="package image" />
                         </div>
                         <div>
+                            <div>
+                                {{-- <span class="py-2 px-4 bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg font-semibold text-white">{{ $package->tryout_id != null ? 'Tryout' : 'Bimbel' }}</span> --}}
+                                <h1 class="mt-3 text-3xl font-bold text-gray-800 sm:text-5xl sm:leading-none sm:tracking-tight dark:text-white uppercase">{{ $package->name }}</h1>
+                            </div>
                             <div class="my-6 space-y-2">
-                                <h1 class=" text-xl font-bold text-gray-900 sm:text-2xl sm:leading-none sm:tracking-tight dark:text-white">Deskripsi</h1>
-                        
-                                <p class="mb-4 font-normal text-gray-500 text-lg dark:text-gray-400">{!! $package->description !!}</p>
+                                <h1 class=" text-xl font-bold text-gray-800 sm:text-2xl sm:leading-none sm:tracking-tight dark:text-white">Deskripsi</h1>
+                                
+                                <div class="mb-4 font-normal text-gray-500 text-lg dark:text-gray-400">{!! $package->description !!}</div>
                             </div>
 
                             <div class="my-6 space-y-2">
@@ -65,7 +66,7 @@
                                 $package->tryout_id != null && $package->tryout->is_together == 'together'
                             )
                                 <div class="my-6 space-y-2">
-                                    <h1 class=" text-2xl font-bold text-gray-900 mb-4 sm:text-2xl sm:leading-none sm:tracking-tight dark:text-white">Tanggal Pengerjaan Tryout</h1>
+                                    <h1 class=" text-2xl font-bold text-gray-800 mb-4 sm:text-2xl sm:leading-none sm:tracking-tight dark:text-white">Tanggal Pengerjaan Tryout</h1>
                         
                                     <div class="text-xl font-semibold text-gray-500">
                                         <span class="py-1 px-4 bg-sky-400 bg-opacity-30 border-sky-400 border-2 text-sky-600 rounded-lg font-semibold"><i class="fa-solid fa-calendar-days mr-2"></i> {{ \Carbon\Carbon::parse($package->tryout->start_date)->format('j F Y') }} </span>
@@ -94,7 +95,7 @@
                                                                     <img class="w-8 h-8 rounded-full" src="{{ Storage::url($testimonial->user->avatar) }}" alt="Neil image">
                                                                 </div>
                                                                 <div class="flex-1 min-w-0 ms-4">
-                                                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                                    <p class="text-sm font-medium text-gray-800 truncate dark:text-white">
                                                                         {{ $testimonial->name ?? $testimonial->user->name }}
                                                                     </p>
                                                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -192,13 +193,13 @@
                                 {{-- @livewire('user.package.discount-voucher',['package_id' => $package->id]) --}}
                             </div>
                             <div class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:p-6">
-                                <p class="text-xl font-semibold text-gray-900 dark:text-white">Informasi Harga</p>
+                                <p class="text-xl font-semibold text-gray-800 dark:text-white">Informasi Harga</p>
 
                                 <div class="space-y-4">
                                     <div class="space-y-2">
                                     <dl class="flex items-center justify-between gap-4">
                                         <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Harga Paket</dt>
-                                        <dd class="text-base font-medium text-gray-900 dark:text-white">Rp. {{ number_format($package->price, 0, ',', '.') }}</dd>
+                                        <dd class="text-base font-medium text-gray-800 dark:text-white">Rp. {{ number_format($package->price, 0, ',', '.') }}</dd>
                                     </dl>
 
                                     {{-- <dl class="flex items-center justify-between gap-4">
@@ -209,30 +210,37 @@
                                     @if($applied_voucher)
                                         <dl class="flex items-center justify-between gap-4">
                                             <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Discount</dt>
-                                            <dd class="text-base font-medium text-gray-900 dark:text-white">- Rp. {{ number_format($package->price - $discounted_price, 0, ',', '.') }}</dd>
+                                            <dd class="text-base font-medium text-gray-800 dark:text-white">- Rp. {{ number_format($package->price - $discounted_price, 0, ',', '.') }}</dd>
                                         </dl>
                                     @endif
 
                                     <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
-                                        <dt class="text-base font-bold text-gray-900 dark:text-white">Total Pembayaran:</dt>
-                                        <dd class="text-base font-bold text-gray-900 dark:text-white">Rp. {{ number_format($final_price, 0, ',', '.') }}</dd>
+                                        <dt class="text-base font-bold text-gray-800 dark:text-white">Total Pembayaran:</dt>
+                                        <dd class="text-base font-bold text-gray-800 dark:text-white">Rp. {{ number_format($final_price, 0, ',', '.') }}</dd>
                                     </dl>
                                 </div>
 
                                 {{-- Checkout Button --}}
-                                <div class="flex justify-end">
-                                    <x-primary-button 
+                                <div class="w-full">
+                                    <div class="w-full">
+                                        <x-primary-button 
                                         wire:click="checkout"
                                         wire:loading.attr="disabled"
-                                        class="px-6 py-3"
+                                        {{-- class="w-f" --}}
                                     >
-                                        <span wire:loading.remove wire:target="checkout">
-                                            Checkout Sekarang
+                                            <span wire:loading.remove wire:target="checkout">
+                                                Checkout Sekarang
+                                            </span>
+                                            <span wire:loading wire:target="checkout">
+                                                Processing...
+                                            </span>
+                                        </x-primary-button>
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class="text-sm text-rose-500">
+                                            * Lakukan pembayaran sebelum 24 jam dari setelah checkout
                                         </span>
-                                        <span wire:loading wire:target="checkout">
-                                            Processing...
-                                        </span>
-                                    </x-primary-button>
+                                    </div>
                                 </div>
 
                                 {{-- Loading States & Notifications --}}
@@ -254,8 +262,8 @@
                             {{-- <div class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
                                 <form class="space-y-4">
                                     <div>
-                                    <label for="voucher" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Do you have a voucher or gift card? </label>
-                                    <input type="text" id="voucher" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="" required />
+                                    <label for="voucher" class="mb-2 block text-sm font-medium text-gray-800 dark:text-white"> Do you have a voucher or gift card? </label>
+                                    <input type="text" id="voucher" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-800 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="" required />
                                     </div>
                                     <button type="submit" class="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Apply Code</button>
                                 </form>
@@ -263,8 +271,8 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <x-primary-link href="{{ route('user.packages') }}" class="mt-3">
+                <div class="">
+                    <x-primary-link href="{{ route('user.packages') }}">
                         Kembali
                     </x-primary-link>
                 </div>

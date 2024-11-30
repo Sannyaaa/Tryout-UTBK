@@ -13,7 +13,7 @@
                     <li>
                         <div class="flex items-center">
                         <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                        <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Paket</a>
+                        <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Paket Pembelian</a>
                         </div>
                     </li>
                     <li>
@@ -53,22 +53,33 @@
                                 <img class="object-cover object-center w-full h-full rounded-md" 
                                     src="{{ $package->image != null ? Storage::url($package->image) : asset('build/assets/Photo-Image-Icon-Graphics-10388619-1-1-580x386.jpg') }}" 
                                     alt="package image" />
-                                <span class="relative bottom-10 -right-3 py-1 px-4 bg-sky-500 border-sky-400 border-2 text-white rounded-lg font-semibold">
+                                {{-- <span class="relative bottom-10 -right-3 py-1 px-4 bg-sky-500 border-sky-400 border-2 text-white rounded-lg font-semibold">
                                     {{ $package->tryout_id != null ? 'Tryout' : 'Bimbel' }}
-                                </span>
+                                </span> --}}
                             </div>
-                            <div class="px-5 py-3">
+                            <div class="px-5 py-2">
                                 <div>
                                     <a href="{{ route('user.package.item', $package->id) }}">
-                                        <h5 class="text-2xl font-semibold hover:underline text-gray-900 dark:text-white">
+                                        <h5 class="text-3xl font-bold hover:underline text-gray-800 uppercase dark:text-white mb-0">
                                             {{ $package->name }}
                                         </h5>
                                     </a>
                                 </div>
-                                <p class="font-medium text-gray-500 dark:text-gray-400 mb-3">
+                                {{-- <p class="font-medium text-gray-500 dark:text-gray-400 mb-3">
                                     {!! Str::limit($package->description, 100, '...') !!}
-                                </p>
-                                <div class="flex justify-between items-baseline mb-2">
+                                </p> --}}
+                                <div class="space-y-1 my-2">
+                                    @foreach ($package->benefits as $benefit)
+                                        <div class="flex items-center space-x-3 text-gray-500 font-medium text-sm">
+                                            <!-- Icon -->
+                                            <div class="p-1 bg-sky-400 rounded-full">
+                                                <svg class="flex-shrink-0 w-4 h-4 text-gray-100 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            </div>
+                                            <span>{{ $benefit->benefit }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="flex justify-between items-baseline my-3">
                                     <x-primary-link href="{{ route('user.package.item', $package->id) }}">
                                         Lihat Detail
                                     </x-primary-link>
