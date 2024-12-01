@@ -247,6 +247,7 @@ $(document).ready(function() {
         serverSide: true,
         // ordering: true,
         order: [[2,'desc']],
+        // ajax: "{{ route('admin.class-bimbel.index') }}",
         ajax: {
                 url: "{{ route('admin.class-bimbel.index') }}",
                 data: function (d) {
@@ -344,9 +345,9 @@ $(document).ready(function() {
         window.location.href = '{{ route("admin.class-bimbel.index") }}?export_excel=true';
     });
 
-    document.getElementById('exportPdf').addEventListener('click', function() {
-        window.location.href = '{{ route("admin.class-bimbel.index") }}?export_pdf=true';
-    });
+    // document.getElementById('exportPdf').addEventListener('click', function() {
+    //     window.location.href = '{{ route("admin.class-bimbel.index") }}?export_pdf=true';
+    // });
 </script>
 @endsection
 

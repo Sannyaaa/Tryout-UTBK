@@ -27,4 +27,8 @@ class Package_member extends Model
     public function orders(){
         return $this->hasMany(Order::class);
     }
+
+    public function promotion(){
+        return $this->hasMany(Promotion::class);
+    }
 }

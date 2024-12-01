@@ -200,7 +200,7 @@ class PackageMemberController extends Controller
         }
 
         // $package_member::wi
-        $tryout = tryout::all();
+        $tryout = tryout::where('is_free', 'paid')->get();
         $bimbel = Bimbel::all();
         $discounts = Discount::all();
         $benefit = $package_member->benefit; // Ambil jawaban yang terkait dengan pertanyaan

@@ -381,7 +381,11 @@ class ClassBimbelController extends Controller
             return redirect($request->input('back'))->with('success', 'Tryout berhasil ditambahkan.');
         }
 
-        return redirect()->route('admin.class-bimbel.index')->with('success', 'Tryout berhasil diubah.');
+        if(Gate::allows('admin')){
+            return redirect()->route('admin.class-bimbel.index')->with('success', 'Tryout berhasil diubah.');
+        }elseif(Gate::allows('mentor')){
+            return redirect()->route('mentor.class-bimbel.index')->with('success', 'Tryout berhasil diubah.');
+        }
     }
 
     /**

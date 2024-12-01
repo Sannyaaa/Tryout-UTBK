@@ -3,10 +3,10 @@
 @section('content')
     <div class="bg-sky-50">
         <div class="relative isolate px-6 lg:px-8">
-            <div class="w-full md:flex py-16 lg:py-20 px-10 md:px-14 lg:px-20 xl:px-32 space-y-10">
-                <div class="w-4/5 md:w-1/2 flex justify-center items-center pe-10">
+            <div class="w-full lg:flex py-16 lg:py-20 px-10 lg:px-14  xl:px-32 space-y-10">
+                <div class="w-4/5 lg:w-1/2 flex justify-center items-center pe-10">
                     <div class="text-left w-full">
-                        <h1 class="text-5xl font-bold text-sky-950 md:text-6xl lg:text-7xl ">{{ $homePage->hero_title }}</h1>
+                        <h1 class="text-5xl font-bold text-sky-950 lg:text-6xl ">{{ $homePage->hero_title }}</h1>
 
                         <div class="mt-6 text-lg  text-gray-600">{!! $homePage->hero_desc !!}</div>
 
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full md:w-1/2 px-0 md:px-8 mx-auto my-auto">
+                <div class="w-full lg:w-1/2 px-0 lg:px-8 mx-auto my-auto">
                     <div class="overflow-hidden">
                         <img src="{{ Storage::url($homePage->hero_image) }}" alt="" class=" min-w-10">
                     </div>
@@ -32,7 +32,7 @@
 
             <div class="mt-6">
                 <div class="text-center w-3/5 md:w-2/5 mx-auto">
-                    <h1 class="text-4xl font-bold  text-sky-950 md:text-5xl lg:text-6xl ">Our <span class="">Feature</span></h1>
+                    <h1 class="text-4xl font-bold  text-sky-950 md:text-5xl lg:text-6xl ">Kenapa Memilih Kami</span></h1>
 
                     <p class="mt-6 text-lg  text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
                 </div>
@@ -40,14 +40,14 @@
                     <div class="w-full flex flex-wrap justify-center">
                         @foreach ($features as $feature)
                             <div class="p-4 lg:p-6 max-w-xl w-full md:w-1/2">
-                                <div class="p-12 bg-sky-50 hover:bg-sky-200 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
+                                <div class="p-12 bg-sky-50 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
                                     <div class="text-center mb-4">
-                                        <div class=" w-24 flex items-center justify-center text-sky-900 aspect-square rounded-full bg-sky-950 mx-auto">
+                                        <div class=" w-24 flex items-center justify-center text-sky-900 aspect-square rounded-full bg-sky-500 mx-auto">
                                             <span class=" text-4xl text-sky-50"><i class="{{ $feature->image }}"></i></span>
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <h2 class="text-2xl  font-bold text-gray-800">{{ $feature->name }}</h2>
+                                        <h2 class="text-2xl  font-bold text-sky-900">{{ $feature->name }}</h2>
                                         <p class="mt-2 text-gray-600">{{ $feature->description }}</p>
                                     </div>
                                 </div>
@@ -86,15 +86,15 @@
             </div>
 
             <div class="w-full px-4 sm:px-16 lg:px-32 space-y-10 mt-16 bg-sky-50">
-                <div class="px-10 md:flex">
-                    <div class="w-full md:w-1/2 px-0 md:px-8 mx-auto my-auto">
+                <div class="px-10 lg:flex">
+                    <div class="w-full lg:w-1/2 px-0 lg:px-8 mx-auto my-auto">
                         <div class="overflow-hidden">
                             <img src="{{ Storage::url($homePage->about_us_image) }}" alt="" class="min-w-10">
                         </div>
                     </div>
-                    <div class="w-4/5 md:w-1/2 flex justify-center items-center">
-                        <div class="text-left w-full pb-20 md:pt-20">
-                            <h1 class="text-5xl font-bold  text-sky-950 md:text-6xl lg:text-7xl ">{{ $homePage->about_us_title }}</h1>
+                    <div class="w-4/5 lg:w-1/2 flex justify-center items-center">
+                        <div class="text-left w-full pb-20 lg:pt-20">
+                            <h1 class="text-5xl font-bold  text-sky-950 lg:text-6xl ">{{ $homePage->about_us_title }}</h1>
 
                             <div class="mt-6 text-lg  text-gray-600">{!! $homePage->about_us_desc !!}</div>
                         
@@ -235,7 +235,7 @@
                             <button
                                 aria-label="Previous slide"
                                 id="keen-slider-previous-desktop"
-                                class="rounded-full border border-rose-600 p-3 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+                                class="rounded-full border border-sky-500 p-3 text-sky-500 transition hover:bg-sky-500 hover:text-white"
                             >
                                 <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -256,7 +256,7 @@
                             <button
                                 aria-label="Next slide"
                                 id="keen-slider-next-desktop"
-                                class="rounded-full border border-sky-600 p-3 text-sky-600 transition hover:bg-sky-600 hover:text-white"
+                                class="rounded-full border border-sky-500 p-3 text-sky-500 transition hover:bg-sky-500 hover:text-white"
                             >
                                 <svg
                                 class="size-5 rtl:rotate-180"

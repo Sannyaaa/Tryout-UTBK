@@ -168,7 +168,14 @@ class TryoutController extends Controller
         ]);
 
         try{
-            Tryout::create($data);
+            $tryout = Tryout::create($data);
+
+            if($tryout->is_together == 'together'){
+                $tryout->update([
+                    'is_free' => 'paid'
+                ]);
+            }
+
             Log::info("berhasil");
             return redirect()->route('admin.tryout.index')->with('success', 'Tryout created successfully.');
         } catch (\Exception $e) {

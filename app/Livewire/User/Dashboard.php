@@ -160,12 +160,12 @@ class Dashboard extends Component
             $secondRank++;
         }
 
-        $isPaid = Order::whereHas('package_member', function($query){
-                    return $query->where('tryout_id',$this->latestTryoutId);
-                })->where('user_id', $this->user->id)
-                ->where('payment_status','paid')->get();
+        // $isPaid = Order::whereHas('package_member', function($query){
+        //             return $query->where('tryout_id',$this->latestTryoutId);
+        //         })->where('user_id', $this->user->id)
+        //         ->where('payment_status','paid')->get();
 
-        $totalScore = $firstUserRank['total_score'] ?? $secondUserRank['total_score'];
+        // $totalScore = $firstUserRank['total_score'] ?? $secondUserRank['total_score'];
 
         $questions = Question::where('tryout_id', $this->latestTryoutId)->count();
 
@@ -213,11 +213,11 @@ class Dashboard extends Component
             'latestTryoutId' => $this->latestTryoutId,
             'firstRank' => $firstUserRank,
             'secondRank' => $secondUserRank,
-            'isPaid' => $isPaid,
+            // 'isPaid' => $isPaid,
             'todayClasses' => $todayClasses,
             'ongoing' => $ongoing,
             'results' => $results,
-            'totalScore' => $totalScore,
+            // 'totalScore' => $totalScore,
             'questions' => $questions,
             'queryClass' => $queryClasses,
             'transactions' => $transaction,

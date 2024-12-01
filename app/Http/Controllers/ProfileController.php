@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\Achievement;
-use App\Models\DataUniversitas;
-use App\Models\KabupatenKota;
-use App\Models\Mentor;
-use App\Models\Provinsi;
-use App\Models\Sekolah;
-use App\Models\User;
 use Exception;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
+use App\Models\Mentor;
+use App\Models\Sekolah;
+use App\Models\Provinsi;
 use Illuminate\View\View;
+use App\Models\Achievement;
+use Illuminate\Http\Request;
+use App\Models\KabupatenKota;
+use App\Models\DataUniversitas;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -68,7 +69,7 @@ class ProfileController extends Controller
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request)
-    {
+    {dd($request);
         try {
             DB::beginTransaction();
 
@@ -92,10 +93,19 @@ class ProfileController extends Controller
                     $user->email_verified_at = null;
                 }
 
+                // Handle image upload if there's a new image
+                if ($request->avatar) {
+                    // Delete old image if exists
+                    if ($request->user->avatar) {
+                        Storage::disk('public')->delete($request->user->avatar);
+                    }
+                    $user['avatar'] = $request->avatar->store('avatar', 'public');
+                }
+
                 $user->save();
             }else {
                 $user = $request->user();
-
+                
                 // Update data umum (berlaku untuk admin dan mentor)
                 $user->fill([
                     'name' => $request->name,
@@ -109,10 +119,17 @@ class ProfileController extends Controller
                     $user->email_verified_at = null;
                 }
 
+                // Handle image upload if there's a new image
+                if ($request->avatar) {
+                    // Delete old image if exists
+                    if ($request->user->avatar) {
+                        Storage::disk('public')->delete($request->user->avatar);
+                    }
+                    $user['avatar'] = $request->avatar->store('avatar', 'public');
+                }
+
                 $user->save();
             }
-
-            // dd($request->user());
 
 
             // Logika tambahan untuk mentor

@@ -57,7 +57,7 @@
                                         <span class="font-medium"><i class="fa-solid fa-clock text-sky-500 me-1"></i> Durasi Pengerjaan</span>
                                     </td>
                                     <td>
-                                        <span class="">: {{ $subCategory->duration ?? '0' }} Menit</span>
+                                        <span class="">: {{ $subCategory->duration ?? '-' }} Menit</span>
                                     </td>
                                 </tr>
                                 <tr class="w-full grid grid-cols-2">
@@ -79,15 +79,23 @@
                             <li>2. Pastikan koneksi internet stabil.</li>
                             <li>3. Pastikan perangkat memiliki baterai cukup atau tersambung ke daya.</li>
                         </ul>
+
+                        @if ($subCategory->totalQuestion == 0)
+                            <span class="inline-flex text-sm text-rose-500 mt-2">
+                                * Belum ada pertanyaan, mohon beritahu admin
+                            </span>
+                        @endif
                     </div>
     
                     <div class="gap-5 flex">
                         <x-secondary-link href="{{ route('user.tryouts.item', $tryoutId) }}">
                             Kembali
                         </x-secondary-link>
-                        <x-primary-link href="{{ route('user.tryouts.paper', [$tryoutId, $subCategoryId]) }}" class="">
-                            Mulai Ujian
-                        </x-primary-link>
+                        @if ($subCategory->totalQuestion != null)
+                            <x-primary-link href="{{ route('user.tryouts.paper', [$tryoutId, $subCategoryId]) }}" class="">
+                                Mulai Ujian
+                            </x-primary-link>
+                        @endif
                     </div>
                 </div>
                 <div class="max-w-md py-12 ps-20 pe-0">
