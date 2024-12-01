@@ -78,7 +78,7 @@
             <div class="flex flex-col">
                 <div class="">
                     <div class="align-middle">
-                        <div class=" overflow-x-scroll lg:overflow-x-hidden">
+                        <div class=" overflow-x-auto">
                             <table id="tryoutTable" class="w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
                                 <thead class="bg-gray-100 dark:bg-gray-700">
                                     <tr>
@@ -185,6 +185,13 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     var table = $('#tryoutTable').DataTable({
         processing: true,
         serverSide: true,
@@ -228,9 +235,9 @@ $(document).ready(function() {
                     }
                 }
             },
-            {data: 'start_date', name: 'start_date'},
-            {data: 'end_date', name: 'end_date'},
-            {data: 'created_at', name: 'created_at'},
+            {data: 'start_date', name: 'start_date', defaultContent: ''},
+            {data: 'end_date', name: 'end_date', defaultContent: ''},
+            {data: 'created_at', name: 'created_at', defaultContent: ''},
             {
                 data: 'action',
                 name: 'action',
