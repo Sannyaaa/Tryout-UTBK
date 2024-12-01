@@ -22,7 +22,7 @@ class QuestionController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $query = Question::with('tryout','sub_categories')->get();
+                $query = Question::with('tryout','sub_categories');
                 
                 if ($request->tryout) {
                     $query->where('tryout_id', $request->tryout);
@@ -31,6 +31,8 @@ class QuestionController extends Controller
                 if ($request->sub_categories) {
                     $query->where('sub_categories_id', $request->sub_categories);
                 }
+
+                $query = $query->get();
 
                 return DataTables::of($query)
                     ->addIndexColumn()

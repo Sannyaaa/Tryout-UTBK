@@ -32,7 +32,7 @@ class TryoutController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $query = tryout::all();
+                $query = tryout::query();
                 
                // Check if a filter is applied
                 if ($request->has('is_free') && $request->is_free != '') {

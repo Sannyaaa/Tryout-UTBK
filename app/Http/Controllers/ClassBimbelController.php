@@ -30,10 +30,13 @@ class ClassBimbelController extends Controller
             if(Gate::allows('admin')){
                 
                 if ($request->ajax()) {
-                    $query = ClassBimbel::with(['bimbel','user','sub_categories'])->get();
+                    $query = ClassBimbel::with(['bimbel','user','sub_categories']);
+                
                     if ($request->sub_categories) {
-                        $query->where('sub_categories_id', $request->sub_categories);
+                        $query = $query->where('sub_categories_id', $request->sub_categories);
                     }
+
+                    $query = $query->get();
 
                     return DataTables::of($query)
                         ->addIndexColumn()
@@ -95,10 +98,13 @@ class ClassBimbelController extends Controller
 
                 if ($request->ajax()) {
                     $query = ClassBimbel::with(['bimbel','user','sub_categories'])
-                    ->where('user_id', Auth::user()->id)->get();
+                    ->where('user_id', Auth::user()->id);
+                
                     if ($request->sub_categories) {
-                        $query->where('sub_categories_id', $request->sub_categories);
+                        $query = $query->where('sub_categories_id', $request->sub_categories);
                     }
+
+                    $query = $query->get();
 
                     return DataTables::of($query)
                         ->addIndexColumn()
