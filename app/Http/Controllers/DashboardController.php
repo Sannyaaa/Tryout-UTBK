@@ -102,7 +102,7 @@ class DashboardController extends Controller
 
         // Dashboard berdasarkan role
         if ($user->role == 'user') {
-            return view('livewire.user.dashboard');
+            return  redirect()->route('user.dashboard');
         } else {
             return view('admin.dashboard', compact(
                 'order',

@@ -45,11 +45,11 @@
                 </div>
                 <div class="flex justify-center items-center gap-2">
                     <div class="">
-                        <select id="payment_status" class="p-2 bquestion-practice rounded">
+                        <x-select-input id="payment_status" class="p-2 question-practice rounded">
                             <option value="">Status Pembayaran</option>
                             <option value="pending">Pending</option>
                             <option value="paid">Dibayar</option>
-                        </select>
+                        </x-select-input>
                     </div>
                     <x-primary-link href="{{ route('admin.question-practice.create') }}">
                         + Latihan

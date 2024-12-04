@@ -69,7 +69,7 @@ class ProfileController extends Controller
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request)
-    {dd($request);
+    {
         try {
             DB::beginTransaction();
 
@@ -94,41 +94,48 @@ class ProfileController extends Controller
                 }
 
                 // Handle image upload if there's a new image
-                if ($request->avatar) {
+                if ($request->hasFile('avatar')) {
                     // Delete old image if exists
                     if ($request->user->avatar) {
                         Storage::disk('public')->delete($request->user->avatar);
                     }
-                    $user['avatar'] = $request->avatar->store('avatar', 'public');
+                    $avatar = $request->file('avatar')->store('avatar', 'public');
                 }
+
+                $user->fill([
+                    'avatar' => $avatar,
+                ]);
 
                 $user->save();
             }else {
                 $user = $request->user();
-                
                 // Update data umum (berlaku untuk admin dan mentor)
-                $user->fill([
+                $data = [
                     'name' => $request->name,
                     'email' => $request->email,
                     'phone' => $request->phone,
                     'tgl' => $request->tgl,
                     'jenis_kelamin' => $request->jenis_kelamin,
-                ]);
-
+                ];
+                
                 if ($user->isDirty('email')) {
                     $user->email_verified_at = null;
                 }
-
+                
                 // Handle image upload if there's a new image
-                if ($request->avatar) {
+                if ($request->hasFile('avatar')) {
                     // Delete old image if exists
-                    if ($request->user->avatar) {
-                        Storage::disk('public')->delete($request->user->avatar);
+                    if ($user->avatar) {
+                        // dd($request->hasFile('avatar'));
+                        Storage::disk('public')->delete($user->avatar);
                     }
-                    $user['avatar'] = $request->avatar->store('avatar', 'public');
+                    $avatar = $request->file('avatar')->store('avatar', 'public');
                 }
+                
+                $data['avatar'] = $avatar;
 
-                $user->save();
+
+                $user->update($data);
             }
 
 

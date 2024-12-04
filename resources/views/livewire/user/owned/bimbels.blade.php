@@ -241,7 +241,7 @@
                 </div>
             </div>
             <div>
-                <x-primary-link href="{{ route('user.my-packages') }}" class="mt-3">
+                <x-primary-link href="{{ route('user.my-packages') }}" class="">
                     Kembali
                 </x-primary-link>
             </div>

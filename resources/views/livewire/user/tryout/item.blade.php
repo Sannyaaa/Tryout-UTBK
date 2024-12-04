@@ -88,9 +88,9 @@
                                                 * waktu pengerjaan sudah selesai
                                             </span>
                                         @else
-                                            <a href="{{ $sub_item->totalQuestion != null ? route('user.tryouts.event.paper', [$tryoutId, $sub_item->id]) : '#'}}" class="flex items-center">
-                                                <button class="p-3 px-4 flex items-center text-white bg-sky-500 rounded-lg font-semibold"><i class="fa-solid fa-circle-play"></i>&nbsp; Kerjakan</button>
-                                            </a>
+                                            <x-primary-link href="{{ route('user.tryouts.instruction', [$tryoutId, $sub_item->id]) }}" class="flex items-center">
+                                                <i class="fa-solid fa-circle-play"></i>&nbsp; Kerjakan
+                                            </x-primary-link>
                                         @endif
                                     @else
                                         @if ( \Carbon\Carbon::today() > $tryout->end_date )
@@ -107,11 +107,11 @@
                                     @endif
                                 @else
                                     <div class="my-auto gap-2">
-                                        <x-primary-link href="{{ route('user.tryouts.instruction', [$tryoutId, $sub_item->id]) }}" class="flex items-center py-1">
+                                        <x-primary-link href="{{ route('user.tryouts.instruction', [$tryoutId, $sub_item->id]) }}" class="flex items-center ">
                                             <i class="fa-solid fa-circle-play"></i>&nbsp; Kerjakan
                                         </x-primary-link>
                                         @if ($sub_item->is_completed)
-                                            <x-secondary-link href="{{ route('user.tryouts.history', [$tryoutId, $sub_item->id]) }}" class="py-1">
+                                            <x-secondary-link href="{{ route('user.tryouts.history', [$tryoutId, $sub_item->id]) }}" class="">
                                                 <i class="fa-solid fa-circle-check"></i>&nbsp;  Riwayat
                                             </x-secondary-link>
                                         @endif

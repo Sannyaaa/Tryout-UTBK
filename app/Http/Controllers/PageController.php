@@ -242,6 +242,9 @@ class PageController extends Controller
     }
 
     public function componentUpdate(Request $request, ComponentPage $componentPage){
+
+        $componentPage = ComponentPage::first();
+
         $data = $request->validate([
             'navbar_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'footer_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -252,7 +255,7 @@ class PageController extends Controller
             'youtube' =>'required|string',
             'tiktok' =>'required|string',
             'email' =>'required|email',
-            'phone' =>'required|numerik',
+            'phone' =>'required',
             'address' =>'required|string',
             'copyright' =>'required|string',
         ]);

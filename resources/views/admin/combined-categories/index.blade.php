@@ -4,12 +4,12 @@
 <div class="p-4 mt-12">
     <div class="p-6 bg-white rounded-lg shadow">
         <div class="mb-4 flex justify-between items-center">
-            <h2 class="text-xl font-semibold">Category</h2>
+            <h2 class="text-xl font-semibold">Materi Tryout</h2>
             
             <!-- Add New Button -->
             <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" 
                 class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 font-medium rounded-lg text-sm px-5 py-2.5">
-                Tambah Category Baru
+                Tambah Materi Baru
             </button>
         </div>
 
@@ -96,13 +96,13 @@
                                         <td class="p-4 space-x-2 whitespace-nowrap">
                                             <div class="flex justify-start gap-1">
                                                 <a href="{{ route('admin.combined-categories.edit', [$category->id, 'type' => 'category']) }}" 
-                                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700">
+                                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500">
                                                     Edit
                                                 </a>
                                                 <form action="{{ route('admin.combined-categories.destroy', [$category->id, 'type' => 'category']) }}" method="POST" class="inline-block">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg">
+                                                    <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-tr from-rose-400 to-rose-500 rounded-lg">
                                                         Delete
                                                     </button>
                                                 </form>
@@ -117,13 +117,13 @@
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                                     <div class="flex justify-start gap-1">
                                                         <a href="{{ route('admin.combined-categories.edit', [$subcategory->id, 'type' => 'subcategory']) }}" 
-                                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700">
+                                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500">
                                                             Edit
                                                         </a>
                                                         <form action="{{ route('admin.combined-categories.destroy', [$subcategory->id, 'type' => 'subcategory']) }}" method="POST" class="inline-block">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg">
+                                                            <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-tr from-rose-400 to-rose-500 rounded-lg">
                                                                 Delete
                                                             </button>
                                                         </form>

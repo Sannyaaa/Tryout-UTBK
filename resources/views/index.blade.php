@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="bg-sky-50">
-        <div class="relative isolate px-6 lg:px-8">
+        <div class="relative isolate px-6 lg:px-8" id="home">
             <div class="w-full lg:flex py-16 lg:py-20 px-10 lg:px-14  xl:px-32 space-y-10">
                 <div class="w-4/5 lg:w-1/2 flex justify-center items-center pe-10">
                     <div class="text-left w-full">
@@ -28,9 +28,9 @@
     </div>
 
     <div class="bg-white">
-        <div class="py-24">
+        <div class="">
 
-            <div class="mt-6">
+            <div class="py-24" id="features">
                 <div class="text-center w-3/5 md:w-2/5 mx-auto">
                     <h1 class="text-4xl font-bold  text-sky-950 md:text-5xl lg:text-6xl ">Kenapa Memilih Kami</span></h1>
 
@@ -39,7 +39,7 @@
                 <div class="mt-6 px-4 sm:px-20 lg:px-40">
                     <div class="w-full flex flex-wrap justify-center">
                         @foreach ($features as $feature)
-                            <div class="p-4 lg:p-6 max-w-xl w-full md:w-1/2">
+                            <div class="p-4 lg:p-6 max-w-xl w-full lg:w-1/2">
                                 <div class="p-12 bg-sky-50 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
                                     <div class="text-center mb-4">
                                         <div class=" w-24 flex items-center justify-center text-sky-900 aspect-square rounded-full bg-sky-500 mx-auto">
@@ -57,35 +57,7 @@
                 </div>
             </div>
 
-            <div class="my-32">
-                <div class="text-center w-3/5 md:w-2/5 mx-auto">
-                    <h1 class="text-4xl font-bold text-sky-900 md:text-5xl lg:text-6xl ">Categories <span class="text-yellow-300">Menu</span></h1>
-
-                    <p class="mt-6 text-lg  text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
-                </div>
-                <div class="my-12 px-4 sm:px-16 lg:px-32">
-                    <div class="flex justify-center px-10">
-                        <div class="w-full flex flex-wrap justify-center">
-                            {{-- @forelse ($categories as $category)
-                                <div class="p-3 md:p-4 max-w-sm bg-opacity-100">
-                                    <a href="{{ route('list-menu-category',$category->id) }}" class="flex flex-col justify-center items-center">
-                                        <div class="rounded-full border-8 {{ isset($selectedCategory) && $selectedCategory->id == $category->id ? 'border-slate-800' : 'border-yellow-200' }}  group-hover:border-yellow-100 overflow-hidden shadow-lg hover:shadow-2xl">
-                                            <img class="w-full" src="{{ Storage::url($category->image) }}" alt="category image" />
-                                        </div>
-                                        <span class="text-base px-6 py-3  rounded-full {{ isset($selectedCategory) && $selectedCategory->id == $category->id ? 'bg-slate-800 text-white font-semibold' : 'bg-white' }} -mt-8 shadow-lg hover:shadow-2xl transition-all">{{ $category->name }}</span>
-                                    </a>
-                                </div>
-                            @empty
-                                <span class="text-center">
-                                    Belum ada product
-                                </span>
-                            @endforelse --}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="w-full px-4 sm:px-16 lg:px-32 space-y-10 mt-16 bg-sky-50">
+            <div class="w-full px-4 sm:px-16 lg:px-32 space-y-10 mt-16 bg-sky-50" id="aboutUs">
                 <div class="px-10 lg:flex">
                     <div class="w-full lg:w-1/2 px-0 lg:px-8 mx-auto my-auto">
                         <div class="overflow-hidden">
@@ -112,11 +84,11 @@
 
                     <p class="mt-6 text-lg  text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
                 </div>
-                <div class="mt-12 px-4 md:px-32 lg:px-40 xl:px-56">
+                <div class="mt-12 px-4 md:px-28 lg:px-36 xl:px-56">
                     <div class="w-full flex flex-wrap justify-center">
 
                         <!-- Package Grid Section -->
-                        <section class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
+                        <section class="grid grid-cols-1 space-y-12 md:space-y-0 lg:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-8">
                             @foreach ($packages as $package)
                                 <div class="flex flex-col max-w-lg">
                                     <div class="text-gray-900 bg-white hover:shadow-xl transition-all border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white">
@@ -169,7 +141,58 @@
                 </div>
             </div>
 
-            <div class="flex px-4 sm:px-16 lg:px-32 mt-40">
+            <div class="py-32" id="teachers">
+                <div class="text-center w-3/5 md:w-2/5 mx-auto">
+                    <h1 class="text-4xl font-bold text-sky-900 md:text-5xl lg:text-6xl ">Kenali Mentor Kami</h1>
+
+                    <p class="mt-6 text-lg  text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+                </div>
+                <div class="my-12 px-4 sm:px-16 lg:px-32">
+                    <div class="flex justify-center px-10">
+                        <div class="w-full flex flex-wrap justify-center">
+                            @forelse ($teachers as $teacher)
+                                <div class="m-4 max-w-sm">
+                                    <div class="rounded-lg border bg-white px-5 pt-8 pb-5 shadow transition-all hover:shadow-lg">
+                                        <div class="relative mx-auto w-48 rounded-full">
+                                            <div class="absolute right-0 m-3 h-3 w-3">
+                                                <span class="relative flex h-4 w-4">
+                                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                                    <span class="relative inline-flex rounded-full h-4 w-4 bg-sky-500"></span>
+                                                </span>
+                                            </div>
+                                            <img class="mx-auto h-auto w-full rounded-xl" src="{{ Storage::url($teacher->avatar ?? '') }}" alt="" />
+                                        </div>
+                                        <h1 class="my-1 text-center text-xl font-bold leading-8 capitalize text-sky-900">{{ $teacher->name }}</h1>
+                                        {{-- <h3 class="font-lg text-semibold text-center leading-6 text-gray-600">{{ $teacher->mentor->teach ?? '' }}</h3> --}}
+                                        <div class="text-center text-sm leading-6 text-gray-500 hover:text-gray-600">{!! Str::limit($teacher->mentor->description ?? '',150) !!}</div>
+                                        <ul class="mt-3 divide-y rounded bg-sky-50 py-1 px-3 text-sky-600 shadow-sm hover:text-sky-700 hover:shadow">
+                                            <li class="flex items-center py-3 text-sm">
+                                                <span>Mengajar</span>
+                                                <span class="ml-auto font-semibold"><span class="">{{ $teacher->mentor->teach ?? '' }}</span></span>
+                                            </li>
+                                            <li class="flex items-center py-3 text-sm">
+                                                <span>Lulusan</span>
+                                                <span class="ml-auto font-semibold"><span class="">{{ $teacher->mentor->data_universitas->nama_universitas ?? '' }}</span></span>
+                                            </li>
+                                            <li class="flex items-center py-3 text-sm">
+                                                <span>Bargabung</span>
+                                                <span class="ml-auto font-medium">{{ \Carbon\Carbon::parse($teacher->mentor->created_at ?? '')->format('d F Y') }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            @empty
+                                <span class="text-center">
+                                    Belum ada product
+                                </span>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full bg-sky-50" id="testimonials">
                 <!--
                     Heads up! 👋
 
@@ -194,7 +217,7 @@
                             '(min-width: 1024px)': {
                             slides: {
                                 origin: 'auto',
-                                perView: 1.5,
+                                perView: 2.5,
                                 spacing: 32,
                             },
                             },
@@ -206,155 +229,122 @@
                     const keenSliderPrevious = document.getElementById('keen-slider-previous')
                     const keenSliderNext = document.getElementById('keen-slider-next')
 
-                    const keenSliderPreviousDesktop = document.getElementById('keen-slider-previous-desktop')
-                    const keenSliderNextDesktop = document.getElementById('keen-slider-next-desktop')
-
                     keenSliderPrevious.addEventListener('click', () => keenSlider.prev())
                     keenSliderNext.addEventListener('click', () => keenSlider.next())
-
-                    keenSliderPreviousDesktop.addEventListener('click', () => keenSlider.prev())
-                    keenSliderNextDesktop.addEventListener('click', () => keenSlider.next())
                     </script>
 
-                    <section class="bg-gray-50 mx-auto">
-                    <div class="mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 xl:py-24">
-                        <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
-                        <div class="max-w-2xl ltr:sm:text-left rtl:sm:text-right">
-                            <div class="px-12 sm:px-20 lg:px-0">
-                                <h2 class="text-4xl font-bold  text-sky-900 md:text-5xl lg:text-6xl ">
-                                    <span class="text-yellow-300">Testimonials</span> Our Customers
+                    <section class="w-full">
+                        <div class="mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
+                            <div class="max-w-7xl items-end justify-between sm:flex sm:pe-6 lg:pe-8">
+                                <h2 class="max-w-xl text-4xl font-bold tracking-tight text-sky-900 sm:text-5xl">
+                                    Apa Kata Mereka Tentang Kami?
                                 </h2>
 
-                                <p class="mt-4 text-gray-700">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas veritatis illo placeat
-                                harum porro optio fugit a culpa sunt id!
-                                </p>
+                                <div class="mt-8 flex gap-4 lg:mt-0">
+                                    <button
+                                    aria-label="Previous slide"
+                                    id="keen-slider-previous"
+                                    class="rounded-full border border-sky-500 p-3 text-sky-500 transition hover:bg-sky-500 hover:text-white"
+                                    >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        class="size-5 rtl:rotate-180"
+                                    >
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                    </svg>
+                                    </button>
+
+                                    <button
+                                    aria-label="Next slide"
+                                    id="keen-slider-next"
+                                    class="rounded-full border border-sky-500 p-3 text-sky-500 transition hover:bg-sky-500 hover:text-white"
+                                    >
+                                    <svg
+                                        class="size-5 rtl:rotate-180"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                        d="M9 5l7 7-7 7"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        />
+                                    </svg>
+                                    </button>
+                                </div>
                             </div>
 
-                            <div class="hidden lg:mt-8 lg:flex lg:gap-4 p-3">
-                            <button
-                                aria-label="Previous slide"
-                                id="keen-slider-previous-desktop"
-                                class="rounded-full border border-sky-500 p-3 text-sky-500 transition hover:bg-sky-500 hover:text-white"
-                            >
-                                <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                class="size-5 rtl:rotate-180"
-                                >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M15.75 19.5L8.25 12l7.5-7.5"
-                                />
-                                </svg>
-                            </button>
+                            <div class="-mx-6 mt-8 lg:col-span-2 lg:mx-0">
+                                <div id="keen-slider" class="keen-slider p-8">
+                                    @foreach ($testimonials as $testimonial)
+                                        <div class="keen-slider__slide bg-white p-6 shadow-xl rounded-xl shadow-sky-100 sm:p-8 lg:p-10">
+                                            <blockquote
+                                                class="flex h-full flex-col justify-between "
+                                            >
+                                                <div>
 
-                            <button
-                                aria-label="Next slide"
-                                id="keen-slider-next-desktop"
-                                class="rounded-full border border-sky-500 p-3 text-sky-500 transition hover:bg-sky-500 hover:text-white"
-                            >
-                                <svg
-                                class="size-5 rtl:rotate-180"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                                >
-                                <path
-                                    d="M9 5l7 7-7 7"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                />
-                                </svg>
-                            </button>
-                            </div>
-                        </div>
+                                                    <div class="">
+                                                        
+                                                        <div class="mb-2 leading-relaxed text-2xl font-semibold text-gray-600 italic">
+                                                            "{!! $testimonial->content !!}"
+                                                        </div>
 
-                        <div class="-mx-6 lg:col-span-2 lg:mx-0">
-                            <div id="keen-slider" class="keen-slider p-6">
+                                                        <p class="text-lg text-sky-500 font-medium italic sm:text-xl">-- {{ $testimonial->package_member->name }}</p>
 
-                                {{-- @forelse ($feedbacks as $feedback)
-                                    <div class="keen-slider__slide shadow-lg ">
-                                        <div class="swiper-slide group hover:bg-yellow-300 bg-white shadow-xl border-solid border-slate-800 rounded-2xl p-6 transition-all duration-500 hover:shadow-xl">
-                                            <div class="flex items-center gap-5 mb-5 sm:mb-5">
-                                                <img class="rounded-full border-white border-4 h-14 w-14" src="{{ $feedback->user->avatar ? Storage::url($feedback->user->avatar) : 'https://pagedone.io/asset/uploads/1696229969.png' }}" alt="avatar">
-                                                <div class="grid gap-1">
-                                                    <h5 class="text-sky-900 font-semibold transition-all duration-500  ">{{ $feedback->name }}</h5>
-                                                    <span class="text-sm leading-6 text-gray-500">{{ $feedback->email }}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div
-                                                class="flex items-center mb-5 sm:mb-5 gap-2 text-sky-900 transition-all duration-500  ">
-                                                @for ($i = 0;$i < $feedback->rating;$i++)
-                                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"
-                                                            fill="currentColor"></path>
-                                                    </svg>
-                                                @endfor
-                                            </div>
-                                            <p
-                                                class="text-sm text-gray-500 leading-6 transition-all duration-500 min-h-24  group-hover:text-gray-800">
-                                                {{ $feedback->message }}
-                                            </p>
 
+                                                <footer class="mt-2 text-sm font-medium text-gray-700 sm:mt-3">
+                                                    <div class="flex items-center mt-4 space-x-4">
+                                                        <img src="{{ Storage::url($testimonial->user->avatar ?? '') }}" alt="" class="w-12 h-12 bg-center bg-cover rounded-full dark:bg-gray-500">
+                                                        <div>
+                                                            <p class="text-lg font-semibold">{{ $testimonial->user->name }}</p>
+                                                            <p class="text-sm dark:text-gray-600">{{ $testimonial->user->email }}</p>
+                                                        </div>
+                                                    </div>
+                                                </footer>
+                                            </blockquote>
                                         </div>
-                                    </div>
-                                @empty
-                                    <span>Testimonial Not Found</span>
-                                @endforelse --}}
-                                
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                        </div>
-
-                        <div class="mt-8 flex justify-center gap-4 lg:hidden">
-                        <button
-                            aria-label="Previous slide"
-                            id="keen-slider-previous"
-                            class="rounded-full border-4 border-slate-800 p-4 text-sky-900 transition hover:bg-yellow-300 hover:text-sky-900"
-                        >
-                            <svg
-                            class="size-5 -rotate-180 transform"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                            >
-                            <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                            </svg>
-                        </button>
-
-                        <button
-                            aria-label="Next slide"
-                            id="keen-slider-next"
-                            class="rounded-full border-4 border-slate-800 p-4 text-sky-900 transition hover:bg-yellow-300 hover:text-sky-900"
-                        >
-                            <svg
-                            class="h-5 w-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                            >
-                            <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                            </svg>
-                        </button>
-                        </div>
-                    </div>
                     </section>
             </div>
 
-            <div class="flex">
-                
-            </div>
+            {{-- <div class=""> --}}
+                <section id="faqs">
+                    <div class="py-28 max-w-screen-xl mx-auto">
+                        <h1 class="mb-8 text-center text-6xl font-bold text-sky-500">Frequently Asked Questions (FAQ)</h1>
+                        <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-sky-100 dark:bg-gray-800 text-sky-600 dark:text-white">
+                            @forelse ($faqs as $i => $faq)
+                                <h2 id="accordion-color-heading-{{ $i }}">
+                                    <button type="button" class="flex items-center justify-between w-full p-5 font-semibold capitalize text-lg rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-sky-200 dark:focus:ring-sky-800 dark:border-gray-700 dark:text-gray-400 hover:bg-sky-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-color-body-{{ $i }}" aria-expanded="true" aria-controls="accordion-color-body-{{ $i }}">
+                                        <span>{{ $faq->question }}</span>
+                                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                        </svg>
+                                    </button>
+                                </h2>
+                                <div id="accordion-color-body-{{ $i }}" class="hidden" aria-labelledby="accordion-color-heading-{{ $i }}">
+                                    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                                        <div class="mb-2 text-gray-500 dark:text-gray-400">{{ $faq->answer }}</div>
+                                    </div>
+                                </div>
+                            @empty
+                                
+                            @endforelse
+                        </div>
+                    </div>
+                </section>
+            {{-- </div> --}}
             
         </div>
     </div>

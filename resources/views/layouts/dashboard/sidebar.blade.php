@@ -6,8 +6,8 @@
       <div class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
         <ul class="pb-2 space-y-2">
           <li>
-            <a href="#" class="flex justify-center my-3">
-              <span class="self-center text-3xl font-semibold sm:text-4xl whitespace-nowrap dark:text-white bg-sky-50">Flowbite</span>
+            <a href="#" class="flex justify-center py-4 bg-sky-50 rounded-lg">
+              <span class="self-center text-3xl font-semibold sm:text-4xl whitespace-nowrap text-sky-800 dark:text-white bg-sky-50">Flowbite</span>
             </a>
           </li>
 
@@ -57,7 +57,11 @@
 
             <li>
               <!-- Dropdown Menu -->
-              <x-sidebar-dropdown id="class-bimbel" name="Bimbel">
+              <x-sidebar-dropdown id="bimbel" name="Bimbel" :isActive="Str::startsWith(request()->url(), [
+                  route('admin.bimbel.index'), 
+                  route('admin.class-bimbel.index'),
+                  route('admin.question-practice.index')
+              ])">
                   {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                   <i class="fa-solid fa-book-open-reader"></i>
                   <x-slot name="content">
@@ -66,11 +70,11 @@
                           {{-- <a href="{{ route('admin.class-bimbel.index') }}" name="All Class</a> --}}
                       </li>
                       <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.class-bimbel.index') }}" name="Daftar Kelas" />
+                          <x-sidebar-link-dropdown link="{{ route('admin.class-bimbel.index') }}" name="Kelas Bimbel" />
                           {{-- <a href="{{ route('admin.class-bimbel.index') }}" name="All Class</a> --}}
                       </li>
                       <li>
-                          <x-sidebar-link-dropdown link="{{ route('admin.question-practice.index') }}" name="Daftar Pertanyaan" />
+                          <x-sidebar-link-dropdown link="{{ route('admin.question-practice.index') }}" name="Pertanyaan Latihan" />
                       </li>
                   </x-slot>
               </x-sidebar-dropdown>
@@ -78,7 +82,10 @@
 
             <li>
               <!-- Dropdown Menu -->
-              <x-sidebar-dropdown id="tryout" name="Tryout">
+              <x-sidebar-dropdown id="tryout" name="Tryout" :isActive="Str::startsWith(request()->url(), [
+                  route('admin.tryout.index'), 
+                  route('admin.question.index'),
+              ])">
                   {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                   <i class="fa-regular fa-file-lines"></i>
                   <x-slot name="content">
@@ -133,7 +140,10 @@
 
             <li>
               <!-- Dropdown Menu -->
-              <x-sidebar-dropdown id="discount" name="Diskon">
+              <x-sidebar-dropdown id="discount" name="Diskon" :isActive="Str::startsWith(request()->url(), [
+                  route('admin.promotion.index'), 
+                  route('admin.discount.index'),
+              ])">
                   {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                   <i class="fa-solid fa-ticket"></i>
                   <x-slot name="content">
@@ -173,7 +183,10 @@
 
             <li>
               <!-- Dropdown Menu -->
-              <x-sidebar-dropdown id="page" name="Pengaturan Halaman">
+              <x-sidebar-dropdown id="page" name="Pengaturan Halaman" :isActive="Str::startsWith(request()->url(), [
+                  route('admin.home-page'), 
+                  route('admin.component-page'),
+              ])">
                   {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
                   <i class="fa-solid fa-file-signature"></i>
                   <x-slot name="content">
@@ -188,7 +201,7 @@
             </li>
 
             <li>
-              <x-sidebar-link link="{{ route('admin.combined-categories.index') }}" token="combined-categories" name="Category">
+              <x-sidebar-link link="{{ route('admin.combined-categories.index') }}" token="combined-categories" name="Materi">
                 <i class="fa-solid fa-book-open"></i>
               </x-sidebar-link>
             </li>

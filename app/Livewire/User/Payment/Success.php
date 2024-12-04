@@ -19,6 +19,10 @@ class Success extends Component
     {
         $order = Order::where('invoice', $this->invoice)->first();
 
+        $order->payment_status = 'paid';
+
+        $order->save();
+
         return view('livewire.user.payment.success',[
             'order' => $order,
         ]);

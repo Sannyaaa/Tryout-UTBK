@@ -77,8 +77,8 @@
                             <x-input-label for="is_show" :value="__('Tampilkan / Tidak')" />
                             <x-select-input id="is_show" name="is_show">
                                 <option selected="" disabled>Tampilkan atau Tidak</option>
-                                <option value="yes" {{ $tryout->is_show == 'yes' ? 'selected' : '' }}>Tampilkan</option>
-                                <option value="no" {{ $tryout->is_show == 'no' ? 'selected' : '' }}>Tahan</option>
+                                <option value="yes" {{ $testimonial->is_show == 'yes' ? 'selected' : '' }}>Tampilkan</option>
+                                <option value="no" {{ $testimonial->is_show == 'no' ? 'selected' : '' }}>Tahan</option>
                             </x-select-input>
                             <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
                         </div>

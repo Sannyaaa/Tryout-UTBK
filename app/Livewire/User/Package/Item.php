@@ -100,6 +100,18 @@ class Item extends Component
             return redirect()->route('login');
         }
 
+        $user = auth()->user();
+
+        // Cek apakah ada transaksi 'pending' untuk user ini
+        $existingOrder = Order::where('user_id', $user->id)
+            ->where('payment_status', 'pending')
+            ->first();
+
+        // if ($existingOrder) {
+        //     // Redirect ke halaman transaksi jika ada transaksi pending
+        //     return redirect()->to("https://app.sandbox.midtrans.com/snap/v4/redirection/{{ $existingOrder->snap_token }}#/payment-list");
+        // }
+
         try {
             // Set konfigurasi Midtrans
             Config::$serverKey = config('midtrans.server_key');
@@ -110,15 +122,19 @@ class Item extends Component
             $user = auth()->user();
             
             // Buat order baru
-            $order = Order::create([
-                'user_id' => $user->id,
-                'package_member_id' => $this->package->id,
-                'discount_id' => $this->applied_voucher?->id,
-                'invoice' => Order::generateInvoice(),
-                'original_price' => $this->package->price,
-                'final_price' => $this->final_price,
-                'payment_status' => 'pending',
-            ]);
+            $order = Order::firstOrCreate(
+                [
+                    'user_id' => $user->id,
+                    'package_member_id' => $this->package->id,
+                    'payment_status' => 'pending'
+                ],
+                [
+                    'discount_id' => $this->applied_voucher?->id,
+                    'invoice' => Order::generateInvoice(),
+                    'original_price' => $this->package->price,
+                    'final_price' => $this->final_price,
+                ]
+            );
 
             // Siapkan parameter untuk Midtrans
             $transaction_details = [
@@ -144,7 +160,7 @@ class Item extends Component
                 'customer_details' => $customer_details,
                 'item_details' => $item_details,
                 'callbacks' => [
-                    'finish' => route('user.payment.finish', ['invoice' => $order->invoice]),
+                    'finish' => route('user.payment.success', ['invoice' => $order->invoice]),
                     'unfinish' => route('user.payment.unfinish', ['invoice' => $order->invoice]),
                     'error' => route('user.payment.error', ['invoice' => $order->invoice]),
                 ]

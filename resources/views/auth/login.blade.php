@@ -60,30 +60,21 @@
 
                 <!-- Remember Me -->
                 <div class="text-base font-semibold text-center text-white  bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6">
-                    {{-- <label for="remember_me" class="inline-flex items-center">
-                        <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                        <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-                    </label> --}}
-
-                    
-                {{-- </div>
-
-                <div class="mt-4 space-y-4"> --}}
 
                     <button class="w-full px-5 py-3 ">
                         {{ __('Masuk Sekarang') }}
                     </button>
-
                     
-
                 </div>
 
-                    <a href="{{ route('google.login') }}" class="btn btn-danger">
-                        Login dengan Google
-                    </a>
+                    <div class="w-full mt-4 mx-auto">
+                        <x-secondary-link href="{{ route('google.login') }}" class="w-full mx-auto">
+                            <span><i class="fa-brands fa-google me-2"></i></span> Login dengan Google
+                        </x-secondary-link>
+                    </div>
 
                     <div class="text-center">
-                        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mt-5 mb-3 ">
+                        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mt-6 mb-4 ">
                             Belum punya akun? <a href="{{ route('register') }}" class="text-sky-700 hover:underline dark:text-sky-500">Buat Sekarang</a>
                         </div>
 

@@ -50,37 +50,43 @@
                         @else
                             <div class="overflow-x-auto">
                                 <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-slate-50 text-slate-600 text-left text-xs uppercase tracking-wider">
+                                    <thead class="bg-gradient-to-tr from-sky-400 to-sky-500 text-slate-50 text-left text-xs uppercase tracking-wider">
                                         <tr>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
+                                                No
+                                            </th>
+                                            <th class="px-6 py-4 font-medium">
                                                 Tryout
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Materi
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Skor
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Benar
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Salah
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Tidak Dijawab
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Tanggal Submit
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Action
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200 text-gray-700 text-sm">
-                                        @forelse($history as $item)
+                                        @forelse($history as $i => $item)
                                             <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ $i + 1 }}
+                                                </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ $item->tryout->name }}
                                                 </td>
@@ -102,7 +108,7 @@
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ \Carbon\Carbon::parse($item->created_at)->format('j F Y') }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-3 whitespace-nowrap">
                                                     <div>
                                                         <x-primary-link href="{{ route('user.tryouts.results', $item->id) }}" class="inline-flex gap-2">
                                                             <span class="">

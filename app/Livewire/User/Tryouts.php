@@ -2,9 +2,11 @@
 
 namespace App\Livewire\User;
 
-use App\Models\Package_member;
+use App\Models\Order;
 use App\Models\Tryout;
 use Livewire\Component;
+use App\Models\Package_member;
+use Illuminate\Support\Facades\Auth;
 
 class Tryouts extends Component
 {
@@ -12,7 +14,7 @@ class Tryouts extends Component
 
     public function render()
     {
-        // $user = Auth::user();
+        $user = Auth::user();
 
         // Get Data
         $tryouts = Tryout::where('is_together','basic')
@@ -20,8 +22,16 @@ class Tryouts extends Component
                             ->where('is_ready','yes')
                             ->get();
 
-        // $paidTryout = Order::where('user_id',$user->id)->where('payment_status','paid');
+        $paidTryout = Tryout::whereHas('package_member', function ($query) {
+                            $query->whereHas('orders', function ($subQuery) {
+                                $subQuery->where('payment_status', 'paid')
+                                ->where('user_id', Auth::id());
+                            });
+                        })
+                        ->where('is_together', 'basic') // Kondisi "tidak serentak"
+                        ->get();
 
+        // dd($paidTryout);
         $packages = Package_member::with(['benefits','tryout'])
             // ->whereHas('tryout', function($query){
             //         return $query->where('is_together','basic');
@@ -36,6 +46,7 @@ class Tryouts extends Component
             'tryouts' => $tryouts,
             'packages' => $packages,
             'user' => $this->user, // Add this line to pass the user data to the view
+            'paidTryout' => $paidTryout, // Add this line to pass the paid tryout data to the view
         ]);
     }
 }

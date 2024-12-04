@@ -37,9 +37,9 @@
                     <div class="flex items-center w-full sm:justify-end">
                         <div class="flex space-x-1">
                             <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
-                        <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                            Delete Selected
-                        </button>
+                            <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                                Hapus
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
 
                 <!-- Modal toggle -->
                 <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                    + Bimbel
+                    Tambah Bimbel
                 </button>
 
                 <!-- Main modal -->
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                                 <x-primary-button type="submit">
-                                    + Bimbel
+                                    Tambah Bimbel
                                 </x-primary-button>
                             </form>
                         </div>

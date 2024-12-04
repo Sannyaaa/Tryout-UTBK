@@ -224,17 +224,18 @@
                                 <div class="w-full">
                                     <div class="w-full">
                                         <x-primary-button 
-                                        wire:click="checkout"
-                                        wire:loading.attr="disabled"
-                                        {{-- class="w-f" --}}
-                                    >
+                                            wire:click="checkout"
+                                            wire:loading.attr="disabled"
+                                            class="relative w-full"
+                                        >
                                             <span wire:loading.remove wire:target="checkout">
                                                 Checkout Sekarang
                                             </span>
-                                            <span wire:loading wire:target="checkout">
+                                            <span wire:loading wire:target="checkout" class="absolute inset-0 flex justify-center items-center bg-opacity-50">
                                                 Processing...
                                             </span>
                                         </x-primary-button>
+
                                     </div>
                                     <div class="mt-3">
                                         <span class="text-sm text-rose-500">

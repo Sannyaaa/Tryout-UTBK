@@ -22,16 +22,24 @@ class Paper extends Component
     public $answers;
     public $questions;
     
+    public $class;
 
     public function mount(Request $request){
         $this->answers = [];
 
         $this->paperId = $request->segment(4);
+
+        $this->class = ClassBimbel::where('id', Auth::id())->first();
         
         $this->q = QuestionPractice::where('class_bimbel_id', $this->paperId)
             ->min('id');
     }
 
+    public function updatedAnswers($value, $key)
+    {
+        // Memicu render ulang komponen saat jawaban diupdate
+        $this->dispatch('answersUpdated');
+    }
     
     public function changeNumber($value)
     {
@@ -40,56 +48,48 @@ class Paper extends Component
     
     public function previousQuestion()
     {
-        // Decrement the index if it's greater than 0
-        // Get the current question ID
-        $currentId = $this->q; 
-        $foundPrevious = false; // Flag to indicate if the previous question is found
+        $currentId = $this->q;
         
-        // Loop through the questions in reverse order to find the previous question with an existing ID
-        foreach ($this->questions as $question) {
-            if ($question->id < $currentId) {
-                $this->q = $question->id; // Update q to the previous existing question ID
-                $foundPrevious = true; // Set the flag to true
-                break; // Exit the loop once the previous question is found
-            }
-        }
+        // Dapatkan semua ID pertanyaan yang diurutkan
+        $questionIds = $this->questions->pluck('id')->sort()->values()->toArray();
         
-        // Optionally handle the case where no previous question was found
-        if (!$foundPrevious) {
-            // Handle the case where there is no previous question (e.g., stay at the current one or reset to the last question)
-            dd("No previous question found.");
+        // Temukan posisi current ID dalam array
+        $currentPosition = array_search($currentId, $questionIds);
+        
+        // Jika bukan di posisi pertama, ambil ID sebelumnya
+        if ($currentPosition > 0) {
+            $this->q = $questionIds[$currentPosition - 1];
         }
     }
 
     public function nextQuestion()
     {
-        $currentId = $this->q; // Store the current question ID
-        $foundNext = false; // Flag to indicate if the next question is found
+        $currentId = $this->q;
         
-        // Loop through the questions starting from the current index + 1
-        foreach ($this->questions as $question) {
-            if ($question->id > $currentId) {
-                $this->q = $question->id; // Update q to the next existing question ID
-                $foundNext = true; // Set the flag to true
-                break; // Exit the loop once the next question is found
-            }
-        }
+        // Dapatkan semua ID pertanyaan yang diurutkan
+        $questionIds = $this->questions->pluck('id')->sort()->values()->toArray();
         
-        // Optionally handle the case where no next question was found
-        if (!$foundNext) {
-            // Handle the case where there is no next question (e.g., reset to the first question or stay at the current one)
-            dd("the end");
+        // Temukan posisi current ID dalam array
+        $currentPosition = array_search($currentId, $questionIds);
+        
+        // Jika bukan di posisi terakhir, ambil ID selanjutnya
+        if ($currentPosition < count($questionIds) - 1) {
+            $this->q = $questionIds[$currentPosition + 1];
         }
     }
     
     public function isFirstQuestion()
     {
-        return $this->q === $this->questions->first()->id;
+        // Dapatkan ID terkecil dari koleksi pertanyaan
+        $firstId = $this->questions->pluck('id')->min();
+        return $this->q === $firstId;
     }
     
     public function isLastQuestion()
     {
-        return $this->q === $this->questions->last()->id;
+        // Dapatkan ID terbesar dari koleksi pertanyaan
+        $lastId = $this->questions->pluck('id')->max();
+        return $this->q === $lastId;
     }
 
     public function render()
@@ -98,7 +98,7 @@ class Paper extends Component
                 ->where('id', $this->q)
                 ->with('answer_practice')
                 ->first();
-        // dd($question->answer);
+
         if ($question) {
             $question->count = 1; // Assigning a fixed new ID of 1, or you can assign any other logic
         }
@@ -131,25 +131,32 @@ class Paper extends Component
             'class_bimbel_id' => $this->paperId,
         ]);
 
-        foreach ($this->answers as $key => $value) {
-            $getCorrectAnswer = QuestionPractice::whereId($key)->first()->correct_answer;
+        foreach ($this->questions as $question) {
+            $questionId = $question->id;
+            $userAnswer = $this->answers[$questionId] ?? null; // Use null if no answer is provided
 
-            if ($value == $getCorrectAnswer) {
-                $correctAnswers++;
-                $score += 4;
-            } elseif ($value == null) {
-                $unanswered++;
+            // Get the correct answer
+            $getCorrectAnswer = $question->correct_answer;
+
+            // Determine if the answer is correct, incorrect, or unanswered
+            if ($userAnswer !== null) {
+                if ($userAnswer === $getCorrectAnswer) {
+                    $correctAnswers++;
+                    $score += 4;
+                } else {
+                    $incorrectAnswers++;
+                    $score -= 1;
+                }
             } else {
-                $incorrectAnswers++;
-                $score -= 1;
+                $unanswered++;
             }
 
             // dd($value);
 
             AnswerQuestionPractice::create([
-                'question_practice_id' => $key,
+                'question_practice_id' => $questionId,
                 'user_id' => Auth::user()->id,
-                'answer' => $value,
+                'answer' => $userAnswer,
                 'result_practice_id' => $result->id,
             ]);
         }
@@ -163,6 +170,6 @@ class Paper extends Component
             'score' => $score,
         ]);
 
-        return redirect()->route('user.my-bimbel.result', $result->id);
+        return redirect()->route('user.my-bimbel.practice.result', $result->id);
     }
 }

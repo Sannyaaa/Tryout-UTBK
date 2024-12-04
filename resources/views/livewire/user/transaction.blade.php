@@ -52,7 +52,7 @@
                                     <option value="">Semua Status</option>
                                     <option value="pending">Pending</option>
                                     <option value="paid">Paid</option>
-                                    <option value="calcel">Cancel</option>
+                                    <option value="cancel">Cancel</option>
                                 </x-select-input>
                             </div>
                         </form>

@@ -49,21 +49,21 @@
                 </div>
                 <div class="flex justify-center items-center gap-2">
                     <div class="">
-                        <select id="tryout_is_free_filter" class="p-2 border rounded">
+                        <x-select-input id="tryout_is_free_filter" class="p-2 border rounded">
                             <option value="">Semua Gratis & Berbayar</option>
                             <option value="free">Gratis</option>
                             <option value="paid">Berbayar</option>
-                        </select>
+                        </x-select-input>
                     </div>
                     <div class="">
-                        <select id="tryout_is_together_filter" class="p-2 border rounded">
+                        <x-select-input id="tryout_is_together_filter" class="p-2 border rounded">
                             <option value="">Semua Serentak & Biasa</option>
                             <option value="together">Serentak</option>
                             <option value="basic">Biasa</option>
-                        </select>
+                        </x-select-input>
                     </div>
                     <a href="{{ route('admin.tryout.create') }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                        Tambah Tryout Baru
+                        Tambah Tryout
                     </a>
                 </div>
                 
@@ -98,10 +98,7 @@
                                             Biasa / Serentak
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Tanggal mulai
-                                        </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                            Tanggal selesai
+                                            Tampilkan
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Tanggal Buat
@@ -235,8 +232,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            {data: 'start_date', name: 'start_date', defaultContent: ''},
-            {data: 'end_date', name: 'end_date', defaultContent: ''},
+            {data: 'is_ready', name: 'is_ready', defaultContent: ''},
             {data: 'created_at', name: 'created_at', defaultContent: ''},
             {
                 data: 'action',

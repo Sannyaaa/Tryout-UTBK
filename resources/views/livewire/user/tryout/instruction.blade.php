@@ -31,7 +31,7 @@
 
             <div class="bg-white flex w-fit rounded-md shadow-lg px-16 py-6">
                 <div class="my-auto space-y-6">
-                    <h1 class="text-5xl capitalize font-extrabold text-sky-500">{{ $tryout->name }}</h1>
+                    <h1 class="text-5xl capitalize font-bold text-sky-500">{{ $tryout->name }}</h1>
                     <div class="text-gray-600 font-semibold">
                         <h2 class="text-xl font-seibold mb-1 text-gray-800">Informasi Ujian</h2>
                         <div class="space-y-1">
@@ -88,7 +88,7 @@
                     </div>
     
                     <div class="gap-5 flex">
-                        <x-secondary-link href="{{ route('user.tryouts.item', $tryoutId) }}">
+                        <x-secondary-link href="{{ $tryout->is_together == 'together' ? route('user.tryouts.event.item', $tryoutId) : route('user.tryouts.item', $tryoutId) }}">
                             Kembali
                         </x-secondary-link>
                         @if ($subCategory->totalQuestion != null)

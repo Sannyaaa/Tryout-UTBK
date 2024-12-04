@@ -108,6 +108,18 @@
     </div>
     <!-- ===== Page Wrapper End ===== -->
 
+    <script>
+        function toggleDropdown(id) {
+            console.log(`Toggle dropdown with ID: ${id}`); // Debugging
+            const dropdown = document.getElementById(`dropdown-${id}`);
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+            } else {
+                dropdown.classList.add('hidden');
+            }
+        }
+    </script>
+
     @stack('script')
     @yield('scripts')
     <script type="module" src="{{ asset('js/index.js') }}"></script>
