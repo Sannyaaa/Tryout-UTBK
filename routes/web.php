@@ -13,6 +13,7 @@ use App\Http\Controllers\UniversityController;
 Route::get('/', [LandingController::class, 'home'])->name('home-page');
 Route::get('/mentor', [LandingController::class, 'mentor'])->name('mentor-page');
 Route::get('/package', [LandingController::class, 'package'])->name('package-page');
+Route::get('/package-item/{id}', [LandingController::class, 'packageDetail'])->name('detail-package-page');
 
 Route::get('/test', function () {
     return view('test');

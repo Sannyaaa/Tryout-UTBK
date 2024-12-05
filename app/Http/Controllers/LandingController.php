@@ -61,11 +61,14 @@ class LandingController extends Controller
             } elseif($type == 'bimbel'){
                 return $query->whereNull('tryout_id');
             }
-        });
+        })->get();
+
+        $component = ComponentPage::first();
 
         return view('package',[
             'packages' => $packages,
             'type' => $type,
+            'component' => $component,
         ]);
     }
 }
