@@ -38,4 +38,34 @@ class LandingController extends Controller
             'teachers' => $teachers,
         ]);
     }
+
+    public function mentor(){
+
+        $component = ComponentPage::first();
+
+        $mentors = User::with('mentor')->where('role','mentor')->get();
+
+        return view('mentor',[
+            'mentors' => $mentors,
+            'component' => $component,
+        ]);
+    }
+
+    public function package(Request $request){
+
+        $type = $request->get('type','all');
+
+        $packages = Package_member::when($type !== null, function ($query) use ($type){
+            if($type == 'tryout'){
+                return $query->whereNotNull('tryout_id');
+            } elseif($type == 'bimbel'){
+                return $query->whereNull('tryout_id');
+            }
+        });
+
+        return view('package',[
+            'packages' => $packages,
+            'type' => $type,
+        ]);
+    }
 }

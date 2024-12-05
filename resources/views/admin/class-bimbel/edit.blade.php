@@ -141,11 +141,11 @@
                     </div>
 
                     <div class="flex justify-between">
-                        <x-secondary-href href="{{ $back ?? route('admin.class-bimbel.index') }}">
+                        <x-secondary-link href="{{ $back ?? route('admin.class-bimbel.index') }}">
                             Kembali
-                        </x-secondary-href>
+                        </x-secondary-link>
                         <x-primary-button type="submit">
-                            Edit Kelas
+                            Submit
                         </x-primary-button>
                     </div>
                 </div>

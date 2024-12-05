@@ -144,7 +144,7 @@
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{$reports->package_member->name}}</td>
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{ number_format($reports->final_price)}}</td>
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{$reports->payment_status}}</td>
-                                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{ \Carbon\Carbon::parse($reports->createt_at)->format('d F Y') }}</td>
+                                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{ \Carbon\Carbon::parse($reports->created_at)->format('d F Y') }}</td>
                                                     {{-- <td class="p-4 space-x-2 whitespace-nowrap">
                                                         <div class="flex justify-start gap-1">
                                                             <a href="{{ route('admin.report.edit', $reports->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

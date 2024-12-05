@@ -65,6 +65,9 @@
                                             Image
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Tampilkan
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Start Date
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
@@ -87,6 +90,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap"><img src="{{ Storage::url($promotions->image) }}" class="w-[100px]" alt=""></td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{$promotions->is_show == 'yes' ? 'Tampilkan di Depan' : 'Hanya di Dashboard'}}</td>
                                                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{$promotions->start_date}}</td>
                                                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{$promotions->end_date}}</td>
                                                 <td class="p-4 space-x-2 whitespace-nowrap">

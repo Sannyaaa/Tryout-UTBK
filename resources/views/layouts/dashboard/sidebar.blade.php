@@ -138,13 +138,13 @@
                 </li>
               </ul> --}}
 
-            <li>
+            {{-- <li>
               <!-- Dropdown Menu -->
               <x-sidebar-dropdown id="discount" name="Diskon" :isActive="Str::startsWith(request()->url(), [
                   route('admin.promotion.index'), 
                   route('admin.discount.index'),
               ])">
-                  {{-- <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path> --}}
+                  <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
                   <i class="fa-solid fa-ticket"></i>
                   <x-slot name="content">
                       <li>
@@ -155,6 +155,18 @@
                       </li>
                   </x-slot>
               </x-sidebar-dropdown>
+            </li> --}}
+
+            <li>
+              <x-sidebar-link link="{{ route('admin.discount.index') }}" token="discount" name="Voucher Discount">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </x-sidebar-link>
+            </li>
+
+            <li>
+              <x-sidebar-link link="{{ route('admin.promotion.index') }}" token="promotion" name="Banner">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </x-sidebar-link>
             </li>
 
             <li>

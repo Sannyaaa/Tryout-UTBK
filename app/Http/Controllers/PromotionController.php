@@ -35,6 +35,7 @@ class PromotionController extends Controller
         $data = $request->validate([
             'start_date' => 'required|date',
             'end_date' => 'required|date',
+            'is_show' => 'required|in:yes,no',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -82,6 +83,7 @@ class PromotionController extends Controller
         $data = $request->validate([
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
+            'is_show' => 'required|in:yes,no',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 

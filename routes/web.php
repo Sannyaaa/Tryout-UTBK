@@ -10,7 +10,9 @@ use App\Http\Controllers\UniversityController;
 //     return view('index');
 // });
 
-Route::get('/', [LandingController::class, 'home']);
+Route::get('/', [LandingController::class, 'home'])->name('home-page');
+Route::get('/mentor', [LandingController::class, 'mentor'])->name('mentor-page');
+Route::get('/package', [LandingController::class, 'package'])->name('package-page');
 
 Route::get('/test', function () {
     return view('test');

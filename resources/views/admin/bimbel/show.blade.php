@@ -38,8 +38,8 @@
                 <main class="rounded-lg bg-white shadow mx-auto px-4 py-8">
                     <div class="grid lg:grid-cols-2 gap-2">
                         <div class="w-full lg:w-2/3 px-4">
-                            <h2 class="text-sm text-gray-500 mb-4">Name Bimbel <br><span class="text-lg font-bold text-gray-800">{{ $bimbel->name }}</span></h2>
-                            <p class="text-sm text-gray-500">Description <br><span class="text-lg font-bold text-gray-800">{{ $bimbel->description }}</span></p>
+                            <h2 class="text-sm text-gray-500 mb-4">Name Bimbel <br><span class="text-lg font-semibold text-gray-700">{{ $bimbel->name }}</span></h2>
+                            <p class="text-sm text-gray-500">Description <br><span class="text-lg font-semibold text-gray-700">{{ $bimbel->description }}</span></p>
                         </div>
                         {{-- <div class="w-full lg:w-1/3 px-4">
                             <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
@@ -65,12 +65,12 @@
 
 
         
-            <div class="items-center justify-between block my-6 sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
-                <h3 class="text-2xl text-gray-800 font-bold">
-                    Daftar Class {{ $bimbel->name }}
+            <div class="items-center justify-between block mt-6 mb-4 sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+                <h3 class="text-2xl text-gray-700 font-bold">
+                    Daftar Kelas {{ $bimbel->name }}
                 </h3>
                 <x-primary-link href="{{ route('admin.bimbel.class.create', $bimbel->id) }}">
-                    + Class
+                    Tambah Kelas
                 </x-primary-link>
             </div>
 
@@ -79,7 +79,7 @@
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden shadow">
                             <table class="min-w-full divide-y divide-gray-200 border-gray-200 border-2 whitespace-nowrap dark:divide-gray-600">
-                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                <thead class="bg-gradient-to-tr from-sky-400 to-sky-500 text-slate-50 text-left text-xs font-semibold uppercase tracking-wider">
                                     <tr>
                                         {{-- <th scope="col" class="p-4">
                                             <div class="flex items-center">
@@ -90,28 +90,28 @@
                                         {{-- <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Image
                                         </th> --}}
-                                        <th scope="col" class="p-4 text-sm font-semibold text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             No
                                         </th>
-                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             Name
                                         </th>
-                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             Sub categories
                                         </th>
-                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             Mentor
                                         </th>
-                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             Tanggal
                                         </th>
-                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             Actions
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">    
-                                    @foreach ($classes as $i => $class)
+                                    @forelse ($classes as $i => $class)
                                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                             <td class="p-4 text-base font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{$i + 1}}</td>
                                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$class->name}}</td>
@@ -125,21 +125,25 @@
                                                             Show
                                                         </a>
                                                         <a href="{{ route('admin.bimbel.class.edit', [$bimbel->id, $class->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                                                             Update
                                                         </a>
                                                         <form action="{{ route('admin.class-bimbel.destroy', $class->id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-tr from-rose-400 to-rose-500 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-                                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                                                                 Delete
                                                             </button>
                                                         </form>
                                                     </div>
                                                 </td>
-                                            </tr>                   
-                                        @endforeach
+                                            </tr>  
+                                        @empty
+                                            <tr class="text-center">
+                                                <td colspan="6" class="py-4 italic font-medium text-center text-gray-500">
+                                                    Data belum tersedia.
+                                                </td>
+                                            </tr>
+                                        @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -148,7 +152,7 @@
             </div>
 
             <div class="items-center justify-between block my-6 sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
-                <h3 class="text-2xl text-gray-800 font-bold">
+                <h3 class="text-2xl text-gray-700 font-bold">
                     Daftar Peserta {{ $bimbel->name }}
                 </h3>
             </div>
@@ -158,7 +162,7 @@
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden shadow">
                             <table class="min-w-full divide-y divide-gray-200 border-gray-200 border-2 whitespace-nowrap dark:divide-gray-600">
-                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                <thead class="bg-gradient-to-tr from-sky-400 to-sky-500 text-slate-50 text-left text-xs font-semibold uppercase tracking-wider">
                                     <tr>
                                         {{-- <th scope="col" class="p-4">
                                             <div class="flex items-center">
@@ -169,19 +173,19 @@
                                         {{-- <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Image
                                         </th> --}}
-                                        <th scope="col" class="p-4 text-sm font-semibold text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             No
                                         </th>
-                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             Name
                                         </th>
-                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             Email
                                         </th>
-                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             Phone
                                         </th>
-                                        <th scope="col" class="p-4 text-sm font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             Action
                                         </th>
                                     </tr>
@@ -203,7 +207,12 @@
                                             </td>
                                         </tr>
                                     @empty
-                                        ---
+                                        
+                                        <tr class="text-center">
+                                            <td colspan="6" class="py-4 italic font-medium text-center text-gray-500">
+                                                Data belum tersedia.
+                                            </td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>

@@ -143,19 +143,19 @@ class QuestionPracticeController extends Controller
 
             if(Gate::allows('admin')){
                 if($request->input('back')){
-                    return redirect()->route('admin.class-bimbel.show', $request->input('back'))->with('success', 'Question berhasil ditambahkan.');
+                    return redirect()->route('admin.class-bimbel.show', $request->input('back'))->with('success', 'Pertanyaan berhasil ditambahkan.');
                 }
 
                 Log::info("berhasil");
-                return redirect()->route('admin.question-practice.index')->with('success', 'question created successfully.');
+                return redirect()->route('admin.question-practice.index')->with('success', 'Pertanyaan berhasil ditambahkan');
             
             }elseif(Gate::allows('mentor')){
                 if($request->input('back')){
-                    return redirect()->route('mentor.class-bimbel.show', $request->input('back'))->with('success', 'Question berhasil ditambahkan.');
+                    return redirect()->route('mentor.class-bimbel.show', $request->input('back'))->with('success', 'Pertanyaan berhasil ditambahkan.');
                 }
 
                 Log::info("berhasil");
-                return redirect()->route('mentor.question-practice.index')->with('success', 'question created successfully.');
+                return redirect()->route('mentor.question-practice.index')->with('success', 'Pertanyaan berhasil ditambahkan.');
             }
 
             
@@ -179,6 +179,24 @@ class QuestionPracticeController extends Controller
     public function edit(QuestionPractice $questionPractice)
     {
         //
+
+        $classes = ClassBimbel::all();
+
+        $question = $questionPractice;
+
+        
+        // Pastikan bahwa question dan relasi answers ada
+        if (!$question) {
+            return redirect()->back()->with('error', 'Pertanyaan tidak ditemukan.');
+        }
+        $answer = AnswerPractice::where('question_practice_id', $question->id)->first(); // Ambil jawaban yang terkait dengan pertanyaan
+        // dd($answer);
+
+        if(Gate::allows('admin')){
+            return view('admin.question-practice.edit', compact('question', 'answer', 'classes'));
+        } elseif(Gate::allows('mentor')){
+            return view('mentor.question-practice.edit', compact('questionPractice', 'classes'));
+        }
     }
 
     /**
@@ -237,19 +255,19 @@ class QuestionPracticeController extends Controller
 
             if(Gate::allows('admin')){
                 if($request->input('back')){
-                    return redirect()->route('admin.class-bimbel.show', $request->input('back'))->with('success', 'Question Behasil DI update');
+                    return redirect()->route('admin.class-bimbel.show', $request->input('back'))->with('success', 'Pertanyaan Behasil diubah');
                 }
 
                 Log::info("berhasil");
-                return redirect()->route('admin.question-practice.index')->with('success', 'question created successfully.');
+                return redirect()->route('admin.question-practice.index')->with('success', 'Pertanyaan berhasil diubah.');
             
             }elseif(Gate::allows('mentor')){
                 if($request->input('back')){
-                    return redirect()->route('mentor.class-bimbel.show', $request->input('back'))->with('success', 'Question Behasil DI update');
+                    return redirect()->route('mentor.class-bimbel.show', $request->input('back'))->with('success', 'Pertanyaan Behasil diubah');
                 }
 
                 Log::info("berhasil");
-                return redirect()->route('mentor.question-practice.index')->with('success', 'question Update successfully.');
+                return redirect()->route('mentor.question-practice.index')->with('success', 'Pertanyaan berhasil diubah.');
             }
 
         } catch (\Exception $e) {
@@ -269,10 +287,10 @@ class QuestionPracticeController extends Controller
             AnswerPractice::where('question_practice_id', $questionPractice->id)->delete();
 
             if($request->input('back')){
-                return redirect( $request->input('back'))->with('success', 'Question and answers deleted successfully.');
+                return redirect( $request->input('back'))->with('success', 'Berhasil menghapus pertanyaan.');
             }
 
-            return redirect()->route('admin.question.index')->with('success', 'Question and answers deleted successfully.');
+            return redirect()->route('admin.question.index')->with('success', 'Berhasil menghapus pertanyaan.');
         } catch (\Exception $e) {
             Log::error('Error in delete question: '. $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());

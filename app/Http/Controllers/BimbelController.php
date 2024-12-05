@@ -48,6 +48,7 @@ class BimbelController extends Controller
                             $editBtn = '<button class="edit-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
                                 data-id="'.$bimbel->id.'" 
                                 data-name="'.$bimbel->name.'" 
+                                data-link_group="'.$bimbel->link_group.'" 
                                 data-description="'.$bimbel->description.'">
                                 Update
                             </button>';
@@ -186,7 +187,7 @@ class BimbelController extends Controller
 
         $bimbels = Bimbel::all();
 
-        $users = User::all();
+        $users = User::where('role','mentor')->get();
 
         $subCategories = sub_categories::all();
 
@@ -263,7 +264,7 @@ class BimbelController extends Controller
 
         $bimbels = Bimbel::all();
 
-        $users = User::all();
+        $users = User::where('role','mentor')->get();
 
         $subCategories = sub_categories::all();
 

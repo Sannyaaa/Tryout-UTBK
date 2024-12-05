@@ -67,11 +67,11 @@
                     
                 </div>
 
-                    <div class="w-full mt-4 mx-auto">
-                        <x-secondary-link href="{{ route('google.login') }}" class="w-full mx-auto">
-                            <span><i class="fa-brands fa-google me-2"></i></span> Login dengan Google
-                        </x-secondary-link>
-                    </div>
+                <div class="w-full mt-4">
+                    <x-secondary-link href="{{ route('google.login') }}" class="w-full">
+                        <span><i class="fa-brands fa-google me-2"></i></span> Login dengan Google
+                    </x-secondary-link>
+                </div>
 
                     <div class="text-center">
                         <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mt-6 mb-4 ">

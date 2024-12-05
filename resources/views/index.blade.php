@@ -6,7 +6,7 @@
             <div class="w-full lg:flex py-16 lg:py-20 px-10 lg:px-14  xl:px-32 space-y-10">
                 <div class="w-4/5 lg:w-1/2 flex justify-center items-center pe-10">
                     <div class="text-left w-full">
-                        <h1 class="text-5xl font-bold text-sky-950 lg:text-6xl ">{{ $homePage->hero_title }}</h1>
+                        <h1 class="text-5xl font-bold text-sky-900 lg:text-6xl ">{{ $homePage->hero_title }}</h1>
 
                         <div class="mt-6 text-lg  text-gray-600">{!! $homePage->hero_desc !!}</div>
 
@@ -32,7 +32,7 @@
 
             <div class="py-24" id="features">
                 <div class="text-center w-3/5 md:w-2/5 mx-auto">
-                    <h1 class="text-4xl font-bold  text-sky-950 md:text-5xl lg:text-6xl ">Kenapa Memilih Kami</span></h1>
+                    <h1 class="text-4xl font-bold  text-sky-900 md:text-5xl lg:text-6xl ">Kenapa Memilih Kami</span></h1>
 
                     <p class="mt-6 text-lg  text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
                 </div>
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <div class="w-full px-4 sm:px-16 lg:px-32 space-y-10 mt-16 bg-sky-50" id="aboutUs">
+            <div class="w-full px-4 sm:px-16 lg:px-32 space-y-10 py-8 mt-16 bg-sky-50" id="aboutUs">
                 <div class="px-10 lg:flex">
                     <div class="w-full lg:w-1/2 px-0 lg:px-8 mx-auto my-auto">
                         <div class="overflow-hidden">
@@ -66,11 +66,14 @@
                     </div>
                     <div class="w-4/5 lg:w-1/2 flex justify-center items-center">
                         <div class="text-left w-full pb-20 lg:pt-20">
-                            <h1 class="text-5xl font-bold  text-sky-950 lg:text-6xl ">{{ $homePage->about_us_title }}</h1>
+                            <h1 class="text-5xl font-bold  text-sky-900 lg:text-6xl ">{{ $homePage->about_us_title }}</h1>
 
                             <div class="mt-6 text-lg  text-gray-600">{!! $homePage->about_us_desc !!}</div>
                         
-                            <div class="mt-10">
+                            <div class="mt-6">
+                                <x-primary-link class="" href="{{ route('login') }}">
+                                    Hubungi Kami
+                                </x-primary-link>
                                 {{-- <a href="{{ route('list-menu') }}" class="px-8 py-4 transition-all bg-slate-800 text-white hover:bg-white border-slate-800 border-4 hover:text-sky-900 rounded-xl font-bold text-lg">Explore Menu</a> --}}
                             </div>
                         </div>
@@ -84,7 +87,7 @@
 
                     <p class="mt-6 text-lg  text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
                 </div>
-                <div class="mt-12 px-4 md:px-28 lg:px-36 xl:px-56">
+                <div class="mt-12 px-4 lg:px-36 xl:px-56">
                     <div class="w-full flex flex-wrap justify-center">
 
                         <!-- Package Grid Section -->
@@ -145,22 +148,22 @@
                 <div class="text-center w-3/5 md:w-2/5 mx-auto">
                     <h1 class="text-4xl font-bold text-sky-900 md:text-5xl lg:text-6xl ">Kenali Mentor Kami</h1>
 
-                    <p class="mt-6 text-lg  text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+                    <p class="mt-6 text-lg  text-gray-600">Kenali mentor kami yang berpengalaman dan berdedikasi. Dengan pengalaman bertahun-tahun dalam dunia pendidikan, mereka siap membimbingmu hingga berhasil!</p>
                 </div>
-                <div class="my-12 px-4 sm:px-16 lg:px-32">
-                    <div class="flex justify-center px-10">
+                <div class="my-12  lg:px-32">
+                    <div class="flex justify-center">
                         <div class="w-full flex flex-wrap justify-center">
                             @forelse ($teachers as $teacher)
                                 <div class="m-4 max-w-sm">
-                                    <div class="rounded-lg border bg-white px-5 pt-8 pb-5 shadow transition-all hover:shadow-lg">
-                                        <div class="relative mx-auto w-48 rounded-full">
+                                    <div class="rounded-lg border bg-white px-5 pt-8 pb-5 shadow transition-all hover:shadow-xl ">
+                                        <div class="relative mx-auto w-48 rounded-full bg-slate-50 p-2">
                                             <div class="absolute right-0 m-3 h-3 w-3">
                                                 <span class="relative flex h-4 w-4">
                                                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
                                                     <span class="relative inline-flex rounded-full h-4 w-4 bg-sky-500"></span>
                                                 </span>
                                             </div>
-                                            <img class="mx-auto h-auto w-full rounded-xl" src="{{ Storage::url($teacher->avatar ?? '') }}" alt="" />
+                                            <img class="mx-auto h-auto w-full rounded-full" src="{{ Storage::url($teacher->avatar ?? '') }}" alt="" />
                                         </div>
                                         <h1 class="my-1 text-center text-xl font-bold leading-8 capitalize text-sky-900">{{ $teacher->name }}</h1>
                                         {{-- <h3 class="font-lg text-semibold text-center leading-6 text-gray-600">{{ $teacher->mentor->teach ?? '' }}</h3> --}}
@@ -174,10 +177,6 @@
                                                 <span>Lulusan</span>
                                                 <span class="ml-auto font-semibold"><span class="">{{ $teacher->mentor->data_universitas->nama_universitas ?? '' }}</span></span>
                                             </li>
-                                            <li class="flex items-center py-3 text-sm">
-                                                <span>Bargabung</span>
-                                                <span class="ml-auto font-medium">{{ \Carbon\Carbon::parse($teacher->mentor->created_at ?? '')->format('d F Y') }}</span>
-                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -188,6 +187,11 @@
                                 </span>
                             @endforelse
                         </div>
+                    </div>
+                    <div class="text-center w-full mt-6">
+                        <x-primary-link href="{{ route('mentor-page') }}" class="px-3 py-2">
+                            Lihat Semua Mentor
+                        </x-primary-link>
                     </div>
                 </div>
             </div>
@@ -321,8 +325,8 @@
 
             {{-- <div class=""> --}}
                 <section id="faqs">
-                    <div class="py-28 max-w-screen-xl mx-auto">
-                        <h1 class="mb-8 text-center text-6xl font-bold text-sky-500">Frequently Asked Questions (FAQ)</h1>
+                    <div class="py-28 max-w-screen-lg px-12 mx-auto">
+                        <h1 class="mb-8 text-center text-6xl font-bold text-sky-900">Frequently Asked Questions (FAQ)</h1>
                         <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-sky-100 dark:bg-gray-800 text-sky-600 dark:text-white">
                             @forelse ($faqs as $i => $faq)
                                 <h2 id="accordion-color-heading-{{ $i }}">
