@@ -54,7 +54,7 @@
             <div class="flex flex-col">
                 <div class="overflow-x-auto">
                     <div class="inline-block min-w-full align-middle">
-                        <div class="overflow-hidden shadow p-6">
+                        <div class="overflow-hidden shadow">
                             <table id="package_memberTable" class="min-w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
                                 <thead class="bg-gray-100 dark:bg-gray-700">
                                     <tr>

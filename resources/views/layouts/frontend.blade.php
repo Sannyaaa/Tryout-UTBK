@@ -35,7 +35,7 @@
                 <nav class="bg-white border-gray-200 dark:bg-gray-900">
                     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-6">
                         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                            <img src="{{ Storage::url($component->navbar_image) }}" class="h-8" alt="Flowbite Logo" />
+                            <img src="{{ Storage::url($component->navbar_image ?? '') }}" class="h-8" alt="Flowbite Logo" />
                             {{-- <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span> --}}
                         </a>
                         <div class="flex items-center lg:order-2 space-x-3 lg:space-x-0 rtl:space-x-reverse">
@@ -46,9 +46,11 @@
                                     <img class="w-8 h-8 rounded-full" src="{{ Storage::url(Auth::user()->avatar ?? '') }}" alt="user photo">
                                 </button>
                             @else
-                                <x-primary-link href="{{ route('login') }}">
+                                <div class="gap-3 flex">
+                                    <x-primary-link href="{{ route('login') }}" class="">
                                     Login
-                                </x-primary-link>
+                                    </x-primary-link>
+                                </div>
                             @endif
                             <!-- Dropdown menu -->
                             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
@@ -77,15 +79,15 @@
                             </button>
                         </div>
                         <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-user">
-                            <ul class="flex flex-col font-medium p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 mx-8 lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
+                            <ul class="flex flex-col font-medium p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 mx-8 lg:space-x-4 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
                                 <li>
-                                    <a href="#home" class="block py-2 px-3 text-white bg-blue-700 rounded lg:bg-transparent lg:text-blue-700 lg:p-0 lg:dark:text-blue-500" aria-current="page">Home</a>
+                                    <a href="{{ route('home-page') }}" class="block text-white  px-4 rounded-lg py-2 {{ Route::is('home-page') ? 'lg:bg-sky-50 lg:text-sky-700 bg-sky-700 lg:dark:text-sky-500' : 'lg:text-sky-700 hover:bg-gray-100 lg:hover:bg-sky-50 lg:hover:text-sky-700' }} dark:text-white lg:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 " aria-current="page">Home</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('package-page') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0 dark:text-white lg:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Paket</a>
+                                    <a href="{{ route('packages') }}" class="block text-white  px-4 rounded-lg py-2 {{ Route::is('packages') ? 'lg:bg-sky-50 lg:text-sky-700 bg-sky-700 lg:dark:text-sky-500' : 'lg:text-sky-700 hover:bg-gray-100 lg:hover:bg-sky-50 lg:hover:text-sky-700' }} dark:text-white lg:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 ">Paket</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('mentor-page') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0 dark:text-white lg:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Mentor</a>
+                                    <a href="{{ route('mentor-page') }}" class="block text-white  px-4 rounded-lg py-2 {{ Route::is('mentor-page') ? 'lg:bg-sky-50 lg:text-sky-700 bg-sky-700 lg:dark:text-sky-500' : 'lg:text-sky-700 hover:bg-gray-100 lg:hover:bg-sky-50 lg:hover:text-sky-700' }} dark:text-white lg:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Mentor</a>
                                 </li>
                             </ul>
                         </div>
@@ -174,7 +176,7 @@
                             </div>
                         </div>
                         <div class="mt-8 text-xs text-zinc-200">
-                            {!! $component->copyright !!}
+                            {!! $component->copyright ?? '' !!}
                         </div>
                     </div>
                 </footer>

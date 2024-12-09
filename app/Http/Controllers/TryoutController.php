@@ -189,14 +189,13 @@ class TryoutController extends Controller
         $question = Question::where('tryout_id', $tryout->id)->get();
         $tryout = tryout::with(['question.sub_categories'])->withCount(['question as total_question'])->findOrFail($tryout->id);
 
-        $subCategories = $tryout->question()
-                ->select('sub_categories_id')
-                ->with(['sub_categories' => function($query){
-                    $query->withCount('results as total_participants');
-                }])
-                ->selectRaw('sub_categories_id, count(*) as question_count')
-                ->groupBy('sub_categories_id')
-                ->get();
+        $subCategories = sub_categories::withCount(['question as question_count' => function ($query) use ($tryout) {
+                $query->where('tryout_id', $tryout->id);
+            }])->withCount(['results as total_participants' => function ($query) use ($tryout) {
+                $query->where('tryout_id', $tryout->id);
+            }])->get();
+
+
 
         return view('admin.tryout.show', compact('tryout','question','subCategories'));
     }

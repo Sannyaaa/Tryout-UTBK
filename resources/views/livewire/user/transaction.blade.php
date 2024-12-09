@@ -96,7 +96,7 @@
                                                 {{ $item->invoice }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <a href="{{ route('user.package.item', $item->package_member_id) }}" class=" hover:underline">
+                                                <a href="{{ route('package.item', $item->package_member_id) }}" class=" hover:underline">
                                                     {{ $item->package_member->name }}
                                                 </a>
                                             </td>
@@ -137,7 +137,7 @@
                                                         </a>
                                                     @endif
                                                 @else
-                                                    <a href="{{ route('user.package.item', $item->package_member_id) }}" target="_blank" class="text-sky-500 hover:text-sky-600 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
+                                                    <a href="{{ route('package.item', $item->package_member_id) }}" target="_blank" class="text-sky-500 hover:text-sky-600 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
                                                         <i class="fa-solid fa-tags"></i> Beli Lagi
                                                     </a>
                                                 @endif

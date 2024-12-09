@@ -4,26 +4,50 @@ namespace App\Livewire\User\Tryout;
 
 use App\Models\Result;
 use App\Models\Tryout;
-use App\Models\Question;
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\Package_member;
+use App\Models\Question;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class Item extends Component
 {
     public $tryoutId;
-
     public $tryout;
-
     public $user;
+    public $content;
+    public $package;
 
     public function mount(Request $request) {
         $this->tryoutId = $request->segment(3);
-
         $this->tryout = Tryout::where('id', $this->tryoutId)->first();
-
         $this->user = auth()->user();
+        $this->package = Package_member::where('tryout_id', $this->tryoutId)->first();
+    }
+
+    public function saveTestimonial()
+    {
+        // dd($this->content);
+        $this->validate([
+            'content' => 'required|string|max:500',
+        ]);
+        
+        $testi = Testimonial::create([
+            'package_member_id' => $this->package->id ?? null,
+            'user_id' => auth()->id(),
+            'content' => $this->content,
+        ]);
+
+        // Reset form
+        $this->reset('content');
+
+        // Dispatch JavaScript event
+        $this->dispatch('close-modal');
+
+        // Kirim flash message
+        session()->flash('success', 'Testimoni berhasil ditambahkan!');
     }
 
     public function render()

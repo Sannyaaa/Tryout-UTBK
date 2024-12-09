@@ -179,11 +179,10 @@ class Paper extends Component
         $tryout = Tryout::where('id', $this->itemId)->first();
 
         if ($tryout->is_together == 'together') {
-            return redirect()->route('user.tryouts.event.results', $result->id);
+            return redirect()->route('user.tryouts.event.item', $result->tryout_id);
         } else {
             return redirect()->route('user.tryouts.results', $result->id);
         }
         
-
     }
 }

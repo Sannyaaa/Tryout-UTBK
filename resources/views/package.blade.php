@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="px-5 py-2">
                                     <div>
-                                        <a href="{{ route('user.package.item', $package->id) }}">
+                                        <a href="{{ route('package.item', $package->id) }}">
                                             <h5 class="text-3xl font-bold hover:underline text-gray-800 uppercase dark:text-white mb-0">
                                                 {{ $package->name }}
                                             </h5>
@@ -83,7 +83,7 @@
                                         @endforeach
                                     </div>
                                     <div class="flex justify-between items-baseline my-3">
-                                        <x-primary-link href="{{ route('user.package.item', $package->id) }}">
+                                        <x-primary-link href="{{ route('package.item', $package->id) }}">
                                             Lihat Detail
                                         </x-primary-link>
                                         <span class="mt-auto text-3xl font-bold">

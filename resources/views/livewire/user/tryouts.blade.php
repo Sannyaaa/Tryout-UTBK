@@ -30,73 +30,75 @@
                 </div>
             </div>
             <div class="space-y-8">
-                <div>
-                    <h1 class="text-2xl font-semibold text-gray-600 mb-4">Tryout Yang Sudah Dibeli</h1>
-                    <div class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
-                        {{-- @dd($paidTryout) --}}
-                        @foreach  ($paidTryout as $item)
-                            <div class="">
-                                <div class="border rounded-lg shadow hover:shadow-lg transition-all duration-200 overflow-hidden">
-                                    <div class=" bg-gradient-to-tr from-sky-400 to-sky-500 text-white font-bold uppercase py-3 px-6">
-                                        Berbayar
-                                    </div>
-                                    <div class="py-4 px-6 bg-white font-semibold">
-                                        <div class="flex justify-between align-middle pb-3">
-                                            <h1 class="my-auto font-bold text-slate-600 text-3xl w-fit">
-                                                {{$item->name}}
-                                            </h1>
+                @if ($paidTryout->isNotEmpty())
+                    <div>
+                        <h1 class="text-2xl font-semibold text-gray-600 mb-4">Tryout Yang Sudah Dibeli</h1>
+                        <div class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
+                            {{-- @dd($paidTryout) --}}
+                            @foreach  ($paidTryout as $item)
+                                <div class="">
+                                    <div class="border rounded-lg shadow hover:shadow-lg transition-all duration-200 overflow-hidden">
+                                        <div class=" bg-gradient-to-tr from-sky-400 to-sky-500 text-white font-bold uppercase py-3 px-6">
+                                            Berbayar
                                         </div>
-                                        <div class="space-y-2">
+                                        <div class="py-4 px-6 bg-white font-semibold">
+                                            <div class="flex justify-between align-middle pb-3">
+                                                <h1 class="my-auto font-bold text-slate-600 text-3xl w-fit">
+                                                    {{$item->name}}
+                                                </h1>
+                                            </div>
+                                            <div class="space-y-2">
 
-                                            <div class="flex items-center text-gray-600 font-medium">
-                                                <span class="text-sky-500 text-xl me-2">
-                                                    <i class="fa-solid fa-file-circle-question"></i>
-                                                </span>
-                                                Jumlah Soal : <span class="font-semibold ms-1">{{ $item->question != null ? $item->question->count() : 0 }} Soal</span>
-                                            </div>
-                                            <div class=" text-sky-500 text-sm italic">
-                                                * Kamu bisa mencoba berulang kali.
-                                            </div>
-                                            @if ($item->is_together == 'together')
-                                                <div class="flex items-center text-gray-600">
-                                                    <div class="">
-                                                        <span class="mx-1"><i class="fa-solid fa-calendar-days"></i></span> {{ \Carbon\Carbon::parse($item->start_date)->format('j F Y') }} - {{ \Carbon\Carbon::parse($item->end_date)->format('j F Y') }}</div>
+                                                <div class="flex items-center text-gray-600 font-medium">
+                                                    <span class="text-sky-500 text-xl me-2">
+                                                        <i class="fa-solid fa-file-circle-question"></i>
+                                                    </span>
+                                                    Jumlah Soal : <span class="font-semibold ms-1">{{ $item->question != null ? $item->question->count() : 0 }} Soal</span>
                                                 </div>
-                                            @endif
+                                                <div class=" text-sky-500 text-sm italic">
+                                                    * Kamu bisa mencoba berulang kali.
+                                                </div>
+                                                @if ($item->is_together == 'together')
+                                                    <div class="flex items-center text-gray-600">
+                                                        <div class="">
+                                                            <span class="mx-1"><i class="fa-solid fa-calendar-days"></i></span> {{ \Carbon\Carbon::parse($item->start_date)->format('j F Y') }} - {{ \Carbon\Carbon::parse($item->end_date)->format('j F Y') }}</div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            {{-- <div class="border-2 rounded-lg border-sky-400 py-2 px-3 w-fit font-bold">
+                                                <span class="text-sky-400 border-e-2 border-sky-400 w-1/2 text-center"><i class="fa-solid fa-calendar-days"></i> 14 Juli 2024</span>
+                                                <hr class="border border-sky-400">
+                                                <span class="text-sky-400"><i class="fa-solid fa-user-group"></i> 20 Peserta</span>
+                                            </div> --}}
                                         </div>
-                                        {{-- <div class="border-2 rounded-lg border-sky-400 py-2 px-3 w-fit font-bold">
-                                            <span class="text-sky-400 border-e-2 border-sky-400 w-1/2 text-center"><i class="fa-solid fa-calendar-days"></i> 14 Juli 2024</span>
-                                            <hr class="border border-sky-400">
-                                            <span class="text-sky-400"><i class="fa-solid fa-user-group"></i> 20 Peserta</span>
+                                        <div class="pb-5 px-6 bg-white">
+                                            <a href="{{ route('user.tryouts.item',$item->id) }}" class="w-full">
+                                                <button class="text-white font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-sky-700 w-full p-3 rounded-lg">
+                                                    Lihat Detail
+                                                    <i class="fa-solid fa-arrow-right-long"></i>
+                                                </button>
+                                            </a>
+                                        </div>
+                                        {{-- <div class="flex justify-between items-center">
+                                            <x-primary-link href="#
+                                            {{ route('user.bimbel.material', $package->id) }}
+                                            " 
+                                                        class="bg-green-500 hover:bg-green-600">
+                                                Lihat Materi
+                                            </x-primary-link>
+                                            <a href="#
+                                            {{ route('user.bimbel.schedule', $package->id) }}
+                                            " 
+                                            class="text-green-500 hover:text-green-700 font-medium">
+                                                Jadwal Bimbel
+                                            </a>
                                         </div> --}}
                                     </div>
-                                    <div class="pb-5 px-6 bg-white">
-                                        <a href="{{ route('user.tryouts.item',$item->id) }}" class="w-full">
-                                            <button class="text-white font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-sky-700 w-full p-3 rounded-lg">
-                                                Lihat Detail
-                                                <i class="fa-solid fa-arrow-right-long"></i>
-                                            </button>
-                                        </a>
-                                    </div>
-                                    {{-- <div class="flex justify-between items-center">
-                                        <x-primary-link href="#
-                                        {{ route('user.bimbel.material', $package->id) }}
-                                        " 
-                                                    class="bg-green-500 hover:bg-green-600">
-                                            Lihat Materi
-                                        </x-primary-link>
-                                        <a href="#
-                                        {{ route('user.bimbel.schedule', $package->id) }}
-                                        " 
-                                        class="text-green-500 hover:text-green-700 font-medium">
-                                            Jadwal Bimbel
-                                        </a>
-                                    </div> --}}
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
-                </div>
+                @endif
                 
                 <div>
                     <h1 class="text-2xl font-semibold text-gray-600 mb-4">Tryout Terbaru</h1>
@@ -181,7 +183,7 @@
                                     </div>
                                     <div class="px-5 py-2">
                                         <div>
-                                            <a href="{{ route('user.package.item', $package->id) }}">
+                                            <a href="{{ route('package.item', $package->id) }}">
                                                 <h5 class="text-3xl font-bold hover:underline text-gray-700 dark:text-white uppercase">
                                                     {{ $package->name }}
                                                 </h5>
@@ -202,7 +204,7 @@
                                             @endforeach
                                         </div>
                                         <div class="flex justify-between items-baseline my-3">
-                                            <x-primary-link href="{{ route('user.package.item', $package->id) }}">
+                                            <x-primary-link href="{{ route('package.item', $package->id) }}">
                                                 Lihat Detail
                                             </x-primary-link>
                                             <span class="mt-auto text-3xl font-bold">

@@ -32,12 +32,13 @@ Route::get('/event/tryout/statistik/{id}', Statistik::class)->name('tryouts.even
 Route::get('/event/tryout/{id}/leaderboard', Leaderboard::class)->name('tryouts.event.leaderboard');
 
 
-Route::get('/paket', All::class)->name('packages');
-Route::get('/paket/{id}', App\Livewire\User\Package\Item::class)->name('package.item');
+// Route::get('/paket', All::class)->name('packages');
+// Route::get('/paket/{id}', App\Livewire\User\Package\Item::class)->name('package.item');
 
 
 Route::get('/paketku', App\Livewire\User\Owned\All::class)->name('my-packages');
 Route::get('/paketku/{id}/bimbel', App\Livewire\User\Owned\Bimbels::class)->name('my-bimbel');
+Route::get('/paketku/latihan/bimbel/{class_bimbel}/preparation', App\Livewire\User\Owned\Practice\Instruction::class)->name('my-bimbel.instruction');
 Route::get('/paketku/latihan/bimbel/{paper}', App\Livewire\User\Owned\Practice\Paper::class)->name('my-bimbel.paper');
 Route::get('/paketku/latihan/result/{result}', App\Livewire\User\Owned\Practice\Result::class)->name('my-bimbel.practice.result');
 Route::get('/paketku/latihan/history/{class_bimbel}', App\Livewire\User\Owned\Practice\History::class)->name('my-bimbel.practice.history');

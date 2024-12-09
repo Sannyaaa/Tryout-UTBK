@@ -50,7 +50,7 @@ class Results extends Component
         $answers = AnswerQuestion::with('question')
             ->where('result_id', $this->resultId)
             ->get();
-
+            
         foreach ($answers as $answer) {
             $this->userAnswers[$answer->question_id] = $answer->answer;
             

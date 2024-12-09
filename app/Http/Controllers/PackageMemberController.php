@@ -272,10 +272,12 @@ class PackageMemberController extends Controller
     {
         try {
             $package_member->delete();
-            return response()->json([
-               'success' => true,
-               'message' => 'Package member deleted successfully.'
-            ]);
+            // return response()->json([
+            //    'success' => true,
+            //    'message' => 'Package member deleted successfully.'
+            // ]);
+
+            return redirect()->route('admin.package_member.index')->with('success','Berhasil menghapus paket');
         } catch (\Exception $e) {
             Log::error('Error in delete package_member: ' . $e->getMessage());
             return response()->json([

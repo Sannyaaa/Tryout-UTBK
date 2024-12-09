@@ -39,6 +39,7 @@ class Bimbels extends Component
 
     public function saveTestimonial()
     {
+        // dd($this->content);
         $this->validate([
             'content' => 'required|string|max:500',
         ]);
@@ -49,8 +50,15 @@ class Bimbels extends Component
             'content' => $this->content,
         ]);
 
-        $this->content = '';
-        // $this->dispatchBrowserEvent('close-modal', ['modalId' => 'bimbel-testimonial-modal']);
+        // Reset form
+        $this->reset('content');
+
+        // Dispatch JavaScript event
+        // $this->dispatch('testimonial-saved');
+        $this->dispatch('close-modal');
+        
+        // Kirim flash message
+        session()->flash('message', 'Testimoni berhasil ditambahkan!');
     }
 
     // Ubah method updating menjadi updated

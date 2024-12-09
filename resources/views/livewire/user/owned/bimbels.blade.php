@@ -13,13 +13,15 @@
                     <li>
                         <div class="flex items-center">
                         <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                        <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Tryout</a>
+                        <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Paket Saya</a>
                         </div>
                     </li>
                     <li>
                         <div class="flex items-center">
                         <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                        <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page"></span>
+                        <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">
+                            {{ $bimbel->name }}
+                        </span>
                         </div>
                     </li>
                     </ol>
@@ -27,6 +29,7 @@
                 {{-- <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Bimbels</h1> --}}
             </div>
         </div>
+
         <div class="py-10 px-7 bg-white rounded-md shadow">
             <div class="flex justify-between items-center mb-2">
                 {{-- <span class="py-2 px-4 bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg font-semibold text-white">{{ $bimbel->tryout_id != null ? 'Tryout' : 'Bimbel' }}</span> --}}
@@ -34,55 +37,88 @@
                     <h1 class="text-3xl font-bold text-gray-900 sm:text-5xl sm:leading-none sm:tracking-tight dark:text-white">{{ $bimbel->name }}</h1>
                     <p class="mb-4 font-normal text-gray-500 text-lg dark:text-gray-400">{{ $bimbel->description }}</p>
                 </div>
-                <div class="inline-flex gap-3">
-                    
+                <div>
                     <div>
-                        <!-- Modal toggle -->
-                        <x-primary-button data-modal-target="bimbel-testimonial-modal" data-modal-toggle="bimbel-testimonial-modal" >
-                            <i class="fa-solid fa-comments"></i>  Testimoni
-                        </x-primary-button>
+                        @if (session()->has('message'))
+                            <div class="mb-4 text-sm text-sky-600 bg-sky-50 px-3 py-2 rounded-md dark:text-sky-400">
+                                {{ session('message') }}
+                            </div>
+                        @endif
+                    </div>
 
-                        <!-- Main modal -->
-                        <div id="bimbel-testimonial-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                            <div class="relative p-4 w-full max-w-2xl max-h-full">
-                                <!-- Modal content -->
+                    <div class="inline-flex gap-3">
+                        <!-- Modal toggle -->
+                        <button data-modal-target="testimonial-modal" data-modal-toggle="testimonial-modal" class="block text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-sky-300 font-semibold rounded-lg px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800" type="button">
+                            Tambah Testimoni
+                        </button>
+
+                        <div 
+                            wire:ignore.self 
+                            id="testimonial-modal" 
+                            tabindex="-1" 
+                            aria-hidden="true" 
+                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+                        >
+                            <div class="relative p-4 w-full max-w-md max-h-full">
                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                    <!-- Modal header -->
                                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                            Tambah Testimoni untuk Bimbel ini
+                                            Tambah Testimoni
                                         </h3>
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="bimbel-testimonial-modal">
+                                        <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="testimonial-modal">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                             </svg>
-                                            <span class="sr-only">Close modal</span>
                                         </button>
                                     </div>
-                                    <!-- Modal body -->
-                                    <div class="p-4 md:p-5 space-y-4">
-                                        <div>
-                                            <x-input-label for="content" :value="__('Testimoni')" />
-                                            <x-text-area id="content" wire:model.defer="content" rows="4" placeholder="Masukan Testimonial"/>
-                                            <x-input-error :messages="$errors->get('content')" class="mt-2" />
-                                        </div>
-                                    </div>
-                                    <!-- Modal footer -->
-                                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                        <button wire:click="saveTestimonial" data-modal-hide="bimbel-testimonial-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan</button>
-                                        <button data-modal-hide="bimbel-testimonial-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Batal</button>
+                                    
+                                    <div class="p-4 md:p-5">
+                                        @if (session()->has('message'))
+                                            <div class="mb-4 text-sm text-sky-600 bg-sky-50 px-3 py-2 rounded-lg dark:text-sky-400">
+                                                {{ session('message') }}
+                                            </div>
+                                        @endif
+                                        <form wire:submit.prevent="saveTestimonial">
+                                            <div class="mb-4">
+                                                <textarea 
+                                                    wire:model="content" 
+                                                    rows="4" 
+                                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                                    placeholder="Tulis testimoni Anda..."
+                                                ></textarea>
+                                                @error('content')
+                                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div class="flex justify-end space-x-2">
+                                                <button 
+                                                    type="button" 
+                                                    data-modal-hide="testimonial-modal" 
+                                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                                >
+                                                    Batal
+                                                </button>
+                                                <button 
+                                                    type="submit" 
+                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                                >
+                                                    Simpan
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <x-primary-link href="{{ $bimbel->link_group }}" target="__blank" class="flex items-center gap-2">
-                        <span class="">
-                            <i class="fa-brands fa-telegram"></i>
-                        </span> 
-                        <span class="">Group</span>
-                    </x-primary-link>
+
+                        <x-primary-link href="{{ $bimbel->link_group }}" target="__blank" class="flex items-center gap-2">
+                            <span class="">
+                                <i class="fa-brands fa-telegram"></i>
+                            </span> 
+                            <span class="">Group</span>
+                        </x-primary-link>
+                    </div>
                 </div>
             </div>
             <div class="">
@@ -170,7 +206,7 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap gap-3">
                                             @if ($hariSesuai)
-                                                <a href="{{ route('user.my-bimbel.paper', $class->id) }}" target="_blank" class="text-sky-50 gap-1 bg-sky-500 hover:bg-sky-600 px-4 py-2 border-2 border-sky-200 rounded-lg">
+                                                <a href="{{ route('user.my-bimbel.instruction', $class->id) }}" target="_blank" class="text-sky-50 gap-1 bg-sky-500 hover:bg-sky-600 px-4 py-2 border-2 border-sky-200 rounded-lg">
                                                     <i class="fa-regular fa-pen-to-square"></i> Kerjakan
                                                 </a>
                                                 @if ($class->is_completed)
@@ -248,3 +284,14 @@
         </div>
     </div>
 </div>
+
+@push('body-scripts')
+    <script>
+        window.addEventListener('close-modal', () => {
+            const closeButton = document.querySelector('[data-modal-hide="testimonial-modal"]');
+            if (closeButton) {
+                closeButton.click(); // Klik tombol untuk menutup modal
+            }
+        });
+    </script>
+@endpush

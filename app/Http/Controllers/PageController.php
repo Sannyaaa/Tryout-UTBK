@@ -40,9 +40,24 @@ class PageController extends Controller
             'hero_desc' => 'nullable|string',
             'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
 
+            'feature_title' => 'required|string',
+            'feature_description' => 'nullable|string',
+
             'about_us_title' => 'required|string',
             'about_us_desc' => 'nullable|string',
             'about_us_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+
+            'package_title' => 'required|string',
+            'package_desc' => 'nullable|string',
+
+            'mentor_title' => 'required|string',
+            'mentor_desc' => 'nullable|string',
+
+            'testimonial_title' => 'required|string',
+            'testimonial_desc' => 'nullable|string',
+
+            'faq_title' => 'required|string',
+            'faq_desc' => 'nullable|string',
 
             'question' => 'required|array|min:1',
             'question.*' => 'required|string',
@@ -66,9 +81,24 @@ class PageController extends Controller
                 'hero_desc' => $data['hero_desc'],
                 'hero_image' => $request->hasFile('hero_image')? $request->file('hero_image')->store('assets', 'public') : null,
 
+                'feature_title' => $data['feature_title'],
+                'feature_desc' => $data['feature_description'],
+
                 'about_us_title' => $data['about_us_title'],
                 'about_us_desc' => $data['about_us_desc'],
                 'about_us_image' => $request->hasFile('about_us_image')? $request->file('about_us_image')->store('assets', 'public') : null,
+
+                'package_title' => $data['package_title'],
+                'package_desc' => $data['package_desc'],
+
+                'mentor_title' => $data['mentor_title'],
+                'mentor_desc' => $data['mentor_desc'],
+
+                'testimonial_title' => $data['testimonial_title'],
+                'testimonial_desc' => $data['testimonial_desc'],    
+
+                'faq_title' => $data['faq_title'],
+                'faq_desc' => $data['faq_desc'],
             ]);
 
 
@@ -106,9 +136,24 @@ class PageController extends Controller
             'hero_desc' => 'nullable|string',
             'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
 
+            'feature_title' => 'required|string',
+            'feature_description' => 'nullable|string',
+
             'about_us_title' => 'required|string',
             'about_us_desc' => 'nullable|string',
             'about_us_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+
+            'package_title' => 'required|string',
+            'package_desc' => 'nullable|string',
+
+            'mentor_title' => 'required|string',
+            'mentor_desc' => 'nullable|string',
+
+            'testimonial_title' => 'required|string',
+            'testimonial_desc' => 'nullable|string',
+
+            'faq_title' => 'required|string',
+            'faq_desc' => 'nullable|string',
 
             'question' => 'required|array|min:1',
             'question.*' => 'required|string',
@@ -143,9 +188,24 @@ class PageController extends Controller
                 'hero_desc' => $data['hero_desc'],
                 'hero_image' => $request->hasFile('hero_image')? $request->file('hero_image')->store('assets', 'public') : $homePage->hero_image,
 
+                'feature_title' => $data['feature_title'],
+                'feature_desc' => $data['feature_description'],
+
                 'about_us_title' => $data['about_us_title'],
                 'about_us_desc' => $data['about_us_desc'],
                 'about_us_image' => $request->hasFile('about_us_image')? $request->file('about_us_image')->store('assets', 'public') : $homePage->about_us_image,
+
+                'package_title' => $data['package_title'],
+                'package_desc' => $data['package_desc'],
+
+                'mentor_title' => $data['mentor_title'],
+                'mentor_desc' => $data['mentor_desc'],
+
+                'testimonial_title' => $data['testimonial_title'],
+                'testimonial_desc' => $data['testimonial_desc'],
+
+                'faq_title' => $data['faq_title'],
+                'faq_desc' => $data['faq_desc'],
             ]);
 
             // Create faqs

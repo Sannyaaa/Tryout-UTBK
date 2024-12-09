@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\ComponentPage;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,5 +32,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('user', function ($user) {
             return $user->role === 'user';
         });
+
+        view()->share('component', ComponentPage::first());
     }
 }

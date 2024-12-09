@@ -67,31 +67,37 @@
                     
                 </div>
 
-                <div class="w-full mt-4">
-                    <x-secondary-link href="{{ route('google.login') }}" class="w-full">
+                <div class="mt-4 w-full text-center">
+                    <x-secondary-link href="{{ route('google.login') }}" class="mx-auto">
                         <span><i class="fa-brands fa-google me-2"></i></span> Login dengan Google
                     </x-secondary-link>
                 </div>
 
-                    <div class="text-center">
-                        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mt-6 mb-4 ">
+                <div class="text-center">
+                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mt-6 mb-4 flex justify-between">
+                        <div>
                             Belum punya akun? <a href="{{ route('register') }}" class="text-sky-700 hover:underline dark:text-sky-500">Buat Sekarang</a>
                         </div>
 
-                        {{-- <a class=" hover:underline text-sm text-sky-600 dark:text-sky-400 hover:text-sky-900 dark:hover:text-indigo-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-indigo-800 mt-3" href="/">
-                            {{ __('Kembali ke Beranda') }}
-                        </a> --}}
-
-                        <a class="underline text-sm text-sky-600 dark:text-sky-400 hover:text-sky-900 dark:hover:text-indigo-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-indigo-800" href="/">
-                            {{ __('Kembali ke Beranda') }}
-                        </a>
-
-                        {{-- @if (Route::has('password.request'))
-                            <a class="underline text-sm text-sky-600 dark:text-sky-400 hover:text-sky-900 dark:hover:text-indigo-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-indigo-800" href="{{ route('password.request') }}">
-                                {{ __('lupa password?') }}
-                            </a>
-                        @endif --}}
+                        <div>
+                            <a href="{{ route('password.request') }}" class="text-sky-700 hover:underline dark:text-sky-500">Lupa Password?</a>
+                        </div>
                     </div>
+
+                    {{-- <a class=" hover:underline text-sm text-sky-600 dark:text-sky-400 hover:text-sky-900 dark:hover:text-indigo-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-indigo-800 mt-3" href="/">
+                        {{ __('Kembali ke Beranda') }}
+                    </a> --}}
+
+                    <a class="underline text-sm text-sky-600 dark:text-sky-400 hover:text-sky-900 dark:hover:text-indigo-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-indigo-800" href="/">
+                        {{ __('Kembali ke Beranda') }}
+                    </a>
+
+                    {{-- @if (Route::has('password.request'))
+                        <a class="underline text-sm text-sky-600 dark:text-sky-400 hover:text-sky-900 dark:hover:text-indigo-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-indigo-800" href="{{ route('password.request') }}">
+                            {{ __('lupa password?') }}
+                        </a>
+                    @endif --}}
+                </div>
                 
             </form>
         </div>

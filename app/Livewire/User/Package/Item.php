@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User\Package;
 
+use App\Models\ComponentPage;
 use Carbon\Carbon;
 use Midtrans\Snap;
 use Midtrans\Config;
@@ -19,6 +20,7 @@ class Item extends Component
     public $voucher;
     public $discounted_price;
     public $final_price;
+    public $component;
     public $applied_voucher = null;
 
     // Rules untuk validasi
@@ -97,7 +99,8 @@ class Item extends Component
     public function checkout()
     {
         if (!auth()->check()) {
-            return redirect()->route('login');
+            $this->dispatchBrowserEvent('show-login-popup');
+            return;
         }
 
         $user = auth()->user();
@@ -205,6 +208,8 @@ class Item extends Component
 
         $testimonials = Testimonial::where('package_member_id',$id)->where('is_show','yes')->get();
 
-        return view('livewire.user.package.item',compact('testimonials'));
+        $component = ComponentPage::first();
+
+        return view('livewire.user.package.item',compact('testimonials','component'));
     }
 }

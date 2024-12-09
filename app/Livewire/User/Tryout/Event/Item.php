@@ -9,6 +9,8 @@ use App\Models\Tryout;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\Question;
+use App\Models\Package_member;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
@@ -22,6 +24,8 @@ class Item extends Component
     public $tryoutId;
     public $tryout;
     public $user;
+    public $content;
+    public $package;
 
     #[Url(history: true)]
     public $search = '';
@@ -52,6 +56,29 @@ class Item extends Component
         $this->tryoutId = $request->segment(4);
         $this->tryout = Tryout::where('id', $this->tryoutId)->first();
         $this->user = auth()->user();
+        $this->package = Package_member::where('tryout_id', $this->tryoutId)->first();
+    }
+
+    public function saveTestimonial()
+    {
+        $this->validate([
+            'content' => 'required|string|max:500',
+        ]);
+        
+        $testi = Testimonial::create([
+            'package_member_id' => $this->package->id ?? '',
+            'user_id' => auth()->id(),
+            'content' => $this->content,
+        ]);
+        
+        // Reset form
+        $this->reset('content');
+
+        // Dispatch JavaScript event
+        $this->dispatch('close-modal');
+        
+        // Kirim flash message
+        session()->flash('success', 'Testimoni berhasil ditambahkan!');
     }
 
     public function render()

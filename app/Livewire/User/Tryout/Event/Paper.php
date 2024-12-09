@@ -175,6 +175,6 @@ class Paper extends Component
             'score' => $score,
         ]);
 
-        return redirect()->route('user.tryouts.results', $result->id);
+        return redirect()->route('user.tryouts.event.item', $result->tryout_id);
     }
 }

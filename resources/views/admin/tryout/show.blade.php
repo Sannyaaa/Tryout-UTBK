@@ -43,9 +43,9 @@
                         <div class="w-full px-4">
                         <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
                             @if ( $tryout->is_free == 'free' )
-                                <span class="text-lg font-bold text-black mb-4">Gratis</span>
+                                <span class="text-lg font-bold text-gray-800 mb-4">Gratis</span>
                             @else
-                                <span class="text-lg font-bold text-black mb-4">Berbayar</span>
+                                <span class="text-lg font-bold text-gray-800 mb-4">Berbayar</span>
                             @endif
                         </h3>
                         @php
@@ -53,11 +53,11 @@
                         @endphp
                         <h3 class="text-sm text-gray-500  mb-4">Biasa / Serentak <br>
                             @if ( $tryout->is_together == 'together' )
-                                <p class="text-lg font-bold text-black mb-4">Serentak</p>
+                                <p class="text-lg font-bold text-gray-800 mb-4">Serentak</p>
                                 <span class="text-sm text-gray-500">Tanggal</span>
-                                <p class="text-lg font-bold text-black mb-4">{{ Carbon::parse($tryout->start_date)->format('d F Y') }} - {{ Carbon::parse($tryout->end_date)->format('d F Y') }} </p>
+                                <p class="text-lg font-bold text-gray-800 mb-4">{{ Carbon::parse($tryout->start_date)->format('d F Y') }} - {{ Carbon::parse($tryout->end_date)->format('d F Y') }} </p>
                             @else
-                                <span class="text-lg font-bold text-black mb-4">Biasa</span>
+                                <span class="text-lg font-bold text-gray-800 mb-4">Biasa</span>
                             @endif
                         </h3>
                     </div>
@@ -74,8 +74,8 @@
                 {{-- <a href="{{ route('admin.tryout.question.create', $tryout->id) }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
                     Add new Question
                 </a> --}}
-                <x-primary-link href="{{ route('admin.combined-categories.index') }}">
-                    Buat Subcategory
+                <x-primary-link href="{{ route('admin.tryout.question.create',$tryout->id) }}">
+                    Tambah Pertanyaan
                 </x-primary-link>
             </div>
 
@@ -141,7 +141,7 @@
                                 </tbody>
                             </table> --}}
                             <table class="min-w-full divide-y divide-gray-200 border-gray-200 border-2 whitespace-nowrap dark:divide-gray-600">
-                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                <thead class="bg-gradient-to-tr from-sky-400 to-sky-500 text-slate-50 text-left text-xs uppercase tracking-wider">
                                     <tr>
                                         {{-- <th scope="col" class="p-4">
                                             <div class="flex items-center">
@@ -152,19 +152,19 @@
                                         {{-- <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Image
                                         </th> --}}
-                                        <th scope="col" class="p-4 text-xs font-semibold text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4 ">
                                             No
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4 ">
                                             Sub Categories
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4 ">
                                             Total Pertanyaan
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4 ">
                                             Total Peserta
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4 ">
                                             Actions
                                         </th>
                                     </tr>
@@ -174,21 +174,20 @@
                                     @foreach ($subCategories  as $i => $subCategory)
                                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                             <td class="p-4 text-base font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{$i + 1}}</td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$subCategory->sub_categories->name}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$subCategory->name}}</td>
                                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$subCategory->question_count}}</td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$subCategory->sub_categories->total_participants}}</td>
+                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$subCategory->total_participants}}</td>
                                             <td class="p-4 space-x-2 whitespace-nowrap">
                                                 <div class="flex justify-start gap-1">
-                                                    <a href="{{ route('admin.tryout.sub-category', ['tryout' => $tryout->id, 'sub_categories' => $subCategory->sub_categories->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
+                                                    <x-primary-link href="{{ route('admin.tryout.sub-category', ['tryout' => $tryout->id, 'sub_categories' => $subCategory->id]) }}"    class="">
                                                         Detail
-                                                    </a>
-                                                  <a href="{{ route('admin.tryout.sub-category', ['tryout' => $tryout->id, 'sub_categories' => $subCategory->sub_categories->id, 'export_excel' => true]) }}" 
-                                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-green-400 to-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300">
+                                                    </x-primary-link>
+                                                    <a href="{{ route('admin.tryout.sub-category', ['tryout' => $tryout->id, 'sub_categories' => $subCategory->id, 'export_excel' => true]) }}" 
+                                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-green-400 to-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300">
                                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                                         </svg>
-                                                        Export to Excel
+                                                        Excel
                                                     </a>
                                                 </div>
                                             </td>
@@ -201,8 +200,8 @@
                 </div>
             </div>
 
-            <div>
-                <x-primary-link href="{{ route('admin.tryout.index') }}" class="mt-4">
+            <div class="mt-4">
+                <x-primary-link href="{{ route('admin.tryout.index') }}" class="">
                     Kembali
                 </x-primary-link>
             </div>

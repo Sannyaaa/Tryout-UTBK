@@ -10,6 +10,7 @@ use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use App\Models\ComponentPage;
 use App\Models\Package_member;
+use App\Models\Promotion;
 
 class LandingController extends Controller
 {
@@ -28,6 +29,8 @@ class LandingController extends Controller
 
         $teachers = User::where('role','mentor')->inRandomOrder()->limit(3)->get();
 
+        $promotions = Promotion::where('is_show','yes')->get();
+
         return view('index',[
             'homePage' => $homePage,
             'faqs' => $faqs,
@@ -36,6 +39,7 @@ class LandingController extends Controller
             'component' => $component,
             'testimonials' => $testimonials,
             'teachers' => $teachers,
+            'promotions' => $promotions,
         ]);
     }
 
@@ -43,11 +47,14 @@ class LandingController extends Controller
 
         $component = ComponentPage::first();
 
+        $homePage = HomePage::first();
+
         $mentors = User::with('mentor')->where('role','mentor')->get();
 
         return view('mentor',[
             'mentors' => $mentors,
             'component' => $component,
+            'homePage' => $homePage,
         ]);
     }
 

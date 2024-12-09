@@ -102,7 +102,13 @@ class DashboardController extends Controller
 
         // Dashboard berdasarkan role
         if ($user->role == 'user') {
+            if (session('url-package')) {
+                return redirect()->route('package.item',session('url-package'));
+            }
+
             return  redirect()->route('user.dashboard');
+        } elseif ($user->role == 'mentor') {
+            return redirect()->route('dashboard-mentor');
         } else {
             return view('admin.dashboard', compact(
                 'order',

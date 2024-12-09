@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('content')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('package_member_id');
+            $table->unsignedBigInteger('package_member_id')->nullable();
             $table->foreign('package_member_id')->references('id')->on('package_members')->onDelete('cascade');
 
             $table->timestamps();

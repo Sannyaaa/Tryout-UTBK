@@ -103,7 +103,7 @@
                     <div>
                         <h2 class="text-5xl font-bold text-gray-700 mb-3 text-center">Feature Section</h2>
                         
-                        <div class="features-container grid grid-cols-2 gap-4 ">
+                        <div class="features-container grid lg:grid-cols-2 gap-4 ">
                             {{-- @forelse($features as $feature)
                                 <div class="feature-input gap-2">
                                     <div>
@@ -160,6 +160,18 @@
                                     </div>
                                 </div>
                             @empty --}}
+                            <div>
+                                <x-input-label for="feature_title" :value="__('Judul hero')" />
+                                <x-text-input type="text" :value="$homePage->feature_title ?? old('feature_title')" name="feature_title" id="feature_title" placeholder="Masukan Judul Hero"/>
+                                <x-input-error :messages="$errors->get('feature_title')" class="mt-2" />
+                            </div>
+
+                            <div>
+                                <x-input-label for="feature_description" :value="__('Deskripsi Hero')" />
+                                <x-text-area id="feature_description" name="feature_description" rows="4" placeholder="Masukan Deskripsi Hero">{!! $homePage->feature_desc ?? '' !!}</x-text-area>
+                                <x-input-error :messages="$errors->get('feature_description')" class="mt-2" />
+                            </div>
+
                             @forelse ($features as $i => $feature)
                                 <div class="feature-input py-4">
                                     <div class="space-y-4">
@@ -329,10 +341,78 @@
 
                     </div>
 
+                    <div class="grid lg:grid-cols-2 gap-4">
+                        <div>
+                            <h2 class="text-5xl font-bold text-gray-700 mb-3 text-center">Paket Section</h2>
+
+                            <div>
+                                <x-input-label for="package_title" :value="__('Judul hero')" />
+                                <x-text-input type="text" :value="$homePage->package_title ?? old('package_title')" name="package_title" id="package_title" placeholder="Masukan Judul Hero"/>
+                                <x-input-error :messages="$errors->get('package_title')" class="mt-2" />
+                            </div>
+
+                            <div>
+                                <x-input-label for="package_desc" :value="__('Deskripsi Hero')" />
+                                <x-text-area id="package_desc" name="package_desc" rows="4" placeholder="Masukan Deskripsi Hero">{!! $homePage->package_desc ?? '' !!}</x-text-area>
+                                <x-input-error :messages="$errors->get('package_desc')" class="mt-2" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 class="text-5xl font-bold text-gray-700 mb-3 text-center">Mentor Section</h2>
+
+                            <div>
+                                <x-input-label for="mentor_title" :value="__('Judul hero')" />
+                                <x-text-input type="text" :value="$homePage->mentor_title ?? old('mentor_title')" name="mentor_title" id="mentor_title" placeholder="Masukan Judul Hero"/>
+                                <x-input-error :messages="$errors->get('mentor_title')" class="mt-2" />
+                            </div>
+
+                            <div>
+                                <x-input-label for="mentor_desc" :value="__('Deskripsi Hero')" />
+                                <x-text-area id="mentor_desc" name="mentor_desc" rows="4" placeholder="Masukan Deskripsi Hero">{!! $homePage->mentor_desc ?? '' !!}</x-text-area>
+                                <x-input-error :messages="$errors->get('mentor_desc')" class="mt-2" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-4">
+                        <div>
+                            <h2 class="text-5xl font-bold text-gray-700 mb-3 text-center">Testimonial Section</h2>
+
+                            <div>
+                                <x-input-label for="testimonial_title" :value="__('Judul hero')" />
+                                <x-text-input type="text" :value="$homePage->testimonial_title ?? old('testimonial_title')" name="testimonial_title" id="testimonial_title" placeholder="Masukan Judul Hero"/>
+                                <x-input-error :messages="$errors->get('testimonial_title')" class="mt-2" />
+                            </div>
+
+                            <div>
+                                <x-input-label for="testimonial_desc" :value="__('Deskripsi Hero')" />
+                                <x-text-area id="testimonial_desc" name="testimonial_desc" rows="4" placeholder="Masukan Deskripsi Hero">{!! $homePage->testimonial_desc ?? '' !!}</x-text-area>
+                                <x-input-error :messages="$errors->get('testimonial_desc')" class="mt-2" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 class="text-5xl font-bold text-gray-700 mb-3 text-center">FAQ Section</h2>
+
+                            <div>
+                                <x-input-label for="faq_title" :value="__('Judul hero')" />
+                                <x-text-input type="text" :value="$homePage->faq_title ?? old('faq_title')" name="faq_title" id="faq_title" placeholder="Masukan Judul Hero"/>
+                                <x-input-error :messages="$errors->get('faq_title')" class="mt-2" />
+                            </div>
+
+                            <div>
+                                <x-input-label for="faq_desc" :value="__('Deskripsi Hero')" />
+                                <x-text-area id="faq_desc" name="faq_desc" rows="4" placeholder="Masukan Deskripsi Hero">{!! $homePage->faq_desc ?? '' !!}</x-text-area>
+                                <x-input-error :messages="$errors->get('faq_desc')" class="mt-2" />
+                            </div>
+                        </div>
+                    </div>
+
                     <div>
-                        <h2 class="text-5xl font-bold text-gray-700 mb-3 text-center">FAQ Section</h2>
                         
-                        <div class="faqs-container grid grid-cols-2 gap-4 ">
+                        <div class="faqs-container grid lg:grid-cols-2 gap-4 ">
+
                             @forelse($faqs as $faq)
                                 <div class="faq-input gap-2">
                                     <div class="space-4">

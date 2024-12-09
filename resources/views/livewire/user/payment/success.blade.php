@@ -45,7 +45,7 @@
                             {{-- <x-primary-link class="px-8">
                                 Dashboard
                             </x-primary-link> --}}
-                            <x-primary-link href="{{ route('user.packages') }}" class="">
+                            <x-primary-link href="{{ route('packages') }}" class="">
                                 Paket Lainnya
                             </x-primary-link>
                         </div>

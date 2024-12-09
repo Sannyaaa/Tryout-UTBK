@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="py-4 px-6 bg-white font-semibold">
                                         <div class="flex justify-between align-middle pb-3">
-                                            <h1 class="my-auto font-bold text-gray-700 text-3xl w-fit">
+                                            <h1 class="my-auto font-semibold text-gray-700 text-3xl w-fit">
                                                 {{$package->tryout->name}}
                                             </h1>
                                         </div>
@@ -237,7 +237,7 @@
                         <h3 class="mt-2 text-sm font-medium text-gray-900">Belum ada paket yang dibeli</h3>
                         <p class="mt-1 text-sm text-gray-500">Mulai beli paket untuk mengakses materi pembelajaran.</p>
                         <div class="mt-6">
-                            <a href="{{ route('user.packages') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-500 hover:bg-sky-600">
+                            <a href="{{ route('packages') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-500 hover:bg-sky-600">
                                 Lihat Paket Tersedia
                             </a>
                         </div>
