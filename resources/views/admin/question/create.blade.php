@@ -155,7 +155,7 @@
                                 Back
                             </x-secondary-href>
                             <x-primary-button type="submit">
-                                Add question
+                                Submit
                             </x-primary-button>
                     </div>
             </form>

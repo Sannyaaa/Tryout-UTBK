@@ -10,7 +10,14 @@ use App\Http\Controllers\UniversityController;
 //     return view('index');
 // });
 
-Route::get('/', [LandingController::class, 'home']);
+Route::get('/', [LandingController::class, 'home'])->name('home-page');
+Route::get('/mentor', [LandingController::class, 'mentor'])->name('mentor-page');
+Route::get('/package', [LandingController::class, 'package'])->name('package-page');
+Route::get('/package-item/{id}', [LandingController::class, 'packageDetail'])->name('detail-package-page');
+
+Route::get('/paket', App\Livewire\User\Package\All::class)->name('packages');
+Route::get('/paket/{id}', App\Livewire\User\Package\Item::class)->name('package.item');
+
 
 Route::get('/test', function () {
     return view('test');

@@ -38,6 +38,7 @@ class DashboardController extends Controller
 
         $packageSales = DB::table('package_members')
         ->join('orders', 'package_members.id', '=', 'orders.package_member_id')
+        ->where('orders.payment_status','paid')
         ->select('package_members.name as package_name', DB::raw('COUNT(orders.id) as total_sales'))
         ->groupBy('package_members.name')
         ->get();
@@ -78,9 +79,7 @@ class DashboardController extends Controller
         
         foreach ($tryouts as $tryout) {
             // Get total sub_categories for this tryout
-            $totalSubCategories = DB::table('questions')
-                ->where('tryout_id', $tryout->id)
-                ->count();
+            $totalSubCategories = sub_categories::count();
 
             // Get users who completed all sub_categories
             $completedUsers = DB::table('results')
@@ -103,7 +102,13 @@ class DashboardController extends Controller
 
         // Dashboard berdasarkan role
         if ($user->role == 'user') {
-            return view('livewire.user.dashboard');
+            if (session('url-package')) {
+                return redirect()->route('package.item',session('url-package'));
+            }
+
+            return  redirect()->route('user.dashboard');
+        } elseif ($user->role == 'mentor') {
+            return redirect()->route('dashboard-mentor');
         } else {
             return view('admin.dashboard', compact(
                 'order',

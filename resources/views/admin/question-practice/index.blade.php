@@ -18,13 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Latihan</a>
+                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Pertanyaan Latihan</a>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Semua Latihan</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Semua Pertanyaan</span>
                             </div>
                         </li>
                         </ol>
@@ -44,15 +44,15 @@
                     </div>
                 </div>
                 <div class="flex justify-center items-center gap-2">
-                    <div class="">
-                        <select id="payment_status" class="p-2 bquestion-practice rounded">
+                    {{-- <div class="">
+                        <x-select-input id="payment_status" class="p-2 question-practice rounded">
                             <option value="">Status Pembayaran</option>
                             <option value="pending">Pending</option>
                             <option value="paid">Dibayar</option>
-                        </select>
-                    </div>
+                        </x-select-input>
+                    </div> --}}
                     <x-primary-link href="{{ route('admin.question-practice.create') }}">
-                        + Latihan
+                        Tambah Pertanyaan
                     </x-primary-link>
                 </div>
             </div>

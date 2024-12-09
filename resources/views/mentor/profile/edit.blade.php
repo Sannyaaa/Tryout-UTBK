@@ -65,17 +65,15 @@
                                                 </label>
                                                 <input type="file" id="avatar" class="hidden" wire:model="avatar" />
                                             </div>
-                                            <button type="button" class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                                Delete
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-6 gap-6">
+
                                 <!-- Nama -->
-                                <div class="col-span-6 sm:col-span-3">
+                                <div class="col-span-6 md:col-span-3">
                                     <x-input-label for="name" :value="__('Nama')" />
                                     <x-text-input id="name" class="block mt-1 w-full"
                                         type="text"
@@ -86,7 +84,7 @@
                                 </div>
 
                                 <!-- Email -->
-                                <div class="col-span-6 sm:col-span-3">
+                                <div class="col-span-6 md:col-span-3">
                                     <x-input-label for="email" :value="__('Email')" />
                                     <x-text-input id="email" class="block mt-1 w-full"
                                         type="email"
@@ -97,7 +95,7 @@
                                 </div>
 
                                 <!-- Phone -->
-                                <div class="col-span-6 sm:col-span-3">
+                                <div class="col-span-6 md:col-span-3">
                                     <x-input-label for="phone" :value="__('Phone')" />
                                     <x-text-input id="phone" class="block mt-1 w-full"
                                         type="number"
@@ -108,7 +106,7 @@
                                 </div>
 
                                 <!-- Phone -->
-                                <div class="col-span-6 sm:col-span-3">
+                                <div class="col-span-6 md:col-span-3">
                                     <x-input-label for="tgl" :value="__('Tanggal Lahir')" />
                                     <x-text-input id="tgl" class="block mt-1 w-full"
                                         type="date"
@@ -119,7 +117,7 @@
                                 </div>
 
                                 <!-- Role -->
-                                <div class="col-span-6 sm:col-span-3">
+                                <div class="col-span-6 md:col-span-3">
                                     <x-input-label for="jenis_kelamin" :value="__('Jenis Kelamin')" />
                                     <x-select-input id="jenis_kelamin" name="jenis_kelamin">
                                         <option selected disabled>Pilih Jenis Kelamin</option>
@@ -130,12 +128,12 @@
                                 </div>
 
                                 <!-- Select inputs dengan Tom Select -->
-                                <div class=" col-span-6 sm:col-span-3">
+                                <div class=" col-span-6 md:col-span-3">
                                     <x-input-label for="data_universitas_id" :value="__('Universitas')" />
                                     <x-select-input id="data_universitas_id" name="data_universitas_id" class="select-university">
                                         <option value="">Pilihan Universitas 1</option>
                                         @foreach ($university as $universitas)
-                                            <option value="{{ $universitas->id }}" {{ old('data_universitas_id', $user->mentor->data_universitas_id) == $universitas->id ? 'selected' : '' }}>
+                                            <option value="{{ $universitas->id }}" {{ old('data_universitas_id', $user->mentor->data_universitas_id ?? '') == $universitas->id ? 'selected' : '' }}>
                                                 {{ $universitas->nama_universitas }}
                                             </option>
                                         @endforeach
@@ -143,17 +141,17 @@
                                 </div>
 
                                 <!-- Phone -->
-                                <div class="col-span-12 sm:col-span-6">
+                                <div class="col-span-12 md:col-span-6">
                                     <x-input-label for="teach" :value="__('Teach')" />
                                     <x-text-input id="teach" class="block mt-1 w-full"
                                         type="text"
                                         name="teach"
-                                        value="{{ old('teach', $user->mentor->teach) }}"
+                                        value="{{ old('teach', $user->mentor->teach ?? '') }}"
                                         autocomplete="teach" />
                                     <x-input-error :messages="$errors->get('teach')" class="mt-2" />
                                 </div>
 
-                                <div class="col-span-12 sm:col-span-6">
+                                <div class="col-span-12 md:col-span-6">
                                     <x-input-label for="achievements" :value="__('Achievements')" />
                                     
                                     <div id="achievements-container">
@@ -200,7 +198,7 @@
 
                                 <div class="col-span-12 sm:col-span-6">
                                     <x-input-label for="description" :value="__('Description')" />
-                                    <x-text-area id="description" name="description" rows="4" value="{{ old('description') }}" placeholder="Masukan description">{!! $user->mentor->description !!}</x-text-area>
+                                    <x-text-area id="description" name="description" rows="4" value="{{ old('description') }}" placeholder="Masukan description">{!! $user->mentor->description ?? '' !!}</x-text-area>
                                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                 </div>
 

@@ -208,7 +208,7 @@ class ClassBimbelController extends Controller
         //
         $bimbels = Bimbel::all();
 
-        $users = User::all();
+        $users = User::where('role','mentor')->get();
 
         $subCategories = sub_categories::all();
 
@@ -298,10 +298,10 @@ class ClassBimbelController extends Controller
         }
 
         if($request->input('back')){
-            return redirect($request->input('back'))->with('success', 'Tryout berhasil ditambahkan.');
+            return redirect($request->input('back'))->with('success', 'Kelas berhasil ditambahkan.');
         }
 
-        return redirect()->route('admin.class-bimbel.index')->with('success', 'Tryout berhasil ditambahkan.');
+        return redirect()->route('admin.class-bimbel.index')->with('success', 'Kelas berhasil ditambahkan.');
     
     }
 
@@ -330,7 +330,7 @@ class ClassBimbelController extends Controller
 
         $bimbels = Bimbel::all();
 
-        $users = User::all();
+        $users = User::where('role','mentor')->get();
 
         $subCategories = sub_categories::all();
 
@@ -388,9 +388,9 @@ class ClassBimbelController extends Controller
         }
 
         if(Gate::allows('admin')){
-            return redirect()->route('admin.class-bimbel.index')->with('success', 'Tryout berhasil diubah.');
+            return redirect()->route('admin.class-bimbel.index')->with('success', 'Kelas berhasil diubah.');
         }elseif(Gate::allows('mentor')){
-            return redirect()->route('mentor.class-bimbel.index')->with('success', 'Tryout berhasil diubah.');
+            return redirect()->route('mentor.class-bimbel.index')->with('success', 'Kelas berhasil diubah.');
         }
     }
 
@@ -402,6 +402,6 @@ class ClassBimbelController extends Controller
         //
         $classBimbel->delete();
 
-        return redirect()->route('admin.class-bimbel.index')->with('success', 'Tryout berhasil dihapus.');
+        return redirect()->route('admin.class-bimbel.index')->with('success', 'Kelas berhasil dihapus.');
     }
 }

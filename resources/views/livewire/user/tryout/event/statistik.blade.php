@@ -107,9 +107,11 @@
                                 <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-8">
                                     <div class="flex justify-between items-center bg-gradient-to-tr from-sky-400 to-sky-500 text-white px-6 py-3">
                                         <h3 class="text-xl font-bold">{{ $result->sub_category_name }}</h3>
-                                        <span class="font-semibold hover:underline">
-                                            <a href="{{ route('user.tryouts.event.results', $result->result_id) }}">Lihat Pembahasan</a>
-                                        </span>
+                                        @if ( \Carbon\Carbon::today() > $tryout->end_date )
+                                            <span class="font-semibold hover:underline">
+                                                <a href="{{ route('user.tryouts.event.results', $result->result_id) }}">Lihat Pembahasan</a>
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class=" xl:flex justify-between w-full px-10 py-8">
                                         <div class="">

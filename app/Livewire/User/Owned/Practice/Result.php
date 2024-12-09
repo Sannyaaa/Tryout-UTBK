@@ -4,162 +4,199 @@ namespace App\Livewire\User\Owned\Practice;
 
 use Livewire\Component;
 use Illuminate\Http\Request;
+use App\Models\ResultPractice;
 use App\Models\QuestionPractice;
 use App\Models\AnswerQuestionPractice;
-use App\Models\ResultPractice;
+use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 
 class Result extends Component
 {
+    public $resultId;
     public $q;
-
-    public $resultsId;
-
-    public $question;
     public $questions;
+    public $result;
+    public $totalResult;
+    public $userAnswers = [];
+    public $answeredQuestions = [];
+    public $averageScore;
+    public $userRank;
+    public $chartData;
+    public $currentQuestionNumber; 
+    public $currentQuestionId;
 
-    public $results; 
-
-    public $answers;
+    protected $updatesQueryString = ['q'];
 
     public function mount(Request $request) {
                   
-        $this->resultsId = $request->segment(4);
-        $this->results = ResultPractice::whereId($this->resultsId)->first();
-
-        // Initialize an empty array for the mapped answers
-        $this->answers = [];
+        $resultId = $request->segment(4);
+        $this->resultId = $resultId;
+        $this->result = ResultPractice::findOrFail($resultId);
         
-        // $this->answers = array_merge($this->answers, $this->question->answer->toArray());
-
-        $this->q = QuestionPractice::where('class_bimbel_id', $this->results->class_bimbel_id)
-            ->min('id');
-
-        // $this->question = Question::where('id', $this->q)
-        //     ->with('answer')
-        //     ->first();
-
-        // Check if the question exists
-        // if ($this->question) {
-        //     // Fetch answers and map them to the desired format
-        //     $this->answers = $this->question->answer->map(function($answer, $index) {
-        //         // Map the index to the corresponding letter
-        //         return [
-        //             'key' => $index + 1, // Start from 1
-        //             'option' => $answer->option, // Assuming 'option' holds 'a', 'b', etc.
-        //             'text' => $answer->text // Assuming 'text' holds the answer text
-        //         ];
-        //     })->pluck('option', 'key'); // Use pluck to create a key-value pair
-        // } else {
-        //     $this->answers = []; // Handle case where question is not found
-        // }
-
+        // Load questions dan simpan sebagai collection
+        $this->questions = collect(QuestionPractice::where('class_bimbel_id',$this->result->class_bimbel_id)
+            ->get()
+            ->map(function ($question, $index) {
+                $question->count = $index + 1;
+                return $question;
+            }));
+            
+        // Set initial question
+        $this->q = $this->questions->first()->id;
+        $this->currentQuestionId = $this->q;
+        $this->updateCurrentQuestionNumber();
         
+        // Load user answers dengan eager loading
+        $answers = AnswerQuestionPractice::with('question_practice')
+            ->where('result_practice_id', $this->resultId)
+            ->get();
+
+        foreach ($answers as $answer) {
+            $this->userAnswers[$answer->question_practice_id] = $answer->answer;
+            
+            // Check if answer is correct
+            if ($answer->answer === null) {
+                $this->answeredQuestions[$answer->question_practice_id] = null;
+            } else {
+                $this->answeredQuestions[$answer->question_practice_id] = 
+                    $answer->answer === $answer->question_practice->correct_answer;
+            }
+        }
+
+        $this->calculateAverageScore();
+        $this->determineUserRank();
+        $this->prepareChartData();
+    }
+
+    public function calculateAverageScore(){
+        $this->averageScore = ResultPractice::where('class_bimbel_id',$this->result->class_bimbel_id)
+                                ->avg('score');
+    }
+
+    public function determineUserRank(){
+        $allResults = ResultPractice::where('class_bimbel_id',$this->result->class_bimbel_id)
+                                ->orderByDesc('score')
+                                ->get();
+
+        $this->userRank = $allResults->search(function($result){
+            return $result->id == $this->resultId;
+        }) + 1;
+    }
+
+    public function prepareChartData(){
+        $allResults = ResultPractice::where('class_bimbel_id',$this->result->class_bimbel_id)
+            ->pluck('score')
+            ->toArray();
+
+        $this->chartData = json_encode($allResults);
+    }
+
+    private function updateCurrentQuestionNumber()
+    {
+        $currentQuestion = $this->questions->firstWhere('id', $this->q);
+        $this->currentQuestionNumber = $currentQuestion ? $currentQuestion->count : 1;
+    }
+
+    public function changeNumber($id)
+    {
+        $question = $this->questions->firstWhere('id', $id);
+        
+        if ($question) {
+            $this->q = $id;
+            $this->currentQuestionId = $id;
+            $this->updateCurrentQuestionNumber();
+            // Emit event untuk update UI
+            $this->dispatch('questionChanged', count: $question->count);
+        }
     }
 
     public function previousQuestion()
     {
-        // Decrement the index if it's greater than 0
-        // Get the current question ID
-        $currentId = $this->q; 
-        $foundPrevious = false; // Flag to indicate if the previous question is found
+        $currentId = $this->q;
+        $questionIds = $this->questions->pluck('id')->sort()->values()->toArray();
+        $currentPosition = array_search($currentId, $questionIds);
         
-        // Loop through the questions in reverse order to find the previous question with an existing ID
-        foreach ($this->questions as $question) {
-            if ($question->id < $currentId) {
-                $this->q = $question->id; // Update q to the previous existing question ID
-                $foundPrevious = true; // Set the flag to true
-                break; // Exit the loop once the previous question is found
-            }
-        }
-        
-        // Optionally handle the case where no previous question was found
-        if (!$foundPrevious) {
-            // Handle the case where there is no previous question (e.g., stay at the current one or reset to the last question)
-            dd("No previous question found.");
+        if ($currentPosition > 0) {
+            $this->q = $questionIds[$currentPosition - 1];
+            $this->currentQuestionId = $this->q;
+            $this->updateCurrentQuestionNumber();
         }
     }
 
     public function nextQuestion()
     {
-        $currentId = $this->q; // Store the current question ID
-        $foundNext = false; // Flag to indicate if the next question is found
+        $currentId = $this->q;
+        $questionIds = $this->questions->pluck('id')->sort()->values()->toArray();
+        $currentPosition = array_search($currentId, $questionIds);
         
-        // Loop through the questions starting from the current index + 1
-        foreach ($this->questions as $question) {
-            if ($question->id > $currentId) {
-                $this->q = $question->id; // Update q to the next existing question ID
-                $foundNext = true; // Set the flag to true
-                break; // Exit the loop once the next question is found
-            }
-        }
-        
-        // Optionally handle the case where no next question was found
-        if (!$foundNext) {
-            // Handle the case where there is no next question (e.g., reset to the first question or stay at the current one)
-            dd("the end");
+        if ($currentPosition < count($questionIds) - 1) {
+            $this->q = $questionIds[$currentPosition + 1];
+            $this->currentQuestionId = $this->q;
+            $this->updateCurrentQuestionNumber();
         }
     }
 
     public function isFirstQuestion()
     {
-        return $this->q === $this->questions->first()->id;
+        return $this->q === $this->questions->pluck('id')->min();
     }
     
     public function isLastQuestion()
     {
-        return $this->q === $this->questions->last()->id;
+        return $this->q === $this->questions->pluck('id')->max();
+    }
+
+    public function updating($name, $value)
+    {
+        if ($name === 'q') {
+            // Validate question exists
+            if (!$this->questions->contains('id', $value)) {
+                return false;
+            }
+        }
     }
 
     public function render()
     {
-        $this->question = QuestionPractice::where('id', $this->q)
+        $question = QuestionPractice::where('id', $this->q)
             ->with('answer_practice')
             ->first();
 
-        if ($this->question) {
-            $this->question->count = 1; // Assigning a fixed new ID of 1, or you can assign any other logic
+        $this->totalResult = ResultPractice::where('class_bimbel_id',$this->result->class_bimbel_id)
+                            ->get();
+
+        // Pastikan questions terdefinisi
+        if (!isset($this->questions)) {
+            $this->questions = collect(QuestionPractice::where('class_bimbel_id',$this->result->class_bimbel_id)
+                ->get()
+                ->map(function ($q, $index) {
+                    $q->count = $index + 1;
+                    return $q;
+                }));
         }
-
-        $this->questions = QuestionPractice::where('class_bimbel_id', $this->results->class_bimbel_id)
-            ->get()
-            ->map(function ($question, $index) {
-                // Assign a new count starting from 1
-                $question->count = $index + 1; // Adding 1 to start from 1 instead of 0
-                return $question; // Return the modified question
-        });
-
-        // Handle case where no questions are found
-        if ($this->questions->isEmpty()) {
-            // Handle the case appropriately (e.g., set a message or redirect)
-            // For example:
-            session()->flash('message', 'No questions found for this tryout.');
-            return; // Early return or handle as needed
-        }
-
-        // $question = $this->question;
-        // if ($question) {
-        //     $this->answers = $question->answers; // Assign answers to the public property
-        //     $question->count = 1; // Assigning a fixed new ID of 1, or you can assign any other logic
-        // } else {
-        //     $this->answers = []; // Initialize as an empty array if no question found
-        // }
-
         
-        $answerQuestions = AnswerQuestionPractice::where('result_practice_id', $this->resultsId)->get();
-        $this->answers = $answerQuestions->mapWithKeys(function ($answerQuestion, $index) {
-            // Fetch the related Question model
-            // $question = $answerQuestion->question_practice;
-            
-            // Map the question ID to the corresponding answer
-            // return [$question->id => $answerQuestion->answer_practice];
-
-            return [$answerQuestion->question_practice_id => $answerQuestion->answer_practice];
-        })->toArray(); // Use mapWithKeys to create a key-value pair
-
-        $totalQuestions = $this->questions->count();
+        $chart = LarapexChart::setType('bar')
+        ->setXAxis(['Rata-Rata', 'Nilai Anda'])
+        ->setDataset([
+            [
+                'name' => 'Rata-Rata',
+                'data' => [$this->averageScore]
+            ],
+            [
+                'name' => 'Nilai Anda',
+                'data' => [$this->result->score]
+            ]
+        ])
+        ->setColors(['#60a5fa', '#0ea5e9']); 
 
         return view('livewire.user.owned.practice.result',[
-            'totalQuestions' => $totalQuestions,
+            // 'totalQuestions' => $totalQuestions,
+            'question' => $question,
+            'questions' => $this->questions,
+            'chartData' => $this->chartData,
+            'averageScore' => $this->averageScore,
+            'userRank' => $this->userRank,
+            'chart' => $chart,
+
         ]);
     }
 }

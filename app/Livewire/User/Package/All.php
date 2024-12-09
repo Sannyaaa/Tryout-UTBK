@@ -2,12 +2,15 @@
 
 namespace App\Livewire\User\Package;
 
-use App\Models\Package_member;
 use Livewire\Component;
+use App\Models\Promotion;
+use App\Models\ComponentPage;
+use App\Models\Package_member;
 
 class All extends Component
 {
     public $selectedType = 'all';
+    public $component;
     
     public function render()
     {
@@ -21,6 +24,10 @@ class All extends Component
             })
             ->get();
 
-        return view('livewire.user.package.all', compact( 'packages'));
+        $promotions = Promotion::all();
+
+        $component = ComponentPage::first();
+
+        return view('livewire.user.package.all', compact( 'packages','promotions','component'));
     }
 }

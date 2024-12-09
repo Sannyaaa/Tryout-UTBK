@@ -37,9 +37,9 @@
                     <div class="flex items-center w-full sm:justify-end">
                         <div class="flex space-x-1">
                             <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
-                        <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                            Delete Selected
-                        </button>
+                            <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                                Hapus
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
 
                 <!-- Modal toggle -->
                 <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                    + Bimbel
+                    Tambah Bimbel
                 </button>
 
                 <!-- Main modal -->
@@ -93,9 +93,11 @@
                                         <x-input-error :messages="$errors->get('link_group')" class="mt-2" />
                                     </div>
                                 </div>
-                                <x-primary-button type="submit">
-                                    + Bimbel
-                                </x-primary-button>
+                                <div class="my-2">
+                                    <x-primary-button type="submit" class="py-1">
+                                        Submit
+                                    </x-primary-button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -141,10 +143,10 @@
                                         <x-input-error :messages="$errors->get('link_group')" class="mt-2" />
                                     </div>
                                 </div>
-                                <div class="flex items-center space-x-4">
-                                    <x-primary-button type="submit">
+                                <div class="mb-2">
+                                    <x-primary-button type="submit" class="py-1">
                                         {{-- <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg> --}}
-                                        Edit Bimbel
+                                        Submit
                                     </x-primary-button>
                                 </div>
                             </form>

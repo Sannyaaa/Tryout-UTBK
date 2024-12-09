@@ -43,9 +43,9 @@
                         <div class="w-full px-4">
                         <h3 class="text-sm text-gray-500 mb-4">Berbayar / Gratis <br>
                             @if ( $tryout->is_free == 'free' )
-                                <span class="text-lg font-bold text-black mb-4">Gratis</span>
+                                <span class="text-lg font-bold text-gray-800 mb-4">Gratis</span>
                             @else
-                                <span class="text-lg font-bold text-black mb-4">Berbayar</span>
+                                <span class="text-lg font-bold text-gray-800 mb-4">Berbayar</span>
                             @endif
                         </h3>
                         @php
@@ -53,9 +53,9 @@
                         @endphp
                         <h3 class="text-sm text-gray-500  mb-4">Biasa / Serentak <br>
                             @if ( $tryout->is_together == 'together' )
-                                <p class="text-lg font-bold text-black mb-4">Serentak</p>
+                                <p class="text-lg font-bold text-gray-800 mb-4">Serentak</p>
                                 <span class="text-sm text-gray-500">Tanggal</span>
-                                <p class="text-lg font-bold text-black mb-4">{{ Carbon::parse($tryout->start_date)->format('d F Y') }} - {{ Carbon::parse($tryout->end_date)->format('d F Y') }} </p>
+                                <p class="text-lg font-bold text-gray-800 mb-4">{{ Carbon::parse($tryout->start_date)->format('d F Y') }} - {{ Carbon::parse($tryout->end_date)->format('d F Y') }} </p>
                             @else
                                 <span class="text-lg font-bold text-black mb-4">Biasa</span>
                             @endif
@@ -88,21 +88,21 @@
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden shadow">
                             <table class="min-w-full divide-y divide-gray-200 border-gray-200 border-2 whitespace-nowrap dark:divide-gray-600">
-                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                <thead class="bg-gradient-to-tr from-sky-400 to-sky-500 text-slate-50 text-left text-xs uppercase tracking-wider">
                                     <tr>
-                                        <th scope="col" class="p-4 text-xs font-semibold text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             No
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             Pertanyaan
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             Jawaban Benar
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             Tanggal
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             Actions
                                         </th>
                                     </tr>
@@ -156,30 +156,30 @@
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden shadow">
                             <table class="min-w-full divide-y divide-gray-200 border-gray-200 border-2 whitespace-nowrap dark:divide-gray-600">
-                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                <thead class="bg-gradient-to-tr from-sky-400 to-sky-500 text-slate-50 text-left text-xs uppercase tracking-wider">
                                     <tr>
-                                        <th scope="col" class="p-4 text-xs font-semibold text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             No
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             Email Peserta
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             Total Poin
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             Benar
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             Salah
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             Tidak Dijawab
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             Tanggal Submit
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="p-4">
                                             Action
                                         </th>
                                     </tr>
@@ -222,9 +222,11 @@
                 </div>
             </div>  
 
-            <x-primary-link href="{{ route('admin.tryout.show', $tryout->id) }}" class="mt-4">
-                Kembali
-            </x-primary-link>
+            <div class="mt-4">
+                <x-primary-link href="{{ route('admin.tryout.show', $tryout->id) }}" class="">
+                    Kembali
+                </x-primary-link>
+            </div>
         </div>
     </div>
 </div>

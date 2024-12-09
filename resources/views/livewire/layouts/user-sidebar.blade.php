@@ -11,7 +11,8 @@
         <ul class="pb-2 space-y-2">
           <li>
             <a href="#" class="flex justify-center py-4 bg-sky-50 rounded-lg">
-              <span class="self-center text-3xl font-semibold sm:text-4xl whitespace-nowrap text-sky-800 dark:text-white bg-sky-50">Flowbite</span>
+              <img src="{{ Storage::url($component->navbar_image ?? '') }}" class="h-8" alt="Flowbite Logo" />
+              {{-- <span class="self-center text-3xl font-semibold sm:text-4xl whitespace-nowrap text-sky-800 dark:text-white bg-sky-50">Flowbite</span> --}}
             </a>
           </li>
 
@@ -59,7 +60,7 @@
           </li>
 
           <li>
-            <x-user-sidebar-link link="{{route('user.packages')}}" token="paket" name="Paket Pembelian">
+            <x-user-sidebar-link link="{{route('packages')}}" token="paket" name="Paket Pembelian">
               <i class="fa-solid fa-shop"></i>
             </x-user-sidebar-link>
           </li>
@@ -74,6 +75,14 @@
             <x-user-sidebar-link link="{{route('user.profile')}}" token="profile" name="Profile">
               <i class="fa-solid fa-user"></i>
             </x-user-sidebar-link>
+          </li>
+          <li>
+            <form method="POST" action="{{ route('logout') }}" class="">
+              @csrf
+              <button type="submit" class="block py-2 px-4 font-medium text-slate-50 bg-rose-500 hover:bg-rose-600 rounded-lg dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
+                <span role="menuitem" class=""><i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Logout </span>
+              </button>
+            </form>
           </li>
           {{-- <li>
             <!-- Dropdown Menu -->

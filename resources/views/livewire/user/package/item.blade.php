@@ -1,4 +1,4 @@
-<div class="p-4 mt-12">
+<div class="p-4 {{ Auth::user() ? 'mt-14' : '-mt-10 max-w-7xl mx-auto' }}">
     <div class="p-6 bg-white block rounded-lg shadow sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
         <div class="w-full mb-1">
             <div class="mx-6 relative -mt-12 mb-10">
@@ -6,15 +6,15 @@
                     <nav class="flex" aria-label="Breadcrumb">
                         <ol class="inline-flex items-center space-x-1 text-sm font-semibold md:space-x-2">
                         <li class="inline-flex items-center">
-                            <a href="#" class="inline-flex items-center text-gray-50 hover:text-sky-200 dark:text-gray-300 dark:hover:text-white">
+                            <a href="{{ Auth::user() ? route('user.dashboard') : '/' }}" class="inline-flex items-center text-gray-50 hover:text-sky-200 dark:text-gray-300 dark:hover:text-white">
                             <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                                Dashboard
+                                {{ Auth::user() ? 'Dashboard' : 'Beranda' }}
                             </a>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Paket</a>
+                            <a href="{{ route('packages') }}" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Paket</a>
                             </div>
                         </li>
                         <li>
@@ -223,18 +223,26 @@
                                 {{-- Checkout Button --}}
                                 <div class="w-full">
                                     <div class="w-full">
-                                        <x-primary-button 
-                                        wire:click="checkout"
-                                        wire:loading.attr="disabled"
-                                        {{-- class="w-f" --}}
-                                    >
-                                            <span wire:loading.remove wire:target="checkout">
+                                        @if (Auth::check())
+                                            <x-primary-button 
+                                                wire:click="checkout"
+                                                wire:loading.attr="disabled"
+                                                class="relative w-full"
+                                            >
+                                                <span wire:loading.remove wire:target="checkout">
+                                                    Checkout Sekarang
+                                                </span>
+                                                <span wire:loading wire:target="checkout" class="absolute inset-0 flex justify-center items-center bg-opacity-50">
+                                                    Processing...
+                                                </span>
+                                            </x-primary-button>
+                                        @else
+                                            <!-- Modal toggle -->
+                                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="w-full text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg px-5 py-2 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800" type="button">
                                                 Checkout Sekarang
-                                            </span>
-                                            <span wire:loading wire:target="checkout">
-                                                Processing...
-                                            </span>
-                                        </x-primary-button>
+                                            </button>            
+                                        @endif
+
                                     </div>
                                     <div class="mt-3">
                                         <span class="text-sm text-rose-500">
@@ -242,6 +250,44 @@
                                         </span>
                                     </div>
                                 </div>
+                                
+
+                                <!-- Main modal -->
+                                <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative p-4 w-full max-w-2xl max-h-full">
+                                        <!-- Modal content -->
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <!-- Modal header -->
+                                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                    Terms of Service
+                                                </h3>
+                                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                    </svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="p-4 md:p-5 space-y-4">
+                                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                                                </p>
+                                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                                    The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                                                </p>
+                                            </div>
+                                            <!-- Modal footer -->
+                                            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Nanti Dulu</button>
+                                                <x-primary-link href="{{ route('login',['paket' => $package->id]) }}" class="">Login Sekarang</x-primary-link>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 {{-- Loading States & Notifications --}}
                                 <div wire:loading.delay wire:target="applyVoucher">
@@ -272,7 +318,7 @@
                     </div>
                 </div>
                 <div class="">
-                    <x-primary-link href="{{ route('user.packages') }}">
+                    <x-primary-link href="{{ route('packages') }}">
                         Kembali
                     </x-primary-link>
                 </div>
@@ -280,3 +326,4 @@
         </div>
     </div>
 </div>
+

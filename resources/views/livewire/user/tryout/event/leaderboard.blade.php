@@ -244,7 +244,7 @@
                                                 <div class="mt-6">
                                                     {{-- @dd($package->id) --}}
                                                     @if ($package)
-                                                        <a href="{{ route('user.package.item', $package->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-500 hover:bg-sky-600">
+                                                        <a href="{{ route('package.item', $package->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-500 hover:bg-sky-600">
                                                             Lihat Paket
                                                         </a>
                                                     @else

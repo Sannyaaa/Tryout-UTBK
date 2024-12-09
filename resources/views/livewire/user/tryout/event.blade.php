@@ -142,11 +142,11 @@
                                     d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                             </svg>
                             <p class="mt-1 text-sm text-gray-800">Belum ada Tryout yang sedang berjalan</p>
-                            <div class="mt-6">
-                                <a href="{{ route('user.packages') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-500 hover:bg-sky-600">
-                                    Lihat Paket Tersedia
+                            {{-- <div class="mt-6">
+                                <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-500 hover:bg-sky-600">
+                                    
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     @endforelse
                 </section>
@@ -200,11 +200,11 @@
                                     d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                             </svg>
                             <p class="mt-1 text-sm text-gray-800">Belum ada Tryout yang akan datang</p>
-                            <div class="mt-6">
-                                <a href="{{ route('user.packages') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-500 hover:bg-sky-600">
+                            {{-- <div class="mt-6">
+                                <a href="{{ route('packages') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-500 hover:bg-sky-600">
                                     Lihat Paket Tersedia
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     @endforelse
                 </section>
@@ -271,7 +271,7 @@
                             </svg>
                             <p class="mt-1 text-sm text-gray-800">Tidak ada Tryout yang sudah berakhir</p>
                             <div class="mt-6">
-                                <a href="{{ route('user.packages') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-500 hover:bg-sky-600">
+                                <a href="{{ route('packages') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-500 hover:bg-sky-600">
                                     Lihat Paket Tersedia
                                 </a>
                             </div>

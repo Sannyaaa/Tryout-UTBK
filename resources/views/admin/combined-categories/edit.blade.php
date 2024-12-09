@@ -39,13 +39,14 @@
             </div>
             
             <div class="flex justify-between">
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                <x-secondary-link href="{{ route('admin.combined-categories.index') }}" 
+                    class="">
+                    Cancel
+                </x-secondary-link>
+                <button type="submit" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
                     Update
                 </button>
-                <a href="{{ route('admin.combined-categories.index') }}" 
-                    class="text-gray-500 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5">
-                    Cancel
-                </a>
+                
             </div>
         </form>
     </div>

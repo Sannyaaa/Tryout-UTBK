@@ -49,11 +49,11 @@
                 </div>
                 <div class="flex justify-center items-center gap-2">
                     <div class="">
-                        <select id="payment_status" class="p-2 border rounded">
+                        <x-select-input id="payment_status" class="p-2 border rounded">
                             <option value="">Status Pembayaran</option>
                             <option value="pending">Pending</option>
                             <option value="paid">Dibayar</option>
-                        </select>
+                        </x-select-inp>
                     </div>
                 </div>
                 

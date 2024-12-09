@@ -38,35 +38,47 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.2.2/css/tom-select.min.css" rel="stylesheet">
         <style>
-        /* Optional: Custom styling untuk Tom Select */
-        .ts-wrapper {
-            width: 100%;
-        }
 
-        .ts-control {
-            border-radius: 0.375rem;
-            border-color: #d1d5db;
-            padding: 0.5rem;
-        }
+            /* Sembunyikan scrollbar untuk browser modern */
+            .sidebar-content {
+            scrollbar-width: none; /* Untuk Firefox */
+            -ms-overflow-style: none; /* Untuk Internet Explorer */
+            }
 
-        .ts-dropdown {
-            border-radius: 0.375rem;
-            border-color: #d1d5db;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .ts-dropdown .option {
-            padding: 0.5rem;
-        }
-
-        .ts-dropdown .active {
-            background-color: #e5e7eb;
-        }
+            .sidebar-content::-webkit-scrollbar {
+            display: none; /* Untuk Chrome, Safari, dan Edge */
+            }
 
 
-        .ck-editor__editable {
-            height: 150px;  /* Me/* Menentukan tinggi maksimum editor */
-        }
+            /* Optional: Custom styling untuk Tom Select */
+            .ts-wrapper {
+                width: 100%;
+            }
+
+            .ts-control {
+                border-radius: 0.375rem;
+                border-color: #d1d5db;
+                padding: 0.5rem;
+            }
+
+            .ts-dropdown {
+                border-radius: 0.375rem;
+                border-color: #d1d5db;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            }
+
+            .ts-dropdown .option {
+                padding: 0.5rem;
+            }
+
+            .ts-dropdown .active {
+                background-color: #e5e7eb;
+            }
+
+
+            .ck-editor__editable {
+                height: 150px;  /* Me/* Menentukan tinggi maksimum editor */
+            }
 
         </style>
 
@@ -107,6 +119,18 @@
 
     </div>
     <!-- ===== Page Wrapper End ===== -->
+
+    <script>
+        function toggleDropdown(id) {
+            console.log(`Toggle dropdown with ID: ${id}`); // Debugging
+            const dropdown = document.getElementById(`dropdown-${id}`);
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+            } else {
+                dropdown.classList.add('hidden');
+            }
+        }
+    </script>
 
     @stack('script')
     @yield('scripts')

@@ -39,30 +39,30 @@
                     <div class="grid lg:grid-cols-2 gap-2">
                         <div class="w-full lg:w-2/3 px-4">
                             <h3 class="text-sm text-gray-500 mb-4">Nama kelas <br>
-                                <span class="text-lg font-bold text-gray-800">{{ $classBimbel->name }}</span>
+                                <span class="text-lg font-semibold text-gray-700">{{ $classBimbel->name }}</span>
                             </h3>
                             <h3 class="text-sm text-gray-500 mb-4">Bimbel <br>
-                                <span class="text-lg font-bold text-gray-800">{{ $classBimbel->bimbel->name }}</span>
+                                <span class="text-lg font-semibold text-gray-700">{{ $classBimbel->bimbel->name }}</span>
                             </h3>
                             <h3 class="text-sm text-gray-500 mb-4">Materi Pelajaran <br>
-                                <span class="text-lg font-bold text-gray-800">{{ $classBimbel->sub_categories->name }}</span>
+                                <span class="text-lg font-semibold text-gray-700">{{ $classBimbel->sub_categories->name }}</span>
                             </h3>
                             <h3 class="text-sm text-gray-500 mb-4">Tanggal <br>
-                                <span class="text-lg font-bold text-gray-800">{{ date('j F Y', strtotime($classBimbel->date)) .' '. date('h:i A', strtotime($classBimbel->start_time)) }}</span>
+                                <span class="text-lg font-semibold text-gray-700">{{ date('j F Y', strtotime($classBimbel->date)) .' '. date('h:i A', strtotime($classBimbel->start_time)) }}</span>
                             </h3>
                         </div>
                         <div class="w-full lg:w-1/2 px-4">
                             <h3 class="text-sm text-gray-500 mb-4">Pemateri <br>
-                                <span class="text-lg font-bold text-gray-800 mb-4">{{ $classBimbel->user->name ?? 'Belum di tambahkan' }}</span>
+                                <span class="text-lg font-semibold text-gray-700 mb-4">{{ $classBimbel->user->name ?? 'Belum di tambahkan' }}</span>
                             </h3>
                             <h3 class="text-sm text-gray-500 mb-4">Link Zoom <br>
-                                <span class="text-lg font-bold text-gray-800 mb-4">{{ $classBimbel->link_zoom ?? 'Belum di tambahkan' }}</span>
+                                <span class="text-lg font-semibold text-gray-700 mb-4">{{ $classBimbel->link_zoom ?? 'Belum di tambahkan' }}</span>
                             </h3>
                             <h3 class="text-sm text-gray-500  mb-4">Link Video <br>
-                                <span class="text-lg font-bold text-gray-800 mb-4">{{ $classBimbel->link_video ?? 'Belum di tambahkan' }}</span>
+                                <span class="text-lg font-semibold text-gray-700 mb-4">{{ $classBimbel->link_video ?? 'Belum di tambahkan' }}</span>
                             </h3>
                             <h3 class="text-sm text-gray-500  mb-4">Link Materi <br>
-                                <span class="text-lg font-bold text-gray-800 mb-4">{{ $classBimbel->materi ?? 'Belum di tambahkan' }}</span>
+                                <span class="text-lg font-semibold text-gray-700 mb-4">{{ $classBimbel->materi ?? 'Belum di tambahkan' }}</span>
                             </h3>
                         </div>
                     </div>
@@ -71,13 +71,13 @@
 
 
         
-            <div class="items-center justify-between block my-6 sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+            <div class="items-center justify-between block mt-6 mb-4 sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
                 <h3 class="text-2xl text-gray-800 font-bold">
                     Daftar Pertanyaan
                 </h3>
-                <a href="{{ route('admin.class.question.create', $classBimbel->id) }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    Tambah Pertanyaan Baru
-                </a>
+                <x-primary-link href="{{ route('admin.class.question.create', $classBimbel->id) }}" class="">
+                    Tambah Pertanyaan
+                </x-primary-link>
             </div>
 
             <div class="flex flex-col">
@@ -85,7 +85,7 @@
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden shadow">
                             <table class="min-w-full divide-y divide-gray-200 border-gray-200 border-2 whitespace-nowrap dark:divide-gray-600">
-                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                <thead class="bg-gradient-to-tr from-sky-400 to-sky-500 text-slate-50 text-left text-xs font-semibold uppercase tracking-wider">
                                     <tr>
                                         {{-- <th scope="col" class="p-4">
                                             <div class="flex items-center">
@@ -96,16 +96,16 @@
                                         {{-- <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Image
                                         </th> --}}
-                                        <th scope="col" class="p-4 text-xs font-semibold text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             No
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             Pertanyaan
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             Tanggal
                                         </th>
-                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        <th scope="col" class="px-6 py-4">
                                             Actions
                                         </th>
                                     </tr>
@@ -119,7 +119,6 @@
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                                     <div class="flex justify-start gap-1">
                                                         <a href="{{ route('admin.class.question.edit', [ 'class_bimbel' => $classBimbel->id, 'question' => $question->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                                                             Update
                                                         </a>
                                                         <form action="{{ route('admin.question-practice.destroy',  $question->id) }}" method="POST">
@@ -127,7 +126,6 @@
                                                             @method('DELETE')
                                                             <x-text-input type="hidden" value="{{ route('admin.class-bimbel.show', $classBimbel->id) }}" name="back" id="back" />
                                                             <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-tr from-rose-400 to-rose-500 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-                                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                                                                 Delete item
                                                             </button>
                                                         </form>

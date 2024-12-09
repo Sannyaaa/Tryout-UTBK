@@ -45,16 +45,16 @@
                 </div>
                 <div class="flex justify-center items-center gap-2">
                     <div class="">
-                        <select id="payment_status" class="p-2 btestimonial rounded">
-                            <option value="">Status Pembayaran</option>
+                        <x-select-input id="payment_status" class="p-2 btestimonial rounded">
+                            <option value="">Semua Paket</option>
                             <option value="pending">Pending</option>
                             <option value="paid">Dibayar</option>
-                        </select>
+                        </x-select-input>
                     </div>
 
                     <!-- Modal toggle -->
                     <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                        + Testimoni
+                        Tambah Testimoni
                     </button>
 
                     <!-- Main modal -->

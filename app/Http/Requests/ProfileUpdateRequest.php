@@ -37,7 +37,7 @@ class ProfileUpdateRequest extends FormRequest
             'achievements' => ['array'],
             'achievements.*' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable'],
-            
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 

@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Socialite\Facades\Socialite;
@@ -37,11 +38,13 @@ class GoogleController extends Controller
                 'name' => $googleUser->name,
                 'google_id' => $googleUser->id,
                 'avatar' => $avatarPath, // Simpan path relatif
-                'password' => bcrypt(uniqid())
+                'password' => bcrypt(uniqid()),
+
+                'email_verified_at' => now(),
             ]);
 
             Auth::login($user);
-            return redirect('/dashboard');
+            return redirect()->route('dashboard');
 
         } catch (\Exception $e) {
             return redirect('/login')->with('error', 'Google authentication failed');

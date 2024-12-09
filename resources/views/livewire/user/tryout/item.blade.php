@@ -29,35 +29,109 @@
         </div>
         
         <div class="py-10 px-7 bg-white rounded-md shadow lg:flex">
-            <div class=" w-full lg:w-5/12 pe-10">
+            <div class=" w-full xl:w-5/12 pe-10">
                 <h1 class="text-4xl mb-2 font-bold text-gray-700">{{$tryout->name}}</h1>
                 <div class="text-gray-600">
                     {!! $tryout->description !!}
                 </div>
 
-                @if ($tryout->is_together == 'together')
-                    <div>
-                        {{-- <h2 class="text-2xl my-3 font-semibold text-gray-700">Lihat Statistik atau Leaderboard</h2> --}}
-                        {{-- <span class="mx-1 text-sky-500"><i class="fa-solid fa-calendar-days"></i></span> {{ \Carbon\Carbon::parse($tryout->start_date)->format('j F Y') }} - {{ \Carbon\Carbon::parse($tryout->end_date)->format('j F Y') }} --}}
+                
+                <div class="my-4 gap-4 flex flex-wrap">
+                    <!-- Modal toggle -->
+                    <button data-modal-target="testimonial-modal" data-modal-toggle="testimonial-modal" class="block text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-sky-300 font-semibold rounded-lg px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800" type="button">
+                        Testimoni
+                    </button>
+
+                    <div 
+                        wire:ignore.self 
+                        id="testimonial-modal" 
+                        tabindex="-1" 
+                        aria-hidden="true" 
+                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+                    >
+                        <div class="relative p-4 w-full max-w-md max-h-full">
+                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                        Tambah Testimoni
+                                    </h3>
+                                    <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="testimonial-modal">
+                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <div class="p-4 md:p-5">
+                                    @if (session()->has('message'))
+                                        <div class="mb-4 text-sm text-sky-600 bg-sky-50 px-3 py-2 rounded-lg dark:text-sky-400">
+                                            {{ session('message') }}
+                                        </div>
+                                    @endif
+                                    <form wire:submit.prevent="saveTestimonial">
+                                        <div class="mb-4">
+                                            <textarea 
+                                                wire:model="content" 
+                                                rows="4" 
+                                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                                placeholder="Tulis testimoni Anda..."
+                                            ></textarea>
+                                            @error('content')
+                                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="flex justify-end space-x-2">
+                                            <button 
+                                                type="button" 
+                                                data-modal-hide="testimonial-modal" 
+                                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                            >
+                                                Batal
+                                            </button>
+                                            <button 
+                                                type="submit" 
+                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                            >
+                                                Simpan
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    @if ($results->isNotEmpty())
-                        <div class="mt-3 gap-4 flex">
-                            <x-secondary-link href="{{ route('user.tryouts.event.statistik', $tryout->id) }}" class="">
-                                <span class="flex justify-center items-center">
-                                    <i class="fa-solid fa-chart-line me-2"></i> Statistik
-                                </span>
-                            </x-secondary-link>
-                            <x-secondary-link href="{{ route('user.tryouts.event.leaderboard', $tryout->id) }}" class="">
-                                <span class="flex justify-center items-center">
-                                    <i class="fa-solid fa-ranking-star me-2"></i> Leaderboard
-                                </span>
-                            </x-secondary-link>
+                    @if ($tryout->is_together == 'together')
+                        {{-- <div>
+                            <h2 class="text-2xl my-3 font-semibold text-gray-700">Lihat Statistik atau Leaderboard</h2>
+                            <span class="mx-1 text-sky-500"><i class="fa-solid fa-calendar-days"></i></span> {{ \Carbon\Carbon::parse($tryout->start_date)->format('j F Y') }} - {{ \Carbon\Carbon::parse($tryout->end_date)->format('j F Y') }}
+                        </div> --}}
+                        @if ($results->isNotEmpty())
+                                <x-secondary-link href="{{ route('user.tryouts.event.statistik', $tryout->id) }}" class="">
+                                    <span class="flex justify-center items-center">
+                                        <i class="fa-solid fa-chart-line me-2"></i> Statistik
+                                    </span>
+                                </x-secondary-link>
+                                <x-secondary-link href="{{ route('user.tryouts.event.leaderboard', $tryout->id) }}" class="">
+                                    <span class="flex justify-center items-center">
+                                        <i class="fa-solid fa-ranking-star me-2"></i> Leaderboard
+                                    </span>
+                                </x-secondary-link>
+                        @else
+                            <span class="text-sm text-sky-600">* selesaikan semua untuk melihat statistik dan leaderboard</span>
+                        @endif
+                    @endif
+                </div>
+
+                <div>
+                    @if (session()->has('message'))
+                        <div class="mb-4 text-sm text-sky-600 bg-sky-50 px-3 py-2 rounded-md dark:text-sky-400">
+                            {{ session('message') }}
                         </div>
                     @endif
-                @endif
+                </div>
             </div>
             <hr class="border h-100">
-            <div class=" w-full lg:w-7/12"> 
+            <div class=" w-full xl:w-7/12"> 
                 @foreach($categories as $item)
                     <div class="mb-5 border shadow rounded-lg overflow-hidden">
                         <h1 class="px-5 py-4 text-2xl font-bold bg-gradient-to-tr from-sky-400 to-sky-500 text-white">{{$item->name}}</h1>
@@ -88,9 +162,9 @@
                                                 * waktu pengerjaan sudah selesai
                                             </span>
                                         @else
-                                            <a href="{{ $sub_item->totalQuestion != null ? route('user.tryouts.event.paper', [$tryoutId, $sub_item->id]) : '#'}}" class="flex items-center">
-                                                <button class="p-3 px-4 flex items-center text-white bg-sky-500 rounded-lg font-semibold"><i class="fa-solid fa-circle-play"></i>&nbsp; Kerjakan</button>
-                                            </a>
+                                            <x-primary-link href="{{ route('user.tryouts.instruction', [$tryoutId, $sub_item->id]) }}" class="flex items-center">
+                                                <i class="fa-solid fa-circle-play"></i>&nbsp; Kerjakan
+                                            </x-primary-link>
                                         @endif
                                     @else
                                         @if ( \Carbon\Carbon::today() > $tryout->end_date )
@@ -106,12 +180,12 @@
                                         @endif
                                     @endif
                                 @else
-                                    <div class="my-auto gap-2">
-                                        <x-primary-link href="{{ route('user.tryouts.instruction', [$tryoutId, $sub_item->id]) }}" class="flex items-center py-1">
+                                    <div class="my-auto flex gap-2">
+                                        <x-primary-link href="{{ route('user.tryouts.instruction', [$tryoutId, $sub_item->id]) }}" class="flex items-center ">
                                             <i class="fa-solid fa-circle-play"></i>&nbsp; Kerjakan
                                         </x-primary-link>
                                         @if ($sub_item->is_completed)
-                                            <x-secondary-link href="{{ route('user.tryouts.history', [$tryoutId, $sub_item->id]) }}" class="py-1">
+                                            <x-secondary-link href="{{ route('user.tryouts.history', [$tryoutId, $sub_item->id]) }}" class="">
                                                 <i class="fa-solid fa-circle-check"></i>&nbsp;  Riwayat
                                             </x-secondary-link>
                                         @endif
@@ -128,3 +202,14 @@
         </div>
     </div>
 </div>
+
+@push('body-scripts')
+    <script>
+        window.addEventListener('close-modal', () => {
+            const closeButton = document.querySelector('[data-modal-hide="testimonial-modal"]');
+            if (closeButton) {
+                closeButton.click(); // Klik tombol untuk menutup modal
+            }
+        });
+    </script>
+@endpush

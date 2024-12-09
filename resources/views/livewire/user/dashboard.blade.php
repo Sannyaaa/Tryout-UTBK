@@ -3,9 +3,9 @@
         <div>
             <div id="default-carousel" class="relative w-full mt-6" data-carousel="slide">
                 <!-- Carousel wrapper -->
-                <div class="relative h-56 overflow-hidden rounded-lg shadow-lg md:h-96 p-1">
+                <div class="relative h-56 overflow-hidden rounded-lg shadow-lg md:h-96 p-1 z-20">
                     <!-- Item 1 -->
-                    @if ($todayClasses)
+                    @if ($todayClasses->isNotEmpty())
                         @foreach ($todayClasses as $class)
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <div class="w-full h-full flex justify-center items-center bg-gradient-to-tr from-sky-300 to-sky-500 text-white">
@@ -40,7 +40,7 @@
                         @endforeach
                     @endif
                     {{-- @dd($ongoing) --}}
-                    @if ($ongoing)
+                    @if ($ongoing->isNotEmpty())
                         @foreach ($ongoing as $item)
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <div class="w-full h-full flex justify-center items-center bg-gradient-to-tr from-sky-300 to-sky-500 text-white">
@@ -69,11 +69,15 @@
                             </div>
                         @endforeach
                     @endif
-                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <a href="{{ route('user.packages') }}">
-                            <img src="{{ asset('assets/Artboard 1.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                        </a>
-                    </div>
+                    @if ($promotions)
+                        @foreach ($promotions as $promo)
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <a href="{{ route('packages') }}">
+                                    <img src="{{ Storage::url($promo->image) }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                                </a>
+                            </div>
+                        @endforeach
+                    @endif
                     <!-- Item 2 -->
                     {{-- <div class="hidden duration-700 ease-in-out" data-carousel-item>
                         <img src="/docs/images/carousel/carousel-2.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
@@ -441,7 +445,7 @@
                                                         </a>
                                                     @endif
                                                 @else
-                                                    <a href="{{ route('user.package.item', $item->package_member_id) }}" target="_blank" class="text-sky-500 hover:text-sky-600 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
+                                                    <a href="{{ route('package.item', $item->package_member_id) }}" target="_blank" class="text-sky-500 hover:text-sky-600 bg-sky-50 bg-opacity-50 px-4 py-2 border-2 border-sky-200 rounded-lg">
                                                         <i class="fa-solid fa-tags"></i> Beli Lagi
                                                     </a>
                                                 @endif
@@ -480,7 +484,7 @@
                             </div>
                             <div class="px-5 py-2">
                                 <div>
-                                    <a href="{{ route('user.package.item', $package->id) }}">
+                                    <a href="{{ route('package.item', $package->id) }}">
                                         <h5 class="text-3xl font-bold hover:underline text-gray-800 uppercase dark:text-white mb-0">
                                             {{ $package->name }}
                                         </h5>
@@ -501,7 +505,7 @@
                                     @endforeach
                                 </div>
                                 <div class="flex justify-between items-baseline my-3">
-                                    <x-primary-link href="{{ route('user.package.item', $package->id) }}">
+                                    <x-primary-link href="{{ route('package.item', $package->id) }}">
                                         Lihat Detail
                                     </x-primary-link>
                                     <span class="mt-auto text-3xl font-bold">

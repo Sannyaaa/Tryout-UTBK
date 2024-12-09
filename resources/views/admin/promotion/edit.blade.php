@@ -71,10 +71,22 @@
                         <img src="{{ Storage::url($promotion->image) }}" class="w-[300px]" alt="">
                     </div>
 
-                    <div>
-                        <x-input-label for="image" :value="__('Image')" />
-                        <x-text-input type="file" :value="$promotion->image ?? old('image')" name="image" id="image" placeholder="Masukan Nama promotion"/>
-                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                    <div class="grid lg:grid-cols-2 gap-3">
+                        <div>
+                            <x-input-label for="image" :value="__('Image')" />
+                            <x-text-input type="file" :value="$promotion->image ?? old('image')" name="image" id="image" placeholder="Masukan Nama promotion"/>
+                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                        </div>
+
+                        <div>
+                            <x-input-label for="is_show" :value="__('Tampilkan di Halaman Depan / Tidak')" />
+                            <x-select-input id="is_show" name="is_show">
+                                <option selected="" disabled>Tampilkan di Halaman Depan / Tidak</option>
+                                <option value="yes" {{ $promotion->is_show == 'yes' ? 'selected' : '' }}>Tampilkan di Halaman Depan</option>
+                                <option value="no" {{ $promotion->is_show == 'no' ? 'selected' : '' }}>Tampilkan di Dashboard Saja</option>
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
+                        </div>
                     </div>
                         
                     <div class="grid lg:grid-cols-2 gap-3">

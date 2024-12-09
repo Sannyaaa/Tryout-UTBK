@@ -74,15 +74,15 @@
                 </div>
                 <div class="flex justify-center items-center gap-2">
                     <div class="">
-                        <select id="user_role_filter" class="p-2 border rounded">
+                        <x-select-input id="user_role_filter" class="p-2 border rounded">
                             <option value="">Semua Role</option>
                             <option value="admin">Admin</option>
                             <option value="mentor">Mentor</option>
                             <option value="user">User</option>
-                        </select>
+                        </x-select-input>
                     </div>
                     <a href="{{ route('admin.user.create') }}" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                        Tambah User baru
+                        Tambah User
                     </a>
                 </div>
                 

@@ -7,7 +7,9 @@ use App\Models\Order;
 use App\Models\Tryout;
 use Livewire\Component;
 use App\Models\Question;
+use App\Models\Promotion;
 use App\Models\ClassBimbel;
+use Illuminate\Http\Request;
 use App\Models\Package_member;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -22,9 +24,18 @@ class Dashboard extends Component
 
     public $isPaid;
 
-    public function render()
+    public function render(Request $request)
     {
         $this->user = Auth::user();
+        
+        if($this->user->data_universitas_id = null){
+            return redirect()->route('user.profile');
+        }
+
+        if (session('url-package')) {
+            $url = session('url-package');
+            return redirect()->route('package.item',$url);
+        }
 
         $this->now = Carbon::now();
 
@@ -198,6 +209,8 @@ class Dashboard extends Component
 
         $packages = Package_member::limit(3)->get();
 
+        $promotions = Promotion::where('start_date', '<=', $this->now)->where('end_date', '>=', $this->now)->get();
+
         DB::table('orders')
         ->where('payment_status','pending')
         ->where('created_at', '<', $now->subHours(24))
@@ -222,6 +235,7 @@ class Dashboard extends Component
             'queryClass' => $queryClasses,
             'transactions' => $transaction,
             'packages' => $packages,
+            'promotions'=> $promotions,
         ]);
     }
 }

@@ -18,13 +18,13 @@
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Paket</a>
+                            <a href="#" class="ml-1 text-gray-50 hover:text-sky-200 md:ml-2 dark:text-gray-300 dark:hover:text-white">Halaman</a>
                             </div>
                         </li>
                         <li>
                             <div class="flex items-center">
                             <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Edit Paket</span>
+                            <span class="ml-1 text-gray-50 md:ml-2 dark:text-gray-500" aria-current="page">Edit Home</span>
                             </div>
                         </li>
                         </ol>
@@ -66,11 +66,11 @@
             <form action="{{ $homePage != null ? route('admin.edit-home-page', $homePage->id) : route('admin.create-home-page') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method( $homePage != null ? 'PUT' : 'POST' )
-                <div class="space-y-10">
+                <div class="space-y-20">
                     
                     <div class="grid lg:grid-cols-2 gap-4">
-                        <div class="col-span-2 text-center">
-                            <h2 class="text-4xl font-bold text-gray-800">Hero Section</h2>
+                        <div class="col-span-2 text-center mt-3">
+                            <h2 class="text-5xl font-bold text-gray-700">Hero Section</h2>
                         </div>
 
                         <div class="space-y-4">
@@ -101,9 +101,9 @@
                     </div>
 
                     <div>
-                        <h2 class="text-4xl font-bold text-gray-800 mb-3 text-center">Feature Section</h2>
+                        <h2 class="text-5xl font-bold text-gray-700 mb-3 text-center">Feature Section</h2>
                         
-                        <div class="features-container grid grid-cols-2 gap-4 ">
+                        <div class="features-container grid lg:grid-cols-2 gap-4 ">
                             {{-- @forelse($features as $feature)
                                 <div class="feature-input gap-2">
                                     <div>
@@ -160,29 +160,44 @@
                                     </div>
                                 </div>
                             @empty --}}
-                            @forelse ($features as $i => $feature)
-                                <div class="feature-input gap-2">
-                                    <div>
+                            <div>
+                                <x-input-label for="feature_title" :value="__('Judul hero')" />
+                                <x-text-input type="text" :value="$homePage->feature_title ?? old('feature_title')" name="feature_title" id="feature_title" placeholder="Masukan Judul Hero"/>
+                                <x-input-error :messages="$errors->get('feature_title')" class="mt-2" />
+                            </div>
 
-                                        <div class="flex items-center gap-10 mb-4">
+                            <div>
+                                <x-input-label for="feature_description" :value="__('Deskripsi Hero')" />
+                                <x-text-area id="feature_description" name="feature_description" rows="4" placeholder="Masukan Deskripsi Hero">{!! $homePage->feature_desc ?? '' !!}</x-text-area>
+                                <x-input-error :messages="$errors->get('feature_description')" class="mt-2" />
+                            </div>
+
+                            @forelse ($features as $i => $feature)
+                                <div class="feature-input py-4">
+                                    <div class="space-y-4">
+
+                                        <div class="flex items-center gap-6">
                                             <!-- Trigger Button -->
-                                            <button id="openPopup{{ $i + 1 }}" type="button" class="h-fit bg-blue-500 text-white px-4 py-2 rounded">
+                                            <x-primary-button id="openPopup{{ $i + 1 }}" type="button" class="">
                                                 Pilih Ikon
-                                            </button>
+                                            </x-primary-button>
 
                                             <div id="selectedIconDisplay" class="">
-                                                <i id="selectedIconPreview{{ $i + 1 }}" class="{{ $feature->image ?? 'text-gray-300' }} text-3xl"></i>
+                                                <span class="bg-sky-100 h-16 w-16 flex items-center justify-center rounded-full text-sky-600 text-2xl">
+                                                    <i id="selectedIconPreview{{ $i + 1 }}" class="{{ $feature->image ?? 'text-gray-300' }}"></i>
+                                                </span>
                                                 <input type="hidden" id="selectedIconInput{{ $i + 1 }}" name="feature_icon[]" value="{{ $feature->image }}">
                                             </div>
                                         </div>
 
                                         <!-- Popup -->
                                         <div id="iconPopup{{ $i + 1 }}" class="fixed inset-0 z-30 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
-                                            <div class="bg-white py-16 px-20 rounded-lg w-4/5 max-h-[80vh] overflow-y-auto">
+                                            <div class="bg-white py-12 px-20 rounded-lg w-3/4">
+
                                                 <!-- Header -->
                                                 <div class="flex justify-between items-center mb-4">
-                                                    <h2 class="text-lg font-semibold">Pilih Ikon</h2>
-                                                    <button id="closePopup{{ $i + 1 }}" type="button" class="text-gray-500 hover:text-gray-700">&times;</button>
+                                                    <h2 class="text-3xl font-bold">Pilih Ikon</h2>
+                                                    <button id="closePopup{{ $i + 1 }}" type="button" class=" bg-rose-600 text-rose-100 p-1 rounded-full h-8 w-8">&times;</button>
                                                 </div>
                                                 
                                                 <!-- Search Input -->
@@ -192,26 +207,30 @@
                                                     class="border border-gray-300 rounded-lg px-3 py-2 mb-4 w-full"
                                                     placeholder="Cari ikon...">
                                                 
-                                                <!-- Icon List -->
-                                                <div id="iconList{{ $i + 1 }}" class="grid grid-cols-4 lg:grid-cols-6 gap-4">
-                                                    <!-- Ikon akan dimuat di sini -->
+                                                <div class="  max-h-[60vh] overflow-y-auto overflow-hidden">
+                                                    <!-- Icon List -->
+                                                    <div id="iconList{{ $i + 1 }}" class="grid grid-cols-4 lg:grid-cols-6 gap-4">
+                                                        <!-- Ikon akan dimuat di sini -->
+                                                    </div>
                                                 </div>
                                                 
-                                                <!-- Submit Button -->
-                                                <button id="submitIcon{{ $i + 1 }}" type="button" class="bg-green-500 text-white px-4 py-2 rounded mt-4">
-                                                    Pilih
-                                                </button>
+                                                <div class="mt-4 w-1/5 mx-auto">
+                                                    <!-- Submit Button -->
+                                                    <x-primary-button id="submitIcon{{ $i + 1 }}" type="button" class="">
+                                                        Pilih
+                                                    </x-primary-button>
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div>
-                                            <x-input-label for="feature_name" :value="__('feature_name Package Member')" />
+                                            <x-input-label for="feature_name" :value="__('Judul')" />
                                             <x-text-input type="text" name="feature_name[]" value="{{ $feature->name }}" id="feature_name" placeholder="Masukan feature_name"/>
                                             <x-input-error :messages="$errors->get('feature_name')" class="mt-2" />
                                         </div>
 
                                         <div>
-                                            <x-input-label for="feature_desc" :value="__('feature_desc')" />
+                                            <x-input-label for="feature_desc" :value="__('Deskripsi')" />
                                             <textarea id="feature_desc" name="feature_desc[]" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukan feature_desc">{!! $feature->description ?? '' !!}</textarea>
                                             <x-input-error :messages="$errors->get('feature_desc')" class="mt-2" />
                                         </div>
@@ -293,7 +312,7 @@
 
                     <div class="grid lg:grid-cols-2 gap-4">
                         <div class="col-span-2 text-center">
-                            <h2 class="text-4xl font-bold text-gray-800">About Us Section</h2>
+                            <h2 class="text-5xl font-bold text-gray-700">About Us Section</h2>
                         </div>
 
                         <div>
@@ -302,7 +321,7 @@
 
                         <div class="space-y-4">
                             <div>
-                                <x-input-label for="about_us_image" :value="__('about_us_Image')" />
+                                <x-input-label for="about_us_image" :value="__('Gambar About Us')" />
                                 <x-file-input type="file" name="about_us_image" id="about_us_image" placeholder="Masukan Gambar About Us"/>
                                 <x-input-error :messages="$errors->get('about_us_image')" class="mt-2" />
                             </div>
@@ -322,13 +341,81 @@
 
                     </div>
 
+                    <div class="grid lg:grid-cols-2 gap-4">
+                        <div>
+                            <h2 class="text-5xl font-bold text-gray-700 mb-3 text-center">Paket Section</h2>
+
+                            <div>
+                                <x-input-label for="package_title" :value="__('Judul hero')" />
+                                <x-text-input type="text" :value="$homePage->package_title ?? old('package_title')" name="package_title" id="package_title" placeholder="Masukan Judul Hero"/>
+                                <x-input-error :messages="$errors->get('package_title')" class="mt-2" />
+                            </div>
+
+                            <div>
+                                <x-input-label for="package_desc" :value="__('Deskripsi Hero')" />
+                                <x-text-area id="package_desc" name="package_desc" rows="4" placeholder="Masukan Deskripsi Hero">{!! $homePage->package_desc ?? '' !!}</x-text-area>
+                                <x-input-error :messages="$errors->get('package_desc')" class="mt-2" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 class="text-5xl font-bold text-gray-700 mb-3 text-center">Mentor Section</h2>
+
+                            <div>
+                                <x-input-label for="mentor_title" :value="__('Judul hero')" />
+                                <x-text-input type="text" :value="$homePage->mentor_title ?? old('mentor_title')" name="mentor_title" id="mentor_title" placeholder="Masukan Judul Hero"/>
+                                <x-input-error :messages="$errors->get('mentor_title')" class="mt-2" />
+                            </div>
+
+                            <div>
+                                <x-input-label for="mentor_desc" :value="__('Deskripsi Hero')" />
+                                <x-text-area id="mentor_desc" name="mentor_desc" rows="4" placeholder="Masukan Deskripsi Hero">{!! $homePage->mentor_desc ?? '' !!}</x-text-area>
+                                <x-input-error :messages="$errors->get('mentor_desc')" class="mt-2" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-4">
+                        <div>
+                            <h2 class="text-5xl font-bold text-gray-700 mb-3 text-center">Testimonial Section</h2>
+
+                            <div>
+                                <x-input-label for="testimonial_title" :value="__('Judul hero')" />
+                                <x-text-input type="text" :value="$homePage->testimonial_title ?? old('testimonial_title')" name="testimonial_title" id="testimonial_title" placeholder="Masukan Judul Hero"/>
+                                <x-input-error :messages="$errors->get('testimonial_title')" class="mt-2" />
+                            </div>
+
+                            <div>
+                                <x-input-label for="testimonial_desc" :value="__('Deskripsi Hero')" />
+                                <x-text-area id="testimonial_desc" name="testimonial_desc" rows="4" placeholder="Masukan Deskripsi Hero">{!! $homePage->testimonial_desc ?? '' !!}</x-text-area>
+                                <x-input-error :messages="$errors->get('testimonial_desc')" class="mt-2" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 class="text-5xl font-bold text-gray-700 mb-3 text-center">FAQ Section</h2>
+
+                            <div>
+                                <x-input-label for="faq_title" :value="__('Judul hero')" />
+                                <x-text-input type="text" :value="$homePage->faq_title ?? old('faq_title')" name="faq_title" id="faq_title" placeholder="Masukan Judul Hero"/>
+                                <x-input-error :messages="$errors->get('faq_title')" class="mt-2" />
+                            </div>
+
+                            <div>
+                                <x-input-label for="faq_desc" :value="__('Deskripsi Hero')" />
+                                <x-text-area id="faq_desc" name="faq_desc" rows="4" placeholder="Masukan Deskripsi Hero">{!! $homePage->faq_desc ?? '' !!}</x-text-area>
+                                <x-input-error :messages="$errors->get('faq_desc')" class="mt-2" />
+                            </div>
+                        </div>
+                    </div>
+
                     <div>
-                        <h2 class="text-4xl font-bold text-gray-800 mb-3 text-center">FAQ Section</h2>
                         
-                        <div class="faqs-container grid grid-cols-2 gap-4 ">
+                        <div class="faqs-container grid lg:grid-cols-2 gap-4 ">
+
                             @forelse($faqs as $faq)
                                 <div class="faq-input gap-2">
-                                    <div>
+                                    <div class="space-4">
                                         <div>
                                             <x-input-label for="question" :value="__('question Package Member')" />
                                             <x-text-input type="text" :value="$faq->question ?? old('question')" name="question[]" id="question" placeholder="Masukan question"/>
@@ -351,15 +438,15 @@
                                 </div>
                             @empty
                                 <div class="faq-input gap-2">
-                                    <div>
+                                    <div class=" space-y-4">
                                         <div>
-                                            <x-input-label for="question" :value="__('question Package Member')" />
+                                            <x-input-label for="question" :value="__('Pertanyaan')" />
                                             <x-text-input type="text" :value="$faq->question ?? old('question')" name="question[]" id="question" placeholder="Masukan question"/>
                                             <x-input-error :messages="$errors->get('question')" class="mt-2" />
                                         </div>
 
                                         <div>
-                                            <x-input-label for="answer" :value="__('answer')" />
+                                            <x-input-label for="answer" :value="__('Jawaban')" />
                                             <textarea id="answer" name="answer[]" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukan answer">{!! $faq->answer ?? '' !!}</textarea>
                                             <x-input-error :messages="$errors->get('answer')" class="mt-2" />
                                         </div>
@@ -397,7 +484,7 @@
                                 Kembali
                             </x-secondary-href>
                             <x-primary-button type="submit">
-                                Edit Package member
+                                Edit
                             </x-primary-button>
                     </div>
             </form>
@@ -577,14 +664,14 @@
                             details.styles.forEach(style => {
                                 const iconClass = `fa-${style} fa-${icon}`;
                                 const iconItem = document.createElement('div');
-                                iconItem.className = 'flex flex-col items-center justify-center bg-white space-y-2 h-44';
+                                iconItem.className = 'flex flex-col items-center justify-center bg-white space-y-2 h-36';
                                 iconItem.innerHTML = `
                                     <div class="w-full h-full">
                                         <input type="radio" id="${iconClass}" name="icon" value="${iconClass}" class="hidden peer" required />
-                                        <label for="${iconClass}" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">                           
+                                        <label for="${iconClass}" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-sky-500 peer-checked:border-sky-600 peer-checked:text-sky-600 peer-checked:bg-sky-100 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">                           
                                             <div class="flex flex-col w-full justify-center items-center">
                                                 <i class="${iconClass} text-3xl font-bold mb-2"></i>
-                                                <span>${icon}</span>
+                                                <span class="text-sm">${icon}</span>
                                             </div>
                                         </label>
                                     </div>

@@ -36,15 +36,17 @@
                     </div>
 
                     <div>
-                        <form method="GET" action="{{ route('admin.report.index') }}">
-                            <select name="year" class="p-2 border rounded">
-                                @foreach($years as $year)
-                                    <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
-                                        {{ $year }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500" type="submit">Filter</button>
+                        <form method="GET" action="{{ route('admin.report.index') }}" class="flex gap-4">
+                            <div>
+                                <x-select-input name="year" class="">
+                                    @foreach($years as $year)
+                                        <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
+                                            {{ $year }}
+                                        </option>
+                                    @endforeach
+                                </x-select-input>
+                            </div>
+                            <button class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500" type="submit">Filter</button>
                         </form>
 
                         <div style="width: 80%; margin: auto;">
@@ -56,19 +58,19 @@
             <div class="shadow-lg rounded-md p-6 bg-white mt-10">
                 <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700 mb-4">
                     <form method="GET" action="{{ route('admin.report.index') }}">
-                        <div class="flex justify-center gap-3">
+                        <div class="flex justify-center gap-4">
                             <!-- Dropdown Tahun -->
-                            <select name="year" class="p-2 border rounded">
+                            <x-select-input name="year" class="p-2 border rounded">
                                 <option value="" >Pilih Tahun</option>
                                 @foreach($years as $year)
                                     <option value="{{ $year }}" {{ request('year') == $year ? 'selected' : '' }}>
                                         {{ $year }}
                                     </option>
                                 @endforeach
-                            </select>
+                            </x-select-input>
 
                             <!-- Dropdown Bulan (Statis) -->
-                            <select name="month" class="p-2 border rounded">
+                            <x-select-input name="month" class="p-2 border rounded">
                                 <option value="">Pilih Bulan</option>
                                 <option value="1" {{ request('month') == '1' ? 'selected' : '' }}>Januari</option>
                                 <option value="2" {{ request('month') == '2' ? 'selected' : '' }}>Februari</option>
@@ -82,9 +84,9 @@
                                 <option value="10" {{ request('month') == '10' ? 'selected' : '' }}>Oktober</option>
                                 <option value="11" {{ request('month') == '11' ? 'selected' : '' }}>November</option>
                                 <option value="12" {{ request('month') == '12' ? 'selected' : '' }}>Desember</option>
-                            </select>
+                            </x-select-input>
 
-                            <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500">Filter</button>
+                            <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500">Filter</button>
                         </div>
                     </form>
 
@@ -115,7 +117,7 @@
                         <div class="align-middle">
                             <div class=" overflow-x-scroll lg:overflow-x-hidden">
                                 <table class="w-full divide-y divide-gray-200 whitespace-nowrap dark:divide-gray-600">
-                                    <thead class="bg-gray-100">
+                                    <thead class="bg-gradient-to-tr from-sky-400 to-sky-500 text-slate-50 text-left text-xs font-semibold uppercase tracking-wider">
                                         <tr>
                                             {{-- <th scope="col" class="p-4">
                                                 <div class="flex items-center">
@@ -123,22 +125,22 @@
                                                     <label for="checkbox-all" class="sr-only">checkbox</label>
                                                 </div>
                                             </th> --}}
-                                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            <th scope="col" class="p-4 ">
                                                 Invoice
                                             </th>
-                                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            <th scope="col" class="p-4 ">
                                                 Paket
                                             </th>
-                                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            <th scope="col" class="p-4 ">
                                                 Total harga
                                             </th>
-                                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            <th scope="col" class="p-4 ">
                                                 Status
                                             </th>
-                                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            <th scope="col" class="p-4 ">
                                                 Tanggal
                                             </th>
-                                            {{-- <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            {{-- <th scope="col" class="p-4 ">
                                                 Actions
                                             </th> --}}
                                         </tr>
@@ -158,7 +160,7 @@
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{$reports->package_member->name}}</td>
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{ number_format($reports->final_price)}}</td>
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{$reports->payment_status}}</td>
-                                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{ \Carbon\Carbon::parse($reports->createt_at)->format('d F Y') }}</td>
+                                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{ \Carbon\Carbon::parse($reports->created_at)->format('d F Y') }}</td>
                                                     {{-- <td class="p-4 space-x-2 whitespace-nowrap">
                                                         <div class="flex justify-start gap-1">
                                                             <a href="{{ route('admin.report.edit', $reports->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -183,15 +185,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="shadow-xl rounded p-6">
-                    <hr>
-                    <br>
+                <div class="shadow-xl bg-gradient-to-tr from-sky-400 to-sky-500 text-white rounded px-6 py-4">
                     <ul class="flex justify-between">
-                        <li class="font-medium text-lg">
+                        <li class="font-bold text-xl">
                             Total Pendapatan 
                         </li>
-                        <li class="font-medium text-lg">
-                            Rp {{ number_format($total) }}
+                        <li class="font-bold text-xl">
+                            Rp. {{ number_format($total) }}
                         </li>
                     </ul>
                 </div>

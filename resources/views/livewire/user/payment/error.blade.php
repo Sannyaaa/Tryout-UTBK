@@ -47,7 +47,7 @@
                             {{-- <x-primary-link class="px-8">
                                 Dashboard
                             </x-primary-link> --}}
-                            <x-primary-link href="{{ route('user.packages') }}" class="px-8 bg-gradient-to-tr from-emerald-400 to-emerald-500">
+                            <x-primary-link href="{{ route('packages') }}" class="px-8 bg-gradient-to-tr from-emerald-400 to-emerald-500">
                                 Paket Lainnya
                             </x-primary-link>
                         </div>
