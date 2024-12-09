@@ -84,6 +84,7 @@ Route::post('/report/bulk-delete', [ReportController::class, 'bulkDelete'])->nam
 
 
 
+
 // hasan
 
 Route::resource('/class-bimbel', ClassBimbelController::class);
