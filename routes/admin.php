@@ -36,6 +36,9 @@ Route::post('/tryout/bulk-delete', [TryoutController::class, 'bulkDelete'])->nam
 Route::get('/tryout/{tryout}/subcategory/{sub_categories}',[TryoutController::class,'subCategory'])->name('tryout.sub-category');
 Route::get('/tryout/{tryout}/subcategory/{sub_categories}/result/{result}',[TryoutController::class,'result'])->name('tryout.result');
 
+Route::post('/tryout/bulk-update', [TryoutController::class, 'bulkUpdate'])
+    ->name('tryout.bulkUpdate');
+
 Route::get('/tryout/{tryout}/question/create', [TryoutController::class, 'question_create'])->name('tryout.question.create');
 Route::post('/tryout/{tryout}/question/', [TryoutController::class, 'question_store'])->name('tryout.question.store');
 Route::get('/tryout/{tryout}/question/{question}/edit', [TryoutController::class, 'question_edit'])->name('tryout.question.edit');
@@ -51,6 +54,8 @@ Route::get('/bimbel/{bimbel}/class/{class_bimbel}/edit', [BimbelController::clas
 
 Route::resource('/class-bimbel', ClassBimbelController::class);
 Route::post('/class-bimbel/bulk-delete', [ClassBimbelController::class, 'bulkDelete'])->name('class-bimbel.bulkDelete');
+Route::post('/class-bimbel/bulk-update', [ClassBimbelController::class, 'bulkUpdate'])
+    ->name('class-bimbel.bulkUpdate');
 
 Route::resource('/question-practice', QuestionPracticeController::class);
 Route::post('/question-practice/bulk-delete', [QuestionPracticeController::class, 'bulkDelete'])->name('question-practice.bulkDelete');
@@ -64,6 +69,8 @@ Route::resource('/category/sub_categories', SubCategoriesController::class);
 
 Route::post('/question/bulk-delete', [QuestionController::class, 'bulkDelete'])->name('question.bulkDelete');
 Route::resource('/question', QuestionController::class);
+Route::post('/question/bulk-update', [QuestionController::class, 'bulkUpdate'])
+    ->name('question.bulkUpdate');
 
 Route::post('/package_member/bulk-delete', [PackageMemberController::class, 'bulkDelete'])->name('package_member.bulkDelete');
 Route::resource('/package_member', PackageMemberController::class);
@@ -114,6 +121,9 @@ Route::post('/discount/bulk-delete', [DiscountController::class, 'bulkDelete'])-
 
 Route::resource('/order', OrderController::class);
 Route::post('/order/bulk-delete', [OrderController::class, 'bulkDelete'])->name('order.bulkDelete');
+
+Route::post('/order/bulk-update', [OrderController::class, 'bulkUpdate'])
+    ->name('order.bulkUpdate');
 
 Route::resource('/testimonial', TestimonialController::class);
 Route::post('/testimonial/bulk-delete', [TestimonialController::class, 'bulkDelete'])->name('testimonial.bulkDelete');

@@ -11,6 +11,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
@@ -86,6 +87,59 @@ class OrderController extends Controller
                 return response()->json(['error' => 'An error occurred while processing your request.'], 500);
             }
             return back()->with('error', 'An error occurred while loading the page. Please try again.');
+        }
+    }
+
+    public function bulkUpdate(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'ids' => 'required|array',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false, 
+                    'message' => $validator->errors()->first()
+                ], 422);
+            }
+
+            // Siapkan data update
+            $updateData = [];
+            
+            // Tambahkan is_free jika ada
+            if ($request->has('payment_status')) {
+                $updateData['payment_status'] = $request->payment_status;
+            }
+            
+            // // Tambahkan is_together jika ada
+            // if ($request->has('is_together')) {
+            //     $updateData['is_together'] = $request->is_together;
+            // }
+
+            // Pastikan ada data yang akan diupdate
+            if (empty($updateData)) {
+                return response()->json([
+                    'success' => false, 
+                    'message' => 'Tidak ada data yang akan diupdate'
+                ], 400);
+            }
+
+            // Lakukan update
+            $updatedCount = Order::whereIn('id', $request->ids)
+                ->update($updateData);
+
+            return response()->json([
+                'success' => true, 
+                'message' => "Berhasil mengupdate {$updatedCount} tryout"
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Bulk Update Error: ' . $e->getMessage());
+            return response()->json([
+                'success' => false, 
+                'message' => 'Terjadi kesalahan saat memproses update'
+            ], 500);
         }
     }
 

@@ -38,7 +38,7 @@
                     <div>
                         <form method="GET" action="{{ route('admin.report.index') }}" class="flex gap-4">
                             <div>
-                                <x-select-input name="year" class="">
+                                <x-select-input name="year" class="p-2 border rounded">
                                     @foreach($years as $year)
                                         <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
                                             {{ $year }}

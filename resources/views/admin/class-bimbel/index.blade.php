@@ -45,6 +45,19 @@
                                 Hapus yang dipilih
                             </button>
                         </div>
+                        <div id="bulk-update-row" style="display:none;">
+                            <div>
+                                <div class="flex justify-center gap-2">
+                                    <x-select-input id="bulk-update-select" class="form-control mr-2" style="width: 250px;">
+                                        <option value="">Pilih Mapel yang ingin di Update</option>
+                                        @foreach($subCategories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </x-select-input>
+                                    <button id="bulk-update-btn" class="text-white  bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Update</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="flex justify-center items-center gap-2">
@@ -337,6 +350,70 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+
+    // Handle "select all" checkbox
+    $('#checkbox-all').on('click', function() {
+        $('.class-bimbel-checkbox').prop('checked', this.checked);
+        updateBulkOptions();
+    });
+
+    // Handle individual checkbox changes
+    $('#classBimbelTable').on('change', '.class-bimbel-checkbox', function() {
+        updateBulkOptions();
+        
+        // Update "select all" checkbox
+        var allChecked = $('.class-bimbel-checkbox:checked').length === $('.class-bimbel-checkbox').length;
+        $('#checkbox-all').prop('checked', allChecked);
+    });
+
+    // Fungsi untuk mengupdate opsi bulk
+    function updateBulkOptions() {
+        var checkedCount = $('.class-bimbel-checkbox:checked').length;
+        
+        if (checkedCount > 0) {
+            // Tampilkan baris opsi update
+            $('#bulk-update-row').show();
+        } else {
+            // Sembunyikan baris opsi update
+            $('#bulk-update-row').hide();
+        }
+    }
+
+    // Handle bulk update
+    $('#bulk-update-btn').on('click', function() {
+        var selectedIds = [];
+        $('.class-bimbel-checkbox:checked').each(function() {
+            selectedIds.push($(this).val());
+        });
+
+        var subCategoryId = $('#bulk-update-select').val();
+
+        $.ajax({
+            url: "{{ route('admin.class-bimbel.bulkUpdate') }}", 
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                ids: selectedIds,
+                sub_category_id: subCategoryId
+            },
+            success: function(response) {
+                if (response.success) {
+                    // Refresh table
+                    table.ajax.reload();
+                    // Sembunyikan baris update
+                    $('#bulk-update-row').hide();
+                    // Uncheck "select all"
+                    $('#checkbox-all').prop('checked', false);
+                    
+                    // Tampilkan pesan sukses
+                    toastr.success(response.message);
+                }
+            },
+            error: function(error) {
+                toastr.error('Error updating selected items');
+            }
+        });
     });
 });
 </script>
