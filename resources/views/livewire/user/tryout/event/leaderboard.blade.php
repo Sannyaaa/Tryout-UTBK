@@ -54,9 +54,9 @@
                                             <p class="mt-1 text-gray-600">Lihat Statistik dan Ranking dari Hasil Tryout yang sudah Kamu Selesaikan Ini.</p>
                                         </div>
                                         <div>
-                                            <x-primary-link href="{{ route('user.tryouts.event.item', $tryout->id) }}">
+                                            <x-secondary-link href="{{ route('user.tryouts.event.item', $tryout->id) }}">
                                                 Kembali
-                                            </x-primary-link>
+                                            </x-secondary-link>
                                         </div>
                                     </div>
                                     @if (Auth::user()->data_universitas_id != null && Auth::user()->second_data_universitas_id != null)

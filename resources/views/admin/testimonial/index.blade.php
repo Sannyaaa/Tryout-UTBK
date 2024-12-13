@@ -45,10 +45,11 @@
                 </div>
                 <div class="flex justify-center items-center gap-2">
                     <div class="">
-                        <x-select-input id="payment_status" class="p-2 btestimonial rounded">
+                        <x-select-input id="package_member_id" class="p-2 btestimonial rounded">
                             <option value="">Semua Paket</option>
-                            <option value="pending">Pending</option>
-                            <option value="paid">Dibayar</option>
+                            @foreach ($packages as $package)
+                                <option value="{{ $package->id }}">{{ $package->name }}</option>
+                            @endforeach
                         </x-select-input>
                     </div>
 
@@ -97,8 +98,8 @@
                                             <x-input-error :messages="$errors->get('package_member_id')" class="mt-2" />
                                         </div>
                                     </div>
-                                    <x-primary-button type="submit">
-                                        + Bimbel
+                                    <x-primary-button type="submit" class="">
+                                        Submit
                                     </x-primary-button>
                                 </form>
                             </div>
@@ -219,7 +220,7 @@ $(document).ready(function() {
         ajax: {
                 url: "{{ route('admin.testimonial.index') }}",
                 data: function (d) {
-                    d.payment_status = $('#payment_status').val();
+                    d.package_member_id = $('#package_member_id').val();
                 }
             },
         columns: [
@@ -230,8 +231,17 @@ $(document).ready(function() {
                 searchable: false,
                 width: '5%'
             },
-            {data: 'content', name: 'content'},
-            {data: 'package_member.name', name: 'package_member.name'},
+            {
+                data: 'content', // Mengambil data content
+                name: 'content',
+                defaultContent: '',
+                render: function(data, type, row) {
+                    // Menghapus tag HTML dan menampilkan teks biasa
+                    var plainText = $('<div>').html(data).text();  // Menghapus HTML
+                    return plainText;  // Mengembalikan teks biasa
+                }
+            },
+            {data: 'package_member.name', name: 'package_member.name', defaultContent: '-'},
             {data: 'user.name', name: 'user.name'},
             {data: 'created_at', name: 'created_at'},
             {
@@ -243,7 +253,7 @@ $(document).ready(function() {
         ]
     });
 
-    $('#payment_status').change(function(){
+    $('#package_member_id').change(function(){
         table.draw();
     });
 

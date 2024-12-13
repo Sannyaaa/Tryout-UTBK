@@ -6,9 +6,9 @@
             <div class="w-full lg:flex py-16 lg:py-20 px-10 lg:px-14  xl:px-32 space-y-10">
                 <div class="w-4/5 lg:w-1/2 flex justify-center items-center pe-10">
                     <div class="text-left w-full">
-                        <h1 class="text-5xl font-bold text-sky-900 lg:text-6xl ">{{ $homePage->hero_title }}</h1>
+                        <h1 class="text-5xl font-bold text-sky-900 lg:text-6xl ">{{ $homePage->hero_title ?? '' }}</h1>
 
-                        <div class="mt-6 text-lg  text-gray-600">{!! $homePage->hero_desc !!}</div>
+                        <div class="mt-6 text-lg  text-gray-600">{!! $homePage->hero_desc ?? '' !!}</div>
 
                         <div class="mt-6 inline-flex items-center gap-x-3">
                             <x-primary-link href="{{ route('login') }}" class="py-1 px-2">
@@ -336,16 +336,18 @@
 
                                                     <div class="">
                                                         
-                                                        <div class="mb-2 leading-relaxed text-2xl font-semibold text-gray-600 italic">
-                                                            "{!! $testimonial->content !!}"
+                                                        <div class="mb-2 text-md leading-relaxed lg:text-lg font-semibold text-gray-600 italic">
+                                                            {!! $testimonial->content !!}
                                                         </div>
 
-                                                        <p class="text-lg text-sky-500 font-medium italic sm:text-xl">-- {{ $testimonial->package_member->name }}</p>
+                                                        {{-- @if ($testimonial->package_member_id != null)
+                                                            <p class="text-lg text-sky-500 font-medium italic lg:text-xl">-- {{ $testimonial->package_member->name }}</p>
+                                                        @endif --}}
 
                                                     </div>
                                                 </div>
 
-                                                <footer class="mt-2 text-sm font-medium text-gray-700 sm:mt-3">
+                                                <footer class="text-sm font-medium text-gray-700">
                                                     <div class="flex items-center mt-4 space-x-4">
                                                         <img src="{{ Storage::url($testimonial->user->avatar ?? '') }}" alt="" class="w-12 h-12 bg-center bg-cover rounded-full dark:bg-gray-500">
                                                         <div>

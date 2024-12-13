@@ -98,12 +98,12 @@
                         </div>
                     </div>
                     <div class="flex justify-between">
-                            <x-secondary-href href="{{ route('admin.promotion.index') }}">
-                                Kembali
-                            </x-secondary-href>
-                            <x-primary-button type="submit">
-                                Tambah Promotion
-                            </x-primary-button>
+                        <x-secondary-link href="{{ route('admin.promotion.index') }}">
+                            Kembali
+                        </x-secondary-li>
+                        <x-primary-button type="submit">
+                            Submit
+                        </x-primary-button>
                     </div>
             </form>
         </div>

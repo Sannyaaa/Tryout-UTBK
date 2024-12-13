@@ -37,7 +37,7 @@
                     </div>
                     <div class="inline-flex gap-3">
                         <x-primary-link href="{{ route('user.tryouts.paper', [$tryoutId, $subCategoryId]) }}" target="__blank" class="flex items-center my-1">
-                            <i class="fa-solid fa-circle-play"></i>&nbsp; Kerjakan Ulang
+                            <i class="fa-solid fa-circle-play"></i>&nbsp; Kerjakan Lagi
                         </x-primary-link>
                     </div>
                 </div>
@@ -108,14 +108,16 @@
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ \Carbon\Carbon::parse($item->created_at)->format('j F Y') }}
                                                 </td>
-                                                <td class="px-6 py-3 whitespace-nowrap">
+                                                <td class="px-6 py-3 whitespace-nowrap flex gap-4">
                                                     <div>
-                                                        <x-primary-link href="{{ route('user.tryouts.results', $item->id) }}" class="inline-flex gap-2">
-                                                            <span class="">
-                                                                <i class="fa-solid fa-eye"></i>
-                                                            </span> 
-                                                            <span class="">Lihat</span>
-                                                        </x-primary-link>
+                                                        <x-secondary-link href="{{ route('user.tryouts.statistik', $item->id) }}" class="">
+                                                            <span class="">Statistik</span>
+                                                        </x-secondary-link>
+                                                    </div>
+                                                    <div>
+                                                        <x-secondary-link href="{{ route('user.tryouts.results', $item->id) }}" class="">
+                                                            <span class="">Pembahasan</span>
+                                                        </x-secondary-link>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -137,10 +139,10 @@
                         </div> --}}
                     </div>
                 </div>
-                <div>
-                    <x-primary-link href="{{ route('user.tryouts.item', $tryoutId) }}" class="py-1">
+                <div class=" inline-block">
+                    <x-secondary-link href="{{ route('user.tryouts.item', $tryoutId) }}" class="py-1">
                         Kembali
-                    </x-primary-link>
+                    </x-secondary-link>
                 </div>
             </div>
         </div>

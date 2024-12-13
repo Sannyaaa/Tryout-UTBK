@@ -38,13 +38,13 @@
                         <div class="flex space-x-1">
                             <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
                             <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                                Hapus Yang dipilih
+                                Hapus
                             </button>
                         </div>
                     </div>
                 </div>
-                <x-primary-link href="{{ route('admin.promotion.create') }}" class="" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                    Tambah Banner Promo
+                <x-primary-link href="{{ route('admin.promotion.create') }}">
+                    Tambah Banner
                 </x-primary-link>
             </div>
 

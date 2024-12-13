@@ -28,6 +28,12 @@
             </div>
         </div>
 
+        @if (session('message'))
+            <div class="mb-8 bg-rose-200 border-rose-700 border text-rose-700 py-3 px-4 rounded-md">
+                {{ session('message') }}
+            </div>
+        @endif
+
         <div>
             @if ($todayClasses->isNotEmpty())
                 @foreach ($todayClasses as $class)
@@ -131,7 +137,7 @@
                                     <div class="pb-5 px-6 pt-1 bg-white rounded-b-lg">
                                         <a href="{{ $package->tryout->is_together == 'together' ? route('user.tryouts.event.item', $package->tryout_id) : route('user.tryouts.item', $package->tryout_id) }}" class="w-full">
                                             <button class="text-white font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-sky-700 w-full p-3 rounded-lg">
-                                                Kerjakan
+                                                Lihat Detail
                                                 <i class="fa-solid fa-arrow-right-long"></i>
                                             </button>
                                         </a>

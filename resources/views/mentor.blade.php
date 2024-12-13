@@ -6,9 +6,15 @@
             <div class="w-full lg:flex py-16 lg:py-20 px-10 lg:px-14  xl:px-32 space-y-10">
                 <div class="w-4/5 lg:w-full flex justify-center items-center pe-10">
                     <div class="text-center w-full">
-                        <h1 class="text-5xl font-bold text-sky-900 lg:text-6xl ">Berlatih bersama mentor yang telah membantu ratusan siswa mencapai nilai tinggi!</h1>
+                        <h1 class="text-5xl font-bold text-sky-900 lg:text-6xl ">
+                            {{-- Berlatih bersama mentor yang telah membantu ratusan siswa mencapai nilai tinggi! --}}
+                            {{ $homePage->mentor_title }}
+                        </h1>
 
-                        <div class="mt-6 text-lg  text-gray-600">Dibimbing oleh guru dan mentor berpengalaman di bidang UTBK, kami hadirkan tenaga pengajar terbaik untuk mendukung persiapanmu. Setiap pengajar telah terlatih dan memahami pola soal UTBK, sehingga kamu bisa lebih siap menghadapi ujian.</div>
+                        <div class="mt-6 text-lg  text-gray-600 w-4/5 mx-auto">
+                            {{-- Dibimbing oleh guru dan mentor berpengalaman di bidang UTBK, kami hadirkan tenaga pengajar terbaik untuk mendukung persiapanmu. Setiap pengajar telah terlatih dan memahami pola soal UTBK, sehingga kamu bisa lebih siap menghadapi ujian. --}}
+                            {!! $homePage->mentor_desc !!}
+                        </div>
 
                         {{-- <div class="mt-6 inline-flex items-center gap-x-6">
                             <x-primary-link href="{{ route('login') }}" class="py-1 px-2 rounded-full">
@@ -30,14 +36,14 @@
     <div class="bg-white">
         <div class="">
 
-            <div class="py-24" id="features">
-                <div class="flex justify-center">
+            <div class="py-20" id="features">
+                {{-- <div class="flex justify-center">
                     <div class="text-center max-w-4xl mx-auto">
                         <h1 class="text-4xl font-bold  text-sky-900 md:text-5xl lg:text-6xl ">{{ $homePage->mentor_title }}</h1>
 
                         <p class="mt-6 text-lg  text-gray-600">{!! $homePage->mentor_desc !!}</p>
                     </div>
-                </div>
+                </div> --}}
                 <div class="mt-6 px-4 sm:px-20 lg:px-28">
                     <div class="w-full flex flex-wrap justify-center">
                         @foreach ($mentors as $mentor)

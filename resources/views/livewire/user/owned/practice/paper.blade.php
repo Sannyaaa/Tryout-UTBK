@@ -33,7 +33,7 @@
             <div class=" lg:flex gap-6">
 
                 {{-- Main Content Area --}}
-                <div class="w-2/3">
+                <div class="w-full lg:w-2/3">
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
                         {{-- Question Navigation Header --}}
                         <div class="border-b border-gray-200">
@@ -80,7 +80,7 @@
                             @endif
 
                             <div class="prose max-w-none">
-                                <h3 class="text-3xl font-bold text-gray-900">{{ $question->question }}</h3>
+                                <h3 class="text-3xl font-bold text-gray-900">{!! $question->question !!}</h3>
                             </div>
 
                             {{-- Answer Options --}}
@@ -109,7 +109,7 @@
                 </div>
 
                 {{-- Left Sidebar with Navigation --}}
-                <div class="w-1/3">
+                <div class="w-full lg:w-1/3">
                     <div class="space-y-4">
 
                         {{-- Question Navigation --}}

@@ -4,14 +4,13 @@
   <div class="relative flex flex-col flex-1 min-h-0 py-0 mt-20 lg:mt-0 overflow-hidden bg-white border-r rounded-lg shadow border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto sidebar-content">
       <div class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-        <ul class="pb-2 space-y-2">
+        <ul class="py-2 space-y-2">
           <li>
             <a href="#" class="flex justify-center py-4 bg-sky-50 rounded-lg">
               <img src="{{ Storage::url($component->navbar_image ?? '') }}" class="h-8" alt="Flowbite Logo" />
               {{-- <span class="self-center text-3xl font-semibold sm:text-4xl whitespace-nowrap text-sky-800 dark:text-white bg-sky-50">Flowbite</span> --}}
             </a>
           </li>
-
           <li>
             <form action="#" method="GET" class="lg:hidden">
               <label for="mobile-search" class="sr-only">Search</label>
@@ -34,7 +33,7 @@
           @if (Gate::allows('admin'))
 
             <li>
-              <x-sidebar-link link="{{ route('dashboard') }}" token="dashboard-proccess" name="Dashboard">
+              <x-sidebar-link link="{{ route('dashboard') }}" token="dashboard" name="Dashboard">
                 <i class="fa-solid fa-display"></i>
               </x-sidebar-link>
             </li>
@@ -82,6 +81,15 @@
             </li>
 
             <li>
+              <x-sidebar-link link="{{ route('admin.combined-categories.index') }}" token="combined-categories" name="Materi">
+                <i class="fa-solid fa-book-open"></i>
+              </x-sidebar-link>
+            </li>
+        </ul>
+
+        <ul class="py-2 space-y-2">
+
+            <li>
               <x-sidebar-link link="{{ route('admin.package_member.index') }}" token="package_member" name="Paket">
                 <i class="fa-solid fa-tags"></i>
               </x-sidebar-link>
@@ -110,7 +118,10 @@
                 <i class="fa-solid fa-flag"></i>
               </x-sidebar-link>
             </li>
+        </ul>
 
+        <ul class="py-2 space-y-2">
+          
             <li>
               <x-sidebar-link link="{{ route('admin.testimonial.index') }}" token="testimonial" name="Testimonial">
                 <i class="fa-solid fa-comments"></i>
@@ -142,13 +153,9 @@
               </x-sidebar-dropdown>
             </li>
 
-            <li>
-              <x-sidebar-link link="{{ route('admin.combined-categories.index') }}" token="combined-categories" name="Materi">
-                <i class="fa-solid fa-book-open"></i>
-              </x-sidebar-link>
-            </li>
+          @endif
 
-          @elseif (Gate::allows('mentor'))
+          @if (Gate::allows('mentor'))
             
             <li>
               <x-sidebar-link link="{{ route('mentor.bimbel.index') }}" token="bimbel" name="Bimbel">
@@ -164,11 +171,12 @@
 
           @endif
         </ul>
+
         <div class="pt-2 space-y-2">
           @if (Gate::allows('admin'))
             <x-sidebar-link link="{{ route('admin.profile.edit') }}" token="profile" name="Profile">
-            <i class="fa-solid fa-user"></i>
-          </x-sidebar-link>
+              <i class="fa-solid fa-user"></i>
+            </x-sidebar-link>
           @elseif (Gate::allows('mentor'))
             <x-sidebar-link link="{{ route('mentor.profile.edit') }}" token="profile" name="Profile">
               <i class="fa-solid fa-user"></i>

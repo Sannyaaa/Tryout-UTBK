@@ -84,6 +84,15 @@
                     
                     <div class="grid lg:grid-cols-3 gap-3">
                         <div>
+                            <x-input-label for="is_together" :value="__('Biasa / Serentak')" />
+                            <x-select-input id="is_together" name="is_together" >
+                                <option selected="" disabled>Pilih Is Together</option>
+                                <option value="basic" {{ $tryout->is_together == 'basic' ? 'selected' : '' }}>Biasa</option>
+                                <option value="together" {{ $tryout->is_together == 'together' ? 'selected' : '' }}>Serentak</option>
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('is_together')" class="mt-2" />
+                        </div>
+                        <div>
                             <x-input-label for="is_free" :value="__('Berbayar / Gratis')" />
                             <x-select-input id="is_free" name="is_free">
                                 <option selected="" disabled>Pilih is free</option>
@@ -101,18 +110,9 @@
                             </x-select-input>
                             <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
                         </div>
-                        <div>
-                            <x-input-label for="is_together" :value="__('Biasa / Serentak')" />
-                            <x-select-input id="is_together" name="is_together" >
-                                <option selected="" disabled>Pilih Is Together</option>
-                                <option value="basic" {{ $tryout->is_together == 'basic' ? 'selected' : '' }}>Biasa</option>
-                                <option value="together" {{ $tryout->is_together == 'together' ? 'selected' : '' }}>Serentak</option>
-                            </x-select-input>
-                            <x-input-error :messages="$errors->get('is_together')" class="mt-2" />
-                        </div>
                     </div>
                     
-                    <div id="date-inputs" style="{{ $tryout->is_together != null ? 'display: block;' : 'display: none;' }}"> 
+                    <div id="date-inputs" style="{{ $tryout->is_together == 'together' ? 'display: block;' : 'display: none;' }}"> 
                         <div class="grid lg:grid-cols-2 gap-3">
                             <div>
                                 <x-input-label for="start_date" :value="__('Tanggal mulai')" />
@@ -127,11 +127,11 @@
                         </div>
                     </div>
                     <div class="flex justify-between">
-                        <x-secondary-href href="{{ route('admin.tryout.index') }}">
+                        <x-secondary-link href="{{ route('admin.tryout.index') }}">
                             Kembali
-                        </x-secondary-href>
+                        </x-secondary-link>
                         <x-primary-button>
-                            Edit Tryout
+                            Submit
                         </x-primary-button>
                     </div>
             </form>
@@ -146,7 +146,9 @@
     <script>
         document.getElementById('is_together').addEventListener('change', function() {
             var dateInputs = document.getElementById('date-inputs');
+            var isFree = document.getElementById('is_free');
             dateInputs.style.display = this.value === 'together' ? 'block' : 'none';
+            isFree.style.display = this.value === 'together' ? 'none' : 'block';
             
             // Toggle required attribute
             var inputs = dateInputs.getElementsByTagName('input');

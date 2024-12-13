@@ -121,11 +121,11 @@
                         </div>
                     </div>
                     <div class="flex justify-between">
-                        <x-secondary-href href="{{ route('admin.discount.index') }}">
+                        <x-secondary-link href="{{ route('admin.discount.index') }}">
                             Kembali
-                        </x-secondary-href>
+                        </x-secondary-link>
                         <x-primary-button type="submit">
-                            Edit Voucher
+                            Submit
                         </x-primary-button>
                     </div>
             </form>

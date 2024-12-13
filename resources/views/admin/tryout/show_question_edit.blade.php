@@ -116,12 +116,12 @@
                         <x-input-error :messages="$errors->get('explanation')" class="mt-2" />
                     </div>
 
-                    <div class="flex justify-end">
-                        <x-secondary-href href="{{ route('admin.tryout.show', $tryout->id) }}">
-                            Back
-                        </x-secondary-href>
-                        <x-primary-button class="ml-4">
-                            {{ __('Update') }}
+                    <div class="flex justify-between ">
+                        <x-secondary-link href="{{ route('admin.tryout.show', $tryout->id) }}">
+                            Kembali
+                        </x-secondary-link>
+                        <x-primary-button class="">
+                            {{ __('Submit') }}
                         </x-primary-button>
                     </div>
                 </div>

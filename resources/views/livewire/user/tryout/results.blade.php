@@ -89,7 +89,7 @@
                             @endif
 
                             <div class="prose max-w-none">
-                                <h3 class="text-3xl font-bold text-slate-700">{{ $question->question }}</h3>
+                                <h3 class="text-3xl font-bold text-slate-700">{!! $question->question !!}</h3>
                             </div>
 
                             {{-- Answer Options with Correct/Incorrect Indicators --}}
@@ -132,7 +132,7 @@
                             @if($question->explanation)
                             <div class="mt-6 p-4 bg-sky-50 rounded-lg border border-sky-200">
                                 <h4 class="text-lg font-semibold text-sky-900 mb-2">Pembahasan</h4>
-                                <p class="text-sky-800">{{ $question->explanation }}</p>
+                                <p class="text-sky-800">{!! $question->explanation !!}</p>
                             </div>
                             @endif
                         </div>

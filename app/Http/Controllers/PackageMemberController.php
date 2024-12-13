@@ -27,7 +27,7 @@ class PackageMemberController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $query = Package_member::with('tryout','bimbel')->orderBy('created_at', 'desc');
+                $query = Package_member::with('tryout','bimbel')->get();
                 
                 return DataTables::of($query)
                     ->addIndexColumn()
@@ -134,7 +134,7 @@ class PackageMemberController extends Controller
             'tryout_id' => 'required_without:bimbel_id|exists:tryouts,id',
             'bimbel_id' => 'required_without:tryout_id|exists:bimbels,id',
             'name' => 'required|string',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
             'price' => 'required|string',
             'benefits' => 'required|array|min:1',
             'benefits.*' => 'required|string',

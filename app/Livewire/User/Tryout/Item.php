@@ -2,14 +2,15 @@
 
 namespace App\Livewire\User\Tryout;
 
+use App\Models\Order;
 use App\Models\Result;
 use App\Models\Tryout;
 use Livewire\Component;
 use App\Models\Category;
-use App\Models\Package_member;
 use App\Models\Question;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use App\Models\Package_member;
 use Illuminate\Support\Facades\DB;
 
 class Item extends Component
@@ -25,6 +26,22 @@ class Item extends Component
         $this->tryout = Tryout::where('id', $this->tryoutId)->first();
         $this->user = auth()->user();
         $this->package = Package_member::where('tryout_id', $this->tryoutId)->first();
+    
+        if($this->tryout->is_together == 'basic' AND $this->tryout->is_free == 'paid'){
+            $paid = Order::where('user_id', auth()->id())
+                ->where('payment_status', 'paid')
+                ->with(['package_member','user'])
+                ->whereHas('package_member', function($q){
+                    // dd($q);
+                    $q->where('tryout_id', $this->tryoutId);
+                })->first();
+                
+            if($paid == null){
+                session()->flash('message','kamu tidak memiliki akses untuk paket tersebut');
+
+                return redirect()->route('user.my-packages');
+            }
+        }
     }
 
     public function saveTestimonial()
@@ -56,15 +73,7 @@ class Item extends Component
 
         $totalSubCategories = DB::table('sub_categories')->count();
         
-        $filterFirst = Result::select('user_id', DB::raw('SUM(score) as total_score'))
-            ->join('users', 'results.user_id', '=', 'users.id')
-            ->where('users.data_universitas_id', $this->user->second_data_universitas_id)
-            ->where('users.second_data_universitas_id', $this->user->data_universitas_id)
-            ->where('results.tryout_id', $this->tryoutId)
-            ->groupBy('results.user_id')
-            ->havingRaw('COUNT(DISTINCT results.sub_category_id) = ?', [$totalSubCategories])
-            ->orderByDesc('total_score')
-            ->get();
+        
 
 
         // Cek setiap sub-category yang sudah pernah dikerjakan user
@@ -82,7 +91,6 @@ class Item extends Component
 
         return view('livewire.user.tryout.item', [
             'categories' => $categories,
-            'firstFilters' => $filterFirst
         ]); 
     }
 }

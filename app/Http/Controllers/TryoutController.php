@@ -154,7 +154,12 @@ class TryoutController extends Controller
     public function store(Request $request)
     {
 
+        if($request->is_together == 'together'){
+            $request['is_free'] = 'paid';
+        }
+
         // dd($request);
+
         $data = $request->validate([
             'name' => 'nullable|max:255',
             'description' => 'nullable|string',
@@ -166,12 +171,6 @@ class TryoutController extends Controller
 
         try{
             $tryout = Tryout::create($data);
-
-            if($tryout->is_together == 'together'){
-                $tryout->update([
-                    'is_free' => 'paid'
-                ]);
-            }
 
             Log::info("berhasil");
             return redirect()->route('admin.tryout.index')->with('success', 'Tryout created successfully.');

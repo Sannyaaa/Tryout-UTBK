@@ -22,8 +22,8 @@ class TestimonialController extends Controller
                 $query = Testimonial::with(['package_member', 'user']);
                 
                // Check if a filter is applied
-                if ($request->has('payment_status') && $request->payment_status != '') {
-                    $query->where('payment_status', $request->payment_status);
+                if ($request->has('package_member_id') && $request->package_member_id != '') {
+                    $query->where('package_member_id', $request->package_member_id);
                 }
 
                 return DataTables::of($query)
@@ -72,6 +72,7 @@ class TestimonialController extends Controller
             return back()->with('error', 'An error occurred while loading the page. Please try again.');
         }
     }
+
 
     public function bulkDelete(Request $request)
     {

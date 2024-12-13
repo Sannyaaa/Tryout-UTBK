@@ -128,9 +128,11 @@
                     </div>
                 </div>
                 <div class="flex justify-between">
-                    
+                    <x-secondary-link href="{{ route('admin.user.index') }}">
+                        Kembali
+                    </x-secondary-li>
                     <x-primary-button type="submit">
-                        Add User
+                        Submit
                     </x-primary-button>
                 </div>
             </div>
@@ -202,7 +204,7 @@
                                             <td class="p-4 space-x-2 whitespace-nowrap">
                                                 {{-- @dd($result->sub_category_id) --}}
                                                 <div class="flex justify-start gap-1">
-                                                    <a href="{{ route('admin.tryout.result', [$result->tryout_id, $result->sub_category_id, $result->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:ring-emerald-300 dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-emerald-800">
+                                                    <a href="{{ route('admin.tryout.result', [$result->tryout_id, $result->sub_category_id, $result->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-emerald-500 hover:bg-emerald-600 focus:ring-4 focus:ring-emerald-300 dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-emerald-800">
                                                         Detail
                                                     </a>
                                                 </div>
@@ -224,9 +226,11 @@
             </div>  
         </div>
 
-        <x-secondary-href href="{{ route('admin.user.index') }}">
-            Back
-        </x-secondary-href>
+        <div class="mt-4">
+            <x-secondary-link href="{{ route('admin.user.index') }}" class="inline-block">
+                Back
+            </x-secondary-link>
+        </div>
     </div>
 </div>
 

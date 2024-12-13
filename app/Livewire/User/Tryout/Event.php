@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Livewire\User\Tryout;
+
+use App\Models\sub_categories;
 use App\Models\Tryout;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Event extends Component
 {
+
     public function render()
     {
         $now = Carbon::today();
@@ -16,8 +20,19 @@ class Event extends Component
 
         $comingsoon = $tryouts->where('start_date', '>', $now);
         $finished = $tryouts->where('end_date', '<', $now);
-        $ongoing = $tryouts->where('start_date', '<=', $now)->where('end_date', '>=', $now);
+        $ongoing = $tryouts->where('start_date', '<=', $now)->where('end_date', '>=', $now)->first();
 
-        return view('livewire.user.tryout.event', compact('comingsoon','ongoing','finished'));
+        $totalCategories = sub_categories::count();
+
+        $participant = DB::table('results')
+                        ->select('user_id', DB::raw('COUNT(DISTINCT sub_category_id) as completed_categories'))
+                        ->join('sub_categories', 'results.sub_category_id', '=', 'sub_categories.id')
+                        ->where('results.tryout_id', $ongoing->id)
+                        // ->where('results.status', 'completed') // Pastikan kategori diselesaikan
+                        ->groupBy('user_id')
+                        ->having('completed_categories', '=', $totalCategories)
+                        ->count();
+                        
+        return view('livewire.user.tryout.event', compact('comingsoon','ongoing', 'participant','finished'));
     }
 }

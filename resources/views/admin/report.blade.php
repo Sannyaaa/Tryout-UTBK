@@ -20,7 +20,7 @@
                                 <li>
                                     <div class="flex items-center">
                                     <svg class="w-6 h-6 text-gray-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                                    <a href="#" class="ml-1 text-white md:ml-2">Laporan</a>
+                                    <a href="#" class="ml-1 text-white md:ml-2">Laporan Keuangan</a>
                                     </div>
                                 </li>
                                 {{-- <li>
@@ -140,8 +140,8 @@
                                                             <label for="checkbox" class="sr-only">checkbox</label>
                                                         </div>
                                                     </td> --}}
-                                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{$reports->invoice}}</td>
-                                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{$reports->package_member->name}}</td>
+                                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap"><a href="{{ route('admin.order.show', $reports->id) }}">{{$reports->invoice}}</a></td>
+                                                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap"><a href="{{ route('admin.package_member.show',$reports->package_member_id) }}">{{$reports->package_member->name}}</a></td>
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{ number_format($reports->final_price)}}</td>
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{$reports->payment_status}}</td>
                                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">{{ \Carbon\Carbon::parse($reports->created_at)->format('d F Y') }}</td>

@@ -151,12 +151,12 @@
                     </div>
                     
                     <div class="flex justify-between">
-                            <x-secondary-href href="{{ route('admin.question.index') }}">
-                                Back
-                            </x-secondary-href>
-                            <x-primary-button type="submit">
-                                Submit
-                            </x-primary-button>
+                        <x-secondary-link href="{{ route('admin.question.index') }}">
+                            Back
+                        </x-secondary-link>
+                        <x-primary-button type="submit">
+                            Submit
+                        </x-primary-button>
                     </div>
             </form>
         </div>
