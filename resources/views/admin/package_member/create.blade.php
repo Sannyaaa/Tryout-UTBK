@@ -67,9 +67,9 @@
                 <div class="space-y-4">
 
                     <div>
-                        <x-input-label for="name" :value="__('Nama Package Member')" />
+                        <x-input-label for="name" :value="__('Nama Paket')" />
                         <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama" required=""/>
-                        <x-input-error :messages="$errors->get('price')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
 
                     <div>
@@ -103,6 +103,7 @@
                         <x-text-input type="number" :value="old('price')" name="price" id="price" placeholder="Masukan Harga"/>
                         <x-input-error :messages="$errors->get('price')" class="mt-2" />
                     </div>
+
                     <div class="space-y-4">
                         <!-- Input Radio untuk memilih antara Tryout dan Bimbel -->
                         <div>
@@ -149,7 +150,7 @@
                         <ul class="grid w-full gap-6 md:grid-cols-3">
                             @forelse ($discounts as $discount)
                                 <li>
-                                    <input type="checkbox" id="discount-{{ $discount->id }}" value="{{ $discount->id }}" name="discounts[]" class="hidden peer" required="">
+                                    <input type="checkbox" id="discount-{{ $discount->id }}" value="{{ $discount->id }}" name="discounts[]" class="hidden peer" >
                                     <label for="discount-{{ $discount->id }}" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 ">                           
                                         <div class="block">
                                             <div class="w-full text-lg font-semibold">{{ $discount->name }}</div>
@@ -164,13 +165,14 @@
                     </div>
                     
                     <div class="flex justify-between">
-                            <x-secondary-href href="{{ route('admin.package_member.index') }}">
-                                Back
-                            </x-secondary-href>
-                            <x-primary-button type="submit">
-                                Add package_member
-                            </x-primary-button>
+                        <x-secondary-link href="{{ route('admin.package_member.index') }}">
+                            Kembali
+                        </x-secondary-link>
+                        <x-primary-button type="submit">
+                            Submit
+                        </x-primary-button>
                     </div>
+                </div>
             </form>
         </div>
     </div>

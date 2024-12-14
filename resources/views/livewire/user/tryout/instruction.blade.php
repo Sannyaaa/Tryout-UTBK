@@ -98,7 +98,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="max-w-md py-12 ps-20 pe-0">
+                <div class="max-w-md hidden lg:flex py-12 ps-20 pe-0">
                     <img src="{{ asset('assets/Online test-amico.png') }}" alt="">
                 </div>
             </div>

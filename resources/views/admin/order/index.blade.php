@@ -51,8 +51,9 @@
                     <div class="">
                         <x-select-input id="payment_status" class="p-2 border rounded">
                             <option value="">Status Pembayaran</option>
-                            <option value="pending">Pending</option>
                             <option value="paid">Dibayar</option>
+                            <option value="pending">Pending</option>
+                            <option value="cancel">Dibatalkan</option>
                         </x-select-inp>
                     </div>
                 </div>

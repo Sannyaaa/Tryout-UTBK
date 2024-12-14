@@ -118,11 +118,11 @@
                     </div>
 
                     <div class="flex justify-between">
-                        <x-secondary-href href="{{ route('admin.order.index') }}">
+                        <x-secondary-link href="{{ route('admin.order.index') }}">
                             Kembali
-                        </x-secondary-href>
+                        </x-secondary-link>
                         <x-primary-button>
-                            Edit Order
+                            Submit
                         </x-primary-button>
                     </div>
             </form>

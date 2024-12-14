@@ -3,7 +3,7 @@
 
     
 
-    <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+    <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900 mx-10">
 
         <div class="mt-8 mb-2 col-span-full">
             <div class="bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg shadow-lg py-4 px-3">
@@ -88,7 +88,7 @@
                                                     Upload Image
                                                 </span>
                                             </label>
-                                            <input type="file" id="avatar" class="hidden" wire:model="avatar" />
+                                            <input type="file" id="avatar" class="hidden" wire:model="avatar" accept="image/png, image/jpeg, image/jpg, image/gif" />
                                         </div>
                                     </div>
                                     @error('avatar')

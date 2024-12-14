@@ -2,16 +2,17 @@
 
 namespace App\Livewire\User\Owned;
 
+use Carbon\Carbon;
+use App\Models\Order;
 use App\Models\Bimbel;
+use Livewire\Component;
 use App\Models\ClassBimbel;
+use App\Models\Testimonial;
+use Livewire\Attributes\Url;
+use Livewire\WithPagination;
 use App\Models\Package_member;
 use App\Models\ResultPractice;
 use App\Models\sub_categories;
-use App\Models\Testimonial;
-use Carbon\Carbon;
-use Livewire\Component;
-use Livewire\Attributes\Url;
-use Livewire\WithPagination;
 
 class Bimbels extends Component
 {
@@ -35,6 +36,20 @@ class Bimbels extends Component
         $this->package = Package_member::findOrFail($id);
         $this->bimbel = Bimbel::findOrFail($this->package->bimbel_id);
         $this->subCategories = sub_categories::all();
+
+        $paid = Order::where('user_id', auth()->id())
+            ->where('payment_status', 'paid')
+            ->with(['package_member','user'])
+            ->whereHas('package_member', function($q){
+                // dd($q);
+                $q->where('bimbel_id', $this->package->bimbel_id);
+            })->first();
+            
+        if($paid == null){
+            session()->flash('message','kamu tidak memiliki akses untuk paket tersebut');
+
+            return redirect()->route('user.my-packages');
+        }
     }
 
     public function saveTestimonial()

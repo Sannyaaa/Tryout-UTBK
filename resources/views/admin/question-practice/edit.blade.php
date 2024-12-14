@@ -115,7 +115,7 @@
                     </div>
                     
                     <div class="flex justify-between">
-                        <x-secondary-link href="{{  $back ?? route('admin.question.index') }}">
+                        <x-secondary-link href="{{  $back ? route('admin.class-bimbel.show',$back) : route('admin.question-practice.index') }}">
                             Kembali
                         </x-secondary-link>
                         <x-primary-button type="submit">

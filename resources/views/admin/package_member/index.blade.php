@@ -170,7 +170,7 @@ $(document).ready(function() {
     var table = $('#package_memberTable').DataTable({
         processing: true,
         serverSide: true,
-        order: [[ 6,'desc' ]],
+        order: [[ 5,'desc' ]],
         ajax: {
             url: "{{ route('admin.package_member.index') }}",
             type: 'GET',

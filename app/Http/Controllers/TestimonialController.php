@@ -7,6 +7,7 @@ use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
 class TestimonialController extends Controller
@@ -22,8 +23,12 @@ class TestimonialController extends Controller
                 $query = Testimonial::with(['package_member', 'user']);
                 
                // Check if a filter is applied
-                if ($request->has('payment_status') && $request->payment_status != '') {
-                    $query->where('payment_status', $request->payment_status);
+                if ($request->has('package_member_id') && $request->package_member_id != '') {
+                    $query->where('package_member_id', $request->package_member_id);
+                }
+
+                if ($request->has('is_show') && $request->is_show != '') {
+                    $query->where('is_show', $request->is_show);
                 }
 
                 return DataTables::of($query)
@@ -73,6 +78,31 @@ class TestimonialController extends Controller
         }
     }
 
+
+    public function bulkUpdate(Request $request)
+    {
+        $ids = $request->input('ids');
+        $isShow = $request->input('is_show');
+        $packages = $request->input('package_member_id');
+
+        $query = Testimonial::whereIn('id', $ids);
+
+        // Update tryout if provided
+        if ($isShow) {
+            $query->update(['is_show' => $isShow]);
+        }
+
+        // Update sub_category if provided
+        if ($packages) {
+            $query->update(['package_member_id' => $packages]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Selected questions updated successfully'
+        ]);
+    }
+
     public function bulkDelete(Request $request)
     {
         try {
@@ -116,17 +146,21 @@ class TestimonialController extends Controller
     {
         //
         // dd($request);
+        try{
+            $data = $request->validate([
+                'content' =>'required|string|max:255',
+                'package_member_id' => 'required|integer|exists:package_members,id',
+            ]);
 
-        $data = $request->validate([
-            'content' =>'required|string|max:255',
-            'is_show' =>'required|in:yes,no',
-            'package_member_id' => 'required|integer|exists:package_members,id',
-        ]);
+            $data['user_id'] = auth()->id();
 
-        $data['user_id'] = auth()->id();
-
-        Testimonial::create($data);
-        return redirect()->route('admin.testimonial.index')->with('success', 'Testimonial has been created successfully.');
+            Testimonial::create($data);
+            return redirect()->route('admin.testimonial.index')->with('success', 'Testimonial has been created successfully.');
+    
+        } catch (\Exception $e) {
+            Log::error('Error in create question: ' . $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**

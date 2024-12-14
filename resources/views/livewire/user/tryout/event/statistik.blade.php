@@ -49,9 +49,9 @@
                                             <p class="mt-1 text-gray-600">Lihat Statistik dan Ranking dari Hasil Tryout yang sudah Kamu Selesaikan Ini.</p>
                                         </div>
                                         <div>
-                                            <x-primary-link href="{{ route('user.tryouts.event.item', $tryout->id) }}">
+                                            <x-secondary-link href="{{ route('user.tryouts.event.item', $tryout->id) }}">
                                                 Kembali
-                                            </x-primary-link>
+                                            </x-secondary-link>
                                         </div>
                                     </div>
                                     <div class="mt-5">
@@ -158,6 +158,7 @@
 </div>
 
 @push('body-scripts')
+
     <script>
         document.querySelectorAll('[data-tabs-target]').forEach(tab => {
             tab.addEventListener('click', function () {
@@ -179,6 +180,7 @@
         });
 
     </script>
+    
     <script>
         // Initialize tabs
         document.addEventListener('livewire:load', function () {

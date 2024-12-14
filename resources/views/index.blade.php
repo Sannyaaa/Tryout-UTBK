@@ -337,15 +337,17 @@
                                                     <div class="">
                                                         
                                                         <div class="mb-2 leading-relaxed text-2xl font-semibold text-gray-600 italic">
-                                                            "{!! $testimonial->content  !!}"
+                                                            "{!! $testimonial->content !!}"
                                                         </div>
 
-                                                        <p class="text-lg text-sky-500 font-medium italic sm:text-xl">-- {{ $testimonial->package_member->name }}</p>
+                                                        {{-- @if ($testimonial->package_member_id != null)
+                                                            <p class="text-lg text-sky-500 font-medium italic lg:text-xl">-- {{ $testimonial->package_member->name }}</p>
+                                                        @endif --}}
 
                                                     </div>
                                                 </div>
 
-                                                <footer class="mt-2 text-sm font-medium text-gray-700 sm:mt-3">
+                                                <footer class="text-sm font-medium text-gray-700">
                                                     <div class="flex items-center mt-4 space-x-4">
                                                         <img src="{{ Storage::url($testimonial->user->avatar ?? '') }}" alt="" class="w-12 h-12 bg-center bg-cover rounded-full dark:bg-gray-500">
                                                         <div>

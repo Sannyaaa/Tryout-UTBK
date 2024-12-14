@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="mt-4 w-full text-center">
-                    <x-secondary-link href="{{ route('google.login') }}" class="mx-auto">
+                    <x-secondary-link href="{{ route('google.login') }}" class="mx-auto px-">
                         <span><i class="fa-brands fa-google me-2"></i></span> Login dengan Google
                     </x-secondary-link>
                 </div>

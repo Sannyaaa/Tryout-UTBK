@@ -97,8 +97,10 @@ class QuestionPracticeController extends Controller
         //
         $classes = ClassBimbel::all();
 
+        $back = null;
+
         if(Gate::allows('admin')){
-            return view('admin.question-practice.create',compact('classes'));
+            return view('admin.question-practice.create',compact('classes', 'back'));
         }elseif(Gate::allows('mentor')){
             return view('mentor.question-practice.create',compact('classes'));
         }
@@ -184,6 +186,7 @@ class QuestionPracticeController extends Controller
 
         $question = $questionPractice;
 
+        $back = null;
         
         // Pastikan bahwa question dan relasi answers ada
         if (!$question) {
@@ -193,7 +196,7 @@ class QuestionPracticeController extends Controller
         // dd($answer);
 
         if(Gate::allows('admin')){
-            return view('admin.question-practice.edit', compact('question', 'answer', 'classes'));
+            return view('admin.question-practice.edit', compact('question', 'back', 'answer', 'classes'));
         } elseif(Gate::allows('mentor')){
             return view('mentor.question-practice.edit', compact('questionPractice', 'classes'));
         }

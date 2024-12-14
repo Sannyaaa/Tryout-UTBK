@@ -200,10 +200,10 @@
                 </div>
             </div>
 
-            <div class="mt-4">
-                <x-primary-link href="{{ route('admin.tryout.index') }}" class="">
+            <div class="mt-6 inline-block">
+                <x-secondary-link href="{{ route('admin.tryout.index') }}" class="">
                     Kembali
-                </x-primary-link>
+                </x-secondary-link>
             </div>
         </div>
     </div>

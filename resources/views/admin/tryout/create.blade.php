@@ -78,15 +78,6 @@
                     </div>
                     <div class="grid lg:grid-cols-2 gap-3">
                         <div>
-                            <x-input-label for="is_free" :value="__('Berbayar / Gratis')" />
-                            <x-select-input id="is_free" name="is_free">
-                                <option selected="" disabled>Pilih Berbayar / Gratis</option>
-                                <option value="paid" {{ old('is_free') == 'paid' ? 'selected' : '' }}>Berbayar</option>
-                                <option value="free" {{ old('is_free') == 'free' ? 'selected' : '' }}>Gratis</option>
-                            </x-select-input>
-                            <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
-                        </div>
-                        <div>
                             <x-input-label for="is_together" :value="__('Biasa / Serentak')" />
                             <x-select-input id="is_together" name="is_together" >
                                 <option selected="" disabled>Pilih Biasa / Serentak</option>
@@ -95,6 +86,16 @@
                             </x-select-input>
                             <x-input-error :messages="$errors->get('is_together')" class="mt-2" />
                         </div>
+                        <div id="is_free">
+                            <x-input-label for="is_free" :value="__('Berbayar / Gratis')" />
+                            <x-select-input id="is_free" name="is_free">
+                                <option selected="" disabled>Pilih Berbayar / Gratis</option>
+                                <option value="paid" {{ old('is_free') == 'paid' ? 'selected' : '' }}>Berbayar</option>
+                                <option value="free" {{ old('is_free') == 'free' ? 'selected' : '' }}>Gratis</option>
+                            </x-select-input>
+                            <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
+                        </div>
+                        
                     </div>
                     
                     <div id="date-inputs" style="display: none;"> 
@@ -112,11 +113,11 @@
                         </div>
                     </div>
                     <div class="flex justify-between">
-                            <x-secondary-href href="{{ route('admin.tryout.index') }}">
+                            <x-secondary-link href="{{ route('admin.tryout.index') }}">
                                 Kembali
-                            </x-secondary-href>
+                            </x-secondary-link>
                             <x-primary-button type="submit">
-                                Tambah Tryout
+                                Submit
                             </x-primary-button>
                     </div>
             </form>
@@ -131,7 +132,9 @@
     <script>
         document.getElementById('is_together').addEventListener('change', function() {
             var dateInputs = document.getElementById('date-inputs');
+            var isFree = document.getElementById('is_free');
             dateInputs.style.display = this.value === 'together' ? 'block' : 'none';
+            isFree.style.display = this.value === 'together' ? 'none' : 'block';
             
             // Toggle required attribute
             var inputs = dateInputs.getElementsByTagName('input');

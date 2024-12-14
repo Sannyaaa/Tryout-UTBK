@@ -40,102 +40,70 @@
                 </div>
                 <!-- Package Grid Section -->
                 <section class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
-                    @forelse ($ongoing as $going)
-
-
-                        {{-- <div class="border rounded-lg shadow hover:shadow-lg transition-all duration-200">
-                            <div class="px-6 py-3 rounded-t-lg bg-gradient-to-tr from-sky-400 to-sky-500">
-                                <h4 class="font-bold text-white">ONGOING</h4>
-                            </div>
-                            <div class="py-4 px-6 bg-white font-semibold">
-                                <div class="flex justify-between align-middle pb-3">
-                                    <h1 class="my-auto font-semibold text-gray-900 text-3xl w-fit">
-                                        {{$going->name}}
-                                    </h1>
-                                </div>
-                                <div class="space-y-2">
-
-                                    <div class="flex items-center text-gray-600">
-                                        <span class="text-sky-500 mx-1">
-                                            <i class="fa-solid fa-file-circle-question"></i>
-                                        </span>
-                                        <span>Jumlah Soal : {{ $going->question->count() }} Soal</span>
-                                    </div>
-                                    @if ($going->is_together == 'together')
-                                        <div class="flex items-center text-gray-600">
-                                            <div class="">
-                                                <span class="mx-1 text-sky-500"><i class="fa-solid fa-calendar-days"></i></span> {{ \Carbon\Carbon::parse($going->start_date)->format('j F Y') }} - {{ \Carbon\Carbon::parse($going->end_date)->format('j F Y') }}
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="pb-5 px-6 pt-1 bg-white rounded-b-lg">
-                                <a href="{{ route('user.tryouts.event.item', $going->id) }}" class="w-full">
-                                    <button class="text-white font-semibold bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-sky-700 w-full p-3 rounded-lg">
-                                        Lihat Detail
-                                        <i class="fa-solid fa-arrow-right-long"></i>
-                                    </button>
-                                </a>
-                            </div>
-                        </div> --}}
-
+                    @if ($ongoing)
                         
                         <div class="w-full col-span-3 h-full bg-gradient-to-tr from-sky-400 to-sky-500 text-white px-16 py-10 rounded-lg">
-                            <div class="">
-                                <div>
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <div>
-                                            <span class="relative flex h-5 w-5">
-                                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                                                <span class="relative inline-flex rounded-full h-5 w-5 bg-white"></span>
-                                            </span>
-                                        </div>
-                                        <h1 class="text-xl font-semibold uppercase">Tryout Sedang Berlangsung</h1>
-                                    </div>
+                            <div>
+                                {{-- <div class="flex items-center gap-2 mb-2">
                                     <div>
-                                        <h2 class="font-extrabold text-3xl lg:text-5xl">{{ $going->name }}</h2>
-                                        <div class="space-x-12 flex my-3">
-                                            <div class="">
-                                                <h3>Tanggal Mulai : </h3>
-                                                <div class="font-semibold">
-                                                    <span class="text-lg mx-1">
-                                                        <i class="fa-solid fa-calendar-days"></i>
-                                                    </span>
-                                                    <span>{{ \Carbon\Carbon::parse($going->start_date)->format('j F Y') }}</span>
-                                                </div>
+                                        <span class="relative flex h-5 w-5">
+                                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                                            <span class="relative inline-flex rounded-full h-5 w-5 bg-white"></span>
+                                        </span>
+                                    </div>
+                                    <h1 class="text-xl font-semibold uppercase">Tryout Sedang Berlangsung</h1>
+                                </div> --}}
+                                <div>
+                                    <h2 class="font-extrabold text-3xl lg:text-5xl">{{ $ongoing->name }}</h2>
+                                    <div class="space-x-12 flex my-3">
+                                        <div class="">
+                                            <h3>Tanggal Mulai : </h3>
+                                            <div class="font-semibold">
+                                                <span class="text-lg mx-1">
+                                                    <i class="fa-solid fa-calendar-days"></i>
+                                                </span>
+                                                <span>{{ \Carbon\Carbon::parse($ongoing->start_date)->format('j F Y') }}</span>
                                             </div>
-                                            <div class="">
-                                                <h3>Tanggal Berakhir : </h3>
-                                                <div class="font-semibold">
-                                                    <span class="text-lg mx-1">
-                                                        <i class="fa-solid fa-calendar-days"></i>
-                                                    </span>
-                                                    <span>{{ \Carbon\Carbon::parse($going->end_date)->format('j F Y') }}</span>
-                                                </div>
+                                        </div>
+                                        <div class="">
+                                            <h3>Tanggal Berakhir : </h3>
+                                            <div class="font-semibold">
+                                                <span class="text-lg mx-1">
+                                                    <i class="fa-solid fa-calendar-days"></i>
+                                                </span>
+                                                <span>{{ \Carbon\Carbon::parse($ongoing->end_date)->format('j F Y') }}</span>
                                             </div>
-                                            <div class="">
-                                                <h3>Jumlah Soal : </h3>
-                                                <div class="font-semibold">
-                                                    <span class="text-lg mx-1">
-                                                        <i class="fa-solid fa-file-circle-question"></i>
-                                                    </span>
-                                                    <span>{{ $going->question->count() }} Soal</span>
-                                                </div>
+                                        </div>
+                                        <div class="">
+                                            <h3>Total Peserta : </h3>
+                                            <div class="font-semibold">
+                                                <span class="text-lg mx-1">
+                                                    <i class="fa-solid fa-users"></i>
+                                                </span>
+                                                <span>{{ $participant }} Perserta</span>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <h3>Jumlah Soal : </h3>
+                                            <div class="font-semibold">
+                                                <span class="text-lg mx-1">
+                                                    <i class="fa-solid fa-file-circle-question"></i>
+                                                </span>
+                                                <span>{{ $ongoing->question->count() }} Soal</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mt-5">
-                                        <a href="{{ route('user.tryouts.event.item',$going->id) }}" class="bg-white text-sky-400 font-semibold rounded-lg py-3 px-6">
-                                            Lihat Tryout
-                                        </a>
-                                    </div>
+                                </div>
+                                <div class="mt-4 inline-block">
+                                    <a href="{{ route('user.tryouts.event.item',$ongoing->id) }}" class="bg-white text-sky-400 font-semibold rounded-lg py-3 px-6">
+                                        Lihat Tryout
+                                    </a>
                                 </div>
                             </div>
                         </div>
 
 
-                    @empty
+                    @else
                         <div class="col-span-full text-center py-12">
                             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
@@ -148,7 +116,7 @@
                                 </a>
                             </div> --}}
                         </div>
-                    @endforelse
+                    @endif
                 </section>
             </div>
             <div class=" mt-10">
@@ -228,7 +196,7 @@
                                             <span class="relative inline-flex rounded-full h-4 w-4 bg-slate-500"></span>
                                         </span>
                                     </div>
-                                    <h4 class="">FINISHED</h4>
+                                    <h4 class="">BERAKHIR</h4>
                                 </div>
                                 <div class="py-4 px-6 bg-white rounded-b-lg font-semibold">
                                     <div class="flex justify-between align-middle pb-3">

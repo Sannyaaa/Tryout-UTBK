@@ -106,9 +106,9 @@
                                                             <div>
                                                                 <div class="mx-3">
                                                                     <p class="text-base  font-medium text-sky-900 dark:text-white my-3">
-                                                                        {{ $testimonial->content }}
+                                                                        {!! $testimonial->content !!}
                                                                     </p>
-                                                                    <span class="text-sm text-slate-500">{{ \Carbon\Carbon::parse($testimonial->created_at)->format('j F Y') }} </span>
+                                                                    <span class="text-sm text-slate-500 mt-6">{{ \Carbon\Carbon::parse($testimonial->created_at)->format('j F Y') }} </span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -246,7 +246,7 @@
                                     </div>
                                     <div class="mt-3">
                                         <span class="text-sm text-rose-500">
-                                            * Lakukan pembayaran sebelum 24 jam dari setelah checkout
+                                            * Lakukan pembayaran sebelum 24 jam setelah checkout
                                         </span>
                                     </div>
                                 </div>
@@ -318,9 +318,9 @@
                     </div>
                 </div>
                 <div class="">
-                    <x-primary-link href="{{ route('packages') }}">
+                    <x-secondary-link href="{{ route('packages') }}">
                         Kembali
-                    </x-primary-link>
+                    </x-secondary-link>
                 </div>
             </div>
         </div>

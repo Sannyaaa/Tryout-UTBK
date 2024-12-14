@@ -21,6 +21,7 @@ Route::get('/tryout/{tryout}/preparation/{sub_categories}', App\Livewire\User\Tr
 Route::get('/tryout/item/{id}/{paper}', App\Livewire\User\Tryout\Paper::class)->name('tryouts.paper');
 Route::get('/tryout/item/question', App\Livewire\User\Tryout\Question::class)->name('tryouts.question');
 Route::get('/tryout/results/{id}', App\Livewire\User\Tryout\Results::class)->name('tryouts.results');
+Route::get('/tryout/results/{id}/statistik', App\Livewire\User\Tryout\Statistik::class)->name('tryouts.statistik');
 Route::get('/tryout/{tryout}/history/{sub_categories}', App\Livewire\User\Tryout\History::class)->name('tryouts.history');
 
 

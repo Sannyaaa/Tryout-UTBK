@@ -21,6 +21,7 @@ class Profile extends Component
     public $email;
     public $phone;
     public $avatar;
+    public $current_avatar;
     public $sekolah_id;
     public $status;
     public $tgl;
@@ -39,7 +40,7 @@ class Profile extends Component
         $this->name = $user->name;
         $this->email = $user->email;
         $this->phone = $user->phone;
-        $this->avatar = $user->avatar;
+        $this->current_avatar = $user->avatar;
         $this->sekolah_id = $user->sekolah_id;
         $this->status = $user->status;
         $this->tgl = $user->tgl;
@@ -51,12 +52,11 @@ class Profile extends Component
 
     public function update(Request $request)
     {
-        dd($this->avatar);
+        // dd($this->avatar);
         $this->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'sekolah_id' => 'nullable|exists:sekolahs,id',
             'status' => 'nullable|string',
             'tgl' => 'nullable|date',
@@ -72,8 +72,9 @@ class Profile extends Component
                 Storage::disk('public')->delete($this->user->avatar);
             }
             $data['avatar'] = $this->avatar->store('avatar', 'public');
+        }else{
+            $data['avatar'] = $this->current_avatar; // keep the old avatar if no new image is uploaded
         }
-
 
         $this->user->update([
             'name' => $this->name,

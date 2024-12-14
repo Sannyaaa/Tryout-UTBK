@@ -127,11 +127,11 @@
                         </div>
                     </div>
                     <div class="flex justify-between">
-                        <x-secondary-href href="{{ route('admin.user.index') }}">
-                            Back
-                        </x-secondary-href>
+                        <x-secondary-link href="{{ route('admin.user.index') }}">
+                            Kembali
+                        </x-secondary-li>
                         <x-primary-button type="submit">
-                            Add User
+                            Submit
                         </x-primary-button>
                     </div>
             </form>

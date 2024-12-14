@@ -78,7 +78,7 @@
                     <div class="mt-4 space-y-4">
 
                         <div class="text-base font-semibold text-center text-white  bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6">
-                            <x-primary-button class="">
+                            <x-primary-button class="py-1">
                                 {{ __('Daftar Sekarang') }}
                             </x-primary-button>
                         </div>
