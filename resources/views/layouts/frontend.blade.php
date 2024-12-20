@@ -29,7 +29,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased scroll-smooth">
-        <div class="min-h-screen w-full flex flex-col sm:justify-center items-center scroll-smooth pt-6 sm:pt-0 bg-gray-50 dark:bg-gray-900">
+        <div class="min-h-screen w-full flex flex-col sm:justify-center items-center scroll-smooth bg-gray-50 dark:bg-gray-900">
             <div class="w-full bg-white dark:bg-gray-800 shadow-md overflow-hidden scroll-smooth">
 
                 <nav class="bg-white border-gray-200 dark:bg-gray-900">
@@ -88,7 +88,7 @@
                         <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-user">
                             <ul class="flex flex-col font-medium p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 mx-8 lg:space-x-4 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
                                 <li>
-                                    <a href="{{ route('home-page') }}" class="block text-white  px-4 rounded-lg py-2 {{ Route::is('home-page') ? 'lg:bg-sky-50 text-white lg:text-sky-700 bg-sky-700 lg:dark:text-sky-500' : 'text-sky-800 hover:bg-gray-100 lg:hover:bg-sky-50 lg:hover:text-sky-700' }} dark:text-white lg:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 transition-all " aria-current="page">Home</a>
+                                    <a href="{{ route('home-page') }}" class="block  px-4 rounded-lg py-2 {{ Route::is('home-page') ? 'lg:bg-sky-50 text-white lg:text-sky-700 bg-sky-700 lg:dark:text-sky-500' : 'text-sky-800 hover:bg-gray-100 lg:hover:bg-sky-50 lg:hover:text-sky-700' }} dark:text-white lg:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 transition-all " aria-current="page">Home</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('packages') }}" class="block  px-4 rounded-lg py-2 {{ Route::is('packages') ? 'lg:bg-sky-50 text-white lg:text-sky-700 bg-sky-700 lg:dark:text-sky-500' : 'text-sky-700 hover:bg-gray-100 lg:hover:bg-sky-50 lg:hover:text-sky-700' }} dark:text-white lg:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 transition-all ">Paket</a>
@@ -160,7 +160,7 @@
                                         <a class="hover:opacity-75" href="#faqs"> FAQ </a>
                                     </nav>
                                 </div>
-                                
+
                                 <div>
                                     <p class="font-medium">
                                         Products
