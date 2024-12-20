@@ -9,7 +9,7 @@ use App\Models\Benefit;
 use App\Models\Bimbel;
 use App\Models\Discount;
 use App\Models\Package_member;
-use App\Models\tryout;
+use App\Models\Tryout;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -118,7 +118,7 @@ class PackageMemberController extends Controller
      */
     public function create()
     {
-        $tryout = tryout::where('is_free', 'paid')->get();
+        $tryout = Tryout::where('is_free', 'paid')->get();
         $bimbel = Bimbel::all();
         $discounts = Discount::all();
         return view('admin.package_member.create', compact('tryout', 'bimbel','discounts'));
@@ -198,7 +198,7 @@ class PackageMemberController extends Controller
         }
 
         // $package_member::wi
-        $tryout = tryout::where('is_free', 'paid')->get();
+        $tryout = Tryout::where('is_free', 'paid')->get();
         $bimbel = Bimbel::all();
         $discounts = Discount::all();
         $benefit = $package_member->benefit; // Ambil jawaban yang terkait dengan pertanyaan

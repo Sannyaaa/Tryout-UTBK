@@ -4,7 +4,7 @@ namespace App\Exports;
 
 use App\Models\Question;
 use App\Models\Result;
-use App\Models\tryout;
+use App\Models\Tryout;
 use App\Models\sub_categories;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;

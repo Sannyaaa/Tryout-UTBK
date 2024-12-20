@@ -6,7 +6,7 @@ use App\Exports\QuestionExport;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\sub_categories;
-use App\Models\tryout;
+use App\Models\Tryout;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -80,7 +80,7 @@ class QuestionController extends Controller
 
 
              $subCategories = sub_categories::all();
-             $tryout = tryout::all();
+             $tryout = Tryout::all();
             return view('admin.question.index', compact('subCategories', 'tryout'));
         } catch (\Exception $e) {
             Log::error('Error in index method: ' . $e->getMessage());
@@ -151,7 +151,7 @@ class QuestionController extends Controller
     public function create()
     {
         $sub_categories = sub_categories::all();
-        $tryouts = tryout::all();
+        $tryouts = Tryout::all();
         return view('admin.question.create', compact('tryouts','sub_categories'));
     }
 
@@ -219,7 +219,7 @@ class QuestionController extends Controller
         }
 
         $sub_categories = sub_categories::all();
-        $tryouts = tryout::all();
+        $tryouts = Tryout::all();
         $answer = $question->answer; // Ambil jawaban yang terkait dengan pertanyaan
 
         return view('admin.question.edit', compact('tryouts', 'sub_categories', 'question', 'answer'));

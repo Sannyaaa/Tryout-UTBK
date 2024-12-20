@@ -13,7 +13,7 @@ use App\Models\batch;
 use App\Models\Question;
 use App\Models\Result;
 use App\Models\sub_categories;
-use App\Models\tryout;
+use App\Models\Tryout;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -33,7 +33,7 @@ class TryoutController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $query = tryout::query();
+                $query = Tryout::query();
                 
                // Check if a filter is applied
                 if ($request->has('is_free') && $request->is_free != '') {
@@ -88,18 +88,18 @@ class TryoutController extends Controller
 
             // Ekspor ke Excel
             if ($request->has('export_excel')) {
-                $data = tryout::all(); // Ambil data
+                $data = Tryout::all(); // Ambil data
                 return Excel::download(new TryoutExport($data), 'tryout_data.xlsx');
             }
 
             // Ekspor ke PDF
             if ($request->has('export_pdf')) {
-                $data = tryout::all(); // Ambil data
+                $data = Tryout::all(); // Ambil data
                 $pdf = Pdf::loadView('admin.tryout.pdf', compact('data'));
                 return $pdf->download('tryout_data.pdf');
             }
 
-            $tryout = tryout::all(); //
+            $tryout = Tryout::all(); //
             return view('admin.tryout.index', compact('tryout'));
         } catch (\Exception $e) {
             Log::error('Error in index method: ' . $e->getMessage());
@@ -240,7 +240,7 @@ class TryoutController extends Controller
     public function show(tryout $tryout)
     {
         $question = Question::where('tryout_id', $tryout->id)->get();
-        $tryout = tryout::with(['question.sub_categories'])->withCount(['question as total_question'])->findOrFail($tryout->id);
+        $tryout = Tryout::with(['question.sub_categories'])->withCount(['question as total_question'])->findOrFail($tryout->id);
 
         $subCategories = sub_categories::withCount(['question as question_count' => function ($query) use ($tryout) {
                 $query->where('tryout_id', $tryout->id);
@@ -295,7 +295,7 @@ class TryoutController extends Controller
     public function update(Request $request, string $id)
     {
         // dd($request);
-        $tryout = tryout::findOrFail($id);
+        $tryout = Tryout::findOrFail($id);
 
         $data = $request->validate([
             'name' => 'nullable|max:255',
