@@ -2,16 +2,17 @@
 
 namespace App\Livewire\User\Tryout;
 
-use App\Models\AnswerQuestion;
-use App\Models\Question;
+use App\Models\Order;
 use App\Models\Result;
-use App\Models\sub_categories;
 use App\Models\Tryout;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Collection;
-use Livewire\Attributes\Url;
 use Livewire\Component;
+use App\Models\Question;
+use Illuminate\Http\Request;
+use Livewire\Attributes\Url;
+// use Illuminate\Support\Collection;
+use App\Models\AnswerQuestion;
+use App\Models\sub_categories;
+use Illuminate\Support\Facades\Auth;
 
 class Paper extends Component
 {
@@ -25,6 +26,7 @@ class Paper extends Component
     // Collections of answers
     public $answers;
     public $questions;
+    public $tryout;
     
 
     public function mount(Request $request){
@@ -32,10 +34,29 @@ class Paper extends Component
         
         $this->itemId = $request->segment(3);
         $this->paperId = $request->segment(4);
+
+        $this->tryout = Tryout::findOrFail($this->itemId);
+        if($this->tryout->is_together == 'basic' AND $this->tryout->is_free == 'paid'){
+            $paid = Order::where('user_id', auth()->id())
+                ->where('payment_status', 'paid')
+                ->with(['package_member','user'])
+                ->whereHas('package_member', function($q){
+                    // dd($q);
+                    $q->where('tryout_id', $this->itemId);
+                })->first();
+                
+            if($paid == null){
+                session()->flash('message','kamu tidak memiliki akses untuk paket tersebut');
+
+                return redirect()->route('user.my-packages');
+            }
+        }
         
         $this->q = Question::where('tryout_id', $this->itemId)
             ->where('sub_categories_id', $this->paperId)
             ->min('id');
+
+        
     }
 
     public function updatedAnswers($value, $key)
@@ -120,8 +141,8 @@ class Paper extends Component
     
         return view('livewire.user.tryout.paper', [
             'question' => $question,
-            'paper' => sub_categories::where('id', $this->paperId)->first(),
-            'tryout' => Tryout::where('id',$this->itemId)->first(),
+            'paper' => sub_categories::findOrFail($this->paperId),
+            'tryout' => Tryout::findOrFail($this->itemId),
         ]);
     }
 
@@ -176,7 +197,7 @@ class Paper extends Component
             'score' => $score,
         ]);
 
-        $tryout = Tryout::where('id', $this->itemId)->first();
+        $tryout = Tryout::findOrFail($this->itemId);
 
         if ($tryout->is_together == 'together') {
             return redirect()->route('user.tryouts.event.item', $result->tryout_id);

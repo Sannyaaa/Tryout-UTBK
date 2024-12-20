@@ -27,7 +27,7 @@
             </div>
         </div>
         
-        <div class="w-full lg:flex justify-center items-center">
+        <div class="w-full flex justify-center items-center">
 
             <div class="bg-white flex w-fit rounded-md shadow-lg px-16 py-6">
                 <div class="my-auto space-y-6">
@@ -98,8 +98,8 @@
                         @endif
                     </div>
                 </div>
-                <div class="max-w-md hidden lg:flex py-12 ps-20 pe-0">
-                    <img src="{{ asset('assets/Online test-amico.png') }}" alt="">
+                <div class="max-w-md hidden lg:block py-12 ps-20 pe-0">
+                    <img src="{{ asset('assets/Online test-amico.png') }}" class="w-full h-auto" alt="">
                 </div>
             </div>
 

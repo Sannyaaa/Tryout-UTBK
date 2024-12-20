@@ -27,7 +27,9 @@ class LandingController extends Controller
 
         $packages = Package_member::latest()->limit(3)->get();
 
-        $teachers = User::where('role','mentor')->inRandomOrder()->limit(3)->get();
+        $teachers = User::with('mentor')->whereHas('mentor',function ($mentor){
+            return $mentor->where('is_show','yes');
+        })->where('role','mentor')->inRandomOrder()->limit(3)->get();
 
         $promotions = Promotion::where('is_show','yes')->get();
 
@@ -49,7 +51,9 @@ class LandingController extends Controller
 
         $homePage = HomePage::first();
 
-        $mentors = User::with('mentor')->where('role','mentor')->get();
+        $mentors = User::with('mentor')->whereHas('mentor',function ($mentor){
+            return $mentor->where('is_show','yes');
+        })->where('role','mentor')->get();
 
         return view('mentor',[
             'mentors' => $mentors,

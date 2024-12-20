@@ -119,8 +119,8 @@ class Paper extends Component
     
         return view('livewire.user.tryout.paper', [
             'question' => $question,
-            'paper' => sub_categories::where('id', $this->paperId)->first(),
-            'tryout' => Tryout::where('id',$this->itemId)->first(),
+            'paper' => sub_categories::findOrFail($this->paperId),
+            'tryout' => Tryout::findOrFail($this->itemId),
         ]);
     }
 

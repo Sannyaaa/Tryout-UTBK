@@ -54,7 +54,7 @@ class Item extends Component
 
     public function mount(Request $request) {
         $this->tryoutId = $request->segment(4);
-        $this->tryout = Tryout::where('id', $this->tryoutId)->first();
+        $this->tryout = Tryout::findOrFail($this->tryoutId);
         $this->user = auth()->user();
         $this->package = Package_member::where('tryout_id', $this->tryoutId)->first();
     }

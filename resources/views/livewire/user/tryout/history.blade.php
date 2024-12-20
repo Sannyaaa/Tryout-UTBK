@@ -32,7 +32,7 @@
                 <div class="flex justify-between items-center mb-2">
                     {{-- <span class="py-2 px-4 bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg font-semibold text-white">{{ $bimbel->tryout_id != null ? 'Tryout' : 'Bimbel' }}</span> --}}
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900 sm:text-5xl sm:leading-none sm:tracking-tight dark:text-white">Riwayat Hasil Tryout</h1>
+                        <h1 class="text-3xl font-bold text-gray-800 sm:text-4xl sm:leading-none sm:tracking-tight dark:text-white">Riwayat Hasil Tryout</h1>
                         <p class="mb-4 font-normal text-gray-500 text-lg dark:text-gray-400"></p>
                     </div>
                     <div class="inline-flex gap-3">
@@ -57,9 +57,6 @@
                                             </th>
                                             <th class="px-6 py-4 font-medium">
                                                 Tryout
-                                            </th>
-                                            <th class="px-6 py-4 font-medium">
-                                                Materi
                                             </th>
                                             <th class="px-6 py-4 font-medium">
                                                 Skor
@@ -91,9 +88,6 @@
                                                     {{ $item->tryout->name }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $item->sub_category->name }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ $item->score }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -110,9 +104,9 @@
                                                 </td>
                                                 <td class="px-6 py-3 whitespace-nowrap flex gap-4">
                                                     <div>
-                                                        <x-secondary-link href="{{ route('user.tryouts.statistik', $item->id) }}" class="">
+                                                        <x-primary-link href="{{ route('user.tryouts.statistik', $item->id) }}" class="">
                                                             <span class="">Statistik</span>
-                                                        </x-secondary-link>
+                                                        </x-primary-link>
                                                     </div>
                                                     <div>
                                                         <x-secondary-link href="{{ route('user.tryouts.results', $item->id) }}" class="">
@@ -139,7 +133,7 @@
                         </div> --}}
                     </div>
                 </div>
-                <div class=" inline-block">
+                <div class="mt-3 inline-block">
                     <x-secondary-link href="{{ route('user.tryouts.item', $tryoutId) }}" class="py-1">
                         Kembali
                     </x-secondary-link>

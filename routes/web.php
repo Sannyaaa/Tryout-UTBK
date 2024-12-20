@@ -51,7 +51,7 @@ prefix('/admin')->name('admin.')->group(function() {
 });
 
 Route::
-middleware(['auth','role:mentor'])->
+middleware(['auth','role:mentor|admin'])->
 prefix('/mentor')->name('mentor.')->group(function() {
     require __DIR__.'/mentor.php';
 });

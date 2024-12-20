@@ -8,12 +8,12 @@
                     <div class="text-center w-full">
                         <h1 class="text-5xl font-bold text-sky-900 lg:text-6xl ">
                             {{-- Berlatih bersama mentor yang telah membantu ratusan siswa mencapai nilai tinggi! --}}
-                            {{ $homePage->mentor_title }}
+                            {{ $homePage->mentor_title ?? 'Mentor Title' }}
                         </h1>
 
                         <div class="mt-6 text-lg  text-gray-600 w-4/5 mx-auto">
                             {{-- Dibimbing oleh guru dan mentor berpengalaman di bidang UTBK, kami hadirkan tenaga pengajar terbaik untuk mendukung persiapanmu. Setiap pengajar telah terlatih dan memahami pola soal UTBK, sehingga kamu bisa lebih siap menghadapi ujian. --}}
-                            {!! $homePage->mentor_desc !!}
+                            {!! $homePage->mentor_desc ?? 'Mentor Description' !!}
                         </div>
 
                         {{-- <div class="mt-6 inline-flex items-center gap-x-6">

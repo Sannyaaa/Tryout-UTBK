@@ -51,30 +51,30 @@
                         @else
                             <div class="overflow-x-auto">
                                 <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-slate-50 text-slate-600 text-left text-xs uppercase tracking-wider">
+                                    <thead class="bg-gradient-to-tr from-sky-400 to-sky-500 text-slate-50 text-left text-xs uppercase tracking-wider">
                                         <tr>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Bimbel
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Kelas
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Skor
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Benar
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Salah
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Tidak Dijawab
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Tanggal Submit
                                             </th>
-                                            <th class="p-6 font-medium">
+                                            <th class="px-6 py-4 font-medium">
                                                 Action
                                             </th>
                                         </tr>
@@ -103,14 +103,16 @@
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ \Carbon\Carbon::parse($item->created_at)->format('j F Y') }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-2 whitespace-nowrap flex gap-4">
                                                     <div>
-                                                        <x-primary-link href="{{ route('user.my-bimbel.practice.result', $item->id) }}" class="inline-flex gap-2">
-                                                            <span class="">
-                                                                <i class="fa-solid fa-eye"></i>
-                                                            </span> 
-                                                            <span class="">Lihat</span>
-                                                        </x-primary-link>
+                                                        <x-secondary-link href="{{ route('user.my-bimbel.practice.statistik', $item->id) }}" class="inline-flex gap-2">
+                                                            Statistik
+                                                        </x-secondary-link>
+                                                    </div>
+                                                    <div>
+                                                        <x-secondary-link href="{{ route('user.my-bimbel.practice.result', $item->id) }}" class="inline-flex gap-2">
+                                                            Pembahasan
+                                                        </x-secondary-link>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -132,10 +134,10 @@
                         </div> --}}
                     </div>
                 </div>
-                <div>
-                    <x-primary-link href="{{ route('user.my-bimbel', $bimbelId) }}" class="mt-3">
+                <div class="mt-3 inline-block">
+                    <x-secondary-link href="{{ route('user.my-bimbel', $package->id) }}" class="">
                         Kembali
-                    </x-primary-link>
+                    </x-secondary-link>
                 </div>
             </div>
         </div>

@@ -192,7 +192,7 @@ $(document).ready(function() {
     var table = $('#tryoutTable').DataTable({
         processing: true,
         serverSide: true,
-        order: [[ 5,'desc' ]],
+        order: [[ 6,'desc' ]],
         // ajax: "{{ route('admin.tryout.index') }}",
         ajax: {
                 url: "{{ route('admin.tryout.index') }}",

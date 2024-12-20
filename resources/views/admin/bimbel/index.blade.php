@@ -77,13 +77,13 @@
                                 <div class="py-2 space-y-1">
                                     <div class="mb-4">
                                         <x-input-label for="name" :value="__('Nama')" />
-                                        <x-text-input type="text" :value="old('name')" name="name" id="name" placeholder="Masukan Nama bimbel" required=""/>
+                                        <x-text-input type="text" required :value="old('name')" name="name" id="name" placeholder="Masukan Nama bimbel" required=""/>
                                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
                                     
                                     <div class="mb-4">
                                         <x-input-label for="description" :value="__('Description')" />
-                                        <textarea name="description" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:ring-1 block w-full p-2.5"></textarea>
+                                        <textarea name="description" required rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:ring-1 block w-full p-2.5"></textarea>
                                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
 

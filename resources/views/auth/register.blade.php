@@ -1,6 +1,6 @@
 <x-guest-layout>
 
-    <div class="me-16 w-full max-w-2xl">
+    <div class="me-16 w-full max-w-2xl hidden lg:flex">
         <div class="-mt-28">
 
             <div class="mx-auto max-w-2xl">

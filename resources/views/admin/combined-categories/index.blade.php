@@ -92,7 +92,7 @@
                                             </div>
                                         </td> --}}
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><h3 class="text-lg font-medium">{{ $category->name }}</h3></td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><p class="text-gray-600 text-sm">{{ $category->description }}</p></td>
+                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><div class="text-gray-600 text-sm">{!! Str::limit($category->description, 100, '...') !!}</d></td>
                                         <td class="p-4 space-x-2 whitespace-nowrap">
                                             <div class="flex justify-start gap-1">
                                                 <a href="{{ route('admin.combined-categories.edit', [$category->id, 'type' => 'category']) }}" 
@@ -113,7 +113,7 @@
                                         @foreach($category->sub_categories as $subcategory)   
                                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><h3 class="text-lg font-medium"><h4 class="font-medium">---- {{ $subcategory->name }}</h4></h3></td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><p class="text-gray-600 text-sm">{!! $subcategory->description !!}</p></td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><div class="text-gray-600 text-sm">{!! Str::limit($subcategory->description, 100, '...') !!}</div></td>
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                                     <div class="flex justify-start gap-1">
                                                         <a href="{{ route('admin.combined-categories.edit', [$subcategory->id, 'type' => 'subcategory']) }}" 

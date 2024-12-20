@@ -34,8 +34,8 @@
             <div class="flex justify-between items-center mb-2">
                 {{-- <span class="py-2 px-4 bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg font-semibold text-white">{{ $bimbel->tryout_id != null ? 'Tryout' : 'Bimbel' }}</span> --}}
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900 sm:text-5xl sm:leading-none sm:tracking-tight dark:text-white">{{ $bimbel->name }}</h1>
-                    <p class="mb-4 font-normal text-gray-500 text-lg dark:text-gray-400">{{ $bimbel->description }}</p>
+                    <h1 class="text-3xl font-bold text-gray-800 sm:text-5xl sm:leading-none sm:tracking-tight dark:text-white">{{ $bimbel->name }}</h1>
+                    <p class="mb-4 font-normal text-gray-500 text-lg dark:text-gray-400">{!! $bimbel->description !!}</p>
                 </div>
                 <div>
                     <div>
@@ -276,10 +276,10 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <x-primary-link href="{{ route('user.my-packages') }}" class="">
+            <div class="inline-flex ">
+                <x-secondary-link href="{{ route('user.my-packages') }}" class="">
                     Kembali
-                </x-primary-link>
+                </x-secondary-link>
             </div>
         </div>
     </div>

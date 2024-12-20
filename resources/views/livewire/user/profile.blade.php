@@ -68,7 +68,7 @@
                                         alt="Uploaded Avatar">
                                 @else --}}
                                     <img class="mb-4 rounded-lg w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0" 
-                                        src="{{ $user->avatar ? Storage::url($user->avatar) : '/default-avatar.png' }}" 
+                                        src="{{ $user->avatar != null ? Storage::url($user->avatar ?? '') : 'https://openclipart.org/image/2000px/247319' }}" 
                                         alt="Profile Picture">
                                 {{-- @endif --}}
 
@@ -124,7 +124,7 @@
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <x-input-label for="tgl" :value="__('Date of Birth')" />
+                            <x-input-label for="tgl" :value="__('Tanggal Lahir')" />
                             <x-text-input id="tgl" class="block mt-1 w-full" type="date" wire:model="tgl" autocomplete="bday" />
                             @error('tgl')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -132,7 +132,7 @@
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <x-input-label for="jenis_kelamin" :value="__('Gender')" />
+                            <x-input-label for="jenis_kelamin" :value="__('Kelamin')" />
                             <x-select-input id="jenis_kelamin" wire:model="jenis_kelamin" required>
                                 <option value="">Select Gender</option>
                                 <option value="lk">Male</option>
@@ -149,7 +149,7 @@
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <x-input-label for="sekolah_id" :value="__('School')" />
+                            <x-input-label for="sekolah_id" :value="__('Sekolah')" />
                             <x-select-input wire:model="sekolah_id">
                                 <option value="">Select School</option>
                                 {{-- @foreach ($sekolah as $sekolahItem)

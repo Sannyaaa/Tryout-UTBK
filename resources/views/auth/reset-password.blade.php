@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="p-8 bg-white rounded-lg shadow-lg">
+    <div class="p-8 bg-white min-w-96 max-w-md w-full rounded-lg shadow-lg">
         <form method="POST" action="{{ route('password.store') }}">
             @csrf
 

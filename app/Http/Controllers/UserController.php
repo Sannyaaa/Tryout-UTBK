@@ -128,8 +128,15 @@ class UserController extends Controller
             'phone' => $data['phone'],
             'role' => $data['role'],
             'password' => Hash::make($data['password']),
-            'email_verified_at' => now(),
         ]);
+
+        if($data['role'] == 'admin'){
+            $user->assignRole('admin');
+        }elseif($data['role'] == 'mentor'){
+            $user->assignRole('mentor');
+        }
+
+        $user->markEmailAsVerified();
 
         return redirect()->route('admin.user.index')->with('success', 'User created successfully.');
     }

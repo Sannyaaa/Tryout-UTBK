@@ -1,7 +1,7 @@
 {{-- {{- $url := split .Permalink "/" -}} --}}
 {{-- {{- $page_slug := index $url (sub (len $url) 2) -}} --}}
 
-<aside id="sidebar" class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-72 h-full pt-4 font-normal duration-75 lg:flex transition-width rounded-lg overflow-hidden" aria-label="Sidebar">
+<aside id="sidebar" class="fixed top-0 left-0 z-40 flex flex-col flex-shrink-0 hidden w-72 h-full pt-4 font-normal duration-75 lg:flex transition-width rounded-lg overflow-hidden" aria-label="Sidebar">
   <div class="relative flex flex-col flex-1 min-h-0 py-0 mt-20 lg:mt-0 rounded-lg overflow-hidden 
     bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 shadow
     ms-4 mb-4
@@ -10,8 +10,8 @@
       <div class="flex-1 px-3 space-y-1 rounded-lg bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
         <ul class="pb-2 space-y-2">
           <li>
-            <a href="#" class="flex justify-center py-4 bg-sky-50 rounded-lg">
-              <img src="{{ Storage::url($component->navbar_image ?? '') }}" class="h-8" alt="Flowbite Logo" />
+            <a href="/" class="flex justify-center py-4  rounded-lg">
+              <img src="{{ Storage::url($component->navbar_image ?? '') }}" class="h-8" alt="Navbar Logo" />
               {{-- <span class="self-center text-3xl font-semibold sm:text-4xl whitespace-nowrap text-sky-800 dark:text-white bg-sky-50">Flowbite</span> --}}
             </a>
           </li>
@@ -66,13 +66,13 @@
           </li>
 
           <li>
-            <x-user-sidebar-link link="{{route('user.transaction')}}" token="transaction" name="Transaction">
+            <x-user-sidebar-link link="{{route('user.transaction')}}" token="transaction" name="Transaksi">
               <i class="fa-solid fa-tags"></i>
             </x-user-sidebar-link>
           </li>
 
           <li>
-            <x-user-sidebar-link link="{{route('user.profile')}}" token="profile" name="Profile">
+            <x-user-sidebar-link link="{{route('user.profile')}}" token="profile" name="Profil">
               <i class="fa-solid fa-user"></i>
             </x-user-sidebar-link>
           </li>

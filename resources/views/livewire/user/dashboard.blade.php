@@ -1,126 +1,128 @@
 <div>
     <div class="px-4 pt-6">
         <div>
-            <div id="default-carousel" class="relative w-full mt-6" data-carousel="slide">
-                <!-- Carousel wrapper -->
-                <div class="relative h-56 overflow-hidden rounded-lg shadow-lg md:h-96 p-1 z-20">
-                    <!-- Item 1 -->
-                    @if ($todayClasses->isNotEmpty())
-                        @foreach ($todayClasses as $class)
-                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                <div class="w-full h-full flex justify-center items-center bg-gradient-to-tr from-sky-300 to-sky-500 text-white">
-                                    <div class="w-4/5 flex justify-between items-center">
-                                        <div>
-                                            <h2 class="font-extrabold text-3xl lg:text-5xl">Pemberitahuan Kelas</h2>
-                                            <h3 class="font-semibold text-xl mt-2">Hai {{ Auth::user()->name }}, mau ngasih tau aja nih, 
-                                                <br>Kalau hari ini ada kelas dengan informasi sebagai berikut:</h3>
-                                            <div class="ms-3 mt-2">
-                                                <p class="text-lg font-medium text-slate-50 dark:text-gray-400">
-                                                    Pemateri : <span class="font-semibold">{{ $class->user->name }}</span>
-                                                </p>
-                                                <p class="text-lg font-medium text-slate-50 dark:text-gray-400">
-                                                    Materi : <span class="font-semibold">{{ $class->sub_categories->name }}</span>
-                                                </p>
-                                                <p class="text-lg font-medium text-slate-50 dark:text-gray-400">
-                                                    Pukul : <span class="font-semibold">{{ date('h:i A', strtotime($class->start_time)) }}</span>
-                                                </p>
-                                            </div>
-                                            <div class="mt-5">
-                                                <a href="" class="bg-white text-sky-400 font-semibold rounded-lg py-3 px-6">
-                                                    Lihat Kelas
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="hidden md:flex items-center justify-center mt-2">
-                                            <img src="{{ asset('assets/Webinar-pana.png') }}" class=" max-w-md" alt="...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
-                    {{-- @dd($ongoing) --}}
-                    @if ($ongoing->isNotEmpty())
-                        @foreach ($ongoing as $item)
-                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                <div class="w-full h-full flex justify-center items-center bg-gradient-to-tr from-sky-300 to-sky-500 text-white">
-                                    <div class="w-4/5 flex justify-between items-center">
-                                        <div>
+            @if ($todayClasses->isNotEmpty() || $ongoing->isNotEmpty() || $promotions->isNotEmpty())
+                <div id="default-carousel" class="relative w-full mt-6" data-carousel="slide">
+                    <!-- Carousel wrapper -->
+                    <div class="relative h-56 overflow-hidden rounded-lg shadow-lg md:h-96 p-1">
+                        <!-- Item 1 -->
+                        @if ($todayClasses->isNotEmpty())
+                            @foreach ($todayClasses as $class)
+                                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                    <div class="w-full h-full flex justify-center items-center bg-gradient-to-tr from-sky-300 to-sky-500 text-white">
+                                        <div class="w-4/5 flex justify-between items-center">
                                             <div>
-                                                <h2 class="font-extrabold text-3xl lg:text-5xl">Pemberitahuan Tryout Event</h2>
-                                                <h3 class="font-semibold text-xl mt-2">Kami sedang mengadakan Tryout Event mulai
-                                                    <br>
-                                                     tanggal <span class="font-extrabold">{{ date('d F Y', strtotime($item->start_date)) }}</span> sampai <span class="font-extrabold">{{ date('d F Y', strtotime($item->end_date)) }}.</span>
-                                                    <br>
-                                                    Jangan Sampai Ketinggalan!!
-                                                </h3>
+                                                <h2 class="font-extrabold text-3xl lg:text-5xl">Pemberitahuan Kelas</h2>
+                                                <h3 class="font-semibold hidden lg:block text-xl mt-2">Hai {{ Auth::user()->name }}, mau ngasih tau aja nih, 
+                                                    <br>Kalau hari ini ada kelas dengan informasi sebagai berikut:</h3>
+                                                <div class="ms-3 mt-2">
+                                                    <p class="text-lg font-medium text-slate-50 dark:text-gray-400">
+                                                        Pemateri : <span class="font-semibold">{{ $class->user->name }}</span>
+                                                    </p>
+                                                    <p class="text-lg font-medium text-slate-50 dark:text-gray-400">
+                                                        Materi : <span class="font-semibold">{{ $class->sub_categories->name }}</span>
+                                                    </p>
+                                                    <p class="text-lg font-medium text-slate-50 dark:text-gray-400">
+                                                        Pukul : <span class="font-semibold">{{ date('h:i A', strtotime($class->start_time)) }}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="mt-5">
+                                                    <a href="" class="bg-white text-sky-400 font-semibold rounded-lg py-3 px-6">
+                                                        Lihat Kelas
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="mt-5">
-                                                <a href="{{ route('user.tryouts.event.item',$item->id) }}" class="bg-white text-sky-400 font-semibold rounded-lg py-3 px-6">
-                                                    Lihat Tryout
-                                                </a>
+                                            <div class="hidden md:flex items-center justify-center mt-2">
+                                                <img src="{{ asset('assets/Webinar-pana.png') }}" class=" max-w-md" alt="...">
                                             </div>
-                                        </div>
-                                        <div class="hidden md:flex items-center justify-center mt-2">
-                                            <img src="{{ asset('assets/Online test-amico.png') }}" class=" h-80" alt="...">
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    @endif
-                    @if ($promotions)
-                        @foreach ($promotions as $promo)
-                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                <a href="{{ route('packages') }}">
-                                    <img src="{{ Storage::url($promo->image) }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                </a>
-                            </div>
-                        @endforeach
-                    @endif
-                    <!-- Item 2 -->
-                    {{-- <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="/docs/images/carousel/carousel-2.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                            @endforeach
+                        @endif
+                        {{-- @dd($ongoing) --}}
+                        @if ($ongoing->isNotEmpty())
+                            @foreach ($ongoing as $item)
+                                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                    <div class="w-full h-full flex justify-center items-center bg-gradient-to-tr from-sky-300 to-sky-500 text-white">
+                                        <div class="w-4/5 flex justify-between items-center">
+                                            <div>
+                                                <div>
+                                                    <h2 class="font-extrabold text-3xl lg:text-5xl">Pemberitahuan Tryout Event</h2>
+                                                    <h3 class="font-semibold text-xl mt-2">Kami sedang mengadakan Tryout Event mulai
+                                                        <br>
+                                                        tanggal <span class="font-extrabold">{{ date('d F Y', strtotime($item->start_date)) }}</span> sampai <span class="font-extrabold">{{ date('d F Y', strtotime($item->end_date)) }}.</span>
+                                                        <br>
+                                                        Jangan Sampai Ketinggalan!!
+                                                    </h3>
+                                                </div>
+                                                <div class="mt-5">
+                                                    <a href="{{ route('user.tryouts.event.item',$item->id) }}" class="bg-white text-sky-400 font-semibold rounded-lg py-3 px-6">
+                                                        Lihat Tryout
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="hidden md:flex items-center justify-center mt-2">
+                                                <img src="{{ asset('assets/Online test-amico.png') }}" class=" h-80" alt="...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                        @if ($promotions->isNotEmpty())
+                            @foreach ($promotions as $promo)
+                                <div class="hidden duration-700 ease-in-out bg-sky-300" data-carousel-item>
+                                    <a href="{{ route('packages') }}">
+                                        <img src="{{ Storage::url($promo->image) }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                                    </a>
+                                </div>
+                            @endforeach
+                        @endif
+                        <!-- Item 2 -->
+                        {{-- <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="/docs/images/carousel/carousel-2.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                        </div>
+                        <!-- Item 3 -->
+                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="/docs/images/carousel/carousel-3.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                        </div>
+                        <!-- Item 4 -->
+                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="/docs/images/carousel/carousel-4.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                        </div>
+                        <!-- Item 5 -->
+                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="/docs/images/carousel/carousel-5.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                        </div> --}}
                     </div>
-                    <!-- Item 3 -->
-                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="/docs/images/carousel/carousel-3.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                    </div>
-                    <!-- Item 4 -->
-                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="/docs/images/carousel/carousel-4.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                    </div>
-                    <!-- Item 5 -->
-                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="/docs/images/carousel/carousel-5.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <!-- Slider indicators -->
+                    {{-- <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
                     </div> --}}
+                    <!-- Slider controls -->
+                    <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                            </svg>
+                            <span class="sr-only">Previous</span>
+                        </span>
+                    </button>
+                    <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                            <span class="sr-only">Next</span>
+                        </span>
+                    </button>
                 </div>
-                <!-- Slider indicators -->
-                {{-- <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-                </div> --}}
-                <!-- Slider controls -->
-                <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                        </svg>
-                        <span class="sr-only">Previous</span>
-                    </span>
-                </button>
-                <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                        </svg>
-                        <span class="sr-only">Next</span>
-                    </span>
-                </button>
-            </div>
+            @endif
         </div>
         <div class="grid col-span-1 md:grid-cols-2 lg:grid-cols-4 my-6 gap-6">
             <!-- card1 -->
@@ -471,7 +473,7 @@
             </div>
             <!-- Package Grid Section -->
             <section class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
-                @foreach ($packages as $package)
+                @forelse ($packages as $package)
                     <div class="flex flex-col max-w-lg">
                         <div class="text-gray-900 bg-white hover:shadow-lg transition-all border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white">
                             <div class="relative aspect-video overflow-hidden bg-cover align-middle p-2">
@@ -515,7 +517,15 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col-span-full text-center py-12">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                        </svg>
+                        <p class="mt-1 text-sm text-gray-700">Belum ada Paket yang Tersedia</p>
+                    </div>
+                @endforelse
             </section>
         </div>
         {{-- <div class="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3">

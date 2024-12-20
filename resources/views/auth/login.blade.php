@@ -1,6 +1,6 @@
 <x-guest-layout>
 
-    <div class="me-16 w-full max-w-2xl">
+    <div class="me-16 w-full max-w-2xl hidden lg:flex">
         <div class="">
             <div class="mt-8">
                 <h2 class="text-5xl font-extrabold text-sky-500 dark:text-gray-50 leading-tight mx-auto text-center">
@@ -61,20 +61,20 @@
                 <!-- Remember Me -->
                 <div class="text-base font-semibold text-center text-white  bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6">
 
-                    <button class="w-full px-5 py-3 ">
+                    <x-primary-button class="w-full py-1">
                         {{ __('Masuk Sekarang') }}
-                    </button>
+                    </x-primary-button>
                     
                 </div>
 
                 <div class="mt-4 w-full text-center">
-                    <x-secondary-link href="{{ route('google.login') }}" class="mx-auto px-">
+                    <x-secondary-link href="{{ route('google.login') }}" class="mx-auto py-1">
                         <span><i class="fa-brands fa-google me-2"></i></span> Login dengan Google
                     </x-secondary-link>
                 </div>
 
                 <div class="text-center">
-                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mt-6 mb-4 flex justify-between">
+                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mt-6 mb-6 flex justify-between">
                         <div>
                             Belum punya akun? <a href="{{ route('register') }}" class="text-sky-700 hover:underline dark:text-sky-500">Buat Sekarang</a>
                         </div>

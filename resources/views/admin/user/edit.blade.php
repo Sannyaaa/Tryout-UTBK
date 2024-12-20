@@ -226,7 +226,7 @@
             </div>  
         </div>
 
-        <div class="mt-4">
+        <div class="mt-4 inline-block">
             <x-secondary-link href="{{ route('admin.user.index') }}" class="inline-block">
                 Back
             </x-secondary-link>

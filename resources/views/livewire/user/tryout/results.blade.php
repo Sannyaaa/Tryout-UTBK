@@ -221,7 +221,7 @@
                 </div>
 
                 {{-- Score Summary Card --}}
-                <div>
+                {{-- <div>
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 m-3">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">Urutan Hasil Tryout</h3>
                         <div class="p-3 bg-sky-50 rounded-lg text-sky-500 font-semibold text-center">
@@ -231,7 +231,7 @@
                             <div class="">Dari {{ $totalResult->count() }} Hasil.</div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

@@ -50,7 +50,7 @@ class Leaderboard extends Component
 
     public function mount(Request $request) {
         $this->tryoutId = $request->segment(3);
-        $this->tryout = Tryout::where('id', $this->tryoutId)->first();
+        $this->tryout = Tryout::findOrFail($this->tryoutId);
         $this->user = auth()->user();
     }
 

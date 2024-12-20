@@ -1,6 +1,6 @@
 <div class="p-4 {{ Auth::user() ? 'mt-12' : '-mt-16 max-w-7xl mx-auto mb-20' }}">
     <div class="mx-10">
-        @if ($promotions)
+        @if ($promotions->isNotEmpty())
             <div id="default-carousel" class="relative w-full mb-8" data-carousel="slide" wire:ignore>
             <!-- Carousel wrapper -->
                 <div class="relative h-56 overflow-hidden rounded-lg md:h-96 z-20">
@@ -81,7 +81,7 @@
 
             <!-- Package Grid Section -->
             <section class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
-                @foreach ($packages as $package)
+                @forelse ($packages as $package)
                     <div class="flex flex-col max-w-lg">
                         <div class="text-gray-900 bg-white hover:shadow-lg transition-all border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white">
                             <div class="relative aspect-video overflow-hidden bg-cover align-middle p-2">
@@ -125,7 +125,15 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col-span-full text-center py-12">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                        </svg>
+                        <p class="mt-1 text-sm text-gray-700">Belum ada Paket yang Tersedia</p>
+                    </div>
+                @endforelse
             </section>
         </div>
     </div>

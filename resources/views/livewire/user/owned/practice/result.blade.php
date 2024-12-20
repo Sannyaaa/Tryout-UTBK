@@ -167,7 +167,7 @@
 
                     {{-- Back Button --}}
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                        <a href="{{ route('user.my-bimbel', $result->class_bimbel->bimbel_id) }}" 
+                        <a href="{{ route('user.my-bimbel.practice.history', $result->class_bimbel_id) }}" 
                             class="w-full inline-flex items-center justify-center py-3 px-4 rounded-lg text-white font-medium transition-colors
                             bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700
                             focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
@@ -180,8 +180,7 @@
                 </div>
             </div>
 
-            <div class=" grid grid-cols-3 ">
-                {{-- Score Summary Card --}}
+            {{-- <div class=" grid grid-cols-3 ">
                 <div>
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 m-3">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">Rincian Hasil Jawaban</h3>
@@ -208,7 +207,6 @@
                     </div>
                 </div>
 
-                {{-- Score Summary Card --}}
                 <div>
                     <div class="bg-white shadow rounded-lg p-6 m-3">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">Perbandingan Dengan Rata-rata</h3>
@@ -220,7 +218,6 @@
                     </div>
                 </div>
 
-                {{-- Score Summary Card --}}
                 <div>
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 m-3">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">Urutan Hasil Tryout</h3>
@@ -232,7 +229,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
         </div>
     </div>
 

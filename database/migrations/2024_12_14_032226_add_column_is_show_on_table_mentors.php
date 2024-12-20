@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
+        Schema::table('mentors', function (Blueprint $table) {
+            //
 
-            $table->string('name');
-            $table->longText('description')->nullable();
+            $table->enum('is_show',['yes','no'])->default('no')->after('teach');
 
-            $table->timestamps();
         });
     }
 
@@ -26,6 +24,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::table('mentors', function (Blueprint $table) {
+            //
+
+            $table->dropColumn('is_show');
+        });
     }
 };

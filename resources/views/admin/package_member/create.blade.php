@@ -159,7 +159,9 @@
                                     </label>
                                 </li>
                             @empty
-                                Buat Data Discount Terlebih Dahulu
+                                <span class="bg-sky-50 text-sky-600 border border-sky-500 text-sm px-3 py-2 rounded-md">
+                                    * Buat Voucher Discount Terlebih Dahulu
+                                </span>
                             @endforelse
                         </ul>
                     </div>

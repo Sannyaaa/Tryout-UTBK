@@ -37,11 +37,15 @@ class GoogleController extends Controller
             ], [
                 'name' => $googleUser->name,
                 'google_id' => $googleUser->id,
-                'avatar' => $avatarPath, // Simpan path relatif
                 'password' => bcrypt(uniqid()),
-
-                'email_verified_at' => now(),
             ]);
+
+            $user->markEmailAsVerified();
+
+            if(!$user->avatar){
+                // Update user's avatar
+                $user->update(['avatar' => $avatarPath]);
+            }
 
             Auth::login($user);
             return redirect()->route('dashboard');

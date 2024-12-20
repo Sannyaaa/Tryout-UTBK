@@ -2,13 +2,14 @@
 
 namespace App\Livewire\User\Owned\Practice;
 
+use App\Models\Order;
 use Livewire\Component;
+use App\Models\ClassBimbel;
 use Illuminate\Http\Request;
+use App\Models\ResultPractice;
 use App\Models\QuestionPractice;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AnswerQuestionPractice;
-use App\Models\ClassBimbel;
-use App\Models\ResultPractice;
 
 class Paper extends Component
 {
@@ -29,10 +30,24 @@ class Paper extends Component
 
         $this->paperId = $request->segment(4);
 
-        $this->class = ClassBimbel::where('id', Auth::id())->first();
+        $this->class = ClassBimbel::findOrFail($this->paperId);
         
         $this->q = QuestionPractice::where('class_bimbel_id', $this->paperId)
             ->min('id');
+
+        $paid = Order::where('user_id', auth()->id())
+            ->where('payment_status', 'paid')
+            ->with(['package_member','user'])
+            ->whereHas('package_member', function($q){
+                // dd($q);
+                $q->where('bimbel_id', $this->class->bimbel_id);
+            })->first();
+            
+        if($paid == null){
+            session()->flash('message','kamu tidak memiliki akses untuk paket tersebut');
+
+            return redirect()->route('user.my-packages');
+        }
     }
 
     public function updatedAnswers($value, $key)
@@ -114,7 +129,7 @@ class Paper extends Component
         return view('livewire.user.owned.practice.paper',[
             'question' => $question,
             'answers' => $this->answers,
-            'paper' => ClassBimbel::where('id',$this->paperId)->get(),
+            'paper' => ClassBimbel::findOrFail($this->paperId),
         ]);
     }
 

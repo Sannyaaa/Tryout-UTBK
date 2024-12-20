@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Livewire\User\Tryout;
+namespace App\Livewire\User\Owned\Practice;
 
-use App\Models\Question;
-use App\Models\Result;
-use App\Models\Tryout;
-use Illuminate\Http\Request;
+use App\Models\ClassBimbel;
+use App\Models\Order;
 use Livewire\Component;
+use Illuminate\Http\Request;
+use App\Models\ResultPractice;
+use App\Models\QuestionPractice;
 
 class Statistik extends Component
 {
@@ -14,23 +15,22 @@ class Statistik extends Component
     public $averageScore;
     public $result;
     public $resultId;
+    public $classBimbel;
     public $userRank;
     public $tryout;
     public $userScore;
     public $allResults;
 
     public function mount(Request $request){
-        $this->resultId = $request->segment(3);
-        $this->result = Result::findOrFail($this->resultId);
-        $this->tryout = Tryout::findOrFail($this->result->tryout_id);
+        $this->resultId = $request->segment(4);
+        $this->result = ResultPractice::findOrFail($this->resultId);
         $this->userScore = $this->result->score;
+        $this->classBimbel = ClassBimbel::findOrFail($this->result->class_bimbel_id);
 
-        $this->averageScore = Result::where('tryout_id',$this->result->tryout_id)
-                                ->where('sub_category_id', $this->result->sub_category_id)
+        $this->averageScore = ResultPractice::where('class_bimbel_id',$this->classBimbel->id)
                                 ->avg('score');
 
-        $this->allResults = Result::where('tryout_id', $this->result->tryout_id)
-                                ->where('sub_category_id', $this->result->sub_category_id)
+        $this->allResults = ResultPractice::where('class_bimbel_id', $this->classBimbel->id)
                                 ->orderByDesc('score')
                                 ->get();
 
@@ -41,11 +41,10 @@ class Statistik extends Component
 
     public function render()
     {
-        $questions = Question::where('tryout_id', $this->result->tryout_id)
-                                ->where('sub_categories_id', $this->result->sub_category_id)
+        $questions = QuestionPractice::where('class_bimbel_id', $this->classBimbel->id)
                                 ->count();
 
-        return view('livewire.user.tryout.statistik',[
+        return view('livewire.user.owned.practice.statistik',[
             'questions' => $questions,
             'averageScore' => $this->averageScore,
             'userRank' => $this->userRank,

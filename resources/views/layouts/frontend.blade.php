@@ -35,7 +35,7 @@
                 <nav class="bg-white border-gray-200 dark:bg-gray-900">
                     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-6">
                         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                            <img src="{{ Storage::url($component->navbar_image ?? '') }}" class="h-8" alt="Flowbite Logo" />
+                            <img src="{{ Storage::url($component->navbar_image ?? '') }}" class="h-8" alt="Navbar Logo" />
                             {{-- <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span> --}}
                         </a>
                         <div class="flex items-center lg:order-2 space-x-3 lg:space-x-0 rtl:space-x-reverse">
@@ -49,7 +49,7 @@
                                     </div>
                                     <button type="button" class="flex text-sm bg-gray-800 rounded-full lg:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                                         <span class="sr-only">Open user menu</span>
-                                        <img class="w-8 h-8 rounded-full" src="{{ Storage::url(Auth::user()->avatar ?? '') }}" alt="user photo">
+                                        <img class="w-10 h-10 rounded-full" src="{{ Auth::user()->avatar != null ? Storage::url(Auth::user()->avatar ?? '') : 'https://openclipart.org/image/2000px/247319' }}" alt="user photo">
                                     </button>
                                 </div>
                             @else
@@ -109,9 +109,9 @@
                     <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
                         <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
                             <div>
-                                <img src="{{ Storage::url($component->footer_image ?? '') }}" class="mr-5 h-6 sm:h-9" alt="logo" />
+                                <img src="{{ Storage::url($component->footer_image ?? '') }}" class="mr-5 h-6 sm:h-9" alt="Footer Logo" />
                                 <div class="max-w-xs mt-4 text-sm text-zinc-200">
-                                    {!! $component->short_desc ?? '' !!}
+                                    {!! $component->short_desc ?? 'Short Description' !!}
                                 </div>
                                 <div class="flex mt-8 space-x-6 text-zinc-200">
                                     <a class="hover:opacity-75" href="{{ $component->facebook ?? '' }}" target="_blank" rel="noreferrer">
@@ -183,7 +183,7 @@
                             </div>
                         </div>
                         <div class="mt-8 text-xs text-zinc-200">
-                            {!! $component->copyright ?? '' !!}
+                            {!! $component->copyright ?? 'Copyright here' !!}
                         </div>
                     </div>
                 </footer>

@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Sekolah;
 use App\Models\User;
+use App\Models\Sekolah;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Database\Seeders\SekolahSeeder;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder

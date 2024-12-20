@@ -53,7 +53,7 @@
                                 <button 
                                     {{ !$this->isFirstQuestion() ? '' : 'disabled' }}
                                     wire:click="previousQuestion"
-                                    class="p-2 pe-3 rounded-lg flex items-center {{ !$this->isFirstQuestion() 
+                                    class="p-2 px-3 rounded-lg flex items-center {{ !$this->isFirstQuestion() 
                                         ? ' bg-sky-400 hover:bg-sky-500' 
                                         : ' cursor-not-allowed' }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -70,7 +70,7 @@
                                 <button 
                                     {{ !$this->isLastQuestion() ? '' : 'disabled' }}
                                     wire:click="nextQuestion"
-                                    class="p-2 ps-3 rounded-lg flex items-center {{ !$this->isLastQuestion() 
+                                    class="p-2 px-3 rounded-lg flex items-center {{ !$this->isLastQuestion() 
                                         ? ' bg-sky-400 hover:bg-sky-500' 
                                         : ' cursor-not-allowed' }}">
                                     selanjutnya
@@ -147,7 +147,7 @@
                                 @foreach ($questions as $item)
                                     <div>
                                         <button wire:click="changeNumber({{$item->id}})" 
-                                            class="w-full aspect-square flex items-center justify-center rounded-lg text-sm font-medium transition-all duration-200
+                                            class="w-full aspect-square flex items-center justify-center rounded-lg text-sm font-medium transition-all duration-200 max-w-20
                                             {{ $q == $item->id 
                                                 ? 'bg-sky-500 text-white shadow-md ring-2 ring-sky-300 ring-offset-2' 
                                                 : (isset($answers[$item->id]) 
@@ -160,13 +160,58 @@
                                 @endforeach
                             </div>
 
-                            <div class="mt-4">
-                                <button class="py-3 px-8 rounded-lg text-white font-semibold transition-colors
-                                bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700
-                                focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
-                                wire:click="submitAnswers()">
-                                    Selesai Tes
+                            <div class="mt-6">
+                                
+                                <button data-modal-target="testimonial-modal" data-modal-toggle="testimonial-modal" class="block text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-sky-300 font-semibold rounded-lg w-full py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800" type="button">
+                                    Selesai
                                 </button>
+                                    
+
+                                <div 
+                                    wire:ignore.self 
+                                    id="testimonial-modal" 
+                                    tabindex="-1" 
+                                    aria-hidden="true" 
+                                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+                                >
+                                    <div class="relative p-4 w-full max-w-xl max-h-full">
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                    Yakin Ingin Menyelesaikan Tryout-nya?
+                                                </h3>
+                                                <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="testimonial-modal">
+                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="p-4 md:p-5">
+                                                <div class="mb-4 space-y-4">
+                                                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                                        Apakah Anda yakin ingin menyelesaikan tryout ini sekarang? Pastikan Anda telah memeriksa dan menjawab semua pertanyaan dengan baik, karena setelah menyelesaikan tryout, Anda tidak dapat melakukan perubahan lagi.
+                                                    </p>
+                                                </div>
+                                                <div class="flex justify-between space-x-2">
+                                                    <button 
+                                                        type="button" 
+                                                        data-modal-hide="testimonial-modal" 
+                                                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                                    >
+                                                        Batal
+                                                    </button>
+                                                    <button class="py-3 px-5 rounded-lg text-white font-semibold transition-colors
+                                                    bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700
+                                                    focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
+                                                    wire:click="submitAnswers()">
+                                                        Selesai Tes
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

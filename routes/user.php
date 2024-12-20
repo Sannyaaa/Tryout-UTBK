@@ -42,6 +42,7 @@ Route::get('/paketku/{id}/bimbel', App\Livewire\User\Owned\Bimbels::class)->name
 Route::get('/paketku/latihan/bimbel/{class_bimbel}/preparation', App\Livewire\User\Owned\Practice\Instruction::class)->name('my-bimbel.instruction');
 Route::get('/paketku/latihan/bimbel/{paper}', App\Livewire\User\Owned\Practice\Paper::class)->name('my-bimbel.paper');
 Route::get('/paketku/latihan/result/{result}', App\Livewire\User\Owned\Practice\Result::class)->name('my-bimbel.practice.result');
+Route::get('/paketku/latihan/statistik/{result}', App\Livewire\User\Owned\Practice\Statistik::class)->name('my-bimbel.practice.statistik');
 Route::get('/paketku/latihan/history/{class_bimbel}', App\Livewire\User\Owned\Practice\History::class)->name('my-bimbel.practice.history');
 
 

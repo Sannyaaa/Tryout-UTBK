@@ -11,6 +11,8 @@ use Livewire\Component;
 class Event extends Component
 {
 
+    public $participant = 0;
+
     public function render()
     {
         $now = Carbon::today();
@@ -24,7 +26,8 @@ class Event extends Component
 
         $totalCategories = sub_categories::count();
 
-        $participant = DB::table('results')
+        if($ongoing){
+            $this->participant = DB::table('results')
                         ->select('user_id', DB::raw('COUNT(DISTINCT sub_category_id) as completed_categories'))
                         ->join('sub_categories', 'results.sub_category_id', '=', 'sub_categories.id')
                         ->where('results.tryout_id', $ongoing->id)
@@ -32,7 +35,8 @@ class Event extends Component
                         ->groupBy('user_id')
                         ->having('completed_categories', '=', $totalCategories)
                         ->count();
+        }
                         
-        return view('livewire.user.tryout.event', compact('comingsoon','ongoing', 'participant','finished'));
+        return view('livewire.user.tryout.event', compact('comingsoon','ongoing','finished'));
     }
 }

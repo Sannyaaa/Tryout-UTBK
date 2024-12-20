@@ -29,7 +29,7 @@
         </div>
 
         @if (session('message'))
-            <div class="mb-8 bg-rose-200 border-rose-700 border text-rose-700 py-3 px-4 rounded-md">
+            <div class="mb-8 bg-rose-50 border-rose-600 border text-rose-600 py-3 px-4 rounded-md">
                 {{ session('message') }}
             </div>
         @endif
@@ -82,11 +82,11 @@
                 </button>
                 <button wire:click="$set('selectedType', 'tryout')"
                         class="px-4 py-2 rounded-lg transition-all shadow hover:shadow-lg {{ $selectedType === 'tryout' ? 'bg-sky-500 text-white' : 'bg-white text-gray-700' }}">
-                    Tryout
+                    Paket Tryout
                 </button>
                 <button wire:click="$set('selectedType', 'bimbel')"
                         class="px-4 py-2 rounded-lg transition-all shadow hover:shadow-lg {{ $selectedType === 'bimbel' ? 'bg-sky-500 text-white' : 'bg-white text-gray-700' }}">
-                    Bimbel
+                    Paket Bimbel
                 </button>
             </div>
 
@@ -243,9 +243,9 @@
                         <h3 class="mt-2 text-sm font-medium text-gray-900">Belum ada paket yang dibeli</h3>
                         <p class="mt-1 text-sm text-gray-500">Mulai beli paket untuk mengakses materi pembelajaran.</p>
                         <div class="mt-6">
-                            <a href="{{ route('packages') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-500 hover:bg-sky-600">
+                            <x-primary-link href="{{ route('packages') }}" class="inline-flex ">
                                 Lihat Paket Tersedia
-                            </a>
+                            </x-primary-link>
                         </div>
                     </div>
                 @endforelse

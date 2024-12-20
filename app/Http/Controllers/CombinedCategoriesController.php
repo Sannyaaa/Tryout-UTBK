@@ -70,7 +70,7 @@ class CombinedCategoriesController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'string',
             'parent_category' => 'nullable|exists:categories,id'
         ]);
 
@@ -134,7 +134,7 @@ class CombinedCategoriesController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'string',
             'parent_category' => 'nullable|exists:categories,id'
         ]);
 

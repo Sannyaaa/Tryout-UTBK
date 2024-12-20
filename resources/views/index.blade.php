@@ -6,9 +6,9 @@
             <div class="w-full lg:flex py-16 lg:py-20 px-10 lg:px-14  xl:px-32 space-y-10">
                 <div class="w-4/5 lg:w-1/2 flex justify-center items-center pe-10">
                     <div class="text-left w-full">
-                        <h1 class="text-5xl font-bold text-sky-900 lg:text-6xl ">{{ $homePage->hero_title ?? '' }}</h1>
+                        <h1 class="text-5xl font-bold text-sky-900 lg:text-6xl ">{{ $homePage->hero_title ?? 'Hero Title' }}</h1>
 
-                        <div class="mt-6 text-lg  text-gray-600">{!! $homePage->hero_desc ?? '' !!}</div>
+                        <div class="mt-6 text-lg  text-gray-600">{!! $homePage->hero_desc ?? 'Hero Description' !!}</div>
 
                         <div class="mt-6 inline-flex items-center gap-x-3">
                             <x-primary-link href="{{ route('login') }}" class="py-1 px-2">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="w-full lg:w-1/2 px-0 lg:px-8 mx-auto my-auto">
                     <div class="overflow-hidden">
-                        <img src="{{ Storage::url($homePage->hero_image) }}" alt="" class=" min-w-10">
+                        <img src="{{ Storage::url($homePage->hero_image ?? '') }}" alt="" class=" min-w-10">
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
 
             <div class="py-24" id="features">
                 <div class="text-center w-3/5 md:w-2/5 mx-auto">
-                    <h1 class="text-4xl font-bold  text-sky-900 md:text-5xl lg:text-6xl ">{{ $homePage->feature_title ?? '' }}</span></h1>
+                    <h1 class="text-4xl font-bold  text-sky-900 md:text-5xl lg:text-6xl ">{{ $homePage->feature_title ?? 'Feature Title' }}</span></h1>
 
                     <p class="mt-6 text-lg  text-gray-600">{!! $homePage->feature_desc ?? '' !!}</p>
                 </div>
@@ -49,8 +49,8 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <h2 class="text-2xl  font-bold text-sky-900">{{ $feature->name }}</h2>
-                                        <p class="mt-2 text-gray-600">{{ $feature->description }}</p>
+                                        <h2 class="text-2xl  font-bold text-sky-900">{{ $feature->name ?? 'Title Feature' }}</h2>
+                                        <p class="mt-2 text-gray-600">{{ $feature->description ?? 'Desc Feature' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -63,14 +63,14 @@
                 <div class="px-10 lg:flex">
                     <div class="w-full lg:w-1/2 px-0 lg:px-8 mx-auto my-auto">
                         <div class="overflow-hidden">
-                            <img src="{{ Storage::url($homePage->about_us_image) }}" alt="" class="min-w-10">
+                            <img src="{{ Storage::url($homePage->about_us_image ?? '') }}" alt="" class="min-w-10">
                         </div>
                     </div>
                     <div class="w-4/5 lg:w-1/2 flex justify-center items-center">
                         <div class="text-left w-full pb-20 lg:pt-20">
-                            <h1 class="text-5xl font-bold  text-sky-900 lg:text-6xl ">{{ $homePage->about_us_title }}</h1>
+                            <h1 class="text-5xl font-bold  text-sky-900 lg:text-6xl ">{{ $homePage->about_us_title ?? 'About Us Title' }}</h1>
 
-                            <div class="mt-6 text-lg  text-gray-600">{!! $homePage->about_us_desc !!}</div>
+                            <div class="mt-6 text-lg  text-gray-600">{!! $homePage->about_us_desc ?? '' !!}</div>
                         
                             <div class="mt-6">
                                 <x-primary-link class="" href="{{ route('login') }}">
@@ -117,9 +117,9 @@
 
             <div class="mt-32">
                 <div class="text-center w-3/5 md:w-2/5 mx-auto">
-                    <h1 class="text-4xl font-bold  text-sky-900 md:text-5xl lg:text-6xl ">{{ $homePage->package_title }}</h1>
+                    <h1 class="text-4xl font-bold  text-sky-900 md:text-5xl lg:text-6xl ">{{ $homePage->package_title ?? 'Package Title' }}</h1>
 
-                    <p class="mt-6 text-lg  text-gray-600">{!! $homePage->package_desc !!}</p>
+                    <p class="mt-6 text-lg  text-gray-600">{!! $homePage->package_desc ?? '' !!}</p>
                 </div>
                 <div class="mt-12 px-4 lg:px-36 xl:px-56">
                     <div class="w-full flex flex-wrap justify-center">
@@ -184,9 +184,9 @@
 
             <div class="py-32" id="teachers">
                 <div class="text-center w-3/5 md:w-2/5 mx-auto">
-                    <h1 class="text-4xl font-bold text-sky-900 md:text-5xl lg:text-6xl ">{{ $homePage->mentor_title }}</h1>
+                    <h1 class="text-4xl font-bold text-sky-900 md:text-5xl lg:text-6xl ">{{ $homePage->mentor_title ?? 'Mentor Title' }}</h1>
 
-                    <p class="mt-6 text-lg  text-gray-600">{!! $homePage->mentor_desc !!}</p>
+                    <p class="mt-6 text-lg  text-gray-600">{!! $homePage->mentor_desc ?? '' !!}</p>
                 </div>
                 <div class="my-12  lg:px-32">
                     <div class="flex justify-center">
@@ -279,10 +279,10 @@
                         <div class="mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
                             <div class="max-w-7xl items-end justify-between sm:flex sm:pe-6 lg:pe-8">
                                 <h2 class="max-w-xl text-4xl font-bold tracking-tight text-sky-900 sm:text-5xl">
-                                    {{ $homePage->testimonial_title }}
+                                    {{ $homePage->testimonial_title ?? 'Testimonial Title' }}
                                 </h2>
 
-                                <p class="mt-6 text-lg  text-gray-600">{!! $homePage->testimonial_desc !!}</p>
+                                <p class="mt-6 text-lg  text-gray-600">{!! $homePage->testimonial_desc ?? '' !!}</p>
 
                                 <div class="mt-8 flex gap-4 lg:mt-0">
                                     <button
@@ -368,7 +368,7 @@
             {{-- <div class=""> --}}
                 <section id="faqs">
                     <div class="py-28 max-w-screen-lg px-12 mx-auto">
-                        <h1 class="mb-8 text-center text-6xl font-bold text-sky-900">{{ $homePage->faq_title }}</h1>
+                        <h1 class="mb-8 text-center text-6xl font-bold text-sky-900">{{ $homePage->faq_title ?? 'FAQ Title' }}</h1>
                         <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-sky-100 dark:bg-gray-800 text-sky-600 dark:text-white">
                             @forelse ($faqs as $i => $faq)
                                 <h2 id="accordion-color-heading-{{ $i }}">
