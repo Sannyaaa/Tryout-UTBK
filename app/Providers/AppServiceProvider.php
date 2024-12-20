@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\ComponentPage;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -33,6 +34,9 @@ class AppServiceProvider extends ServiceProvider
             return $user->role === 'user';
         });
 
-        view()->share('component', ComponentPage::first());
+        if (Schema::hasTable('component_pages')) {
+            view()->share('component', ComponentPage::first());
+        }
+        
     }
 }
