@@ -43,20 +43,21 @@
                 </div>
             </div>
 
-            <div class="flex gap-6">
+            <div class="space-y-6 lg:space-y-0 lg:flex gap-6">
 
                 {{-- Main Content Area --}}
-                <div class="w-2/3">
+                <div class="w-full lg:w-2/3">
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
                         {{-- Question Navigation Header --}}
                         <div class="border-b border-gray-200">
-                            <div class="p-6 flex items-center justify-between">
+                            <div class="p-6 flex items-center justify-between text-slate-50">
                                 <button 
                                     wire:click="previousQuestion"
                                     {{ $this->isFirstQuestion() ? 'disabled' : '' }}
-                                    class="p-2 rounded-lg {{ !$this->isFirstQuestion() 
-                                        ? 'text-gray-700 hover:bg-gray-100' 
-                                        : 'text-gray-400 cursor-not-allowed' }}">
+                                    class="p-2 px-3 rounded-lg flex items-center {{ !$this->isFirstQuestion() 
+                                        ? 'bg-sky-400 hover:bg-sky-500' 
+                                        : 'cursor-not-allowed' }}">
+                                        sebelumnya
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                                     </svg>
@@ -69,10 +70,11 @@
                                 <button 
                                     wire:click="nextQuestion"
                                     {{ $this->isLastQuestion() ? 'disabled' : '' }}
-                                    class="p-2 rounded-lg {{ !$this->isLastQuestion() 
-                                        ? 'text-gray-700 hover:bg-gray-100' 
-                                        : 'text-gray-400 cursor-not-allowed' }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    class="p-2 px-3 rounded-lg flex items-center {{ !$this->isLastQuestion() 
+                                        ? 'bg-sky-400 hover:bg-sky-500' 
+                                        : 'cursor-not-allowed' }}">
+                                        selanjutnya
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                     </svg>
                                 </button>
@@ -140,7 +142,7 @@
                 </div>
 
                 {{-- Left Sidebar with Navigation and Summary --}}
-                <div class="w-1/3 space-y-4">
+                <div class="w-full lg:w-1/3 space-y-4">
 
                     {{-- Question Navigation --}}
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -151,7 +153,7 @@
                                     wire:click="changeNumber({{ $item->id }})"
                                     wire:key="nav-{{ $item->id }}"
                                     type="button"
-                                    class="w-full aspect-square flex items-center justify-center rounded-lg text-sm font-medium transition-all duration-200
+                                    class="w-full aspect-square flex items-center justify-center rounded-lg text-sm font-medium transition-all duration-200 max-w-20
                                     {{ $currentQuestionId == $item->id ? 'ring-2 ring-offset-2 ' : '' }}
                                     {{ isset($answeredQuestions[$item->id]) && $answeredQuestions[$item->id] === true 
                                         ? 'bg-sky-100 text-sky-700 hover:bg-sky-200 ' . ($currentQuestionId == $item->id ? 'ring-sky-300' : '') 
@@ -182,7 +184,7 @@
 
             <div class=" grid grid-cols-3 ">
                 {{-- Score Summary Card --}}
-                <div>
+                {{-- <div>
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 m-3">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">Rincian Hasil Jawaban</h3>
                         <div class="text-center">
@@ -206,10 +208,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- Score Summary Card --}}
-                <div>
+                {{-- <div>
                     <div class="bg-white shadow rounded-lg p-6 m-3">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">Perbandingan Dengan Rata-rata</h3>
                         {!! $chart->container() !!}
@@ -218,7 +220,7 @@
                             <p><strong>Nilai Anda:</strong> {{ $result->score }}</p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- Score Summary Card --}}
                 {{-- <div>

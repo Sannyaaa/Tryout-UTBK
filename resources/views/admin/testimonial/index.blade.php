@@ -32,8 +32,8 @@
                     {{-- <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Bimbels</h1> --}}
                 </div>
             </div>
-            <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700 mb-4">
-                <div class="flex items-center mb-4 sm:mb-0">
+            <div class="items-center justify-end block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700 mb-4">
+                {{-- <div class="flex items-center mb-4 sm:mb-0">
                     <div class="flex items-center w-full sm:justify-end">
                         <div class="flex space-x-1">
                             <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
@@ -42,7 +42,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="flex justify-center items-center gap-2">
                     <div class="">
                         <x-select-input id="package_member_id" class="p-2 btestimonial rounded">
@@ -50,6 +50,14 @@
                             @foreach ($packages as $package)
                                 <option value="{{ $package->id }}">{{ $package->name }}</option>
                             @endforeach
+                        </x-select-input>
+                    </div>
+
+                    <div class="">
+                        <x-select-input id="is_show_filter" class="p-2 border rounded">
+                            <option value="">Semua Access</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
                         </x-select-input>
                     </div>
 
@@ -106,6 +114,38 @@
                         </div>
                     </div>
                 </div>
+
+                
+
+
+            </div>
+            <div class="flex items-center w-full sm:justify-start mb-3">
+                <div class="flex space-x-1">
+                    <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
+                    <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                        Hapus
+                    </button>
+                </div>
+
+                <!-- Bulk Update Row -->
+                <div id="bulk-update-row" style="display:none;">
+                    <div>
+                        <div class="flex justify-center gap-2">
+                            <x-select-input id="bulk-update-is-show" class="form-control mr-2" style="width: 200px;">
+                                <option value="">Semua Acces</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </x-select-input>
+                            <x-select-input id="bulk-update-packages" class="form-control mr-2" style="width: 250px;">
+                                <option value="">Pilih Paket</option>
+                                @foreach($packages as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </x-select-input>
+                            <button id="bulk-update-btn" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Update</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="flex flex-col">
@@ -132,6 +172,9 @@
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Tanggal
+                                        </th>
+                                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            Access
                                         </th>
                                         <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                             Actions
@@ -221,6 +264,7 @@ $(document).ready(function() {
                 url: "{{ route('admin.testimonial.index') }}",
                 data: function (d) {
                     d.package_member_id = $('#package_member_id').val();
+                    d.is_show = $('#is_show_filter').val();
                 }
             },
         columns: [
@@ -244,6 +288,7 @@ $(document).ready(function() {
             {data: 'package_member.name', name: 'package_member.name', defaultContent: '-'},
             {data: 'user.name', name: 'user.name'},
             {data: 'created_at', name: 'created_at'},
+            {data: 'is_show', name: 'is_show'},
             {
                 data: 'action',
                 name: 'action',
@@ -254,6 +299,10 @@ $(document).ready(function() {
     });
 
     $('#package_member_id').change(function(){
+        table.draw();
+    });
+
+    $('#is_show_filter').change(function(){
         table.draw();
     });
 
@@ -314,6 +363,90 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+
+    // Filter berdasarkan is_free dan is_together
+    // $('#is_free_filter, #is_together_filter').change(function(){
+    //     table.draw();
+    // });
+
+    // Handle "select all" checkbox
+    $('#checkbox-all').on('click', function() {
+        $('.testimonial-checkbox').prop('checked', this.checked);
+        updateBulkOptions();
+    });
+
+    // Handle individual checkbox changes
+    $('#testimonialTable').on('change', '.testimonial-checkbox', function() {
+        updateBulkOptions();
+        
+        // Update "select all" checkbox
+        var allChecked = $('.testimonial-checkbox:checked').length === $('.testimonial-checkbox').length;
+        $('#checkbox-all').prop('checked', allChecked);
+    });
+
+    // Fungsi untuk mengupdate opsi bulk
+    function updateBulkOptions() {
+        var checkedCount = $('.testimonial-checkbox:checked').length;
+        
+        if (checkedCount > 0) {
+            // Tampilkan baris opsi update
+            $('#bulk-update-row').show();
+        } else {
+            // Sembunyikan baris opsi update
+            $('#bulk-update-row').hide();
+        }
+    }
+
+    // Handle bulk update
+    $('#bulk-update-btn').on('click', function() {
+        var selectedIds = [];
+        $('.testimonial-checkbox:checked').each(function() {
+            selectedIds.push($(this).val());
+        });
+
+        var isShow = $('#bulk-update-is-show').val();
+        var packages = $('#bulk-update-packages').val();
+
+        // Validate that at least one option is selected
+        if (!isShow && !packages) {
+            toastr.warning('Pilih minimal satu opsi untuk diupdate');
+            return;
+        
+        
+        if (isShow !== '') {
+            updateData.is_show = isShow;
+        }
+        if (packages !== '') {
+            updateData.package_member_id = packages;
+        }}
+
+        $.ajax({
+            url: "{{ route('admin.testimonial.bulkUpdate') }}", 
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                ids: selectedIds,
+                package_member_id: packages,
+                is_show: isShow,
+            },
+            success: function(response) {
+                if (response.success) {
+                    // Refresh table
+                    table.ajax.reload();
+                    // Hide bulk update row
+                    $('#bulk-update-row').hide();
+                    // Uncheck "select all"
+                    $('#checkbox-all').prop('checked', false);
+                    
+                    // Show success message
+                    toastr.success(response.message);
+                }
+            },
+            error: function(error) {
+                toastr.error('Error updating selected items');
+            }
+        });
     });
 });
 </script>

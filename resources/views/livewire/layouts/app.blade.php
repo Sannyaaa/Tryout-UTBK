@@ -52,15 +52,15 @@
     <!-- ===== Header End ===== -->
     <!-- ===== Sidebar Start ===== -->
 
-        @auth
-            @include('livewire.layouts.user-sidebar')
-        @endauth
+    @auth
+        @include('livewire.layouts.user-sidebar')
+    @endauth
 
     {{-- <include src="./partials/sidebar.html"></include> --}}
     <!-- ===== Sidebar End ===== -->
     
     <!-- ===== Page Wrapper Start ===== -->
-    <div class="flex overflow-hidden bg-slate-100 dark:bg-slate-900">
+    <div class="flex overflow-hidden min-h-screen bg-slate-100 dark:bg-slate-900">
       
       <!-- ===== Content Area Start ===== -->
       <div id="main-content" class="relative w-full h-full overflow-y-auto  {{ Auth::user() ? 'lg:ml-72 bg-slate-100' : 'bg-slate-50' }} dark:bg-slate-900">
@@ -83,7 +83,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="{{ asset('js/index.js') }}"></script>
     <script src="{{ asset('js/sidebar.js') }}"></script>
-    <script src="{{ asset('js/dark-mode.js') }}"></script>
     <script src="{{ asset('js/charts.js') }}"></script>
     {{-- <script src="{{ asset('js/flowbite.js') }}"></script> --}}
     {{-- <script src="./path/to/flowbite/dist/flowbite.js"></script> --}}
@@ -109,6 +108,7 @@
             });
         </script>
     @endif
+
 
     @livewireScripts()
 

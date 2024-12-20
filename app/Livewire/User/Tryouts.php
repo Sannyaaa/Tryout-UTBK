@@ -19,7 +19,6 @@ class Tryouts extends Component
         // Get Data
         $tryouts = Tryout::where('is_together','basic')
                             ->where('is_free','free')
-                            ->where('is_ready','yes')
                             ->get();
 
         $paidTryout = Tryout::whereHas('package_member', function ($query) {

@@ -9,7 +9,7 @@
             </div>
 
             <div class="mx-auto max-w-xl -mt-8">
-                <img src="{{ asset('assets/Learning-pana.png') }}" alt="">
+                <img src="{{ asset('assets/Learning-pana.png') }}" class="w-full" alt="">
             </div>
 
             {{-- <div class="text-center w-full -mt-6">

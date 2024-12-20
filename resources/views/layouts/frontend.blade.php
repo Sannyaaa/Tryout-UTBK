@@ -88,13 +88,13 @@
                         <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-user">
                             <ul class="flex flex-col font-medium p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 mx-8 lg:space-x-4 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
                                 <li>
-                                    <a href="{{ route('home-page') }}" class="block text-white  px-4 rounded-lg py-2 {{ Route::is('home-page') ? 'lg:bg-sky-50 lg:text-sky-700 bg-sky-700 lg:dark:text-sky-500' : 'lg:text-sky-700 hover:bg-gray-100 lg:hover:bg-sky-50 lg:hover:text-sky-700' }} dark:text-white lg:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 transition-all " aria-current="page">Home</a>
+                                    <a href="{{ route('home-page') }}" class="block text-white  px-4 rounded-lg py-2 {{ Route::is('home-page') ? 'lg:bg-sky-50 text-white lg:text-sky-700 bg-sky-700 lg:dark:text-sky-500' : 'text-sky-800 hover:bg-gray-100 lg:hover:bg-sky-50 lg:hover:text-sky-700' }} dark:text-white lg:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 transition-all " aria-current="page">Home</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('packages') }}" class="block text-white  px-4 rounded-lg py-2 {{ Route::is('packages') ? 'lg:bg-sky-50 lg:text-sky-700 bg-sky-700 lg:dark:text-sky-500' : 'lg:text-sky-700 hover:bg-gray-100 lg:hover:bg-sky-50 lg:hover:text-sky-700' }} dark:text-white lg:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 transition-all ">Paket</a>
+                                    <a href="{{ route('packages') }}" class="block  px-4 rounded-lg py-2 {{ Route::is('packages') ? 'lg:bg-sky-50 text-white lg:text-sky-700 bg-sky-700 lg:dark:text-sky-500' : 'text-sky-700 hover:bg-gray-100 lg:hover:bg-sky-50 lg:hover:text-sky-700' }} dark:text-white lg:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 transition-all ">Paket</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('mentor-page') }}" class="block text-white  px-4 rounded-lg py-2 {{ Route::is('mentor-page') ? 'lg:bg-sky-50 lg:text-sky-700 bg-sky-700 lg:dark:text-sky-500' : 'lg:text-sky-700 hover:bg-gray-100 lg:hover:bg-sky-50 lg:hover:text-sky-700' }} dark:text-white lg:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 transition-all">Mentor</a>
+                                    <a href="{{ route('mentor-page') }}" class="block  px-4 rounded-lg py-2 {{ Route::is('mentor-page') ? 'lg:bg-sky-50 text-white lg:text-sky-700 bg-sky-700 lg:dark:text-sky-500' : 'text-sky-700 hover:bg-gray-100 lg:hover:bg-sky-50 lg:hover:text-sky-700' }} dark:text-white lg:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 transition-all">Mentor</a>
                                 </li>
                             </ul>
                         </div>
@@ -149,16 +149,6 @@
                             <div class="grid grid-cols-1 gap-4 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-3">
                                 <div>
                                     <p class="font-medium">
-                                        Products
-                                    </p>
-                                    <nav class="flex flex-col mt-4 space-y-2 text-sm text-zinc-200">
-                                        <a class="hover:opacity-75" href> Tryout </a>
-                                        <a class="hover:opacity-75" href> Event Tryout </a>
-                                        <a class="hover:opacity-75" href> Bimbel </a>
-                                    </nav>
-                                </div>
-                                <div>
-                                    <p class="font-medium">
                                         Helpful Links
                                     </p>
                                     <nav class="flex flex-col mt-4 space-y-2 text-sm text-zinc-200">
@@ -170,6 +160,18 @@
                                         <a class="hover:opacity-75" href="#faqs"> FAQ </a>
                                     </nav>
                                 </div>
+                                
+                                <div>
+                                    <p class="font-medium">
+                                        Products
+                                    </p>
+                                    <nav class="flex flex-col mt-4 space-y-2 text-sm text-zinc-200">
+                                        <a class="hover:opacity-75" href> Tryout </a>
+                                        <a class="hover:opacity-75" href> Event Tryout </a>
+                                        <a class="hover:opacity-75" href> Bimbel </a>
+                                    </nav>
+                                </div>
+                                
                                 <div>
                                     <p class="font-medium">
                                         Contact

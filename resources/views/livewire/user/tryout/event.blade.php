@@ -39,7 +39,7 @@
                     <h1 class="text-xl text-gray-700 font-semibold">Tryout Sedang Berlangsung</h1>
                 </div>
                 <!-- Package Grid Section -->
-                <section class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
+                <section class="grid grid-cols-1 space-y-12 md:space-y-0 lg:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-8">
                     @if ($ongoing)
                         
                         <div class="w-full col-span-3 h-full bg-gradient-to-tr from-sky-400 to-sky-500 text-white px-16 py-10 rounded-lg">
@@ -56,40 +56,44 @@
                                 <div>
                                     <h2 class="font-extrabold text-3xl lg:text-5xl">{{ $ongoing->name }}</h2>
                                     <div class="space-x-12 flex my-3">
-                                        <div class="">
-                                            <h3>Tanggal Mulai : </h3>
-                                            <div class="font-semibold">
-                                                <span class="text-lg mx-1">
-                                                    <i class="fa-solid fa-calendar-days"></i>
-                                                </span>
-                                                <span>{{ \Carbon\Carbon::parse($ongoing->start_date)->format('j F Y') }}</span>
+                                        <div class="md:flex space-y-4 md:space-y-0 gap-12">
+                                            <div class="">
+                                                <h3>Tanggal Mulai : </h3>
+                                                <div class="font-semibold">
+                                                    <span class="text-lg mx-1">
+                                                        <i class="fa-solid fa-calendar-days"></i>
+                                                    </span>
+                                                    <span>{{ \Carbon\Carbon::parse($ongoing->start_date)->format('j F Y') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <h3>Tanggal Berakhir : </h3>
+                                                <div class="font-semibold">
+                                                    <span class="text-lg mx-1">
+                                                        <i class="fa-solid fa-calendar-days"></i>
+                                                    </span>
+                                                    <span>{{ \Carbon\Carbon::parse($ongoing->end_date)->format('j F Y') }}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="">
-                                            <h3>Tanggal Berakhir : </h3>
-                                            <div class="font-semibold">
-                                                <span class="text-lg mx-1">
-                                                    <i class="fa-solid fa-calendar-days"></i>
-                                                </span>
-                                                <span>{{ \Carbon\Carbon::parse($ongoing->end_date)->format('j F Y') }}</span>
+                                        <div class="md:flex space-y-4 md:space-y-0 gap-12">
+                                            <div class="">
+                                                <h3>Total Peserta : </h3>
+                                                <div class="font-semibold">
+                                                    <span class="text-lg mx-1">
+                                                        <i class="fa-solid fa-users"></i>
+                                                    </span>
+                                                    <span>{{ $participant }} Perserta</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="">
-                                            <h3>Total Peserta : </h3>
-                                            <div class="font-semibold">
-                                                <span class="text-lg mx-1">
-                                                    <i class="fa-solid fa-users"></i>
-                                                </span>
-                                                <span>{{ $participant }} Perserta</span>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <h3>Jumlah Soal : </h3>
-                                            <div class="font-semibold">
-                                                <span class="text-lg mx-1">
-                                                    <i class="fa-solid fa-file-circle-question"></i>
-                                                </span>
-                                                <span>{{ $ongoing->question->count() }} Soal</span>
+                                            <div class="">
+                                                <h3>Jumlah Soal : </h3>
+                                                <div class="font-semibold">
+                                                    <span class="text-lg mx-1">
+                                                        <i class="fa-solid fa-file-circle-question"></i>
+                                                    </span>
+                                                    <span>{{ $ongoing->question->count() }} Soal</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +129,7 @@
                     <h1 class="text-xl text-gray-700 font-semibold">Tryout Akan Datang</h1>
                 </div>
                 <!-- Package Grid Section -->
-                <section class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
+                <section class="grid grid-cols-1 space-y-12 md:space-y-0 lg:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-8">
                     {{-- @dd($purchasedPackages) --}}
                     @forelse ($comingsoon as $soon)
                         <div class="">
@@ -184,7 +188,7 @@
                 </div>
 
                 <!-- Package Grid Section -->
-                <section class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
+                <section class="grid grid-cols-1 space-y-12 md:space-y-0 lg:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-8">
                     {{-- @dd($purchasedPackages) --}}
                     @forelse ($finished as $finish)
                         <div class="">

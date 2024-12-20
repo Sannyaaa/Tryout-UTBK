@@ -1,5 +1,5 @@
 
-<nav class=" absolute z-30 w-full">
+<nav class=" absolute z-50 w-full">
   <div class="p-4">
       <div class="px-5 py-4 bg-white rounded-lg shadow border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div class="flex items-center justify-between">

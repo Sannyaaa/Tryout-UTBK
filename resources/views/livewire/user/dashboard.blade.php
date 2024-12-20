@@ -4,7 +4,7 @@
             @if ($todayClasses->isNotEmpty() || $ongoing->isNotEmpty() || $promotions->isNotEmpty())
                 <div id="default-carousel" class="relative w-full mt-6" data-carousel="slide">
                     <!-- Carousel wrapper -->
-                    <div class="relative h-56 overflow-hidden rounded-lg shadow-lg md:h-96 p-1">
+                    <div class="relative h-56 z-0 overflow-hidden rounded-lg shadow-lg md:h-96 p-1">
                         <!-- Item 1 -->
                         @if ($todayClasses->isNotEmpty())
                             @foreach ($todayClasses as $class)
@@ -49,8 +49,8 @@
                                             <div>
                                                 <div>
                                                     <h2 class="font-extrabold text-3xl lg:text-5xl">Pemberitahuan Tryout Event</h2>
-                                                    <h3 class="font-semibold text-xl mt-2">Kami sedang mengadakan Tryout Event mulai
-                                                        <br>
+                                                    <h3 class="font-semibold text-xl mt-2"><span class="hidden md:block">Kami sedang mengadakan Tryout Event mulai
+                                                        <br></span>
                                                         tanggal <span class="font-extrabold">{{ date('d F Y', strtotime($item->start_date)) }}</span> sampai <span class="font-extrabold">{{ date('d F Y', strtotime($item->end_date)) }}.</span>
                                                         <br>
                                                         Jangan Sampai Ketinggalan!!
@@ -472,7 +472,7 @@
                 <h1 class="text-4xl font-bold text-gray-600 mb-4">Paket Terbaru</h1>
             </div>
             <!-- Package Grid Section -->
-            <section class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
+            <section class="grid grid-cols-1 space-y-12 md:space-y-0 lg:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-8">
                 @forelse ($packages as $package)
                     <div class="flex flex-col max-w-lg">
                         <div class="text-gray-900 bg-white hover:shadow-lg transition-all border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white">

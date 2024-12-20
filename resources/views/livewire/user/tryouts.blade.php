@@ -33,7 +33,7 @@
                 @if ($paidTryout->isNotEmpty())
                     <div>
                         <h1 class="text-2xl font-semibold text-gray-600 mb-4">Tryout Yang Sudah Dibeli</h1>
-                        <div class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
+                        <div class="grid grid-cols-1 space-y-12 md:space-y-0 lg:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-8">
                             {{-- @dd($paidTryout) --}}
                             @forelse  ($paidTryout as $item)
                                 <div class="">
@@ -110,7 +110,7 @@
                 
                 <div>
                     <h1 class="text-2xl font-semibold text-gray-600 mb-4">Tryout Terbaru</h1>
-                    <div class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
+                    <div class="grid grid-cols-1 space-y-12 md:space-y-0 lg:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-8">
                         @forelse  ($tryouts as $item)
                             <div class="">
                                 <div class="border rounded-lg shadow hover:shadow-lg transition-all duration-200 overflow-hidden">
@@ -184,7 +184,7 @@
                 </div>
                 <div>
                     <h1 class="text-2xl font-semibold text-gray-600 mb-4">Paket Tryout</h1>
-                    <div class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
+                    <div class="grid grid-cols-1 space-y-12 md:space-y-0 lg:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-8">
                         {{-- @dd($packages) --}}
                         @forelse ($packages as $package)
                             <div class="flex flex-col max-w-lg">

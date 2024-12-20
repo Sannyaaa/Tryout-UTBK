@@ -3,9 +3,9 @@
 
     
 
-    <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900 mx-10">
+    <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900 md:mx-10">
 
-        <div class="mt-8 mb-2 col-span-full">
+        <div class="mt-8 mb-8 col-span-full">
             <div class="bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg shadow-lg py-4 px-3">
                 <nav class="flex" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 text-sm font-semibold md:space-x-2">

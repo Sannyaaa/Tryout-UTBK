@@ -101,15 +101,6 @@
                             </x-select-input>
                             <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
                         </div>
-                        <div>
-                            <x-input-label for="is_ready" :value="__('Tampilkan / Tidak')" />
-                            <x-select-input id="is_ready" name="is_ready">
-                                <option selected="" disabled>Tampilkan atau Tidak</option>
-                                <option value="yes" {{ $tryout->is_ready == 'yes' ? 'selected' : '' }}>Tampilkan</option>
-                                <option value="no" {{ $tryout->is_ready == 'no' ? 'selected' : '' }}>Tahan</option>
-                            </x-select-input>
-                            <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
-                        </div>
                     </div>
                     
                     <div id="date-inputs" style="{{ $tryout->is_together == 'together' ? 'display: block;' : 'display: none;' }}"> 

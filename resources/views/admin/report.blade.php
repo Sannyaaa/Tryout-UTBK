@@ -38,7 +38,7 @@
                     <div>
                         <form method="GET" action="{{ route('admin.report.index') }}" class="flex gap-4">
                             <div>
-                                <x-select-input name="year" class="">
+                                <x-select-input name="year" class="p-2 border rounded">
                                     @foreach($years as $year)
                                         <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
                                             {{ $year }}
@@ -88,6 +88,22 @@
 
                             <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-tr from-sky-400 to-sky-500">Filter</button>
                         </div>
+                    </form>
+
+                    <form method="GET" action="{{ route('admin.report.index') }}">
+                        @if($selectedYear)
+                            <input type="hidden" name="year" value="{{ $selectedYear }}">
+                        @endif
+                        
+                        @if(request('month'))
+                            <input type="hidden" name="month" value="{{ request('month') }}">
+                        @endif
+                        
+                        <input type="hidden" name="export" value="1">
+                        
+                        <button type="submit" class="px-4 py-2 bg-gradient-to-tr from-emerald-400 to-emerald-500 text-white rounded-lg">
+                            Export to Excel
+                        </button>
                     </form>
                 </div>
 

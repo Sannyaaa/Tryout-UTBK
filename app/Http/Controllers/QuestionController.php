@@ -10,6 +10,7 @@ use App\Models\tryout;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
@@ -90,6 +91,30 @@ class QuestionController extends Controller
             }
             return back()->with('error', 'An error occurred while loading the page. Please try again.');
         }
+    }
+
+    public function bulkUpdate(Request $request)
+    {
+        $ids = $request->input('ids');
+        $tryoutId = $request->input('tryout_id');
+        $subCategoryId = $request->input('sub_categories_id');
+
+        $query = Question::whereIn('id', $ids);
+
+        // Update tryout if provided
+        if ($tryoutId) {
+            $query->update(['tryout_id' => $tryoutId]);
+        }
+
+        // Update sub_category if provided
+        if ($subCategoryId) {
+            $query->update(['sub_categories_id' => $subCategoryId]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Selected questions updated successfully'
+        ]);
     }
 
     public function bulkDelete(Request $request)

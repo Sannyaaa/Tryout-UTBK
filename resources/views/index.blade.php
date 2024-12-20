@@ -336,8 +336,8 @@
 
                                                     <div class="">
                                                         
-                                                        <div class="mb-2 text-md leading-relaxed lg:text-lg font-semibold text-gray-600 italic">
-                                                            {!! $testimonial->content !!}
+                                                        <div class="mb-2 leading-relaxed text-2xl font-semibold text-gray-600 italic">
+                                                            "{!! $testimonial->content !!}"
                                                         </div>
 
                                                         {{-- @if ($testimonial->package_member_id != null)

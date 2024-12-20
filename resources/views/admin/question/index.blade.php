@@ -39,12 +39,6 @@
                             <button id="exportExcel" class="px-4 py-2 bg-gradient-to-tr from-emerald-400 to-emerald-500 text-white rounded-lg">Export Excel</button>
                             {{-- <button id="exportPdf" class="px-4 py-2 bg-gradient-to-tr from-rose-400 to-rose-500 text-white rounded-lg">Export PDF</button> --}}
                         </div>
-                        <div class="flex space-x-1">
-                            <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
-                            <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                                Delete Selected
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <div class="flex justify-center items-center gap-2">
@@ -74,6 +68,36 @@
                 {{-- <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                     Add Bimbel
                 </button> --}}
+
+            </div>
+
+            <div class="flex items-center w-full sm:justify-start mb-3">
+
+                <div class="flex space-x-1">
+                    <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
+                    <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                        Delete Selected
+                    </button>
+                </div>
+                <div id="bulk-update-row" style="display:none;">
+                    <div>
+                        <div class="flex justify-center gap-2">
+                            <x-select-input id="bulk-update-sub_categories" class="form-control mr-2" style="width: 250px;">
+                                <option value="">Pilih Mapel yang ingin di Update</option>
+                                @foreach($subCategories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </x-select-input>
+                            <x-select-input id="bulk-update-tryout" class="form-control mr-2" style="width: 250px;">
+                                <option value="">Pilih Tryout yang ingin di Update</option>
+                                @foreach($tryout as $tryouts)
+                                    <option value="{{ $tryouts->id }}">{{ $tryouts->name }}</option>
+                                @endforeach
+                            </x-select-input>
+                            <button id="bulk-update-btn" class="text-white  bg-gradient-to-tr from-sky-400 to-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Update</button>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -311,6 +335,86 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+
+    // $('#tryout_filter').change(function(){
+    //     table.draw();
+    // });
+
+    // $('#subCategories_filter').change(function(){
+    //     table.draw();
+    // });
+
+    // Handle "select all" checkbox
+    $('#checkbox-all').on('click', function() {
+        $('.question-checkbox').prop('checked', this.checked);
+        updateBulkOptions();
+    });
+
+    // Handle individual checkbox changes
+    $('#questionTable').on('change', '.question-checkbox', function() {
+        updateBulkOptions();
+        
+        // Update "select all" checkbox
+        var allChecked = $('.question-checkbox:checked').length === $('.question-checkbox').length;
+        $('#checkbox-all').prop('checked', allChecked);
+    });
+
+    // Function to update bulk options
+    function updateBulkOptions() {
+        var checkedCount = $('.question-checkbox:checked').length;
+        
+        if (checkedCount > 0) {
+            // Show bulk update row
+            $('#bulk-update-row').show();
+        } else {
+            // Hide bulk update row
+            $('#bulk-update-row').hide();
+        }
+    }
+
+    // Handle bulk update
+    $('#bulk-update-btn').on('click', function() {
+        var selectedIds = [];
+        $('.question-checkbox:checked').each(function() {
+            selectedIds.push($(this).val());
+        });
+
+        var subCategoryId = $('#bulk-update-sub_categories').val();
+        var tryoutId = $('#bulk-update-tryout').val();
+
+        // Validate that at least one option is selected
+        if (!subCategoryId && !tryoutId) {
+            toastr.warning('Pilih minimal satu opsi untuk diupdate');
+            return;
+        }
+
+        $.ajax({
+            url: "{{ route('admin.question.bulkUpdate') }}", 
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                ids: selectedIds,
+                tryout_id: tryoutId,
+                sub_categories_id: subCategoryId,
+            },
+            success: function(response) {
+                if (response.success) {
+                    // Refresh table
+                    table.ajax.reload();
+                    // Hide bulk update row
+                    $('#bulk-update-row').hide();
+                    // Uncheck "select all"
+                    $('#checkbox-all').prop('checked', false);
+                    
+                    // Show success message
+                    toastr.success(response.message);
+                }
+            },
+            error: function(error) {
+                toastr.error('Error updating selected items');
+            }
+        });
     });
 });
 </script>

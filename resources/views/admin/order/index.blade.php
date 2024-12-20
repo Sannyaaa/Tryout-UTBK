@@ -39,12 +39,12 @@
                             <button id="exportExcel" class="px-4 py-2 bg-gradient-to-tr from-emerald-400 to-emerald-500 text-white rounded-lg">Export Excel</button>
                             {{-- <button id="exportPdf" class="px-4 py-2 bg-gradient-to-tr from-rose-400 to-rose-500 text-white rounded-lg">Export PDF</button> --}}
                         </div>
-                        <div class="flex space-x-1">
+                        {{-- <div class="flex space-x-1">
                             <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
                             <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
                                 Hapus Yang dipilih
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="flex justify-center items-center gap-2">
@@ -64,6 +64,29 @@
                     Add Bimbel
                 </button> --}}
 
+            </div>
+
+            <div class="flex items-center w-full sm:justify-start mb-3">
+                <div class="flex space-x-1">
+                    <!-- Tambahkan tombol bulk delete yang awalnya hidden -->
+                    <button id="bulkDeleteBtn" style="display: none;" class="text-white  bg-gradient-to-tr from-rose-400 to-rose-500 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                        Hapus
+                    </button>
+                </div>
+
+                <!-- Bulk Update Row -->
+                <div id="bulk-update-row" style="display:none;">
+                    <div>
+                        <div class="flex justify-center gap-2">
+                            <x-select-input id="bulk-update-payment_status" class="form-control mr-2" style="width: 200px;">
+                                <option value="">Update Status Pembayaran</option>
+                                <option value="pending">Pending</option>
+                                <option value="paid">Paid</option>
+                            </x-select-input>
+                            <button id="bulk-update-btn" class="text-white bg-gradient-to-tr from-sky-400 to-sky-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Update</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="flex flex-col">
@@ -267,6 +290,90 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+
+    // Filter berdasarkan is_free dan is_together
+    $('#payment_status').change(function(){
+        table.draw();
+    });
+
+    // Handle "select all" checkbox
+    $('#checkbox-all').on('click', function() {
+        $('.order-checkbox').prop('checked', this.checked);
+        updateBulkOptions();
+    });
+
+    // Handle individual checkbox changes
+    $('#orderTable').on('change', '.order-checkbox', function() {
+        updateBulkOptions();
+        
+        // Update "select all" checkbox
+        var allChecked = $('.order-checkbox:checked').length === $('.order-checkbox').length;
+        $('#checkbox-all').prop('checked', allChecked);
+    });
+
+    // Fungsi untuk mengupdate opsi bulk
+    function updateBulkOptions() {
+        var checkedCount = $('.order-checkbox:checked').length;
+        
+        if (checkedCount > 0) {
+            // Tampilkan baris opsi update
+            $('#bulk-update-row').show();
+        } else {
+            // Sembunyikan baris opsi update
+            $('#bulk-update-row').hide();
+        }
+    }
+
+    // Handle bulk update
+    $('#bulk-update-btn').on('click', function() {
+        var selectedIds = [];
+        $('.order-checkbox:checked').each(function() {
+            selectedIds.push($(this).val());
+        });
+
+        var paymentStatus = $('#bulk-update-payment_status').val();
+
+        // Validasi minimal satu field dipilih
+        // if (!isFree && !isTogether) {
+        //     toastr.warning('Pilih minimal satu status untuk diupdate');
+        //     return;
+        // }
+
+        var updateData = {
+            _token: '{{ csrf_token() }}',
+            ids: selectedIds
+        };
+
+        // Hanya tambahkan field yang dipilih
+        if (paymentStatus !== '') {
+            updateData.payment_status = paymentStatus;
+        }
+        // if (isTogether !== '') {
+        //     updateData.is_together = isTogether;
+        // }
+
+        $.ajax({
+            url: "{{ route('admin.order.bulkUpdate') }}", 
+            type: 'POST',
+            data: updateData,
+            success: function(response) {
+                if (response.success) {
+                    // Refresh table
+                    table.ajax.reload();
+                    // Sembunyikan baris update
+                    $('#bulk-update-row').hide();
+                    // Uncheck "select all"
+                    $('#checkbox-all').prop('checked', false);
+                    
+                    // Tampilkan pesan sukses
+                    toastr.success(response.message);
+                }
+            },
+            error: function(error) {
+                toastr.error('Error updating selected items');
+            }
+        });
     });
 });
 </script>

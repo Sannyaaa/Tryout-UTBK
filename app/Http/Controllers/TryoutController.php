@@ -18,6 +18,7 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
@@ -111,6 +112,59 @@ class TryoutController extends Controller
         }
     }
 
+
+    public function bulkUpdate(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'ids' => 'required|array',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false, 
+                    'message' => $validator->errors()->first()
+                ], 422);
+            }
+
+            // Siapkan data update
+            $updateData = [];
+            
+            // Tambahkan is_free jika ada
+            if ($request->has('is_free')) {
+                $updateData['is_free'] = $request->is_free;
+            }
+            
+            // Tambahkan is_together jika ada
+            if ($request->has('is_together')) {
+                $updateData['is_together'] = $request->is_together;
+            }
+
+            // Pastikan ada data yang akan diupdate
+            if (empty($updateData)) {
+                return response()->json([
+                    'success' => false, 
+                    'message' => 'Tidak ada data yang akan diupdate'
+                ], 400);
+            }
+
+            // Lakukan update
+            $updatedCount = Tryout::whereIn('id', $request->ids)
+                ->update($updateData);
+
+            return response()->json([
+                'success' => true, 
+                'message' => "Berhasil mengupdate {$updatedCount} tryout"
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Bulk Update Error: ' . $e->getMessage());
+            return response()->json([
+                'success' => false, 
+                'message' => 'Terjadi kesalahan saat memproses update'
+            ], 500);
+        }
+    }
 
     public function bulkDelete(Request $request)
     {
@@ -248,7 +302,6 @@ class TryoutController extends Controller
             'description' => 'nullable|string',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
-            'is_ready' => ['required', 'in:yes,no'],
             'is_free' => ['required', 'in:paid,free'],
             'is_together' => ['required', 'in:basic,together'],
         ]);

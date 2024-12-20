@@ -58,7 +58,7 @@ class Dashboard extends Component
         ->where('date', Carbon::today())
         ->get();
 
-        $ongoing = Tryout::where('is_together','together')->where('is_ready','yes')->where('start_date', '<=', $this->now)->where('end_date', '>=', $this->now)->get();
+        $ongoing = Tryout::where('is_together','together')->where('start_date', '<=', $this->now)->where('end_date', '>=', $this->now)->get();
 
         $totalSubCategories = DB::table('sub_categories')->count();
 

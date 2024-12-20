@@ -17,8 +17,7 @@ class Event extends Component
     {
         $now = Carbon::today();
 
-        $tryouts = Tryout::where('is_together','together')
-                            ->where('is_ready','yes')->get();
+        $tryouts = Tryout::where('is_together','together')->get();
 
         $comingsoon = $tryouts->where('start_date', '>', $now);
         $finished = $tryouts->where('end_date', '<', $now);

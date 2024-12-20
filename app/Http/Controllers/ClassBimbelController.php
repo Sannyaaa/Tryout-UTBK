@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ClassBimbelController extends Controller
@@ -169,6 +170,40 @@ class ClassBimbelController extends Controller
         } catch (\Exception $e) {
             Log::error('Error in index method: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while processing your request.'], 500);
+        }
+    }
+    public function bulkUpdate(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'ids' => 'required|array',
+                'sub_category_id' => 'required|exists:sub_categories,id'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false, 
+                    'message' => $validator->errors()->first()
+                ], 422);
+            }
+
+            // Pastikan hanya admin yang bisa update
+            $updatedCount = ClassBimbel::whereIn('id', $request->ids)
+                ->update([
+                    'sub_categories_id' => $request->sub_category_id
+                ]);
+
+            return response()->json([
+                'success' => true, 
+                'message' => "Successfully updated {$updatedCount} classes"
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Bulk Update Error: ' . $e->getMessage());
+            return response()->json([
+                'success' => false, 
+                'message' => 'An error occurred while processing bulk update'
+            ], 500);
         }
     }
 

@@ -31,7 +31,7 @@
             <div class="mx-6">
                 <div class="mx-auto w-fit flex gap-10">
                     <div class="h-full my-auto max-w-md rounded-lg">
-                        <h2 class="text-6xl font-bold text-sky-500 mb-3">Selamat, Pembayaran Anda Berhasil!</h2>
+                        <h2 class="text-5xl lg:text-6xl font-bold text-sky-500 mb-3">Selamat, Pembayaran Anda Berhasil!</h2>
                         
                         <div class="mb-4">
                             <p class="text-lg font-medium text-gray-700">Terima kasih atas kepercayaan Anda. Anda kini telah terdaftar untuk akses {{ $order->package_member->name }}. 
@@ -51,8 +51,8 @@
                         </div>
                     </div>
 
-                    <div class="max-w-xl">
-                        <img src="{{ asset('assets/Successful purchase-cuate.png') }}" alt="">
+                    <div class="hidden lg:block max-w-lg">
+                        <img src="{{ asset('assets/Successful purchase-cuate.png') }}" class="w-full" alt="">
                     </div>
                     
                 </div>

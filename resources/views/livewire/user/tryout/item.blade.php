@@ -1,5 +1,5 @@
 <div class="p-4 mt-12">
-    <div class="mx-10">
+    <div class=" md:mx-10">
         <div class=" relative mb-8">
             <div class="bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg shadow-lg py-4 px-3">
                 <nav class="flex" aria-label="Breadcrumb">
@@ -136,8 +136,8 @@
                     <div class="mb-5 border shadow rounded-lg overflow-hidden">
                         <h1 class="px-5 py-4 text-2xl font-bold bg-gradient-to-tr from-sky-400 to-sky-500 text-white">{{$item->name}}</h1>
                         @foreach($item->sub_categories as $sub_item)
-                        <div class="py-2 border-y px-5 flex" style="width: 100%;">
-                            <div class="w-3/6">
+                        <div class="py-2 border-y px-5 md:flex" style="width: 100%;">
+                            <div class="w-full md:w-3/6">
                                 <h3 class="font-semibold text-xl text-gray-700 mb-1">{{$sub_item->name}}</h3>
                                 @if ($sub_item->duration)
                                     <span class="text-sky-500">
@@ -154,7 +154,7 @@
                                     <span class="font-semibold ms-1">{{ $sub_item->totalQuestion ?? 0 }} Soal</span>
                                 </div>
                             </div>
-                            <div class="w-3/6 px-5 flex align-middle justify-end text-sky-500 gap-4">
+                            <div class="w-full my-3 md:w-3/6 md:px-5 md:mt-0 md:flex align-middle justify-end text-sky-500 gap-4">
                                 @if ($tryout->is_together == 'together' )
                                     @if ($sub_item->is_completed == null)
                                         @if ( \Carbon\Carbon::today() > $tryout->end_date )

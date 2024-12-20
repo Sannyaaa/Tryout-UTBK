@@ -1,7 +1,6 @@
 <div>
-    <div class="p-4 mt-12">
-        <div class="mx-10">
-
+    <div class="">
+        <div class="max-w-7xl mx-auto px-4 py-8 mt-10">
             <div class=" relative mb-8">
                 <div class="bg-gradient-to-tr from-sky-400 to-sky-500 rounded-lg shadow-lg py-4 px-3">
                     <nav class="flex" aria-label="Breadcrumb">

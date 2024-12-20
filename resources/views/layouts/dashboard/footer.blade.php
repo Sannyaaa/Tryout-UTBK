@@ -3,15 +3,15 @@
 
   
 @if (Auth::user())
-    <footer class=" m-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 xl:p-8 dark:bg-gray-800">
-        <ul class="flex flex-wrap items-center mb-6 space-y-1 md:mb-0">
+    <footer class="p-4 m-4 bg-white rounded-lg shadow lg:flex lg:items-center lg:justify-between lg:p-6 xl:p-8 dark:bg-gray-800">
+        <ul class="hidden lg:flex flex-wrap items-center mb-6 space-y-1 lg:mb-0">
             <li><a href="#" class="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6 dark:text-gray-400">Terms and conditions</a></li>
             <li><a href="#" class="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6 dark:text-gray-400">Privacy Policy</a></li>
             <li><a href="#" class="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6 dark:text-gray-400">Licensing</a></li>
             <li><a href="#" class="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6 dark:text-gray-400">Cookie Policy</a></li>
             <li><a href="#" class="text-sm font-normal text-gray-500 hover:underline dark:text-gray-400">Contact</a></li>
         </ul>
-        <div class="flex space-x-6 sm:justify-center">
+        <div class="flex space-x-6 justify-center">
             <a href="#" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
@@ -44,9 +44,9 @@
         <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
                 <div>
-                    <img src="{{ Storage::url($component->footer_image ?? '') }}" class="mr-5 h-6 sm:h-9" alt="logo" />
+                    <img src="{{ Storage::url($component->footer_image ?? '') }}" class="mr-5 h-6 sm:h-9" alt="Footer Logo" />
                     <div class="max-w-xs mt-4 text-sm text-zinc-200">
-                        {!! $component->short_desc ?? '' !!}
+                        {!! $component->short_desc ?? 'Short Description' !!}
                     </div>
                     <div class="flex mt-8 space-x-6 text-zinc-200">
                         <a class="hover:opacity-75" href="{{ $component->facebook ?? '' }}" target="_blank" rel="noreferrer">
@@ -84,16 +84,6 @@
                 <div class="grid grid-cols-1 gap-4 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-3">
                     <div>
                         <p class="font-medium">
-                            Products
-                        </p>
-                        <nav class="flex flex-col mt-4 space-y-2 text-sm text-zinc-200">
-                            <a class="hover:opacity-75" href> Tryout </a>
-                            <a class="hover:opacity-75" href> Event Tryout </a>
-                            <a class="hover:opacity-75" href> Bimbel </a>
-                        </nav>
-                    </div>
-                    <div>
-                        <p class="font-medium">
                             Helpful Links
                         </p>
                         <nav class="flex flex-col mt-4 space-y-2 text-sm text-zinc-200">
@@ -105,6 +95,18 @@
                             <a class="hover:opacity-75" href="#faqs"> FAQ </a>
                         </nav>
                     </div>
+                    
+                    <div>
+                        <p class="font-medium">
+                            Products
+                        </p>
+                        <nav class="flex flex-col mt-4 space-y-2 text-sm text-zinc-200">
+                            <a class="hover:opacity-75" href> Tryout </a>
+                            <a class="hover:opacity-75" href> Event Tryout </a>
+                            <a class="hover:opacity-75" href> Bimbel </a>
+                        </nav>
+                    </div>
+                    
                     <div>
                         <p class="font-medium">
                             Contact
@@ -118,7 +120,7 @@
                 </div>
             </div>
             <div class="mt-8 text-xs text-zinc-200">
-                {!! $component->copyright ?? '' !!}
+                {!! $component->copyright ?? 'Copyright here' !!}
             </div>
         </div>
     </footer>

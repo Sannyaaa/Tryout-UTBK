@@ -1,11 +1,11 @@
 <div class="p-4 {{ Auth::user() ? 'mt-12' : '-mt-16 max-w-7xl mx-auto mb-20' }}">
-    <div class="mx-10">
+    <div class="md:mx-10">
         @if ($promotions->isNotEmpty())
             <div id="default-carousel" class="relative w-full mb-8" data-carousel="slide" wire:ignore>
             <!-- Carousel wrapper -->
-                <div class="relative h-56 overflow-hidden rounded-lg md:h-96 z-20">
+                <div class="relative h-56 overflow-hidden rounded-lg md:h-96 z-10">
                     @foreach ($promotions as $promo)
-                        <div class="hidden duration-700 ease-in-out rounded-lg overflow-hidden" data-carousel-item wire:ignore.self>
+                        <div class="hidden duration-700 ease-in-out rounded-lg overflow-hidden bg-sky-300" data-carousel-item wire:ignore.self>
                             <a href="{{ route('packages') }}">
                                 <img src="{{ Storage::url($promo->image) }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                             </a>
@@ -80,7 +80,7 @@
             </div>
 
             <!-- Package Grid Section -->
-            <section class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-8">
+            <section class="grid grid-cols-1 space-y-12 md:space-y-0 lg:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-8">
                 @forelse ($packages as $package)
                     <div class="flex flex-col max-w-lg">
                         <div class="text-gray-900 bg-white hover:shadow-lg transition-all border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white">
