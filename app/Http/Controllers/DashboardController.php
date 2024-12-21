@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bimbel;
-use App\Models\ClassBimbel;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Order;
+use App\Models\Bimbel;
+use App\Models\Tryout;
+use App\Models\ClassBimbel;
+use Illuminate\Http\Request;
 use App\Models\Package_member;
 use App\Models\sub_categories;
-use App\Models\Tryout;
-use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
