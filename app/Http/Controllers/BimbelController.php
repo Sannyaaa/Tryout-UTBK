@@ -36,7 +36,7 @@ class BimbelController extends Controller
                         ->addColumn('checkbox', function($bimbel) {
                             return '<input type="checkbox" class="bimbel-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $bimbel->id . '">';
                         })
-                        ->addColumn('created_at', function($bimbel) {
+                        ->editColumn('created_at', function($bimbel) {
                             return date('j F Y', strtotime($bimbel->created_at)) ;
                         })
                         ->addColumn('link_group', function($bimbel) {
@@ -74,7 +74,7 @@ class BimbelController extends Controller
                             
                             return $action;
                         })
-                        ->rawColumns(['action', 'checkbox', 'link_group'])
+                        ->rawColumns(['action', 'checkbox', 'link_group', 'created_at'])
                         ->make(true);
                 }
 

@@ -36,7 +36,7 @@ class TestimonialController extends Controller
                     ->addColumn('checkbox', function($testimonial) {
                         return '<input type="checkbox" class="testimonial-checkbox w-4 h-4 text-blue-600 bg-gray-100 btestimonial-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:btestimonial-gray-600" value="' . $testimonial->id . '">';
                     })
-                    ->addColumn('created_at', function ($testimonial) {
+                    ->editColumn('created_at', function ($testimonial) {
                         return date('j F Y', strtotime($testimonial->created_at));
                     })
                     ->addColumn('action', function ($testimonial) {
@@ -60,7 +60,7 @@ class TestimonialController extends Controller
                         
                         return $action;
                     })
-                    ->rawColumns(['action', 'checkbox'])
+                    ->rawColumns(['action', 'checkbox', 'created_at'])
                     ->make(true);
             }
 
@@ -149,7 +149,7 @@ class TestimonialController extends Controller
         try{
             $data = $request->validate([
                 'content' =>'required|string|max:255',
-                'package_member_id' => 'required|integer|exists:package_members,id',
+                'package_member_id' => 'integer|exists:package_members,id',
             ]);
 
             $data['user_id'] = auth()->id();

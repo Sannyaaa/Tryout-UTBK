@@ -161,7 +161,8 @@ $(document).ready(function() {
     var table = $('#question-practiceTable').DataTable({
         processing: true,
         serverSide: true,
-        order:[[4,'desc']],
+        ordering: true,
+        order:[[3,'desc']],
         // ajax: "{{ route('admin.question-practice.index') }}",
         ajax: {
                 url: "{{ route('admin.question-practice.index') }}",

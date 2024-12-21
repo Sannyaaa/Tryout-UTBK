@@ -15,7 +15,7 @@ class PageController extends Controller
     //
 
     public function homePage() {
-        ini_set('memory_limit', '1024M');
+        ini_set('memory_limit', '2048M');
 
         $homePage = HomePage::first();
 

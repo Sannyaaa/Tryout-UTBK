@@ -2,27 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\DetailTryoutExport;
-use App\Exports\ResultUserExport;
-use App\Exports\TryoutExport;
-use App\Exports\UserAnswerExport;
-use App\Livewire\User\Tryouts;
-use App\Models\Answer;
-use App\Models\AnswerQuestion;
-use App\Models\batch;
-use App\Models\Question;
-use App\Models\Result;
-use App\Models\sub_categories;
-use App\Models\Tryout;
 use App\Models\User;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Answer;
+use App\Models\Result;
+use App\Models\Question;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Facades\Excel;
-use Yajra\DataTables\DataTables;
-
+use App\Exports\TryoutExport;
+use App\Models\AnswerQuestion;
+use App\Models\sub_categories;
 use function Pest\Laravel\get;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Yajra\DataTables\DataTables;
+use App\Exports\UserAnswerExport;
+use App\Exports\DetailTryoutExport;
+use App\Models\Tryout;
+use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
 
 class TryoutController extends Controller
 {
@@ -32,6 +28,7 @@ class TryoutController extends Controller
     public function index(Request $request)
     {
         try {
+
             if ($request->ajax()) {
                 $query = Tryout::query();
                 
@@ -49,7 +46,7 @@ class TryoutController extends Controller
                     ->addColumn('checkbox', function($tryout) {
                         return '<input type="checkbox" class="tryout-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $tryout->id . '">';
                     })
-                    ->addColumn('created_at', function($tryout) {
+                    ->editColumn('created_at', function($tryout) {
                         return date('j F Y', strtotime($tryout->created_at));
                     })
                     // ->addColumn('image', function ($tryout) {
@@ -82,7 +79,7 @@ class TryoutController extends Controller
                         
                         return $action;
                     })
-                    ->rawColumns(['action', 'image', 'checkbox'])
+                    ->rawColumns(['action', 'image', 'checkbox', 'created_at'])
                     ->make(true);
             }
 

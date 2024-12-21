@@ -215,7 +215,7 @@ $(document).ready(function() {
     var table = $('#tryoutTable').DataTable({
         processing: true,
         serverSide: true,
-        order: [[ 6,'desc' ]],
+        order: [[ 4,'desc' ]],
         // ajax: "{{ route('admin.tryout.index') }}",
         ajax: {
                 url: "{{ route('admin.tryout.index') }}",
@@ -255,7 +255,12 @@ $(document).ready(function() {
                     }
                 }
             },
-            {data: 'created_at', name: 'created_at'},
+            {   
+                data: 'created_at', 
+                name: 'created_at',
+                orderable: true,
+                searchable: true,
+            },
             {
                 data: 'action',
                 name: 'action',

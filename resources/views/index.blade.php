@@ -6,9 +6,9 @@
             <div class="w-full lg:flex py-16 lg:py-20 px-10 lg:px-14  xl:px-32 space-y-10">
                 <div class="w-4/5 lg:w-1/2 flex justify-center items-center pe-10">
                     <div class="text-left w-full">
-                        <h1 class="text-5xl font-bold text-sky-900 lg:text-6xl ">{{ $homePage->hero_title ?? 'Hero Title' }}</h1>
+                        <h1 class="text-5xl font-bold text-sky-900 lg:text-6xl ">{{ $homePage->hero_title ?? 'Mohon Untuk Masukkan Hero Title' }}</h1>
 
-                        <div class="mt-6 text-lg  text-gray-600">{!! $homePage->hero_desc ?? 'Hero Description' !!}</div>
+                        <div class="mt-6 text-lg  text-gray-600">{!! $homePage->hero_desc ?? 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.' !!}</div>
 
                         <div class="mt-6 inline-flex items-center gap-x-3">
                             <x-primary-link href="{{ route('login') }}" class="py-1 px-2">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="w-full lg:w-1/2 px-0 lg:px-8 mx-auto my-auto">
                     <div class="overflow-hidden">
-                        <img src="{{ Storage::url($homePage->hero_image ?? '') }}" alt="" class=" min-w-10">
+                        <img src="{{ !empty($homePage->hero_image) ? Storage::url($homePage->hero_image) : asset('assets/Webinar-bro.png') }}" alt="" class=" min-w-10">
                     </div>
                 </div>
             </div>
@@ -63,14 +63,14 @@
                 <div class="px-10 lg:flex">
                     <div class="w-full lg:w-1/2 px-0 lg:px-8 mx-auto my-auto">
                         <div class="overflow-hidden">
-                            <img src="{{ Storage::url($homePage->about_us_image ?? '') }}" alt="" class="min-w-10">
+                            <img src="{{ !empty($homePage->about_us_image) ? Storage::url($homePage->about_us_image) : asset('assets/Certification-cuate.png') }}" alt="" class="min-w-10">
                         </div>
                     </div>
                     <div class="w-4/5 lg:w-1/2 flex justify-center items-center">
                         <div class="text-left w-full pb-20 lg:pt-20">
-                            <h1 class="text-5xl font-bold  text-sky-900 lg:text-6xl ">{{ $homePage->about_us_title ?? 'About Us Title' }}</h1>
+                            <h1 class="text-5xl font-bold  text-sky-900 lg:text-6xl ">{{ $homePage->about_us_title ?? 'Mohon Untuk Masukkan About Us Title' }}</h1>
 
-                            <div class="mt-6 text-lg  text-gray-600">{!! $homePage->about_us_desc ?? '' !!}</div>
+                            <div class="mt-6 text-lg  text-gray-600">{!! $homePage->about_us_desc ?? 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.' !!}</div>
                         
                             <div class="mt-6">
                                 <x-primary-link class="" href="{{ route('login') }}">
@@ -220,8 +220,8 @@
                                 </div>
 
                             @empty
-                                <span class="text-center">
-                                    Belum ada product
+                                <span class="text-center text-2xl font-bold text-sky-800">
+                                    Belum ada Mentor
                                 </span>
                             @endforelse
                         </div>
@@ -385,7 +385,46 @@
                                     </div>
                                 </div>
                             @empty
-                                
+                                <h2 id="accordion-color-heading-a">
+                                    <button type="button" class="flex items-center justify-between w-full p-5 font-semibold capitalize text-lg rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-sky-200 dark:focus:ring-sky-800 dark:border-gray-700 dark:text-gray-400 hover:bg-sky-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-color-body-a" aria-expanded="true" aria-controls="accordion-color-body-a">
+                                        <span>Tujuan FAQ FAQ</span>
+                                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                        </svg>
+                                    </button>
+                                </h2>
+                                <div id="accordion-color-body-a" class="hidden" aria-labelledby="accordion-color-heading-a">
+                                    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                                        <div class="mb-2 text-gray-500 dark:text-gray-400">Menjelaskan bahwa FAQ bertujuan untuk memberikan jawaban cepat atas pertanyaan umum yang sering ditanyakan oleh pelanggan atau pengunjung.</div>
+                                    </div>
+                                </div>
+                                <h2 id="accordion-color-heading-b">
+                                    <button type="button" class="flex items-center justify-between w-full p-5 font-semibold capitalize text-lg rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-sky-200 dark:focus:ring-sky-800 dark:border-gray-700 dark:text-gray-400 hover:bg-sky-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-color-body-b" aria-expanded="true" aria-controls="accordion-color-body-b">
+                                        <span>Apa yang diisi pada sesi FAQ</span>
+                                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                        </svg>
+                                    </button>
+                                </h2>
+                                <div id="accordion-color-body-b" class="hidden" aria-labelledby="accordion-color-heading-b">
+                                    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                                        <div class="mb-2 text-gray-500 dark:text-gray-400">FAQ membantu pengunjung atau pelanggan untuk menemukan jawaban atas masalah atau kebingungan mereka tanpa harus menunggu balasan atau bantuan. Ini memberikan kenyamanan kepada pengguna dengan akses langsung ke informasi yang relevan.</div>
+                                    </div>
+                                </div>
+
+                                <h2 id="accordion-color-heading-e">
+                                    <button type="button" class="flex items-center justify-between w-full p-5 font-semibold capitalize text-lg rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-sky-200 dark:focus:ring-sky-800 dark:border-gray-700 dark:text-gray-400 hover:bg-sky-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-color-body-e" aria-expanded="true" aria-controls="accordion-color-body-e">
+                                        <span>Bagaimana cara menambahkan FAQ</span>
+                                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                        </svg>
+                                    </button>
+                                </h2>
+                                <div id="accordion-color-body-e" class="hidden" aria-labelledby="accordion-color-heading-e">
+                                    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                                        <div class="mb-2 text-gray-500 dark:text-gray-400">Pertama pastikan anda memiliki hak akses untuk menambah, kalau punya kamu bisa menuju dashboard lalu pilih yang "Pengaturan Halaman". nah di bagian bawah ada untuk sesi FAQ dan kamu bisa menambahkan sebanyak mingkin disana.</div>
+                                    </div>
+                                </div>
                             @endforelse
                         </div>
                     </div>

@@ -170,6 +170,7 @@ $(document).ready(function() {
     var table = $('#package_memberTable').DataTable({
         processing: true,
         serverSide: true,
+        orderable: true,
         order: [[ 5,'desc' ]],
         ajax: {
             url: "{{ route('admin.package_member.index') }}",
@@ -199,7 +200,7 @@ $(document).ready(function() {
             {data: 'price', name: 'price', defaultContent: ''},
             {data: 'tryout.name', name: 'tryout.name', defaultContent: ''},
             {data: 'bimbel.name', name: 'bimbel.name', defaultContent: ''},
-            {data: 'created_at', name: 'created_at', defaultContent: ''},
+            {data: 'created_at', name: 'created_at'},
             {
                 data: 'action', 
                 name: 'action',

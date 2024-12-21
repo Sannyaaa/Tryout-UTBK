@@ -217,6 +217,7 @@ $(document).ready(function() {
     var table = $('#questionTable').DataTable({
         processing: true,
         serverSide: true,
+        orderable
         order: [[ 4,'desc' ]],
         ajax: {
             url: "{{ route('admin.question.index') }}",
@@ -259,7 +260,7 @@ $(document).ready(function() {
                     return plainText;  // Mengembalikan teks biasa
                 }
             },
-            {data: 'created_at', name: 'created_at', defaultContent: ''},
+            {data: 'created_at', name: 'created_at'},
             {
                 data: 'action',
                 name: 'action',

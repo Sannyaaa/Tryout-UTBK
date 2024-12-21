@@ -44,7 +44,7 @@ class ClassBimbelController extends Controller
                         ->addColumn('checkbox', function($class) {
                             return '<input type="checkbox" class="class-bimbel-checkbox" value="' . $class->id . '">';
                         })
-                        ->addColumn('date', function($class) {
+                        ->editColumn('date', function($class) {
                             return date('j F Y', strtotime($class->date)) .' '. date('h:i A', strtotime($class->start_time));
                         })
                         ->addColumn('action', function ($class) {
@@ -75,7 +75,7 @@ class ClassBimbelController extends Controller
                             
                             return $action;
                         })
-                        ->rawColumns(['action', 'date', 'checkbox'])
+                        ->rawColumns(['action', 'date', 'checkbox', 'created_at'])
                         ->make(true);
                 }
 

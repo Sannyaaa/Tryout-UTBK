@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                                 <div class="my-2">
-                                    <x-primary-button type="submit" class="py-1">
+                                    <x-primary-button type="submit" class="py-1 w-full">
                                         Submit
                                     </x-primary-button>
                                 </div>

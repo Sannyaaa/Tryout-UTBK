@@ -27,7 +27,7 @@ class PackageMemberController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $query = Package_member::with('tryout','bimbel')->get();
+                $query = Package_member::with('tryout','bimbel');
                 
                 return DataTables::of($query)
                     ->addIndexColumn()
@@ -37,7 +37,7 @@ class PackageMemberController extends Controller
                     ->addColumn('image', function ($package_member) {
                         return asset('storage/' . $package_member->image);
                     })
-                    ->addColumn('created_at', function($tryout) {
+                    ->editColumn('created_at', function($tryout) {
                         return date('j F Y', strtotime($tryout->created_at));
                     })
                     ->addColumn('action', function ($package_member) {
@@ -55,7 +55,7 @@ class PackageMemberController extends Controller
                         
                         return $editBtn . $deleteBtn;
                     })
-                    ->rawColumns(['action', 'image', 'checkbox'])
+                    ->rawColumns(['action', 'image', 'checkbox', 'created_at'])
                     ->make(true);
             }
 

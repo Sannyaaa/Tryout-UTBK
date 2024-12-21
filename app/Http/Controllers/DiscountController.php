@@ -20,20 +20,20 @@ class DiscountController extends Controller
 
         try {
             if ($request->ajax()) {
-                $query = Discount::orderBy('created_at', 'desc');
+                $query = Discount::query();
                 
                 return DataTables::of($query)
                     ->addIndexColumn()
                     ->addColumn('checkbox', function($discount) {
                         return '<input type="checkbox" class="discount-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="' . $discount->id . '">';
                     })
-                    ->addColumn('start_date', function ($discount) {
+                    ->editColumn('start_date', function ($discount) {
                         return date('j F Y', strtotime($discount->start_date));
                     })
-                    ->addColumn('end_date', function ($discount) {
+                    ->editColumn('end_date', function ($discount) {
                         return date('j F Y', strtotime($discount->end_date));
                     })
-                    ->addColumn('created_at', function ($discount) {
+                    ->editColumn('created_at', function ($discount) {
                         return date('j F Y', strtotime($discount->created_at));
                     })
                     ->addColumn('action', function ($discount) {
@@ -51,7 +51,7 @@ class DiscountController extends Controller
                         
                         return $editBtn . $deleteBtn;
                     })
-                    ->rawColumns(['action', 'checkbox'])
+                    ->rawColumns(['action', 'checkbox', 'created_at', 'start_date', 'end_date'])
                     ->make(true);
             }
 

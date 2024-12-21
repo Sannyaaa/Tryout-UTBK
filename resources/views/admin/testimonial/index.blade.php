@@ -258,6 +258,7 @@ $(document).ready(function() {
     var table = $('#testimonialTable').DataTable({
         processing: true,
         serverSide: true,
+        orderable: true,
         order:[[4,'desc']],
         // ajax: "{{ route('admin.testimonial.index') }}",
         ajax: {

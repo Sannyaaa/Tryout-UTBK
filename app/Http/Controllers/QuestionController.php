@@ -43,7 +43,7 @@ class QuestionController extends Controller
                     ->addColumn('image', function ($question) {
                         return asset('storage/' . $question->image);
                     })
-                    ->addColumn('created_at', function($class) {
+                    ->editColumn('created_at', function($class) {
                         return date('j F Y', strtotime($class->created_at));
                     })
                     ->addColumn('action', function ($question) {
