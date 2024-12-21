@@ -17,6 +17,6 @@ class Bimbel extends Model
     
     public function package_member()
     {
-        return $this->hasMany(package_member::class);
+        return $this->hasMany(Package_member::class);
     }
 }

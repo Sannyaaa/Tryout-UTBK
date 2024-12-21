@@ -209,7 +209,7 @@ class Dashboard extends Component
 
         $packages = Package_member::limit(3)->get();
 
-        $promotions = Promotion::where('start_date', '<=', $this->now)->where('end_date', '>=', $this->now)->get();
+        $promotions = Promotion::where('start_date', '<=', $this->now)->where('end_date', '>=', $this->now)->where('is_show','yes')->get();
 
         DB::table('orders')
         ->where('payment_status','pending')

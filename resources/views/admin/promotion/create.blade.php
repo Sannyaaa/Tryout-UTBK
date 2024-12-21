@@ -73,11 +73,11 @@
                         </div>
 
                         <div>
-                            <x-input-label for="is_show" :value="__('Tampilkan di Halaman Depan / Tidak')" />
+                            <x-input-label for="is_show" :value="__('Tampilkan di Dashboard User / Tidak')" />
                             <x-select-input id="is_show" name="is_show">
-                                <option selected="" disabled>Tampilkan / Tidak</option>
-                                <option value="yes" >Tampilkan di Halaman Depan</option>
-                                <option value="no" >Tampilkan di Dashboard Saja</option>
+                                <option selected="" disabled>Tampilkan di Dashboard User</option>
+                                <option value="yes" >Tampilkan</option>
+                                <option value="no" >Jangan</option>
                             </x-select-input>
                             <x-input-error :messages="$errors->get('is_free')" class="mt-2" />
                         </div>

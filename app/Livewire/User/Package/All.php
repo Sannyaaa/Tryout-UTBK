@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User\Package;
 
+use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Promotion;
 use App\Models\ComponentPage;
@@ -11,6 +12,7 @@ class All extends Component
 {
     public $selectedType = 'all';
     public $component;
+    public $now;
     
     public function render()
     {
@@ -24,7 +26,9 @@ class All extends Component
             })
             ->get();
 
-        $promotions = Promotion::all();
+        $this->now = Carbon::now();
+
+        $promotions = Promotion::where('start_date', '<=', $this->now)->where('end_date', '>=', $this->now)->get();
 
         $component = ComponentPage::first();
 
